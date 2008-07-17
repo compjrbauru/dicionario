@@ -49,6 +49,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ComboRubrica = new System.Windows.Forms.ComboBox();
+            this.comboRef = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.timerRub = new System.Windows.Forms.Timer(this.components);
+            this.timerRef = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnVisao
@@ -254,11 +260,53 @@
             this.textBox2.Size = new System.Drawing.Size(701, 23);
             this.textBox2.TabIndex = 20;
             // 
+            // ComboRubrica
+            // 
+            this.ComboRubrica.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboRubrica.FormattingEnabled = true;
+            this.ComboRubrica.Location = new System.Drawing.Point(15, 243);
+            this.ComboRubrica.Name = "ComboRubrica";
+            this.ComboRubrica.Size = new System.Drawing.Size(301, 24);
+            this.ComboRubrica.TabIndex = 21;
+            // 
+            // comboRef
+            // 
+            this.comboRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboRef.FormattingEnabled = true;
+            this.comboRef.Location = new System.Drawing.Point(399, 243);
+            this.comboRef.Name = "comboRef";
+            this.comboRef.Size = new System.Drawing.Size(314, 24);
+            this.comboRef.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 223);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(57, 17);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Rubrica";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(396, 223);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 17);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Referência";
+            // 
             // frm_Equivalente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 270);
+            this.ClientSize = new System.Drawing.Size(884, 292);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboRef);
+            this.Controls.Add(this.ComboRubrica);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
@@ -280,6 +328,7 @@
             this.Controls.Add(this.btnVisao);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(900, 330);
             this.Name = "frm_Equivalente";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Entradas equivalentes";
@@ -311,5 +360,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox ComboRubrica;
+        private System.Windows.Forms.ComboBox comboRef;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Timer timerRub;
+        private System.Windows.Forms.Timer timerRef;
     }
 }

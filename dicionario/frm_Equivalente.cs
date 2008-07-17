@@ -15,9 +15,11 @@ namespace dicionario
     public partial class frm_Equivalente : Form
     {
         private CRUD crud = new CRUD();
-        List<Equivalente> equivO = new List<Equivalente>();
-        List<Equivalente> equivD = new List<Equivalente>();
-        List<Palavra> resP = new List<Palavra>();
+        private List<Equivalente> equivO = new List<Equivalente>();
+        private List<Equivalente> equivD = new List<Equivalente>();
+        private List<Palavra> resP = new List<Palavra>();
+        private List<Rubrica> resRubrica = new List<Rubrica>();
+        private List<Referencia> resRef = new List<Referencia>();
         private readonly Palavra registroPai;
         private Equivalente ativo = new Equivalente();
         private bool regsAtivo = true;
@@ -191,6 +193,74 @@ namespace dicionario
             {
                 ativo.Setequivalente(resP.ElementAt(comboDestino.SelectedIndex).id);
             }
+        }
+
+        private void timerRub_Tick(object sender, EventArgs e)
+        {
+            string pesquisa;
+            pesquisa = ComboRubrica.Text;
+            if (ComboRubrica.Items.Count > 0)
+            {
+                ComboRubrica.Items.Clear();
+            }
+            if (pesquisa.Length <= 3)
+            {
+                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
+            }
+            else
+                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
+            foreach (Rubrica r in resRubrica)
+            {
+                ComboRubrica.Items.Add(r.descricao);
+            }
+            timerRub.Enabled = false; //prevenindo de floodar a combo
+        }
+
+        private void ComboRubrica_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ComboRubrica.Text != "")
+            {
+                ativo.Rubrica = resRubrica.Find(rubrica => rubrica.descricao == ComboRubrica.Text).id;
+            }
+        }
+
+        private void ComboRubrica_TextUpdate(object sender, EventArgs e)
+        {
+            if (timerRub.Enabled == true) { timerRub.Enabled = false; timerRub.Enabled = true; } else timerRub.Enabled = true;
+        }
+
+        private void timerRef_Tick(object sender, EventArgs e)
+        {
+            string pesquisa;
+            pesquisa = comboRef.Text;
+            if (comboRef.Items.Count > 0)
+            {
+                comboRef.Items.Clear();
+            }
+            if (pesquisa.Length >= 5)
+            {
+                resRef = Referencia.ConverteObject(crud.SelecionarTabela(tabelasBd.REFERENCIAS, Referencia.ToListTabela(true), "Descricao LIKE '%" + pesquisa + "%'", "LIMIT 10"));
+                foreach (Referencia re in resRef)
+                {
+                    comboRef.Items.Add(re.descricao);
+                }
+            }
+            /*else
+                resultados = crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
+            timerRef.Enabled = false; //prevenindo de floodar a combo
+        }
+
+        private void comboRef_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboRef.Text != "")
+            {
+                ativo.Referencia = resRef.Find(r => r.descricao == comboRef.Text).id;
+            }
+        }
+
+        private void comboRef_TextUpdate(object sender, EventArgs e)
+        {
+            if (timerRef.Enabled == true) { timerRef.Enabled = false; timerRef.Enabled = true; } else timerRef.Enabled = true;
         }
     }
 }

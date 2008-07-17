@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dicionario.Helpers;
 
 namespace dicionario.Model
 {
@@ -14,13 +13,13 @@ namespace dicionario.Model
 	    //public int Id_catGram { get; set; }
 	    public int Id_classeGram { get; set; }
         public string idioma { get; set; }
-        public int rubrica { get; set; }
-        public int referencia_verbete { get; set; }
-        public string referencia_exemplo { get; set; }
+        //public int rubrica { get; set; }
+        //public int referencia_verbete { get; set; }
+        //public string referencia_exemplo { get; set; }
         public string notas_gramatica { get; set; }
         public string nota_cultura { get; set; }
         public int acepcao { get; set; }
-        public string ref_ex_tr { get; set; }
+        //public string ref_ex_tr { get; set; }
         public int Infinitivo { get; set; }
         //public string equivalente_pluriv { get; private set; } = "{-1}";
         public int id_conjuga { get; set; }
@@ -35,16 +34,10 @@ namespace dicionario.Model
             val.Add(lema);
             val.Add(Id_classeGram.ToString());
             val.Add(idioma);
-            val.Add(rubrica.ToString());
-
-            val.Add(referencia_verbete.ToString());
-            val.Add(referencia_exemplo);
             val.Add(notas_gramatica);
             val.Add(nota_cultura);
             val.Add(acepcao.ToString());
-            val.Add(ref_ex_tr);
             val.Add(Infinitivo.ToString());
-            //val.Add(equivalente_pluriv);
             val.Add(id_conjuga.ToString());
             val.Add(Genero);
             val.Add(Definicao);
@@ -57,16 +50,11 @@ namespace dicionario.Model
             if (incluiId)
                 val.Add("id");
             val.Add("Lema");
-            //val.add("Id_catGram"); ///FIXME: Há campos faltando
 	        val.Add("Id_classeGram");
             val.Add("Idioma");
-            val.Add("Rubrica");
-            val.Add("referencia_verbete");
-            val.Add("referencia_exemplo");
             val.Add("notas_gramatica");
             val.Add("notas_cultura");
             val.Add("acepcao");
-            val.Add("referencia_exemplo_tr");
             val.Add("Infinitivo");
             val.Add("Id_conjuga");
             val.Add("Genero");
@@ -117,13 +105,9 @@ namespace dicionario.Model
             p.lema = lista.ElementAt(i++);
             p.Id_classeGram = int.Parse(lista.ElementAt(i++));        
             p.idioma = lista.ElementAt(i++);
-            p.rubrica = int.Parse(lista.ElementAt(i++));
-            p.referencia_verbete = int.Parse(lista.ElementAt(i++));
-            p.referencia_exemplo = lista.ElementAt(i++);
             p.notas_gramatica = lista.ElementAt(i++);
             p.nota_cultura = lista.ElementAt(i++);
             p.acepcao = int.Parse(lista.ElementAt(i++));
-            p.ref_ex_tr = lista.ElementAt(i++);
             p.Infinitivo = int.Parse(lista.ElementAt(i++));
            // p.ChecaOperador(lista.ElementAt(i++));
             p.id_conjuga = int.Parse(lista.ElementAt(i++));
@@ -143,13 +127,9 @@ namespace dicionario.Model
             saida.lema = lista[i++].ToString();
             saida.Id_classeGram = int.Parse(lista[i++].ToString());
             saida.idioma = lista[i++].ToString();
-            saida.rubrica = int.Parse(lista[i++].ToString());
-            saida.referencia_verbete = int.Parse(lista[i++].ToString());
-            saida.referencia_exemplo = lista[i++].ToString();
             saida.notas_gramatica = lista[i++].ToString();
             saida.nota_cultura = lista[i++].ToString();
             saida.acepcao = int.Parse(lista[i++].ToString());
-            saida.ref_ex_tr = lista[i++].ToString();
             saida.Infinitivo = int.Parse(lista[i++].ToString());
             //saida.ChecaOperador(lista[i++].ToString());
             saida.id_conjuga = int.Parse(lista.ElementAt(i++).ToString());

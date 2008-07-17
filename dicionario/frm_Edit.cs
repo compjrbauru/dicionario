@@ -29,28 +29,22 @@ namespace dicionario
         private List<Rubrica> resRubrica = new List<Rubrica>();
         private List<ClasseGramatical> resClg = new List<ClasseGramatical>();
         private List<Referencia> resRef = new List<Referencia>();
-        //private List<CategoriaGramatical> resCtg;
 
         private void EditForm_Load(object sender, EventArgs e)
         {
         }
         private void LimpaCampos()
         {
-            txtAcepcao.Text = "";
+            txtDefinicao.Text = "";
             txtGramatica.Text = "";
             txtpalavra.Text = "";
-            comboRef.SelectedIndex = -1;
-            comboRef.Text = "";
             ComboClasseGram.SelectedIndex = -1;
             ComboClasseGram.Text = "";
             ComboGenero.SelectedIndex = -1;
             ComboGenero.Text = "";
             ComboIdioma.SelectedIndex = -1;
             ComboIdioma.Text = "";
-            ComboRubrica.SelectedIndex = -1;
-            ComboRubrica.Text = "";
             textCultura.Text = "";
-
             btnEquiv.Enabled = false;
             btnConjuga.Enabled = false;
         }
@@ -58,11 +52,8 @@ namespace dicionario
         {
             p.id = -1;
             p.lema = "";
-            //p.Id_catGram = 0;
             p.Id_classeGram = 0;
             p.Genero = "N";
-            p.rubrica = 0;
-            p.referencia_verbete = 0;
         }
         private void MostraDados()
         {
@@ -85,21 +76,6 @@ namespace dicionario
                 clg = resClg.First();
                 ComboClasseGram.Text = clg.descricao;
             }
-            if (p.referencia_verbete > 0)
-            {
-                resultados = crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Id=" + p.referencia_verbete.ToString());
-                resRef = Referencia.ConverteObject(resultados);
-                refere = resRef.First();
-                comboRef.Text = refere.descricao;
-            }
-            if (p.rubrica > 0)
-            {
-                resultados = crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "Id=" + p.rubrica.ToString());
-                resRubrica = Rubrica.ConverteObject(resultados);
-                rb = resRubrica.First();
-                ComboRubrica.Text = rb.descricao;
-            }
-
             numAcepcao.Value = p.acepcao; ///FIXME:bloquear a troca?
             textCultura.Text = p.nota_cultura;
             txtGramatica.Text = p.notas_gramatica;            
@@ -241,6 +217,7 @@ namespace dicionario
             p.acepcao = (int)numAcepcao.Value;
             p.notas_gramatica = txtGramatica.Text;
             p.nota_cultura = textCultura.Text;
+            p.Definicao = txtDefinicao.Text;
             switch (ComboGenero.SelectedIndex)
             {
                 case 0:
@@ -253,7 +230,6 @@ namespace dicionario
                     p.Genero = "N";
                     break;
             }
-
             if (p.id <= 0)
             {
                 if (p.acepcao == 1)
@@ -376,78 +352,6 @@ namespace dicionario
                 ComboClasseGram.Items.Add(c.descricao);
             }
             timerClg.Enabled = false; //prevenindo de floodar a combo
-        }
-
-        private void timerRub_Tick(object sender, EventArgs e)
-        {
-            string pesquisa;
-            pesquisa = ComboRubrica.Text;
-            if (ComboRubrica.Items.Count > 0)
-            {
-                ComboRubrica.Items.Clear();
-            }
-            if (pesquisa.Length <= 3)
-            {
-                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
-            }
-            else
-                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
-            foreach (Rubrica r in resRubrica)
-            {
-                ComboRubrica.Items.Add(r.descricao);
-            }
-            timerRub.Enabled = false; //prevenindo de floodar a combo
-        }
-
-        private void ComboRubrica_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ComboRubrica.Text != "")
-            {
-                rb = resRubrica.Find(rubrica => rubrica.descricao == ComboRubrica.Text);
-                p.rubrica = rb.id;
-            }
-        }
-
-        private void ComboRubrica_TextUpdate(object sender, EventArgs e)
-        {
-            if (timerRub.Enabled == true) { timerRub.Enabled = false; timerRub.Enabled = true; } else timerRub.Enabled = true;
-        }
-
-        private void timerRef_Tick(object sender, EventArgs e)
-        {
-            string pesquisa;
-            pesquisa = comboRef.Text;
-            if (comboRef.Items.Count > 0)
-            {
-                comboRef.Items.Clear();
-            }
-            if (pesquisa.Length >= 5)
-            {
-                resRef = Referencia.ConverteObject(crud.SelecionarTabela(tabelasBd.REFERENCIAS, Referencia.ToListTabela(true), "Descricao LIKE '%" + pesquisa + "%'", "LIMIT 10"));
-                foreach (Referencia re in resRef)
-                {
-                    comboRef.Items.Add(re.descricao);
-                }
-            }
-
-            /*else
-                resultados = crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
-            timerRef.Enabled = false; //prevenindo de floodar a combo
-        }
-
-        private void comboRef_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboRef.Text != "")
-            {
-                refere = resRef.Find(r => r.descricao == comboRef.Text);
-                p.referencia_verbete = refere.id;
-
-            }
-        }
-
-        private void comboRef_TextUpdate(object sender, EventArgs e)
-        {
-            if (timerRef.Enabled == true) { timerRef.Enabled = false; timerRef.Enabled = true; } else timerRef.Enabled = true;
         }
 
         private void btnEquiv_Click(object sender, EventArgs e)

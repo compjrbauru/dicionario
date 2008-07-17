@@ -35,13 +35,12 @@
             this.txtpalavra = new System.Windows.Forms.TextBox();
             this.textCultura = new System.Windows.Forms.TextBox();
             this.txtGramatica = new System.Windows.Forms.TextBox();
-            this.txtAcepcao = new System.Windows.Forms.TextBox();
+            this.txtDefinicao = new System.Windows.Forms.TextBox();
             this.ComboGenero = new System.Windows.Forms.ComboBox();
             this.ComboIdioma = new System.Windows.Forms.ComboBox();
             this.ComboClasseGram = new System.Windows.Forms.ComboBox();
             this.comboFiltroIdiomas = new System.Windows.Forms.ComboBox();
             this.label_palavra = new System.Windows.Forms.Label();
-            this.label_ref = new System.Windows.Forms.Label();
             this.label_cult = new System.Windows.Forms.Label();
             this.label_grammar = new System.Windows.Forms.Label();
             this.label_acep = new System.Windows.Forms.Label();
@@ -49,8 +48,6 @@
             this.lblGenero = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNovo = new System.Windows.Forms.Button();
-            this.ComboRubrica = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnSalva = new System.Windows.Forms.Button();
             this.btnApaga = new System.Windows.Forms.Button();
             this.menu_barra = new System.Windows.Forms.MenuStrip();
@@ -66,11 +63,8 @@
             this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tip_Dicas = new System.Windows.Forms.ToolTip(this.components);
             this.numAcepcao = new System.Windows.Forms.NumericUpDown();
-            this.comboRef = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.timerClg = new System.Windows.Forms.Timer(this.components);
-            this.timerRub = new System.Windows.Forms.Timer(this.components);
-            this.timerRef = new System.Windows.Forms.Timer(this.components);
             this.ComboFiltroPrecisao = new System.Windows.Forms.ComboBox();
             this.btnEquiv = new System.Windows.Forms.Button();
             this.btnConjuga = new System.Windows.Forms.Button();
@@ -930,16 +924,16 @@
             this.txtGramatica.TabIndex = 19;
             this.tip_Dicas.SetToolTip(this.txtGramatica, "Informe neste campo se o lema possui alguma característica gramatical especial");
             // 
-            // txtAcepcao
+            // txtDefinicao
             // 
-            this.txtAcepcao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAcepcao.Location = new System.Drawing.Point(45, 204);
-            this.txtAcepcao.Multiline = true;
-            this.txtAcepcao.Name = "txtAcepcao";
-            this.txtAcepcao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtAcepcao.Size = new System.Drawing.Size(766, 107);
-            this.txtAcepcao.TabIndex = 6;
-            this.tip_Dicas.SetToolTip(this.txtAcepcao, "Insira aqui alguma explicação que defina o lema");
+            this.txtDefinicao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDefinicao.Location = new System.Drawing.Point(45, 204);
+            this.txtDefinicao.Multiline = true;
+            this.txtDefinicao.Name = "txtDefinicao";
+            this.txtDefinicao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDefinicao.Size = new System.Drawing.Size(766, 107);
+            this.txtDefinicao.TabIndex = 6;
+            this.tip_Dicas.SetToolTip(this.txtDefinicao, "Insira aqui alguma explicação que defina o lema");
             // 
             // ComboGenero
             // 
@@ -1009,16 +1003,6 @@
             this.label_palavra.Size = new System.Drawing.Size(45, 18);
             this.label_palavra.TabIndex = 26;
             this.label_palavra.Text = "Lema";
-            // 
-            // label_ref
-            // 
-            this.label_ref.AutoSize = true;
-            this.label_ref.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_ref.Location = new System.Drawing.Point(42, 322);
-            this.label_ref.Name = "label_ref";
-            this.label_ref.Size = new System.Drawing.Size(79, 18);
-            this.label_ref.TabIndex = 27;
-            this.label_ref.Text = "Referência";
             // 
             // label_cult
             // 
@@ -1090,29 +1074,6 @@
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
-            // 
-            // ComboRubrica
-            // 
-            this.ComboRubrica.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboRubrica.FormattingEnabled = true;
-            this.ComboRubrica.Location = new System.Drawing.Point(436, 344);
-            this.ComboRubrica.Name = "ComboRubrica";
-            this.ComboRubrica.Size = new System.Drawing.Size(375, 28);
-            this.ComboRubrica.TabIndex = 9;
-            this.tip_Dicas.SetToolTip(this.ComboRubrica, "Indique qual a rubrica da entrada atual.\r\nDigite um texto para buscar registros e" +
-        "xistentes");
-            this.ComboRubrica.SelectedIndexChanged += new System.EventHandler(this.ComboRubrica_SelectedIndexChanged);
-            this.ComboRubrica.TextUpdate += new System.EventHandler(this.ComboRubrica_TextUpdate);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(433, 323);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 18);
-            this.label5.TabIndex = 42;
-            this.label5.Text = "Rubrica";
             // 
             // btnSalva
             // 
@@ -1247,20 +1208,6 @@
             0,
             0});
             // 
-            // comboRef
-            // 
-            this.comboRef.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboRef.FormattingEnabled = true;
-            this.comboRef.Location = new System.Drawing.Point(45, 344);
-            this.comboRef.Name = "comboRef";
-            this.comboRef.Size = new System.Drawing.Size(385, 28);
-            this.comboRef.TabIndex = 8;
-            this.tip_Dicas.SetToolTip(this.comboRef, "Determine qual é a origem bibliográfica do exemplo de uso.\r\nDigite um texto para " +
-        "buscar registros existentes");
-            this.comboRef.SelectedIndexChanged += new System.EventHandler(this.comboRef_SelectedIndexChanged);
-            this.comboRef.TextUpdate += new System.EventHandler(this.comboRef_TextUpdate);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1275,16 +1222,6 @@
             // 
             this.timerClg.Interval = 700;
             this.timerClg.Tick += new System.EventHandler(this.timerClg_Tick);
-            // 
-            // timerRub
-            // 
-            this.timerRub.Interval = 700;
-            this.timerRub.Tick += new System.EventHandler(this.timerRub_Tick);
-            // 
-            // timerRef
-            // 
-            this.timerRef.Interval = 700;
-            this.timerRef.Tick += new System.EventHandler(this.timerRef_Tick);
             // 
             // ComboFiltroPrecisao
             // 
@@ -1379,14 +1316,11 @@
             this.Controls.Add(this.btnConjuga);
             this.Controls.Add(this.btnEquiv);
             this.Controls.Add(this.ComboFiltroPrecisao);
-            this.Controls.Add(this.comboRef);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.numAcepcao);
             this.Controls.Add(this.menu_barra);
             this.Controls.Add(this.btnApaga);
             this.Controls.Add(this.btnSalva);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.ComboRubrica);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGenero);
@@ -1394,13 +1328,12 @@
             this.Controls.Add(this.label_acep);
             this.Controls.Add(this.label_grammar);
             this.Controls.Add(this.label_cult);
-            this.Controls.Add(this.label_ref);
             this.Controls.Add(this.label_palavra);
             this.Controls.Add(this.comboFiltroIdiomas);
             this.Controls.Add(this.ComboClasseGram);
             this.Controls.Add(this.ComboIdioma);
             this.Controls.Add(this.ComboGenero);
-            this.Controls.Add(this.txtAcepcao);
+            this.Controls.Add(this.txtDefinicao);
             this.Controls.Add(this.txtGramatica);
             this.Controls.Add(this.textCultura);
             this.Controls.Add(this.txtpalavra);
@@ -1428,13 +1361,12 @@
         private System.Windows.Forms.TextBox txtpalavra;
         private System.Windows.Forms.TextBox textCultura;
         private System.Windows.Forms.TextBox txtGramatica;
-        private System.Windows.Forms.TextBox txtAcepcao;
+        private System.Windows.Forms.TextBox txtDefinicao;
         private System.Windows.Forms.ComboBox ComboGenero;
         private System.Windows.Forms.ComboBox ComboIdioma;
         private System.Windows.Forms.ComboBox ComboClasseGram;
         private System.Windows.Forms.ComboBox comboFiltroIdiomas;
         private System.Windows.Forms.Label label_palavra;
-        private System.Windows.Forms.Label label_ref;
         private System.Windows.Forms.Label label_cult;
         private System.Windows.Forms.Label label_grammar;
         private System.Windows.Forms.Label label_acep;
@@ -1442,8 +1374,6 @@
         private System.Windows.Forms.Label lblGenero;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNovo;
-        private System.Windows.Forms.ComboBox ComboRubrica;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSalva;
         private System.Windows.Forms.Button btnApaga;
         private System.Windows.Forms.MenuStrip menu_barra;
@@ -1461,9 +1391,6 @@
         private System.Windows.Forms.NumericUpDown numAcepcao;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer timerClg;
-        private System.Windows.Forms.Timer timerRub;
-        private System.Windows.Forms.ComboBox comboRef;
-        private System.Windows.Forms.Timer timerRef;
         private System.Windows.Forms.ComboBox ComboFiltroPrecisao;
         private System.Windows.Forms.Button btnEquiv;
         private System.Windows.Forms.Button btnConjuga;

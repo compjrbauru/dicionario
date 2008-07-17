@@ -16,10 +16,12 @@ namespace dicionario.Model
         public bool heterogenerico { get; set; }
         public string exemplo { get; set; }
         public string exemplo_traduzido { get; set; }
+        public int Referencia { get; set; }
+        public int Rubrica { get; set; }
 
         public static List<string> ToListTabela()
         {
-            return new List<string> { "origem", "equivalente" , "heterogenerico", "heterotonico", "heterossemantico", "Exemplo", "Exemplo_Traduzido"};
+            return new List<string> { "origem", "equivalente" , "heterogenerico", "heterotonico", "heterossemantico", "Exemplo", "Exemplo_Traduzido", "Referencia", "Rubrica"};
         }
 
         public List<string> ToListValores()
@@ -33,7 +35,9 @@ namespace dicionario.Model
                     heterotonico.ToString(),
                     heterossemantico.ToString(),
                     exemplo,
-                    exemplo_traduzido
+                    exemplo_traduzido,
+                    Referencia.ToString(),
+                    Rubrica.ToString()
                 };
             }
             return r;
@@ -85,6 +89,8 @@ namespace dicionario.Model
             eqv.heterossemantico = Helper.ParseBoolean(entrada[i++].ToString());
             eqv.exemplo = entrada[i++].ToString();
             eqv.exemplo_traduzido = entrada[i++].ToString();
+            eqv.Referencia = int.Parse(entrada[i++].ToString());
+            eqv.Rubrica = int.Parse(entrada[i++].ToString());
             return eqv;
         }
     }

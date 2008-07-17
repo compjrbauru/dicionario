@@ -45,38 +45,38 @@ namespace dicionario
                 {
                     v1.Add(p.Id_classeGram);
                 }
-                if (v2.FindIndex(val => val == p.rubrica) < 0)
+                /*if (v2.FindIndex(val => val == p.rubrica) < 0)
                 {
                     v2.Add(p.rubrica);
                 }
                 if (v3.FindIndex(val => val == p.referencia_verbete) < 0)
                 {
                     v3.Add(p.referencia_verbete);
-                }
+                }*/
             }
             filtro = montaFiltro("id", v1); //filtrando cgram
             resCg = ClasseGramatical.ConverteObject(operaBd.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), filtro));
-            filtro = montaFiltro("id", v2); //filtrando rubrica
+            /*filtro = montaFiltro("id", v2); //filtrando rubrica
             resRubrica = Rubrica.ConverteObject(operaBd.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), filtro));
             filtro = montaFiltro("Id", v3);
-            resRefer = Referencia.ConverteObject(operaBd.SelecionarTabela("referencias", Referencia.ToListTabela(true), filtro));
+            resRefer = Referencia.ConverteObject(operaBd.SelecionarTabela("referencias", Referencia.ToListTabela(true), filtro));*/
             foreach (Palavra p in entrada) {
                 //vamos criar os nodes de exemplo e juntá-los num único conjunto
                 s.Clear();
-                s.Add(p.referencia_exemplo);
-                s.Add(p.ref_ex_tr);
+                //s.Add(p.referencia_exemplo);
+                //s.Add(p.ref_ex_tr);
                 exemplos = criaNode(s);
 
                 cgselect = resCg.Find(icg => icg.id == p.Id_classeGram);
                 //vamos agora juntar os outros valores pertinentes à acepção ou verbete selecionado
-                s = criaListaValores(p, cgselect, resRefer.Find(iref => iref.id == p.referencia_verbete));
+                //s = criaListaValores(p, cgselect, resRefer.Find(iref => iref.id == p.referencia_verbete));
                 nf = criaTreeNodes(s);
 
                 //mesclando ambos em nf
                 nf.Add(exemplos);
 
                 //vamos criar os pais destas folhas
-                s = criaListaTitulos(p, cgselect, resRubrica.Find(irub => irub.id == p.rubrica));
+                //s = criaListaTitulos(p, cgselect, resRubrica.Find(irub => irub.id == p.rubrica));
                 holder = criaTreeTether(s, nf);
 
                 saida.Add(new TreeNode[] { new TreeNode("Acepção" + p.acepcao, holder) });
