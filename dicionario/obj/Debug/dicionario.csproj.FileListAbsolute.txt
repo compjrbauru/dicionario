@@ -1,0 +1,10 @@
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\dicionario.exe.config
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\dicionario.exe
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\dicionario.pdb
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.csprojResolveAssemblyReference.cache
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.Properties.Resources.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.csproj.GenerateResource.Cache
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.csproj.CoreCompileInputs.cache
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.exe
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.pdb
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_contato.resources
