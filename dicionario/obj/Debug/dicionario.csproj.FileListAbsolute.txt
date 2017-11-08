@@ -8,3 +8,13 @@ C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.csproj.Core
 C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.exe
 C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.pdb
 C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_contato.resources
+D:\DEV\dicionario-master\dicionario\bin\Debug\dicionario.exe.config
+D:\DEV\dicionario-master\dicionario\bin\Debug\dicionario.exe
+D:\DEV\dicionario-master\dicionario\bin\Debug\dicionario.pdb
+D:\DEV\dicionario-master\dicionario\obj\Debug\dicionario.csprojResolveAssemblyReference.cache
+D:\DEV\dicionario-master\dicionario\obj\Debug\dicionario.frm_contato.resources
+D:\DEV\dicionario-master\dicionario\obj\Debug\dicionario.Properties.Resources.resources
+D:\DEV\dicionario-master\dicionario\obj\Debug\dicionario.csproj.GenerateResource.Cache
+D:\DEV\dicionario-master\dicionario\obj\Debug\dicionario.csproj.CoreCompileInputs.cache
+D:\DEV\dicionario-master\dicionario\obj\Debug\dicionario.exe
+D:\DEV\dicionario-master\dicionario\obj\Debug\dicionario.pdb
