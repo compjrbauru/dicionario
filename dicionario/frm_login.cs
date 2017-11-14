@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace dicionario
 {
-    public partial class frm_login : Form
+    public partial class Login : Form
     {
-        public frm_login()
+        public Login()
         {
             InitializeComponent();
+        }
+
+        private void frm_login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

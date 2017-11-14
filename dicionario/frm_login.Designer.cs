@@ -1,6 +1,6 @@
 ﻿namespace dicionario
 {
-    partial class frm_login
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -68,8 +68,9 @@
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // frm_login
+            // Login
             // 
+            this.AccessibleName = "Login";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 451);
@@ -77,8 +78,9 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "frm_login";
-            this.Text = "frm_login";
+            this.Name = "Login";
+            this.Text = "Login";
+            this.Load += new System.EventHandler(this.frm_login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

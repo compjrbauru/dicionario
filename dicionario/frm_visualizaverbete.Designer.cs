@@ -105,7 +105,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "frm_visualizaverbete";
-            this.Text = "visualizaverbete";
+            this.Text = "Visualização do Verbete";
             this.ResumeLayout(false);
 
         }
