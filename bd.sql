@@ -7,6 +7,8 @@ CREATE TABLE base (
   [equivalente] [int] NULL,
   [palavra_catGram] [int] NULL,
   [subpalavra_catGram] [int] NULL,
+  [palavra_classeGram] [int] NULL,
+  [subpalavra_classeGram] [int] NULL,
   [acepcao] [varchar] NULL,
   [definicao] [varchar] NULL,
   [exemplos_original] [varchar] NULL,
@@ -39,6 +41,11 @@ CREATE TABLE usr (
   [usr] [varchar](10) NOT NULL,
   [pass] [varchar](15) NOT NULL,
   [nivel_permissao] [int] NOT NULL,
+  [email] [varchar](50) NOT NULL,
+  [nome] [varchar](50) NULL,
+  [contato] [varchar](15) NULL,
+  [rede social] [varchar](15) NULL,
+  [cpf] [int](11) NULL,
   CONSTRAINT [PK_Usr] PRIMARY KEY
 )
 CREATE TABLE categoriaGram(
@@ -46,3 +53,16 @@ CREATE TABLE categoriaGram(
   [Descricao] [varchar](30) NULL,
   [sigla] [varchar](5) NOT NULL
 )
+CREATE TABLE classeGram(
+  [Id] [int] AUTO_INCREMENT NOT NULL,
+  [Descricao] [varchar](30) NULL,
+  [sigla] [varchar](5) NOT NULL
+)
+/* A tabela de palvras ignoradas vai aqui. Pensar numa estrutura interessante
+CREATE TABLE ignoraBusca(
+
+)*/
+/*--Table for statistics
+CREATE TABLE statistics(
+
+)*/
