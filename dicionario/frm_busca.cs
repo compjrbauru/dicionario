@@ -20,6 +20,9 @@ namespace dicionario
             InitializeComponent();
             this.searchResultsListBox.Hide();
             this.objEditForm = new frm_Edit();
+            this.extraComboBox1.Hide();
+            this.extraComboBox2.Hide();
+
         }
 
         private void contactButton_Click(object sender, EventArgs e)
@@ -50,6 +53,20 @@ namespace dicionario
             this.objEditForm.Show(this);
             this.objEditForm.BringToFront();
             this.Hide();
+        }
+
+        private void extraFilterCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (extraFilterCheckBox.Checked)
+            {
+                this.extraComboBox1.Show();
+                this.extraComboBox2.Show();
+            }
+            else if (!extraFilterCheckBox.Checked)
+            {
+                this.extraComboBox1.Hide();
+                this.extraComboBox2.Hide();
+            }
         }
     }
 }

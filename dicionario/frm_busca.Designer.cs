@@ -37,6 +37,9 @@
             this.editModeButton = new System.Windows.Forms.Button();
             this.homeButton = new System.Windows.Forms.Button();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
+            this.extraFilterCheckBox = new System.Windows.Forms.CheckBox();
+            this.extraComboBox1 = new System.Windows.Forms.ComboBox();
+            this.extraComboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // searchBox
@@ -259,9 +262,9 @@
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(367, 131);
+            this.searchButton.Location = new System.Drawing.Point(476, 130);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(110, 28);
+            this.searchButton.Size = new System.Drawing.Size(110, 26);
             this.searchButton.TabIndex = 2;
             this.searchButton.Text = "Procurar";
             this.searchButton.UseVisualStyleBackColor = true;
@@ -272,7 +275,7 @@
             this.searchResultsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.searchResultsListBox.FormattingEnabled = true;
             this.searchResultsListBox.ItemHeight = 17;
-            this.searchResultsListBox.Location = new System.Drawing.Point(45, 242);
+            this.searchResultsListBox.Location = new System.Drawing.Point(44, 271);
             this.searchResultsListBox.Name = "searchResultsListBox";
             this.searchResultsListBox.Size = new System.Drawing.Size(541, 72);
             this.searchResultsListBox.TabIndex = 3;
@@ -322,19 +325,60 @@
             // 
             // filterComboBox
             // 
-            this.filterComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.filterComboBox.FormattingEnabled = true;
+            this.filterComboBox.Items.AddRange(new object[] {
+            "Exatamente",
+            "Contém na entrada",
+            "Anagrama",
+            "Contém no conteúdo",
+            "Exemplo",
+            "Heterogenérico",
+            "Heterotônico"});
             this.filterComboBox.Location = new System.Drawing.Point(249, 131);
             this.filterComboBox.Name = "filterComboBox";
-            this.filterComboBox.Size = new System.Drawing.Size(112, 28);
+            this.filterComboBox.Size = new System.Drawing.Size(153, 26);
             this.filterComboBox.TabIndex = 16;
             this.filterComboBox.Text = "Filtro";
+            // 
+            // extraFilterCheckBox
+            // 
+            this.extraFilterCheckBox.AutoSize = true;
+            this.extraFilterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.extraFilterCheckBox.Location = new System.Drawing.Point(45, 164);
+            this.extraFilterCheckBox.Name = "extraFilterCheckBox";
+            this.extraFilterCheckBox.Size = new System.Drawing.Size(107, 21);
+            this.extraFilterCheckBox.TabIndex = 17;
+            this.extraFilterCheckBox.Text = "Filtros extras";
+            this.extraFilterCheckBox.UseVisualStyleBackColor = true;
+            this.extraFilterCheckBox.CheckedChanged += new System.EventHandler(this.extraFilterCheckBox_CheckedChanged);
+            // 
+            // extraComboBox1
+            // 
+            this.extraComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.extraComboBox1.FormattingEnabled = true;
+            this.extraComboBox1.Location = new System.Drawing.Point(249, 164);
+            this.extraComboBox1.Name = "extraComboBox1";
+            this.extraComboBox1.Size = new System.Drawing.Size(153, 24);
+            this.extraComboBox1.TabIndex = 18;
+            // 
+            // extraComboBox2
+            // 
+            this.extraComboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.extraComboBox2.FormattingEnabled = true;
+            this.extraComboBox2.Location = new System.Drawing.Point(249, 191);
+            this.extraComboBox2.Name = "extraComboBox2";
+            this.extraComboBox2.Size = new System.Drawing.Size(153, 24);
+            this.extraComboBox2.TabIndex = 19;
             // 
             // frm_busca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 361);
+            this.ClientSize = new System.Drawing.Size(634, 412);
+            this.Controls.Add(this.extraComboBox2);
+            this.Controls.Add(this.extraComboBox1);
+            this.Controls.Add(this.extraFilterCheckBox);
             this.Controls.Add(this.filterComboBox);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.editModeButton);
@@ -362,6 +406,9 @@
         private System.Windows.Forms.Button editModeButton;
         private System.Windows.Forms.Button homeButton;
         private System.Windows.Forms.ComboBox filterComboBox;
+        private System.Windows.Forms.CheckBox extraFilterCheckBox;
+        private System.Windows.Forms.ComboBox extraComboBox1;
+        private System.Windows.Forms.ComboBox extraComboBox2;
     }
 }
 
