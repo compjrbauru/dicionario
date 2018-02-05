@@ -13,6 +13,7 @@ namespace dicionario
     public partial class frm_busca : Form
     {
         frm_Edit objEditForm;
+        frm_configuracao configForm;
         public frm_busca()
         {
             //O Construtor esconde o ResultsBox, que só é mostrado depois de uma
@@ -20,6 +21,7 @@ namespace dicionario
             InitializeComponent();
             this.searchResultsListBox.Hide();
             this.objEditForm = new frm_Edit();
+            this.configForm = new frm_configuracao();
             this.extraComboBox1.Hide();
             this.extraComboBox2.Hide();
 
@@ -67,6 +69,14 @@ namespace dicionario
                 this.extraComboBox1.Hide();
                 this.extraComboBox2.Hide();
             }
+        }
+
+        private void ConfigButton_Click(object sender, EventArgs e)
+        {
+            this.configForm.Show(this);
+            this.configForm.BringToFront();
+            this.Hide();
+
         }
     }
 }

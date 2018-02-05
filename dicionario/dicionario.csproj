@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frm_configuracao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_configuracao.Designer.cs">
+      <DependentUpon>frm_configuracao.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_contato.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,7 @@
       <DependentUpon>frm_main.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ConectaBanco.cs" />
+    <Compile Include="Model\Palavra.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +105,9 @@
     </Compile>
     <EmbeddedResource Include="frm_busca.resx">
       <DependentUpon>frm_busca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_configuracao.resx">
+      <DependentUpon>frm_configuracao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_contato.resx">
       <DependentUpon>frm_contato.cs</DependentUpon>

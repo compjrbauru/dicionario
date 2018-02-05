@@ -40,6 +40,7 @@
             this.extraFilterCheckBox = new System.Windows.Forms.CheckBox();
             this.extraComboBox1 = new System.Windows.Forms.ComboBox();
             this.extraComboBox2 = new System.Windows.Forms.ComboBox();
+            this.ConfigButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // searchBox
@@ -295,7 +296,7 @@
             // helpButton
             // 
             this.helpButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpButton.Location = new System.Drawing.Point(208, 37);
+            this.helpButton.Location = new System.Drawing.Point(208, 38);
             this.helpButton.Name = "helpButton";
             this.helpButton.Size = new System.Drawing.Size(75, 30);
             this.helpButton.TabIndex = 6;
@@ -339,7 +340,7 @@
             this.filterComboBox.Name = "filterComboBox";
             this.filterComboBox.Size = new System.Drawing.Size(153, 26);
             this.filterComboBox.TabIndex = 16;
-            this.filterComboBox.Text = "Filtro";
+            this.filterComboBox.Text = "Filtros";
             // 
             // extraFilterCheckBox
             // 
@@ -371,11 +372,23 @@
             this.extraComboBox2.Size = new System.Drawing.Size(153, 24);
             this.extraComboBox2.TabIndex = 19;
             // 
+            // ConfigButton
+            // 
+            this.ConfigButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConfigButton.Location = new System.Drawing.Point(289, 38);
+            this.ConfigButton.Name = "ConfigButton";
+            this.ConfigButton.Size = new System.Drawing.Size(100, 30);
+            this.ConfigButton.TabIndex = 20;
+            this.ConfigButton.Text = "Configuração";
+            this.ConfigButton.UseVisualStyleBackColor = true;
+            this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
+            // 
             // frm_busca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 412);
+            this.Controls.Add(this.ConfigButton);
             this.Controls.Add(this.extraComboBox2);
             this.Controls.Add(this.extraComboBox1);
             this.Controls.Add(this.extraFilterCheckBox);
@@ -409,6 +422,7 @@
         private System.Windows.Forms.CheckBox extraFilterCheckBox;
         private System.Windows.Forms.ComboBox extraComboBox1;
         private System.Windows.Forms.ComboBox extraComboBox2;
+        private System.Windows.Forms.Button ConfigButton;
     }
 }
 

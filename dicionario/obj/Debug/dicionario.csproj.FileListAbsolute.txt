@@ -43,3 +43,4 @@ C:\Users\takao\Documents\Visual Studio 2017\Projetos\dicionario\dicionario\bin\D
 C:\Users\takao\Documents\Visual Studio 2017\Projetos\dicionario\dicionario\bin\Debug\dicionario.pdb
 C:\Users\takao\Documents\Visual Studio 2017\Projetos\dicionario\dicionario\bin\Debug\MySql.Data.dll
 C:\Users\takao\Documents\Visual Studio 2017\Projetos\dicionario\dicionario\bin\Debug\MySql.Data.xml
+C:\Users\takao\Documents\Visual Studio 2017\Projetos\dicionario\dicionario\obj\Debug\dicionario.frm_configuracao.resources
