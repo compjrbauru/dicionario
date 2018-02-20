@@ -37,6 +37,9 @@ namespace dicionario
             Owner.Show();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frm_controledeusuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_controledeusuario.Designer.cs">
+      <DependentUpon>frm_controledeusuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_configuracao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,8 +98,10 @@
     <Compile Include="frm_main.Designer.cs">
       <DependentUpon>frm_main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClasseGramatical.cs" />
     <Compile Include="Model\ConectaBanco.cs" />
     <Compile Include="Model\Palavra.cs" />
+    <Compile Include="Model\Rubrica.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +111,10 @@
     <Compile Include="frm_visualizaverbete.Designer.cs">
       <DependentUpon>frm_visualizaverbete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Referencia.cs" />
+    <EmbeddedResource Include="frm_controledeusuario.resx">
+      <DependentUpon>frm_controledeusuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_busca.resx">
       <DependentUpon>frm_busca.cs</DependentUpon>
     </EmbeddedResource>
@@ -111,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_contato.resx">
       <DependentUpon>frm_contato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Edit.resx">
+      <DependentUpon>frm_Edit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>

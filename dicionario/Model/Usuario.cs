@@ -29,7 +29,7 @@ namespace dicionario.Model
         {
             List<string> val = new List<string>();
             if (incluiId)
-                val.Add("usr");
+            val.Add("usr");
             val.Add("pass");
             val.Add("nivel_permissao");
             val.Add("email");
