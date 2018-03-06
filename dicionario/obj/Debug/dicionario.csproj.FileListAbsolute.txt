@@ -50,7 +50,6 @@ C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\bin\Debug\dicionario.pdb
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\bin\Debug\MySql.Data.dll
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\bin\Debug\MySql.Data.xml
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.csprojResolveAssemblyReference.cache
-C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.controledeusuario.resources
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.frm_busca.resources
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.frm_configuracao.resources
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.frm_contato.resources
@@ -62,3 +61,4 @@ C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.csproj.G
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.csproj.CoreCompileInputs.cache
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.exe
 C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.pdb
+C:\Users\Gustavo\Desktop\DIC\dicionario\dicionario\obj\Debug\dicionario.frm_controledeusuario.resources

@@ -9,7 +9,7 @@ namespace dicionario.Model
     class Usuario
     {
         public Usuario() { }
-        public int usr { get; set; }
+        public string usr { get; set; }
         public string pass { get; set; }
         public string permissao { get; set; }
         public string email { get; set; }
