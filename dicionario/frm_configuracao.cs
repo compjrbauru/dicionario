@@ -41,5 +41,11 @@ namespace dicionario
             Owner.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frm_controledeusuario usr = new frm_controledeusuario();
+            usr.ShowDialog();
+            usr.Dispose();
+        }
     }
 }

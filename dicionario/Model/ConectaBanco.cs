@@ -15,19 +15,21 @@ namespace dicionario.Model
         private string bancoDados;
         private string usuario;
         private string senha;
+        private string porta;
         private MySqlConnection conexao;
 
-        public ConectaBanco(string bd, string usr, string pss, string svr = "localhost")
+        public ConectaBanco(string bd, string usr, string pss, string svr = "localhost", string porta = "3306")
         {
-            PreparaConexao(bd, usr, pss, svr);
+            PreparaConexao(bd, usr, pss, svr, porta);
             servidor = svr;
             bancoDados = bd;
             usuario = usr;
             senha = pss;
+            this.porta = porta;
         }
-        private void PreparaConexao(string bd, string usr, string pss, string svr = "localhost")
+        private void PreparaConexao(string bd, string usr, string pss, string svr = "localhost", string port = "3306")
         {
-            string connectionString = "SERVER=" + svr + ";" + "DATABASE=" + bd + ";" + "UID=" + usr + ";" + "PASSWORD=" + pss + ";";
+            string connectionString = "Server=" + svr + ";" + "Port=" + port + ";Database=" + bd + ";" + "User=" + usr + ";" + "pwd=" + pss + ";";
             conexao = new MySqlConnection(connectionString);
         }
         private bool AbreConexao()
@@ -48,7 +50,11 @@ namespace dicionario.Model
                         case 1045:
                             MessageBox.Show("A combinacao de usuario e senha nao existe. Tente novamente.");
                             break;
+                        default:
+                            MessageBox.Show("Erro" + ex.Code.ToString() + ex.Message);
+                            break;
                     }
+                   
                 }
                 return false;
             }

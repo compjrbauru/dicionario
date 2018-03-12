@@ -26,16 +26,36 @@ namespace dicionario
         private void btnincluir_Click(object sender, EventArgs e)
         {
             Usuario usr = new Usuario();
-            ConectaBanco conecta = new ConectaBanco("bd", "usr", "pass");
+            ConectaBanco conecta = new ConectaBanco("dicionario", "root", "gamesjoker", "10.0.2.15");
+            string temp;
             //campos não nulos: usuario, senha, nivel de permissão, email e cpf
             if (txtusr.Text == "")
                 MessageBox.Show("Campos obrigatórios não foram preenchidos.");
             else
             {
                 usr.usr = txtusr.Text;
+                usr.pass = txtpass.Text;
+                switch (comboPermissao.SelectedIndex)
+                {
+                    case 0:
+                        temp = "ADM";
+                        break;
+                    case 1:
+                        temp = "EDT";
+                        break;
+                    default:
+                        temp = "USR";
+                        break;
+                }
+                usr.permissao = temp;
+                usr.email = txtEmail.Text;
+                usr.nome = txtNome.Text;
+                usr.contato = txtContato.Text;
+                usr.rsocial = txtRSoc.Text;
+                usr.cpf = txtCpf.Text;
                 //...
                 //...
-                conecta.InsereLinha("usr", usr.ToListTabela(),usr.ToListValores());
+                conecta.InsereLinha("usr", usr.ToListTabela(true),usr.ToListValores(true));
             }
         }
     }

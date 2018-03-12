@@ -208,7 +208,7 @@
             this.Controls.Add(this.ConnNameLabel);
             this.Controls.Add(this.ConnNameTextBox);
             this.Name = "frm_configuracao";
-            this.Text = "frm_configuracao";
+            this.Text = "Configurações";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.txtusr = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtpass = new System.Windows.Forms.TextBox();
+            this.txtContato = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtNome = new System.Windows.Forms.TextBox();
+            this.txtRSoc = new System.Windows.Forms.TextBox();
+            this.txtCpf = new System.Windows.Forms.TextBox();
+            this.comboPermissao = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnincluir = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -48,66 +48,66 @@
             this.txtusr.Size = new System.Drawing.Size(160, 26);
             this.txtusr.TabIndex = 0;
             // 
-            // textBox2
+            // txtpass
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox2.Location = new System.Drawing.Point(62, 105);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 26);
-            this.textBox2.TabIndex = 1;
+            this.txtpass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtpass.Location = new System.Drawing.Point(62, 105);
+            this.txtpass.Name = "txtpass";
+            this.txtpass.Size = new System.Drawing.Size(160, 26);
+            this.txtpass.TabIndex = 1;
             // 
-            // textBox3
+            // txtContato
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox3.Location = new System.Drawing.Point(62, 201);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 26);
-            this.textBox3.TabIndex = 2;
+            this.txtContato.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtContato.Location = new System.Drawing.Point(62, 201);
+            this.txtContato.Name = "txtContato";
+            this.txtContato.Size = new System.Drawing.Size(160, 26);
+            this.txtContato.TabIndex = 2;
             // 
-            // textBox4
+            // txtEmail
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox4.Location = new System.Drawing.Point(62, 137);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(160, 26);
-            this.textBox4.TabIndex = 2;
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtEmail.Location = new System.Drawing.Point(62, 137);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(160, 26);
+            this.txtEmail.TabIndex = 2;
             // 
-            // textBox5
+            // txtNome
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox5.Location = new System.Drawing.Point(62, 169);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(160, 26);
-            this.textBox5.TabIndex = 3;
+            this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtNome.Location = new System.Drawing.Point(62, 169);
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(160, 26);
+            this.txtNome.TabIndex = 3;
             // 
-            // textBox6
+            // txtRSoc
             // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox6.Location = new System.Drawing.Point(62, 233);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(160, 26);
-            this.textBox6.TabIndex = 4;
+            this.txtRSoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtRSoc.Location = new System.Drawing.Point(62, 233);
+            this.txtRSoc.Name = "txtRSoc";
+            this.txtRSoc.Size = new System.Drawing.Size(160, 26);
+            this.txtRSoc.TabIndex = 4;
             // 
-            // textBox7
+            // txtCpf
             // 
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox7.Location = new System.Drawing.Point(62, 265);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(160, 26);
-            this.textBox7.TabIndex = 5;
+            this.txtCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtCpf.Location = new System.Drawing.Point(62, 265);
+            this.txtCpf.Name = "txtCpf";
+            this.txtCpf.Size = new System.Drawing.Size(160, 26);
+            this.txtCpf.TabIndex = 5;
             // 
-            // comboBox1
+            // comboPermissao
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboPermissao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.comboPermissao.FormattingEnabled = true;
+            this.comboPermissao.Items.AddRange(new object[] {
             "ADM",
             "EDT",
             "USR"});
-            this.comboBox1.Location = new System.Drawing.Point(363, 71);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(149, 28);
-            this.comboBox1.TabIndex = 6;
+            this.comboPermissao.Location = new System.Drawing.Point(363, 71);
+            this.comboPermissao.Name = "comboPermissao";
+            this.comboPermissao.Size = new System.Drawing.Size(149, 28);
+            this.comboPermissao.TabIndex = 6;
             // 
             // label1
             // 
@@ -137,13 +137,13 @@
             this.ClientSize = new System.Drawing.Size(684, 411);
             this.Controls.Add(this.btnincluir);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.comboPermissao);
+            this.Controls.Add(this.txtCpf);
+            this.Controls.Add(this.txtRSoc);
+            this.Controls.Add(this.txtNome);
+            this.Controls.Add(this.txtEmail);
+            this.Controls.Add(this.txtContato);
+            this.Controls.Add(this.txtpass);
             this.Controls.Add(this.txtusr);
             this.Name = "frm_controledeusuario";
             this.Text = "controledeusuario";
@@ -155,13 +155,13 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtusr;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtpass;
+        private System.Windows.Forms.TextBox txtContato;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.TextBox txtRSoc;
+        private System.Windows.Forms.TextBox txtCpf;
+        private System.Windows.Forms.ComboBox comboPermissao;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnincluir;
     }

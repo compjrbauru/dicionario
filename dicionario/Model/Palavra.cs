@@ -46,7 +46,7 @@ namespace dicionario.Model
             return val;
         }
 
-        public List<string> ToListTabela()
+        public static List<string> ToListTabela()
         {
 
             List<string> val = new List<string>();
