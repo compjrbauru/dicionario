@@ -20,8 +20,6 @@ namespace dicionario
             //busca.
             InitializeComponent();
             this.searchResultsListBox.Hide();
-            this.objEditForm = new frm_Edit();
-            this.configForm = new frm_configuracao();
             this.extraComboBox1.Hide();
             this.extraComboBox2.Hide();
 
@@ -52,6 +50,7 @@ namespace dicionario
 
         private void editModeButton_Click(object sender, EventArgs e)
         {
+            this.objEditForm = new frm_Edit();
             this.objEditForm.Show(this);
             this.objEditForm.BringToFront();
             this.Hide();
@@ -73,6 +72,7 @@ namespace dicionario
 
         private void ConfigButton_Click(object sender, EventArgs e)
         {
+            this.configForm = new frm_configuracao();
             this.configForm.Show(this);
             this.configForm.BringToFront();
             this.Hide();
