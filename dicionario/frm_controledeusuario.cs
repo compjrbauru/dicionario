@@ -29,7 +29,7 @@ namespace dicionario
             ConectaBanco conecta = new ConectaBanco("dicionario", "root", "gamesjoker", "10.0.2.15");
             string temp;
             //campos não nulos: usuario, senha, nivel de permissão, email e cpf
-            if (txtusr.Text == "")
+            if (txtusr.Text == "" || txtpass.Text == "" || txtEmail.Text==""||txtCpf.Text=="")
                 MessageBox.Show("Campos obrigatórios não foram preenchidos.");
             else
             {
@@ -57,6 +57,21 @@ namespace dicionario
                 //...
                 conecta.InsereLinha("usr", usr.ToListTabela(true),usr.ToListValores(true));
             }
+        }
+
+        private void frm_controledeusuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
