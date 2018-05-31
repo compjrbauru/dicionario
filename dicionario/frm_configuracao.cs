@@ -47,5 +47,11 @@ namespace dicionario
             usr.ShowDialog();
             usr.Dispose();
         }
+
+        private void btn_usr_Click(object sender, EventArgs e)
+        {
+            frm_controledeusuario ctlu = new frm_controledeusuario();
+            ctlu.ShowDialog();
+        }
     }
 }

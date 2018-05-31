@@ -74,6 +74,7 @@ namespace dicionario.Model
         }
         public void InsereLinha(string tabela, List<string> campos, List<string> valores)
         {
+            int temp = 0;
             string query = "INSERT INTO " + tabela + " (";
             foreach (string item in campos)
             {
@@ -84,10 +85,17 @@ namespace dicionario.Model
             query += ") VALUES(";
             foreach (string item in valores)
             {
-                query += item;
-                query += ", ";
+                if (int.TryParse(item, out temp)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
+                    query += item;
+                    query += ", ";
+                }
+                else {
+                    query += "'";
+                    query += item;
+                    query += "',";
+                }
             }
-            query = query.Remove(query.Length - 2);
+            query = query.Remove(query.Length - 1);
             query += ")";
             if (this.AbreConexao() == true)
             {
@@ -150,6 +158,59 @@ namespace dicionario.Model
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 switch (tabela)
                 {
+                    case "categoriagram":
+                        while (dataReader.Read())
+                        {
+                            list[0].Add(dataReader["id"] + "");
+                            list[1].Add(dataReader["Descricao"] + "");
+                            list[2].Add(dataReader["sigla"] + "");
+                        }
+                    break;
+                    case "classegram":
+                        while (dataReader.Read())
+                        {
+                            list[0].Add(dataReader["id"] + "");
+                            list[1].Add(dataReader["Descricao"] + "");
+                            list[2].Add(dataReader["sigla"] + "");
+                        }
+                        break;
+                    case "palavra":
+                        while (dataReader.Read())
+                        {
+                            list[0].Add(dataReader["id"] + "");
+                            list[1].Add(dataReader["Lema"] + "");
+                            list[2].Add(dataReader["Id_catGram"] + "");
+                            list[3].Add(dataReader["Id_classeGram"] + "");
+                            list[4].Add(dataReader["Idioma"] + "");
+                            list[5].Add(dataReader["Rubrica"] + "");
+                            list[6].Add(dataReader["heterogenerico"] + "");
+                            list[7].Add(dataReader["heterotonico"] + "");
+                            list[8].Add(dataReader["equivalente"] + "");
+                            list[9].Add(dataReader["referencia_verbete"] + "");
+                            list[10].Add(dataReader["referencia_exemplo"] + "");
+                            list[11].Add(dataReader["notas_gramatica"] + "");
+                            list[12].Add(dataReader["notas_cultura"] + "");
+                            list[13].Add(dataReader["acepcao"] + "");
+                            list[14].Add(dataReader["nots_gramatica_avancado"] + "");
+                        }
+                        break;
+                    case "rubrica":
+                        while (dataReader.Read())
+                        {
+                            list[0].Add(dataReader["id"] + "");
+                            list[1].Add(dataReader["Descricao"] + "");
+                            list[2].Add(dataReader["sigla"] + "");
+                        }
+                        break;
+                    case "referencias":
+                        while (dataReader.Read())
+                        {
+                            list[0].Add(dataReader["Cod"] + "");
+                            list[1].Add(dataReader["Descricao"] + "");
+                            list[2].Add(dataReader["Ano"] + "");
+                            list[3].Add(dataReader["Autor"] + "");
+                        }
+                        break;
                     case "usr":
                         while (dataReader.Read())
                         {
@@ -164,6 +225,9 @@ namespace dicionario.Model
                             list[8].Add(dataReader["telefone"] + "");
                         }
                         break;
+                    default:
+                        throw new Exception("Tabela não tratada no programa!");
+                    
                 }
                 dataReader.Close();
                 this.FechaConexao();

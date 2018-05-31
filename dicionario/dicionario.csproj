@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frm_categoriaGramatical.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_categoriaGramatical.Designer.cs">
+      <DependentUpon>frm_categoriaGramatical.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_controledeusuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,11 +98,17 @@
     <Compile Include="frm_login.Designer.cs">
       <DependentUpon>frm_login.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_main.cs">
+    <Compile Include="frm_classeGramatcal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_main.Designer.cs">
-      <DependentUpon>frm_main.cs</DependentUpon>
+    <Compile Include="frm_classeGramatcal.Designer.cs">
+      <DependentUpon>frm_classeGramatcal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_referencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_referencia.Designer.cs">
+      <DependentUpon>frm_referencia.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportaCsv.cs">
       <SubType>Form</SubType>
@@ -104,8 +116,15 @@
     <Compile Include="ImportaCsv.designer.cs">
       <DependentUpon>ImportaCsv.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\CategoriaGramatical.cs" />
     <Compile Include="Model\ClasseGramatical.cs" />
     <Compile Include="Model\ConectaBanco.cs" />
+    <Compile Include="frm_rubrica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_rubrica.Designer.cs">
+      <DependentUpon>frm_rubrica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Palavra.cs" />
     <Compile Include="Model\Rubrica.cs" />
     <Compile Include="Model\Usuario.cs" />
@@ -118,6 +137,9 @@
       <DependentUpon>frm_visualizaverbete.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Referencia.cs" />
+    <EmbeddedResource Include="frm_categoriaGramatical.resx">
+      <DependentUpon>frm_categoriaGramatical.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_controledeusuario.resx">
       <DependentUpon>frm_controledeusuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +157,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_classeGramatcal.resx">
+      <DependentUpon>frm_classeGramatcal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_referencia.resx">
+      <DependentUpon>frm_referencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_rubrica.resx">
+      <DependentUpon>frm_rubrica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_visualizaverbete.resx">
       <DependentUpon>frm_visualizaverbete.cs</DependentUpon>

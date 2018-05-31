@@ -1,13 +1,3 @@
-C:/Users/Dev/source/repos/dicionario/dicionario/bin/Debug/dicionario.exe.config
-C:/Users/Dev/source/repos/dicionario/dicionario/bin/Debug/dicionario.exe
-C:/Users/Dev/source/repos/dicionario/dicionario/bin/Debug/dicionario.pdb
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.csprojResolveAssemblyReference.cache
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.Properties.Resources.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.csproj.GenerateResource.Cache
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.csproj.CoreCompileInputs.cache
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.exe
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.pdb
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frm_contato.resources
 D:/DEV/dicionario-master/dicionario/bin/Debug/dicionario.exe.config
 D:/DEV/dicionario-master/dicionario/bin/Debug/dicionario.exe
 D:/DEV/dicionario-master/dicionario/bin/Debug/dicionario.pdb
@@ -62,15 +52,6 @@ C:/Users/Gustavo/Desktop/DIC/dicionario/dicionario/obj/Debug/dicionario.csproj.C
 C:/Users/Gustavo/Desktop/DIC/dicionario/dicionario/obj/Debug/dicionario.exe
 C:/Users/Gustavo/Desktop/DIC/dicionario/dicionario/obj/Debug/dicionario.pdb
 C:/Users/Gustavo/Desktop/DIC/dicionario/dicionario/obj/Debug/dicionario.frm_controledeusuario.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/bin/Debug/MySql.Data.dll
-C:/Users/Dev/source/repos/dicionario/dicionario/bin/Debug/MySql.Data.xml
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frm_controledeusuario.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frm_busca.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frm_configuracao.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frm_Edit.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.Login.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frm_visualizaverbete.resources
-C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frmImportaCsv.resources
 /home/denis/Documentos/Jr.COM/dicionario/dicionario/dicionario/bin/Debug/dicionario.exe.config
 /home/denis/Documentos/Jr.COM/dicionario/dicionario/dicionario/bin/Debug/dicionario.exe
 /home/denis/Documentos/Jr.COM/dicionario/dicionario/dicionario/bin/Debug/dicionario.pdb
@@ -90,3 +71,46 @@ C:/Users/Dev/source/repos/dicionario/dicionario/obj/Debug/dicionario.frmImportaC
 /home/denis/Documentos/Jr.COM/dicionario/dicionario/dicionario/obj/Debug/dicionario.csproj.CoreCompileInputs.cache
 /home/denis/Documentos/Jr.COM/dicionario/dicionario/dicionario/obj/Debug/dicionario.exe
 /home/denis/Documentos/Jr.COM/dicionario/dicionario/dicionario/obj/Debug/dicionario.pdb
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\dicionario.exe.config
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\dicionario.exe
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\dicionario.pdb
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\MySql.Data.dll
+C:\Users\Dev\source\repos\dicionario\dicionario\bin\Debug\MySql.Data.xml
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.csprojResolveAssemblyReference.cache
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_controledeusuario.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_busca.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_configuracao.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_contato.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_Edit.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.Login.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frm_visualizaverbete.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.frmImportaCsv.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.Properties.Resources.resources
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.csproj.GenerateResource.Cache
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.csproj.CoreCompileInputs.cache
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.exe
+C:\Users\Dev\source\repos\dicionario\dicionario\obj\Debug\dicionario.pdb
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.csprojResolveAssemblyReference.cache
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_controledeusuario.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_busca.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_configuracao.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_contato.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_Edit.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.Login.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_visualizaverbete.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frmImportaCsv.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.Properties.Resources.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.csproj.GenerateResource.cache
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.csproj.CoreCompileInputs.cache
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.exe
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.pdb
+C:\Users\Igor\Documents\Pasta sem título\dicionario\bin\Debug\dicionario.exe.config
+C:\Users\Igor\Documents\Pasta sem título\dicionario\bin\Debug\dicionario.exe
+C:\Users\Igor\Documents\Pasta sem título\dicionario\bin\Debug\dicionario.pdb
+C:\Users\Igor\Documents\Pasta sem título\dicionario\bin\Debug\MySql.Data.dll
+C:\Users\Igor\Documents\Pasta sem título\dicionario\bin\Debug\MySql.Data.xml
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.csproj.CopyComplete
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_categoriaGramatical.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_CssGr.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.frm_referencia.resources
+C:\Users\Igor\Documents\Pasta sem título\dicionario\obj\Debug\dicionario.Model.frm_rubrica.resources

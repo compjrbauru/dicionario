@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -195,7 +192,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAYAAAB4sfmlAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAAd0SU1FB+ELCA0hEDpY7a0AADcKSURBVHhe7Z0HfBzFvcdHLmAwnQBxaCnw4KU8
+        EgAACxIB0t1+/AAAAAd0SU1FB+ELCA0hEDpY7a0AADcKSURBVHhe7Z0HfBzFvcdHLmAwnQBxaCnw4KU8
         SAik8hICCcXd0t3trlywwRRjkxA/INQQYnovoRhcpbstp2Jb7pJ7kdxl2ZJlWbK6JavXk66//96NsLHG
         tqTdudu7m++H3+cOWdqd8v//d2Z2CmLEKBv+gL9QQDHhLwwGI3KQLPjLKUj8ECRy5yHRcjlKEa5GKfwP
         kMTdihT+90gRRiOZfxj0LPzsLdAXKCVxPkqbOB+lniKJ+xL0Dlzvefj9x+Bvx8M1/hd+dhtc9waUmng1
@@ -436,7 +433,7 @@
   <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAYAAAB4sfmlAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAAd0SU1FB+ELCA0hNXFcOeoAABtNSURBVHhe7Z0J2LblmMeNNUsUIWlBGFsSZc02
+        EgAACxIB0t1+/AAAAAd0SU1FB+ELCA0hNXFcOeoAABtNSURBVHhe7Z0J2LblmMeNNUsUIWlBGFsSZc02
         RYw1lGUsmSKUZcjSMK1iipQhWxhL2SpEdomxV6iUrZIRTSTZJczM/19eXp//+33v+zz3dZ7ndd//33H8
         jsOR93ue87rv+3me+76u8zrPyxljjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYY
         Y4wxxpjlsTG8P3w2fD38BPwCPA2eDX8Ifwp/DS+B/7cMfw9/Ay+C58Nz4BnwJHgCfDc8AD4ebgXXgsaY

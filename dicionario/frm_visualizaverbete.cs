@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using dicionario.Model;
 
 namespace dicionario
 {
@@ -15,6 +16,12 @@ namespace dicionario
         public frm_visualizaverbete()
         {
             InitializeComponent();
+        }
+        string p;
+        ConectaBanco bd = new ConectaBanco("dicionario", "root", "senha");
+        private void frm_visualizaverbete_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

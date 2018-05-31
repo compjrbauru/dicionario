@@ -8,6 +8,7 @@ namespace dicionario.Model
 {
     class Palavra
     {
+        public int id { get; set; }
         public string lema { get; set; }
         public string idioma { get; set; }
         public string heterogenerico { get; set; }
@@ -28,9 +29,11 @@ namespace dicionario.Model
             return expressao;
         }
 
-        public List<string> ToListValores()
+        public List<string> ToListValores(bool incluiId = false)
         {
             List<string> val = new List<string>();
+            if (incluiId)
+                val.Add(id.ToString());
             val.Add(lema);
             val.Add(idioma);
             val.Add(heterogenerico);
@@ -46,16 +49,17 @@ namespace dicionario.Model
             return val;
         }
 
-        public static List<string> ToListTabela()
+        public static List<string> ToListTabela(bool incluiId = false)
         {
-
             List<string> val = new List<string>();
+            if (incluiId)
+                val.Add("id");
             val.Add("lema");
             val.Add("idioma");
             val.Add("heterogenerico");
             val.Add("heterotonico");
-            val.Add("equivalente.ToString()");
-            val.Add("referencia_verbete.ToString()");
+            val.Add("equivalente");
+            val.Add("referencia_verbete");
             val.Add("referencia_exemplo");
             val.Add("notas_gramatica");
             val.Add("nota_cultura");
@@ -63,6 +67,25 @@ namespace dicionario.Model
             val.Add("notas_gramatica_avancado");
 
             return val;
+        }
+        public static explicit operator Palavra(List<string> lista)
+        {
+            Palavra p = new Palavra
+            {
+                id = int.Parse(lista.ElementAt(0)),
+                lema = lista.ElementAt(1),
+                idioma = lista.ElementAt(2),
+                heterogenerico = lista.ElementAt(3),
+                heterotonico = lista.ElementAt(4),
+                equivalente = int.Parse(lista.ElementAt(5)),
+                referencia_verbete = int.Parse(lista.ElementAt(6)),
+                referencia_exemplo = lista.ElementAt(7),
+                notas_gramatica = lista.ElementAt(8),
+                nota_cultura = lista.ElementAt(9),
+                acepcao = lista.ElementAt(10),
+                notas_gramatica_avancado = lista.ElementAt(11),
+            };
+            return p;
         }
     }
 

@@ -32,7 +32,7 @@ namespace dicionario
                 MessageBox.Show("Usurio e(ou) senha não foram preenchidos. Por favor verifique os campos.");
             else
             {
-                list = conecta.Select("usr", usr.ToListTabela(), "usr='" + txtusuario.Text + "', pass='" + txtsenha.Text + "'");
+                list = conecta.Select("usr", Usuario.ToListTabela(), "usr='" + txtusuario.Text + "', pass='" + txtsenha.Text + "'");
                 if (list[0].Count<string>() == 0)
                 {
                     MessageBox.Show("Combinação de usuário e senha não existe.");

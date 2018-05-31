@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using dicionario.Model;
 
 namespace dicionario
 {
@@ -14,6 +15,9 @@ namespace dicionario
     {
         frm_Edit objEditForm;
         frm_configuracao configForm;
+        Palavra Palavra;
+        ConectaBanco conexao;
+
         public frm_busca()
         {
             //O Construtor esconde o ResultsBox, que só é mostrado depois de uma
@@ -22,7 +26,7 @@ namespace dicionario
             this.searchResultsListBox.Hide();
             this.extraComboBox1.Hide();
             this.extraComboBox2.Hide();
-
+            conexao = new ConectaBanco("dicionario", "usr", "senha");
         }
 
         private void contactButton_Click(object sender, EventArgs e)
@@ -35,9 +39,42 @@ namespace dicionario
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            string palavra = this.searchBox.Text;
-            this.searchResultsListBox.Show();
-            this.searchResultsListBox.Items.Add(palavra);
+            if (searchBox.Text == "")
+            {
+                MessageBox.Show("A caixa de busca não pode estar vazia!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string filtro = "";
+            switch (filterComboBox.SelectedIndex)
+            {
+                case 0:
+                    filtro += "palavra='" + searchBox.Text + "'";
+                    break;
+                case 1:
+                    filtro += "palavra LIKE'" + searchBox.Text + "'";
+                    break;
+                case 2:
+                    //anagrama
+                    break;
+                case 3:
+                    filtro += "acepcao LIKE '" + searchBox.Text + "'";
+                    break;
+                case 4:
+                    //exemplo
+                    break;
+                case 5:
+                    //Heterogenérico
+                    break;
+                case 6:
+                    //Heterotônico
+                    break;
+                default:
+                    filtro += "palavra='" + searchBox.Text + "'";
+                    break;
+            }
+            List<string>[] resultadosPalavra = conexao.Select("Palavra", Palavra.ToListTabela(),filtro , "ORDER BY palavra ASC");
+            this.searchResultsListBox.Items.Add(resultadosPalavra);
+            this.searchResultsListBox.Show();        
         }
 
         private void searchResultsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -76,6 +113,11 @@ namespace dicionario
             this.configForm.Show(this);
             this.configForm.BringToFront();
             this.Hide();
+
+        }
+
+        private void helpButton_Click(object sender, EventArgs e)
+        {
 
         }
     }

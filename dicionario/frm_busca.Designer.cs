@@ -32,15 +32,19 @@
             this.searchLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchResultsListBox = new System.Windows.Forms.ListBox();
-            this.contactButton = new System.Windows.Forms.Button();
-            this.helpButton = new System.Windows.Forms.Button();
-            this.editModeButton = new System.Windows.Forms.Button();
-            this.homeButton = new System.Windows.Forms.Button();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
             this.extraFilterCheckBox = new System.Windows.Forms.CheckBox();
             this.extraComboBox1 = new System.Windows.Forms.ComboBox();
             this.extraComboBox2 = new System.Windows.Forms.ComboBox();
-            this.ConfigButton = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.administrativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verbetesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.configuraçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchBox
@@ -243,7 +247,7 @@
             this.searchBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.searchBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBox.Location = new System.Drawing.Point(45, 131);
+            this.searchBox.Location = new System.Drawing.Point(22, 86);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(198, 26);
             this.searchBox.TabIndex = 0;
@@ -254,7 +258,7 @@
             this.searchLabel.AutoSize = true;
             this.searchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.searchLabel.Location = new System.Drawing.Point(45, 89);
+            this.searchLabel.Location = new System.Drawing.Point(22, 44);
             this.searchLabel.Name = "searchLabel";
             this.searchLabel.Size = new System.Drawing.Size(79, 29);
             this.searchLabel.TabIndex = 1;
@@ -263,7 +267,7 @@
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(476, 130);
+            this.searchButton.Location = new System.Drawing.Point(453, 85);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(110, 26);
             this.searchButton.TabIndex = 2;
@@ -276,53 +280,11 @@
             this.searchResultsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.searchResultsListBox.FormattingEnabled = true;
             this.searchResultsListBox.ItemHeight = 17;
-            this.searchResultsListBox.Location = new System.Drawing.Point(44, 271);
+            this.searchResultsListBox.Location = new System.Drawing.Point(21, 192);
             this.searchResultsListBox.Name = "searchResultsListBox";
-            this.searchResultsListBox.Size = new System.Drawing.Size(541, 72);
+            this.searchResultsListBox.Size = new System.Drawing.Size(541, 140);
             this.searchResultsListBox.TabIndex = 3;
             this.searchResultsListBox.SelectedIndexChanged += new System.EventHandler(this.searchResultsListBox_SelectedIndexChanged);
-            // 
-            // contactButton
-            // 
-            this.contactButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contactButton.Location = new System.Drawing.Point(126, 38);
-            this.contactButton.Name = "contactButton";
-            this.contactButton.Size = new System.Drawing.Size(75, 30);
-            this.contactButton.TabIndex = 5;
-            this.contactButton.Text = "Contato";
-            this.contactButton.UseVisualStyleBackColor = true;
-            this.contactButton.Click += new System.EventHandler(this.contactButton_Click);
-            // 
-            // helpButton
-            // 
-            this.helpButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpButton.Location = new System.Drawing.Point(208, 38);
-            this.helpButton.Name = "helpButton";
-            this.helpButton.Size = new System.Drawing.Size(75, 30);
-            this.helpButton.TabIndex = 6;
-            this.helpButton.Text = "Ajuda";
-            this.helpButton.UseVisualStyleBackColor = true;
-            // 
-            // editModeButton
-            // 
-            this.editModeButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editModeButton.Location = new System.Drawing.Point(510, 38);
-            this.editModeButton.Name = "editModeButton";
-            this.editModeButton.Size = new System.Drawing.Size(75, 30);
-            this.editModeButton.TabIndex = 7;
-            this.editModeButton.Text = "Edição";
-            this.editModeButton.UseVisualStyleBackColor = true;
-            this.editModeButton.Click += new System.EventHandler(this.editModeButton_Click);
-            // 
-            // homeButton
-            // 
-            this.homeButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.homeButton.Location = new System.Drawing.Point(45, 38);
-            this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(75, 30);
-            this.homeButton.TabIndex = 8;
-            this.homeButton.Text = "Busca";
-            this.homeButton.UseVisualStyleBackColor = true;
             // 
             // filterComboBox
             // 
@@ -336,7 +298,7 @@
             "Exemplo",
             "Heterogenérico",
             "Heterotônico"});
-            this.filterComboBox.Location = new System.Drawing.Point(249, 131);
+            this.filterComboBox.Location = new System.Drawing.Point(226, 86);
             this.filterComboBox.Name = "filterComboBox";
             this.filterComboBox.Size = new System.Drawing.Size(153, 26);
             this.filterComboBox.TabIndex = 16;
@@ -346,7 +308,7 @@
             // 
             this.extraFilterCheckBox.AutoSize = true;
             this.extraFilterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.extraFilterCheckBox.Location = new System.Drawing.Point(45, 164);
+            this.extraFilterCheckBox.Location = new System.Drawing.Point(22, 119);
             this.extraFilterCheckBox.Name = "extraFilterCheckBox";
             this.extraFilterCheckBox.Size = new System.Drawing.Size(107, 21);
             this.extraFilterCheckBox.TabIndex = 17;
@@ -358,7 +320,7 @@
             // 
             this.extraComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.extraComboBox1.FormattingEnabled = true;
-            this.extraComboBox1.Location = new System.Drawing.Point(249, 164);
+            this.extraComboBox1.Location = new System.Drawing.Point(226, 119);
             this.extraComboBox1.Name = "extraComboBox1";
             this.extraComboBox1.Size = new System.Drawing.Size(153, 24);
             this.extraComboBox1.TabIndex = 18;
@@ -367,42 +329,93 @@
             // 
             this.extraComboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.extraComboBox2.FormattingEnabled = true;
-            this.extraComboBox2.Location = new System.Drawing.Point(249, 191);
+            this.extraComboBox2.Location = new System.Drawing.Point(226, 146);
             this.extraComboBox2.Name = "extraComboBox2";
             this.extraComboBox2.Size = new System.Drawing.Size(153, 24);
             this.extraComboBox2.TabIndex = 19;
             // 
-            // ConfigButton
+            // menuStrip1
             // 
-            this.ConfigButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConfigButton.Location = new System.Drawing.Point(289, 38);
-            this.ConfigButton.Name = "ConfigButton";
-            this.ConfigButton.Size = new System.Drawing.Size(100, 30);
-            this.ConfigButton.TabIndex = 20;
-            this.ConfigButton.Text = "Configuração";
-            this.ConfigButton.UseVisualStyleBackColor = true;
-            this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administrativoToolStripMenuItem,
+            this.sobreToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(634, 29);
+            this.menuStrip1.TabIndex = 21;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // administrativoToolStripMenuItem
+            // 
+            this.administrativoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verbetesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.configuraçãoToolStripMenuItem});
+            this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
+            this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(108, 25);
+            this.administrativoToolStripMenuItem.Text = "Manutenção";
+            // 
+            // sobreToolStripMenuItem
+            // 
+            this.sobreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ajudaToolStripMenuItem,
+            this.contatoToolStripMenuItem});
+            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(72, 25);
+            this.sobreToolStripMenuItem.Text = "Sobre...";
+            // 
+            // ajudaToolStripMenuItem
+            // 
+            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.ajudaToolStripMenuItem.Text = "Ajuda";
+            // 
+            // contatoToolStripMenuItem
+            // 
+            this.contatoToolStripMenuItem.Name = "contatoToolStripMenuItem";
+            this.contatoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.contatoToolStripMenuItem.Text = "Contato";
+            this.contatoToolStripMenuItem.Click += new System.EventHandler(this.contactButton_Click);
+            // 
+            // verbetesToolStripMenuItem
+            // 
+            this.verbetesToolStripMenuItem.Name = "verbetesToolStripMenuItem";
+            this.verbetesToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.verbetesToolStripMenuItem.Text = "Verbetes";
+            this.verbetesToolStripMenuItem.Click += new System.EventHandler(this.editModeButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // configuraçãoToolStripMenuItem
+            // 
+            this.configuraçãoToolStripMenuItem.Name = "configuraçãoToolStripMenuItem";
+            this.configuraçãoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.configuraçãoToolStripMenuItem.Text = "Configuração";
+            this.configuraçãoToolStripMenuItem.Click += new System.EventHandler(this.ConfigButton_Click);
             // 
             // frm_busca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 412);
-            this.Controls.Add(this.ConfigButton);
             this.Controls.Add(this.extraComboBox2);
             this.Controls.Add(this.extraComboBox1);
             this.Controls.Add(this.extraFilterCheckBox);
             this.Controls.Add(this.filterComboBox);
-            this.Controls.Add(this.homeButton);
-            this.Controls.Add(this.editModeButton);
-            this.Controls.Add(this.helpButton);
-            this.Controls.Add(this.contactButton);
             this.Controls.Add(this.searchResultsListBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchLabel);
             this.Controls.Add(this.searchBox);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frm_busca";
             this.Text = "Dicionário";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,15 +427,18 @@
         private System.Windows.Forms.Label searchLabel;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.ListBox searchResultsListBox;
-        private System.Windows.Forms.Button contactButton;
-        private System.Windows.Forms.Button helpButton;
-        private System.Windows.Forms.Button editModeButton;
-        private System.Windows.Forms.Button homeButton;
         private System.Windows.Forms.ComboBox filterComboBox;
         private System.Windows.Forms.CheckBox extraFilterCheckBox;
         private System.Windows.Forms.ComboBox extraComboBox1;
         private System.Windows.Forms.ComboBox extraComboBox2;
-        private System.Windows.Forms.Button ConfigButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem administrativoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verbetesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem configuraçãoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ajudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contatoToolStripMenuItem;
     }
 }
 

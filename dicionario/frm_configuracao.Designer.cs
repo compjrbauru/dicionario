@@ -44,6 +44,7 @@
             this.helpButton = new System.Windows.Forms.Button();
             this.contactButton = new System.Windows.Forms.Button();
             this.ConfigButton = new System.Windows.Forms.Button();
+            this.btn_usr = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConnNameTextBox
@@ -186,11 +187,22 @@
             this.ConfigButton.Text = "Configuração";
             this.ConfigButton.UseVisualStyleBackColor = true;
             // 
+            // btn_usr
+            // 
+            this.btn_usr.Location = new System.Drawing.Point(499, 148);
+            this.btn_usr.Name = "btn_usr";
+            this.btn_usr.Size = new System.Drawing.Size(75, 23);
+            this.btn_usr.TabIndex = 22;
+            this.btn_usr.Text = "button1";
+            this.btn_usr.UseVisualStyleBackColor = true;
+            this.btn_usr.Click += new System.EventHandler(this.btn_usr_Click);
+            // 
             // frm_configuracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 412);
+            this.Controls.Add(this.btn_usr);
             this.Controls.Add(this.ConfigButton);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.editModeButton);
@@ -232,5 +244,6 @@
         private System.Windows.Forms.Button helpButton;
         private System.Windows.Forms.Button contactButton;
         private System.Windows.Forms.Button ConfigButton;
+        private System.Windows.Forms.Button btn_usr;
     }
 }

@@ -106,6 +106,7 @@
             this.Controls.Add(this.button1);
             this.Name = "frm_visualizaverbete";
             this.Text = "Visualização do Verbete";
+            this.Load += new System.EventHandler(this.frm_visualizaverbete_Load);
             this.ResumeLayout(false);
 
         }

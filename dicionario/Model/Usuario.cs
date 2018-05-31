@@ -25,10 +25,9 @@ namespace dicionario.Model
             return expressao;
         }
 
-        public List<string> ToListTabela(bool incluiId = false)
+        public static List<string> ToListTabela()
         {
             List<string> val = new List<string>();
-            if (incluiId)
             val.Add("usr");
             val.Add("pass");
             val.Add("nivel_permissao");
@@ -40,11 +39,10 @@ namespace dicionario.Model
             val.Add("telefone");
             return val;
         }
-        public List<string> ToListValores(bool incluiId = false)
+        public List<string> ToListValores()
         {
             List<string> val = new List<string>();
-            if (incluiId)
-                val.Add(usr.ToString());
+            val.Add(usr.ToString());
             val.Add(pass);
             val.Add(permissao);
             val.Add(email);
@@ -54,6 +52,22 @@ namespace dicionario.Model
             val.Add(cpf);
             val.Add(tel);
             return val;
+        }
+        public static explicit operator Usuario (List<string> lista)
+        {
+            Usuario usu = new Usuario
+            {
+                usr = lista.ElementAt(0),
+                pass = lista.ElementAt(1),
+                permissao = lista.ElementAt(2),
+                email = lista.ElementAt(3),
+                nome = lista.ElementAt(4),
+                contato = lista.ElementAt(5),
+                rsocial = lista.ElementAt(6),
+                cpf = lista.ElementAt(7),
+                tel = lista.ElementAt(8)
+            };
+            return usu;
         }
     }
 }

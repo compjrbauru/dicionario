@@ -8,36 +8,49 @@ namespace dicionario
 {
     class Referencia
     {
-        public int cod { get; set; }
+        public int Cod { get; set; }
         public string descricao { get; set; }
         public int ano { get; set; }
         public string autor { get; set; }
 
         public override string ToString()
         {
-            string expressao = "cod=" + cod + ",descricao='" + descricao + "',ano='" + ano + "',autor='" + autor;
+            string expressao = "Cod=" + Cod + ",descricao='" + descricao + "',ano='" + ano + "',autor='" + autor;
             return expressao;
         }
 
-        public List<string> ToListValores()
+        public List<string> ToListValores(bool incluiId = false)
         {
             List<string> val = new List<string>();
-            val.Add(cod.ToString());
+            if (incluiId)
+                val.Add(Cod.ToString());
             val.Add(descricao);
             val.Add(ano.ToString());
             val.Add(autor);
             return val;
         }
 
-        public List<string> ToListTabela()
+        public static List<string> ToListTabela(bool incluiId = false)
         {
 
             List<string> val = new List<string>();
-            val.Add("cod");
+            if (incluiId)
+                val.Add("Cod");
             val.Add("descricao");
             val.Add("ano");
             val.Add("autor");
             return val;
+        }
+        public static explicit operator Referencia(List<string> lista)
+        {
+            Referencia novo = new Referencia
+            {
+                Cod = int.Parse(lista.ElementAt(0)),
+                descricao = lista.ElementAt(1),
+                ano = int.Parse(lista.ElementAt(2)),
+                autor = lista.ElementAt(3)
+            };
+            return novo;
         }
     }
 }
