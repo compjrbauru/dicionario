@@ -16,6 +16,7 @@ namespace dicionario
         frm_Edit objEditForm;
         frm_configuracao configForm;
         Palavra Palavra;
+        List<string>[] resultadosPalavra;
         ConectaBanco conexao;
 
         public frm_busca()
@@ -26,7 +27,7 @@ namespace dicionario
             this.searchResultsListBox.Hide();
             this.extraComboBox1.Hide();
             this.extraComboBox2.Hide();
-            conexao = new ConectaBanco("dicionario", "usr", "senha");
+            conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         }
 
         private void contactButton_Click(object sender, EventArgs e)
@@ -47,17 +48,14 @@ namespace dicionario
             string filtro = "";
             switch (filterComboBox.SelectedIndex)
             {
-                case 0:
-                    filtro += "palavra='" + searchBox.Text + "'";
-                    break;
                 case 1:
-                    filtro += "palavra LIKE'" + searchBox.Text + "'";
+                    filtro += "lema LIKE'" + searchBox.Text + "'";
                     break;
                 case 2:
                     //anagrama
                     break;
                 case 3:
-                    filtro += "acepcao LIKE '" + searchBox.Text + "'";
+                    //filtro += "acepcao LIKE '" + searchBox.Text + "'";
                     break;
                 case 4:
                     //exemplo
@@ -69,12 +67,13 @@ namespace dicionario
                     //Heterotônico
                     break;
                 default:
-                    filtro += "palavra='" + searchBox.Text + "'";
+                    filtro += "lema='" + searchBox.Text + "'";
                     break;
             }
-            List<string>[] resultadosPalavra = conexao.Select("Palavra", Palavra.ToListTabela(),filtro , "ORDER BY palavra ASC");
-            this.searchResultsListBox.Items.Add(resultadosPalavra);
-            this.searchResultsListBox.Show();        
+            resultadosPalavra = conexao.Select("palavra", Palavra.ToListTabela(true),filtro , "ORDER BY lema ASC");
+            foreach (string item in resultadosPalavra[1])
+                this.searchResultsListBox.Items.Add(item);
+            this.searchResultsListBox.Show();
         }
 
         private void searchResultsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -119,6 +118,14 @@ namespace dicionario
         private void helpButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void searchResultsListBox_DoubleClick(object sender, EventArgs e)
+        {
+            /*Palavra resultado;
+            for (int i = 0; i < 16; i++)
+                resultadosPalavra.ElementAt(searchResultsListBox.SelectedIndex);
+            frm_visualizaverbete _Visualizaverbete = new frm_visualizaverbete(resultado);*/
         }
     }
 }

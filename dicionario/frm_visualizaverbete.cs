@@ -13,15 +13,20 @@ namespace dicionario
 {
     public partial class frm_visualizaverbete : Form
     {
-        public frm_visualizaverbete()
+        Palavra p;
+        ConectaBanco bd = new ConectaBanco("dicionario", "root", "gamesjoker");
+        /*public frm_visualizaverbete(Palavra)
         {
             InitializeComponent();
+            
+        }*/
+        public frm_visualizaverbete(Palavra Resultado) {
+            InitializeComponent();
+            p = Resultado;
         }
-        string p;
-        ConectaBanco bd = new ConectaBanco("dicionario", "root", "senha");
         private void frm_visualizaverbete_Load(object sender, EventArgs e)
         {
-
+            lblLema.Text = p.lema;
         }
     }
 }

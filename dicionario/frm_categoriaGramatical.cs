@@ -20,17 +20,19 @@ namespace dicionario
             InitializeComponent();
         }
     
-        private void LimpaCampos() { txtDesc.Text = ""; txtSigla.Text = ""; }
+        private void LimpaCampos() { txtDesc.Text = ""; txtSigla.Text = ""; txtDefine.Text = ""; }
         private void LimpaModel()
         {
             CtGr.descricao = "";
             CtGr.id = -1;
             CtGr.sigla = "";
+            CtGr.Definicao = String.Empty;
         }
         private void MostraModel()
         {
             txtDesc.Text = CtGr.descricao;
             txtSigla.Text = CtGr.sigla;
+            txtDefine.Text = CtGr.Definicao;
         }
         private bool verificaCampos()
         {
@@ -59,6 +61,7 @@ namespace dicionario
             }
             CtGr.descricao = txtDesc.Text;
             CtGr.sigla = txtSigla.Text;
+            CtGr.Definicao = txtDefine.Text;
             if (CtGr.id > 0)
                 conexao.UpdateLine("categoriagram", ClasseGramatical.ToListTabela(false), CtGr.ToListValores(), "id=" + CtGr.id.ToString());
             else
@@ -91,7 +94,7 @@ namespace dicionario
                 if(resultado[0].Count > 0)
                 {
                     List<string> temp = new List<string>();
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 3; i++)
                         temp.Add(resultado[i].ElementAt<string>(0));
                     CtGr = (CategoriaGramatical)temp;
                     MostraModel();

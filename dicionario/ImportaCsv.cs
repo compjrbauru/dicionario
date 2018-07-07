@@ -36,6 +36,7 @@ namespace dicionario
             progressBar1.MarqueeAnimationSpeed = 50;
             if (File.Exists(LblArquivo.Text))
             {
+                ///TODO:TRY-CATCH the next line
                 StreamReader leitor = new StreamReader(LblArquivo.Text);
                 try
                 {

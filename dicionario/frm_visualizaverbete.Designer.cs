@@ -31,9 +31,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLema = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.TrvPalavra = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // button1
@@ -66,14 +66,14 @@
             this.button3.Text = "Ajuda";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lblLema
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(39, 87);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(248, 53);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Palavra";
+            this.lblLema.Font = new System.Drawing.Font("Microsoft Sans Serif", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLema.Location = new System.Drawing.Point(39, 87);
+            this.lblLema.Name = "lblLema";
+            this.lblLema.Size = new System.Drawing.Size(248, 53);
+            this.lblLema.TabIndex = 6;
+            this.lblLema.Text = "Palavra";
             // 
             // button4
             // 
@@ -85,22 +85,21 @@
             this.button4.Text = "Edição";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // TrvPalavra
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(48, 143);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(556, 264);
-            this.listBox1.TabIndex = 8;
+            this.TrvPalavra.Location = new System.Drawing.Point(48, 143);
+            this.TrvPalavra.Name = "TrvPalavra";
+            this.TrvPalavra.Size = new System.Drawing.Size(679, 296);
+            this.TrvPalavra.TabIndex = 9;
             // 
             // frm_visualizaverbete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 451);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.TrvPalavra);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblLema);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -116,8 +115,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLema;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TreeView TrvPalavra;
     }
 }

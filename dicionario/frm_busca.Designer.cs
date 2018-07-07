@@ -38,12 +38,12 @@
             this.extraComboBox2 = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.administrativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verbetesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.configuraçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -285,6 +285,7 @@
             this.searchResultsListBox.Size = new System.Drawing.Size(541, 140);
             this.searchResultsListBox.TabIndex = 3;
             this.searchResultsListBox.SelectedIndexChanged += new System.EventHandler(this.searchResultsListBox_SelectedIndexChanged);
+            this.searchResultsListBox.DoubleClick += new System.EventHandler(this.searchResultsListBox_DoubleClick);
             // 
             // filterComboBox
             // 
@@ -356,6 +357,25 @@
             this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(108, 25);
             this.administrativoToolStripMenuItem.Text = "Manutenção";
             // 
+            // verbetesToolStripMenuItem
+            // 
+            this.verbetesToolStripMenuItem.Name = "verbetesToolStripMenuItem";
+            this.verbetesToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
+            this.verbetesToolStripMenuItem.Text = "Verbetes";
+            this.verbetesToolStripMenuItem.Click += new System.EventHandler(this.editModeButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(170, 6);
+            // 
+            // configuraçãoToolStripMenuItem
+            // 
+            this.configuraçãoToolStripMenuItem.Name = "configuraçãoToolStripMenuItem";
+            this.configuraçãoToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
+            this.configuraçãoToolStripMenuItem.Text = "Configuração";
+            this.configuraçãoToolStripMenuItem.Click += new System.EventHandler(this.ConfigButton_Click);
+            // 
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -368,34 +388,15 @@
             // ajudaToolStripMenuItem
             // 
             this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
-            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.ajudaToolStripMenuItem.Text = "Ajuda";
             // 
             // contatoToolStripMenuItem
             // 
             this.contatoToolStripMenuItem.Name = "contatoToolStripMenuItem";
-            this.contatoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.contatoToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.contatoToolStripMenuItem.Text = "Contato";
             this.contatoToolStripMenuItem.Click += new System.EventHandler(this.contactButton_Click);
-            // 
-            // verbetesToolStripMenuItem
-            // 
-            this.verbetesToolStripMenuItem.Name = "verbetesToolStripMenuItem";
-            this.verbetesToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
-            this.verbetesToolStripMenuItem.Text = "Verbetes";
-            this.verbetesToolStripMenuItem.Click += new System.EventHandler(this.editModeButton_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // configuraçãoToolStripMenuItem
-            // 
-            this.configuraçãoToolStripMenuItem.Name = "configuraçãoToolStripMenuItem";
-            this.configuraçãoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
-            this.configuraçãoToolStripMenuItem.Text = "Configuração";
-            this.configuraçãoToolStripMenuItem.Click += new System.EventHandler(this.ConfigButton_Click);
             // 
             // frm_busca
             // 

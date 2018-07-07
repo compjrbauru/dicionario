@@ -74,7 +74,7 @@ namespace dicionario.Model
         }
         public void InsereLinha(string tabela, List<string> campos, List<string> valores)
         {
-            int temp = 0;
+            int temp = 0; bool tempb;
             string query = "INSERT INTO " + tabela + " (";
             foreach (string item in campos)
             {
@@ -87,12 +87,20 @@ namespace dicionario.Model
             {
                 if (int.TryParse(item, out temp)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
                     query += item;
-                    query += ", ";
+                    query += ",";
                 }
                 else {
-                    query += "'";
-                    query += item;
-                    query += "',";
+                    if (Boolean.TryParse(item, out tempb)){
+                        if (tempb)
+                            query += "1,";
+                        else
+                            query += "0,";
+                    }
+                    else {
+                        query += "'";
+                        query += item;
+                        query += "',";
+                    }
                 }
             }
             query = query.Remove(query.Length - 1);
@@ -106,6 +114,7 @@ namespace dicionario.Model
         }
         public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro = "")
         {
+            ///TODO: Analisar a strings contando os dados para que os valores boolean sejam corretamente adaptados para 0 ou 1
             string query = "UPDATE " + tabela + " SET ";
             string temp1, temp2;
             while (campos.Count > 0)
@@ -164,6 +173,7 @@ namespace dicionario.Model
                             list[0].Add(dataReader["id"] + "");
                             list[1].Add(dataReader["Descricao"] + "");
                             list[2].Add(dataReader["sigla"] + "");
+                            list[3].Add(dataReader["Definicao"] + "");
                         }
                     break;
                     case "classegram":
@@ -191,7 +201,9 @@ namespace dicionario.Model
                             list[11].Add(dataReader["notas_gramatica"] + "");
                             list[12].Add(dataReader["notas_cultura"] + "");
                             list[13].Add(dataReader["acepcao"] + "");
-                            list[14].Add(dataReader["nots_gramatica_avancado"] + "");
+                            list[14].Add(dataReader["heterossemantico"] + "");
+                            list[15].Add(dataReader["referencia_exemplo_tr"] + "");
+                            list[16].Add(dataReader["Infinitivo"] + "");
                         }
                         break;
                     case "rubrica":

@@ -11,6 +11,7 @@ namespace dicionario.Model
         public int id { get; set; }
         public string descricao { get; set; }
         public string sigla { get; set; }
+        public string Definicao { get; set; }
 
         public override string ToString()
         {
@@ -25,6 +26,7 @@ namespace dicionario.Model
                 val.Add(id.ToString());
             val.Add(descricao);
             val.Add(sigla);
+            val.Add(Definicao);
             return val;
         }
 
@@ -35,6 +37,7 @@ namespace dicionario.Model
                 val.Add("id");
             val.Add("descricao");
             val.Add("sigla");
+            val.Add("Definicao");
             return val;
         }
         public static explicit operator CategoriaGramatical(List<string> lista)
@@ -43,7 +46,8 @@ namespace dicionario.Model
             {
                 id = int.Parse(lista.ElementAt(0)),
                 descricao = lista.ElementAt(1),
-                sigla = lista.ElementAt(2)
+                sigla = lista.ElementAt(2),
+                Definicao = lista.ElementAt(3)
             };
             return ct;
         }

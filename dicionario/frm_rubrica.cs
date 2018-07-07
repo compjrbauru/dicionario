@@ -88,7 +88,7 @@ namespace dicionario.Model
                 if (resultado[0].Count > 0)
                 {
                     List<string> temp = new List<string>();
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 3; i++)
                         temp.Add(resultado[i].ElementAt<string>(0));
                     rubrica = (Rubrica)temp;
                     MostraModel();
