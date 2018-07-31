@@ -36,8 +36,6 @@
             this.txtDesc = new System.Windows.Forms.TextBox();
             this.btnNovo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnPesquisa
@@ -122,30 +120,11 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Descrição Classe Gramatical";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(22, 191);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(452, 136);
-            this.textBox1.TabIndex = 55;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 164);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
-            this.label7.TabIndex = 54;
-            this.label7.Text = "Gramática";
-            // 
             // frm_CssGr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 356);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label7);
+            this.ClientSize = new System.Drawing.Size(644, 176);
             this.Controls.Add(this.btnPesquisa);
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.btnApaga);
@@ -171,8 +150,6 @@
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -37,7 +37,7 @@ namespace dicionario.Model
                 val.Add("id");
             val.Add("descricao");
             val.Add("sigla");
-            val.Add("Definicao");
+            val.Add("definicao");
             return val;
         }
         public static explicit operator CategoriaGramatical(List<string> lista)
@@ -49,6 +49,24 @@ namespace dicionario.Model
                 sigla = lista.ElementAt(2),
                 Definicao = lista.ElementAt(3)
             };
+            return ct;
+        }
+        public static explicit operator CategoriaGramatical(List<string>[] lista)
+        {
+            CategoriaGramatical ct = new CategoriaGramatical();
+            try
+            {
+                ct.id = int.Parse(lista[0].ElementAt(0));
+                ct.descricao = lista[1].ElementAt(0);
+                ct.sigla = lista[2].ElementAt(0);
+                ct.Definicao = lista[3].ElementAt(0);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                ct.descricao = lista[0].ElementAt(0);
+                ct.sigla = lista[1].ElementAt(0);
+                ct.Definicao = lista[2].ElementAt(0);
+            }
             return ct;
         }
     }

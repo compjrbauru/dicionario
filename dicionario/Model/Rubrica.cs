@@ -50,5 +50,20 @@ namespace dicionario.Model
             };
             return rubrica;
         }
+        public static explicit operator Rubrica (List<string>[] lista)
+        {
+            Rubrica rubrica = new Rubrica();
+            try
+            {
+                rubrica.id = int.Parse(lista[0].ElementAt(0));
+                rubrica.descricao = lista[1].ElementAt(0);
+                rubrica.sigla = lista[2].ElementAt(0);
+            }
+            catch (IndexOutOfRangeException) {
+                rubrica.descricao = lista[0].ElementAt(0);
+                rubrica.sigla = lista[1].ElementAt(0);
+            }
+            return rubrica;
+        }
     }
 }

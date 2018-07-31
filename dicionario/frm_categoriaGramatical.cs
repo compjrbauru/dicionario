@@ -90,13 +90,13 @@ namespace dicionario
         {
             if (txtSigla.Text != "")
             {
-                List<string>[] resultado = conexao.Select("categoriagram", ClasseGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'");
+                List<string>[] resultado = conexao.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'");
                 if(resultado[0].Count > 0)
                 {
-                    List<string> temp = new List<string>();
+                    /*List<string> temp = new List<string>();
                     for (int i = 0; i < 3; i++)
-                        temp.Add(resultado[i].ElementAt<string>(0));
-                    CtGr = (CategoriaGramatical)temp;
+                        temp.Add(resultado[i].ElementAt<string>(0));*/
+                    CtGr = (CategoriaGramatical)resultado;
                     MostraModel();
                 }
                 else

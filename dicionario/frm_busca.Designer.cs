@@ -282,7 +282,7 @@
             this.searchResultsListBox.ItemHeight = 17;
             this.searchResultsListBox.Location = new System.Drawing.Point(21, 192);
             this.searchResultsListBox.Name = "searchResultsListBox";
-            this.searchResultsListBox.Size = new System.Drawing.Size(541, 140);
+            this.searchResultsListBox.Size = new System.Drawing.Size(541, 208);
             this.searchResultsListBox.TabIndex = 3;
             this.searchResultsListBox.SelectedIndexChanged += new System.EventHandler(this.searchResultsListBox_SelectedIndexChanged);
             this.searchResultsListBox.DoubleClick += new System.EventHandler(this.searchResultsListBox_DoubleClick);

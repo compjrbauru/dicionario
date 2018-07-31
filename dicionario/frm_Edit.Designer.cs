@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.homeButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
@@ -37,7 +36,7 @@
             this.textCultura = new System.Windows.Forms.TextBox();
             this.txtGramatica = new System.Windows.Forms.TextBox();
             this.txtAcepcao = new System.Windows.Forms.TextBox();
-            this.ComboClasseGram = new System.Windows.Forms.ComboBox();
+            this.ComboGenero = new System.Windows.Forms.ComboBox();
             this.ComboIdioma = new System.Windows.Forms.ComboBox();
             this.ComboCatGram = new System.Windows.Forms.ComboBox();
             this.comboFiltroIdiomas = new System.Windows.Forms.ComboBox();
@@ -49,7 +48,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label_catgrama = new System.Windows.Forms.Label();
             this.txtEquiv = new System.Windows.Forms.TextBox();
-            this.label_classgrama = new System.Windows.Forms.Label();
+            this.lblGenero = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNovo = new System.Windows.Forms.Button();
             this.ComboRubrica = new System.Windows.Forms.ComboBox();
@@ -86,17 +85,6 @@
             this.menu_barra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).BeginInit();
             this.SuspendLayout();
-            // 
-            // homeButton
-            // 
-            this.homeButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.homeButton.Location = new System.Drawing.Point(933, 32);
-            this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(75, 30);
-            this.homeButton.TabIndex = 11;
-            this.homeButton.Text = "Busca";
-            this.homeButton.UseVisualStyleBackColor = true;
-            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
             // 
             // searchBox
             // 
@@ -953,17 +941,21 @@
             this.txtAcepcao.Size = new System.Drawing.Size(766, 107);
             this.txtAcepcao.TabIndex = 20;
             // 
-            // ComboClasseGram
+            // ComboGenero
             // 
-            this.ComboClasseGram.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboClasseGram.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboClasseGram.FormattingEnabled = true;
-            this.ComboClasseGram.Location = new System.Drawing.Point(652, 152);
-            this.ComboClasseGram.Name = "ComboClasseGram";
-            this.ComboClasseGram.Size = new System.Drawing.Size(159, 28);
-            this.ComboClasseGram.TabIndex = 21;
-            this.ComboClasseGram.SelectedIndexChanged += new System.EventHandler(this.ComboClasseGram_SelectedIndexChanged);
-            this.ComboClasseGram.TextUpdate += new System.EventHandler(this.ComboClasseGram_TextUpdate);
+            this.ComboGenero.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ComboGenero.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboGenero.FormattingEnabled = true;
+            this.ComboGenero.Items.AddRange(new object[] {
+            "Masculino",
+            "Feminino",
+            "Neutro"});
+            this.ComboGenero.Location = new System.Drawing.Point(652, 152);
+            this.ComboGenero.Name = "ComboGenero";
+            this.ComboGenero.Size = new System.Drawing.Size(159, 28);
+            this.ComboGenero.TabIndex = 21;
+            this.ComboGenero.SelectedIndexChanged += new System.EventHandler(this.ComboClasseGram_SelectedIndexChanged);
+            this.ComboGenero.TextUpdate += new System.EventHandler(this.ComboClasseGram_TextUpdate);
             // 
             // ComboIdioma
             // 
@@ -1281,15 +1273,15 @@
             this.txtEquiv.Size = new System.Drawing.Size(179, 28);
             this.txtEquiv.TabIndex = 37;
             // 
-            // label_classgrama
+            // lblGenero
             // 
-            this.label_classgrama.AutoSize = true;
-            this.label_classgrama.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_classgrama.Location = new System.Drawing.Point(649, 131);
-            this.label_classgrama.Name = "label_classgrama";
-            this.label_classgrama.Size = new System.Drawing.Size(130, 18);
-            this.label_classgrama.TabIndex = 38;
-            this.label_classgrama.Text = "Classe Gramatical";
+            this.lblGenero.AutoSize = true;
+            this.lblGenero.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblGenero.Location = new System.Drawing.Point(649, 131);
+            this.lblGenero.Name = "lblGenero";
+            this.lblGenero.Size = new System.Drawing.Size(58, 18);
+            this.lblGenero.TabIndex = 38;
+            this.lblGenero.Text = "Gênero";
             // 
             // label1
             // 
@@ -1612,7 +1604,7 @@
             this.Controls.Add(this.ComboRubrica);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.label_classgrama);
+            this.Controls.Add(this.lblGenero);
             this.Controls.Add(this.txtEquiv);
             this.Controls.Add(this.label_catgrama);
             this.Controls.Add(this.label4);
@@ -1624,7 +1616,7 @@
             this.Controls.Add(this.comboFiltroIdiomas);
             this.Controls.Add(this.ComboCatGram);
             this.Controls.Add(this.ComboIdioma);
-            this.Controls.Add(this.ComboClasseGram);
+            this.Controls.Add(this.ComboGenero);
             this.Controls.Add(this.txtAcepcao);
             this.Controls.Add(this.txtGramatica);
             this.Controls.Add(this.textCultura);
@@ -1632,7 +1624,6 @@
             this.Controls.Add(this.filterComboBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchBox);
-            this.Controls.Add(this.homeButton);
             this.MainMenuStrip = this.menu_barra;
             this.MinimumSize = new System.Drawing.Size(1024, 726);
             this.Name = "frm_Edit";
@@ -1647,8 +1638,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button homeButton;
         private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.ComboBox filterComboBox;
@@ -1656,7 +1645,7 @@
         private System.Windows.Forms.TextBox textCultura;
         private System.Windows.Forms.TextBox txtGramatica;
         private System.Windows.Forms.TextBox txtAcepcao;
-        private System.Windows.Forms.ComboBox ComboClasseGram;
+        private System.Windows.Forms.ComboBox ComboGenero;
         private System.Windows.Forms.ComboBox ComboIdioma;
         private System.Windows.Forms.ComboBox ComboCatGram;
         private System.Windows.Forms.ComboBox comboFiltroIdiomas;
@@ -1668,7 +1657,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_catgrama;
         private System.Windows.Forms.TextBox txtEquiv;
-        private System.Windows.Forms.Label label_classgrama;
+        private System.Windows.Forms.Label lblGenero;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.ComboBox ComboRubrica;

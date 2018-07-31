@@ -11,7 +11,7 @@ namespace dicionario.Model
         public int id { get; set; }
         public string lema { get; set; }
 	    public int Id_catGram { get; set; }
-	    public int Id_classeGram { get; set; }
+	    public string Genero { get; set; }
         public string idioma { get; set; }
         public int rubrica { get; set; }
         public bool heterogenerico { get; set; }
@@ -39,7 +39,7 @@ namespace dicionario.Model
                 val.Add(id.ToString());
             val.Add(lema);
 	        val.Add(Id_catGram.ToString());
-	        val.Add(Id_classeGram.ToString());
+	        val.Add(Genero);
             val.Add(idioma);
             val.Add(rubrica.ToString());
             val.Add(heterogenerico.ToString());
@@ -64,7 +64,7 @@ namespace dicionario.Model
                 val.Add("id");
             val.Add("Lema");
 	        val.Add("Id_catGram");
-	        val.Add("Id_classeGram");
+	        val.Add("Genero");
             val.Add("Idioma");
             val.Add("Rubrica");
             val.Add("heterogenerico");
@@ -88,7 +88,7 @@ namespace dicionario.Model
                 id = int.Parse(lista.ElementAt(0)),
                 lema = lista.ElementAt(1),
                 Id_catGram = int.Parse(lista.ElementAt(2)),
-                Id_classeGram = int.Parse(lista.ElementAt(3)),
+                Genero = lista.ElementAt(3),
                 idioma = lista.ElementAt(4),
                 rubrica = int.Parse(lista.ElementAt(5)),
                 heterogenerico = Boolean.Parse(lista.ElementAt(6)),
@@ -105,6 +105,7 @@ namespace dicionario.Model
             };
             return p;
         }
+        /* lista<string>[] => Palavra */
     }
 
 }

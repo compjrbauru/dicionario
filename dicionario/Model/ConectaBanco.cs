@@ -173,7 +173,7 @@ namespace dicionario.Model
                             list[0].Add(dataReader["id"] + "");
                             list[1].Add(dataReader["Descricao"] + "");
                             list[2].Add(dataReader["sigla"] + "");
-                            list[3].Add(dataReader["Definicao"] + "");
+                            list[3].Add(dataReader["definicao"] + "");
                         }
                     break;
                     case "classegram":

@@ -55,8 +55,8 @@ namespace dicionario
             comboRef.Text = "";
             ComboCatGram.SelectedIndex = -1;
             ComboCatGram.Text = "";
-            ComboClasseGram.SelectedIndex = -1;
-            ComboClasseGram.Text = "";
+            ComboGenero.SelectedIndex = -1;
+            ComboGenero.Text = "";
             ComboIdioma.SelectedIndex = -1;
             ComboIdioma.Text = "";
             ComboRubrica.SelectedIndex = -1;
@@ -70,7 +70,7 @@ namespace dicionario
             p.id = -1;
             p.lema = "";
             p.Id_catGram = 0;
-            p.Id_classeGram = 0;
+            p.Genero = "";
             p.rubrica = 0;
             p.referencia_verbete = 0;
             p.heterogenerico = false;
@@ -152,7 +152,7 @@ namespace dicionario
                     p.id = int.Parse(resultados[0].ElementAt(0));
                     p.lema = resultados[1].ElementAt(0);
                     p.Id_catGram = int.Parse(resultados[2].ElementAt(0));
-                    p.Id_classeGram = int.Parse(resultados[3].ElementAt(0));
+                    p.Genero = resultados[3].ElementAt(0);
                     p.idioma = resultados[4].ElementAt(0);
                     p.rubrica = int.Parse(resultados[5].ElementAt(0));
                     p.heterogenerico = Boolean.Parse(resultados[6].ElementAt(0));
@@ -187,6 +187,7 @@ namespace dicionario
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
+//NOTE: Se houver problemas ao salvar, foi criado um INDEX na tabela com o nome Lema_UNIQUE
         {
             if(txtpalavra.Text == String.Empty)
             {
@@ -334,10 +335,10 @@ namespace dicionario
         {
             string pesquisa;
             int i = 0;
-            pesquisa = ComboClasseGram.Text;
-            if (ComboClasseGram.Items.Count > 0)
+            pesquisa = ComboGenero.Text;
+            if (ComboGenero.Items.Count > 0)
             {
-                ComboClasseGram.Items.Clear();
+                ComboGenero.Items.Clear();
             }
             if (pesquisa.Length <= 3)
             {
@@ -346,7 +347,7 @@ namespace dicionario
                 resultados[1].CopyTo(siglas, 0);
                 while (siglas[i] != null && i < 10)
                 {
-                    ComboClasseGram.Items.Add(siglas[i++]);
+                    ComboGenero.Items.Add(siglas[i++]);
                 }
             }
 
