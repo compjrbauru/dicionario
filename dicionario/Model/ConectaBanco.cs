@@ -204,6 +204,7 @@ namespace dicionario.Model
                             list[14].Add(dataReader["heterossemantico"] + "");
                             list[15].Add(dataReader["referencia_exemplo_tr"] + "");
                             list[16].Add(dataReader["Infinitivo"] + "");
+                            list[17].Add(dataReader["equivalente_pluriv"] + "");
                         }
                         break;
                     case "rubrica":

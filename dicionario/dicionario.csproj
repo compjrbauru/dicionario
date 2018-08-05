@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="diag_equivalente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="diag_equivalente.Designer.cs">
+      <DependentUpon>diag_equivalente.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_categoriaGramatical.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
       <DependentUpon>frm_visualizaverbete.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Referencia.cs" />
+    <EmbeddedResource Include="diag_equivalente.resx">
+      <DependentUpon>diag_equivalente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_categoriaGramatical.resx">
       <DependentUpon>frm_categoriaGramatical.cs</DependentUpon>
     </EmbeddedResource>

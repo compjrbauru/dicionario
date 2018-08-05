@@ -82,6 +82,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtExemplo = new System.Windows.Forms.TextBox();
             this.txtExemploT = new System.Windows.Forms.TextBox();
+            this.btnEquiv = new System.Windows.Forms.Button();
             this.menu_barra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).BeginInit();
             this.SuspendLayout();
@@ -517,6 +518,7 @@
             this.txtpalavra.Name = "txtpalavra";
             this.txtpalavra.Size = new System.Drawing.Size(248, 28);
             this.txtpalavra.TabIndex = 16;
+            this.txtpalavra.Leave += new System.EventHandler(this.txtpalavra_Leave);
             // 
             // textCultura
             // 
@@ -1516,7 +1518,7 @@
             // 
             this.chkHeterossemantico.AutoSize = true;
             this.chkHeterossemantico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHeterossemantico.Location = new System.Drawing.Point(521, 343);
+            this.chkHeterossemantico.Location = new System.Drawing.Point(588, 343);
             this.chkHeterossemantico.Name = "chkHeterossemantico";
             this.chkHeterossemantico.Size = new System.Drawing.Size(158, 24);
             this.chkHeterossemantico.TabIndex = 51;
@@ -1527,7 +1529,7 @@
             // 
             this.chkHeterotonico.AutoSize = true;
             this.chkHeterotonico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHeterotonico.Location = new System.Drawing.Point(395, 343);
+            this.chkHeterotonico.Location = new System.Drawing.Point(462, 343);
             this.chkHeterotonico.Name = "chkHeterotonico";
             this.chkHeterotonico.Size = new System.Drawing.Size(120, 24);
             this.chkHeterotonico.TabIndex = 52;
@@ -1538,7 +1540,7 @@
             // 
             this.chkHeterogenerico.AutoSize = true;
             this.chkHeterogenerico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHeterogenerico.Location = new System.Drawing.Point(251, 343);
+            this.chkHeterogenerico.Location = new System.Drawing.Point(318, 343);
             this.chkHeterogenerico.Name = "chkHeterogenerico";
             this.chkHeterogenerico.Size = new System.Drawing.Size(138, 24);
             this.chkHeterogenerico.TabIndex = 53;
@@ -1581,11 +1583,24 @@
             this.txtExemploT.Size = new System.Drawing.Size(372, 26);
             this.txtExemploT.TabIndex = 57;
             // 
+            // btnEquiv
+            // 
+            this.btnEquiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEquiv.Location = new System.Drawing.Point(168, 341);
+            this.btnEquiv.Name = "btnEquiv";
+            this.btnEquiv.Size = new System.Drawing.Size(144, 28);
+            this.btnEquiv.TabIndex = 58;
+            this.btnEquiv.Text = "Editar";
+            this.btnEquiv.UseVisualStyleBackColor = true;
+            this.btnEquiv.Visible = false;
+            this.btnEquiv.Click += new System.EventHandler(this.btnEquiv_Click);
+            // 
             // frm_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.btnEquiv);
             this.Controls.Add(this.txtExemploT);
             this.Controls.Add(this.txtExemplo);
             this.Controls.Add(this.label3);
@@ -1691,5 +1706,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtExemplo;
         private System.Windows.Forms.TextBox txtExemploT;
+        private System.Windows.Forms.Button btnEquiv;
     }
 }

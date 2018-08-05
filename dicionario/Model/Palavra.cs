@@ -25,6 +25,7 @@ namespace dicionario.Model
         public bool heterossemantico { get; set; }
         public string ref_ex_tr { get; set; }
         public int Infinitivo { get; set; }
+        public string equivalente_pluriv { get; private set; } = "{-1}";
 
         public override string ToString()
         {
@@ -53,6 +54,9 @@ namespace dicionario.Model
             val.Add(heterossemantico.ToString());
             val.Add(ref_ex_tr);
             val.Add(Infinitivo.ToString());
+            if (equivalente > 1)
+                equivalente_pluriv = "{-1}";
+            val.Add(equivalente_pluriv);
 
             return val;
         }
@@ -78,8 +82,27 @@ namespace dicionario.Model
             val.Add("heterossemantico");
             val.Add("referencia_exemplo_tr");
             val.Add("Infinitivo");
+            val.Add("equivalente_pluriv");
 
             return val;
+        }
+        public void EditRelacoesPluri(List<int> relacionamento)
+        {
+            string espacos = "";
+            int max = relacionamento.Count();
+                for (int i = 0; i < max; i++)
+                {
+                    espacos += "{" + relacionamento.ElementAt(i).ToString() + "}";
+                }
+            equivalente_pluriv = espacos;
+        }
+        private void ChecaOperador(string entrada) {
+            if (!(entrada.Contains("{") && entrada.Contains("}")))
+                equivalente_pluriv = "{-1}";
+            else
+            {
+                equivalente_pluriv = entrada;
+            }
         }
         public static explicit operator Palavra(List<string> lista) //fazer um implicito?
         {
@@ -103,6 +126,7 @@ namespace dicionario.Model
                 ref_ex_tr = lista.ElementAt(15),
                 Infinitivo = int.Parse(lista.ElementAt(16))
             };
+            p.ChecaOperador(lista.ElementAt(17));
             return p;
         }
         /* lista<string>[] => Palavra */

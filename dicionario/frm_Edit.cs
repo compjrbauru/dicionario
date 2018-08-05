@@ -91,11 +91,21 @@ namespace dicionario
                     ComboIdioma.SelectedIndex = 1;
                 }
             }
-            /*ComboCatGram
-             * ComboClasseGram
-             * comboRef
-             * ComboRubrica
-             */
+            if (p.Id_catGram > 0)
+            {
+                resultados = conexao.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "Id=" + p.Id_catGram.ToString());
+                ComboCatGram.Text = resultados[1].ElementAt(0);
+            }
+            if (p.referencia_verbete > 0)
+            {
+                resultados = conexao.Select("referencias", Referencia.ToListTabela(true), "Id=" + p.referencia_verbete.ToString());
+                comboRef.Text = resultados[1].ElementAt(0);
+            }
+            if (p.rubrica > 0)
+            {
+                resultados = conexao.Select("rubrica", Rubrica.ToListTabela(true), "Id=" + p.rubrica.ToString());
+                ComboRubrica.Text = resultados[1].ElementAt(0);
+            }
 
             chkHeterogenerico.Checked = p.heterogenerico;
             chkHeterotonico.Checked = p.heterotonico;
@@ -147,6 +157,7 @@ namespace dicionario
                         break;
                 }
                 resultados  = conexao.Select("palavra", Palavra.ToListTabela(), "lema='" + searchBox.Text + "'");
+                ///FIXME: Temos isso dentro da classe palavra
                 if (resultados[0].Count == 1)
                 {
                     p.id = int.Parse(resultados[0].ElementAt(0));
@@ -426,6 +437,38 @@ namespace dicionario
         private void comboRef_TextUpdate(object sender, EventArgs e)
         {
             if (timerRef.Enabled == true) { timerRef.Enabled = false; timerRef.Enabled = true; } else timerRef.Enabled = true;
+        }
+
+        private void txtpalavra_Leave(object sender, EventArgs e)
+        {
+            if (txtpalavra.Text.Contains(' ') && txtpalavra.Text.Last()!= ' ')
+            {
+                btnEquiv.Visible = true;
+                txtEquiv.Visible = false;
+            }
+            else
+            {
+                btnEquiv.Visible = false;
+                txtEquiv.Visible = true;
+            }
+        }
+
+        private void btnEquiv_Click(object sender, EventArgs e)
+        {
+            string[] lemas = txtpalavra.Text.Split(' ');
+            List<int> saidas = new List<int>();
+            diag_equivalente diag;
+            for (int i = 0; i < lemas.Count(); i++)
+            {
+                diag = new diag_equivalente(lemas[i]);
+                diag.ShowDialog();
+                if (diag.DialogResult == DialogResult.OK)
+                    saidas.Add(diag.selecionado);
+                else
+                    saidas.Add(-1);
+                diag.Dispose();
+            }
+            p.EditRelacoesPluri(saidas);
         }
     }
 }
