@@ -11,7 +11,7 @@ namespace dicionario.Model
         public int id { get; set; }
         public string lema { get; set; }
 	    public int Id_catGram { get; set; }
-	    public string Genero { get; set; }
+	    
         public string idioma { get; set; }
         public int rubrica { get; set; }
         public bool heterogenerico { get; set; }
@@ -26,6 +26,8 @@ namespace dicionario.Model
         public string ref_ex_tr { get; set; }
         public int Infinitivo { get; set; }
         public string equivalente_pluriv { get; private set; } = "{-1}";
+        public int id_conjuga { get; set; }
+        public string Genero { get; set; }
 
         public override string ToString()
         {
@@ -40,7 +42,7 @@ namespace dicionario.Model
                 val.Add(id.ToString());
             val.Add(lema);
 	        val.Add(Id_catGram.ToString());
-	        val.Add(Genero);
+	        
             val.Add(idioma);
             val.Add(rubrica.ToString());
             val.Add(heterogenerico.ToString());
@@ -57,7 +59,8 @@ namespace dicionario.Model
             if (equivalente > 1)
                 equivalente_pluriv = "{-1}";
             val.Add(equivalente_pluriv);
-
+            val.Add(id_conjuga.ToString());
+            val.Add(Genero);
             return val;
         }
 
@@ -68,7 +71,7 @@ namespace dicionario.Model
                 val.Add("id");
             val.Add("Lema");
 	        val.Add("Id_catGram");
-	        val.Add("Genero");
+	        
             val.Add("Idioma");
             val.Add("Rubrica");
             val.Add("heterogenerico");
@@ -83,7 +86,8 @@ namespace dicionario.Model
             val.Add("referencia_exemplo_tr");
             val.Add("Infinitivo");
             val.Add("equivalente_pluriv");
-
+            val.Add("Id_conjuga");
+            val.Add("Genero");
             return val;
         }
         public void EditRelacoesPluri(List<int> relacionamento)
@@ -111,7 +115,7 @@ namespace dicionario.Model
                 id = int.Parse(lista.ElementAt(0)),
                 lema = lista.ElementAt(1),
                 Id_catGram = int.Parse(lista.ElementAt(2)),
-                Genero = lista.ElementAt(3),
+                Genero = lista.ElementAt(18),
                 idioma = lista.ElementAt(4),
                 rubrica = int.Parse(lista.ElementAt(5)),
                 heterogenerico = Boolean.Parse(lista.ElementAt(6)),
@@ -125,11 +129,26 @@ namespace dicionario.Model
                 heterossemantico = Boolean.Parse(lista.ElementAt(14)),
                 ref_ex_tr = lista.ElementAt(15),
                 Infinitivo = int.Parse(lista.ElementAt(16))
+                //id_conjuga = int.Parse(lista.ElementAt(18))
             };
             p.ChecaOperador(lista.ElementAt(17));
             return p;
         }
-        /* lista<string>[] => Palavra */
+        /*public static explicit operator Palavra[](List<string>[] lista)
+        {
+            int elementos = lista[0].Count;
+            Palavra[] saida = new Palavra[elementos];
+            if (elementos == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+            return saida;
+        }
+         */
     }
 
 }

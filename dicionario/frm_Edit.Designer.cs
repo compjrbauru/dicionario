@@ -83,6 +83,7 @@
             this.txtExemplo = new System.Windows.Forms.TextBox();
             this.txtExemploT = new System.Windows.Forms.TextBox();
             this.btnEquiv = new System.Windows.Forms.Button();
+            this.btnConjuga = new System.Windows.Forms.Button();
             this.menu_barra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).BeginInit();
             this.SuspendLayout();
@@ -1595,11 +1596,23 @@
             this.btnEquiv.Visible = false;
             this.btnEquiv.Click += new System.EventHandler(this.btnEquiv_Click);
             // 
+            // btnConjuga
+            // 
+            this.btnConjuga.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConjuga.Location = new System.Drawing.Point(820, 343);
+            this.btnConjuga.Name = "btnConjuga";
+            this.btnConjuga.Size = new System.Drawing.Size(123, 53);
+            this.btnConjuga.TabIndex = 59;
+            this.btnConjuga.Text = "Editar Conjugações";
+            this.btnConjuga.UseVisualStyleBackColor = true;
+            this.btnConjuga.Click += new System.EventHandler(this.btnConjuga_Click);
+            // 
             // frm_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.btnConjuga);
             this.Controls.Add(this.btnEquiv);
             this.Controls.Add(this.txtExemploT);
             this.Controls.Add(this.txtExemplo);
@@ -1707,5 +1720,6 @@
         private System.Windows.Forms.TextBox txtExemplo;
         private System.Windows.Forms.TextBox txtExemploT;
         private System.Windows.Forms.Button btnEquiv;
+        private System.Windows.Forms.Button btnConjuga;
     }
 }

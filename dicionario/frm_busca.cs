@@ -97,10 +97,14 @@ namespace dicionario
 
         private void editModeButton_Click(object sender, EventArgs e)
         {
-            this.objEditForm = new frm_Edit();
+            Login l = new Login(new frm_Edit());
+            l.ShowDialog();
+            l.Dispose();
+
+            /*this.objEditForm = new frm_Edit();
             this.objEditForm.Show(this);
             this.objEditForm.BringToFront();
-            this.Hide();
+            this.Hide();*/
         }
 
         private void extraFilterCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -119,10 +123,9 @@ namespace dicionario
 
         private void ConfigButton_Click(object sender, EventArgs e)
         {
-            this.configForm = new frm_configuracao();
-            this.configForm.Show(this);
-            this.configForm.BringToFront();
-            this.Hide();
+            Login l = new Login(new frm_controledeusuario(),0);
+            l.ShowDialog();
+            l.Dispose();
 
         }
 
@@ -147,23 +150,24 @@ namespace dicionario
                 temp.id = int.Parse(resultadosPalavra[0].ElementAt(e));
                 temp.lema = resultadosPalavra[1].ElementAt(e);
                 temp.Id_catGram = int.Parse(resultadosPalavra[2].ElementAt(e));
-                temp.Genero = resultadosPalavra[3].ElementAt(e);
-                temp.idioma = resultadosPalavra[4].ElementAt(e);
-                temp.rubrica = int.Parse(resultadosPalavra[5].ElementAt(e));
-                temp.heterogenerico = Boolean.Parse(resultadosPalavra[6].ElementAt(e));
-                temp.heterotonico = Boolean.Parse(resultadosPalavra[7].ElementAt(e));
-                int.TryParse(resultadosPalavra[8].ElementAt(e), out dummy);
+                
+                temp.idioma = resultadosPalavra[3].ElementAt(e);
+                temp.rubrica = int.Parse(resultadosPalavra[4].ElementAt(e));
+                temp.heterogenerico = Boolean.Parse(resultadosPalavra[5].ElementAt(e));
+                temp.heterotonico = Boolean.Parse(resultadosPalavra[6].ElementAt(e));
+                int.TryParse(resultadosPalavra[7].ElementAt(e), out dummy);
                 temp.equivalente = dummy;
-                int.TryParse(resultadosPalavra[9].ElementAt(e), out dummy);
+                int.TryParse(resultadosPalavra[8].ElementAt(e), out dummy);
                 temp.referencia_verbete = dummy;
-                temp.referencia_exemplo = resultadosPalavra[10].ElementAt(e);
-                temp.notas_gramatica = resultadosPalavra[11].ElementAt(e);
-                temp.nota_cultura = resultadosPalavra[12].ElementAt(e);
-                temp.acepcao = int.Parse(resultadosPalavra[13].ElementAt(e));
-                temp.heterossemantico = Boolean.Parse(resultadosPalavra[14].ElementAt(e));
-                temp.ref_ex_tr = resultadosPalavra[15].ElementAt(e);
-                int.TryParse(resultadosPalavra[16].ElementAt(e),out dummy);
+                temp.referencia_exemplo = resultadosPalavra[9].ElementAt(e);
+                temp.notas_gramatica = resultadosPalavra[10].ElementAt(e);
+                temp.nota_cultura = resultadosPalavra[11].ElementAt(e);
+                temp.acepcao = int.Parse(resultadosPalavra[12].ElementAt(e));
+                temp.heterossemantico = Boolean.Parse(resultadosPalavra[13].ElementAt(e));
+                temp.ref_ex_tr = resultadosPalavra[14].ElementAt(e);
+                int.TryParse(resultadosPalavra[15].ElementAt(e),out dummy);
                 temp.Infinitivo = dummy;
+                temp.Genero = resultadosPalavra[16].ElementAt(e);
             }
             try
             {

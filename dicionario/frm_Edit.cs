@@ -13,9 +13,11 @@ namespace dicionario
 {
     public partial class frm_Edit : Form
     {
+        //byte nAcesso;
         public frm_Edit()
         {
             InitializeComponent();
+            //nAcesso = acesso;
         }
         private ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         private Palavra p = new Palavra();
@@ -23,6 +25,7 @@ namespace dicionario
         private CategoriaGramatical ctg = new CategoriaGramatical();
         //private ClasseGramatical clg = new ClasseGramatical();
         List<string>[] resultados;
+        
         private void homeButton_Click(object sender, EventArgs e)
         {
             Owner.Show();
@@ -33,7 +36,7 @@ namespace dicionario
         {
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
+        /*protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
@@ -41,7 +44,7 @@ namespace dicionario
 
             // Faz o form pai aparecer
             Owner.Show();
-        }
+        }*/
         private void LimpaCampos()
         {
             txtAcepcao.Text = "";
@@ -64,13 +67,14 @@ namespace dicionario
             txtExemploT.Text = "";
             txtExemplo.Text = "";
             textCultura.Text = "";
+            ComboGenero.SelectedIndex = 2;
         }
         private void LimpaModel()
         {
             p.id = -1;
             p.lema = "";
             p.Id_catGram = 0;
-            p.Genero = "";
+            p.Genero = "N";
             p.rubrica = 0;
             p.referencia_verbete = 0;
             p.heterogenerico = false;
@@ -98,7 +102,7 @@ namespace dicionario
             }
             if (p.referencia_verbete > 0)
             {
-                resultados = conexao.Select("referencias", Referencia.ToListTabela(true), "Id=" + p.referencia_verbete.ToString());
+                resultados = conexao.Select("referencias", Referencia.ToListTabela(true), "Cod=" + p.referencia_verbete.ToString());
                 comboRef.Text = resultados[1].ElementAt(0);
             }
             if (p.rubrica > 0)
@@ -110,9 +114,32 @@ namespace dicionario
             chkHeterogenerico.Checked = p.heterogenerico;
             chkHeterotonico.Checked = p.heterotonico;
             chkHeterossemantico.Checked = p.heterossemantico;
-            numAcepcao.Value = p.acepcao; //bloquear a troca?
+            numAcepcao.Value = p.acepcao; ///FIXME:bloquear a troca?
             textCultura.Text = p.nota_cultura;
             txtGramatica.Text = p.notas_gramatica;
+            if (p.equivalente_pluriv != "{-1}")
+            {
+                txtEquiv.Visible = false;
+                btnEquiv.Visible = true;
+            }
+            else
+            {
+                txtEquiv.Visible = true;
+                btnEquiv.Visible = false;
+            }
+            switch (p.Genero) {
+                case "M":
+                    ComboGenero.SelectedIndex = 0;
+                    break;
+                case "N":
+                    ComboGenero.SelectedIndex = 2;
+                    break;
+                case "F":
+                    ComboGenero.SelectedIndex = 1;
+                    break;
+                default:
+                    break;
+            }
         }
         private void searchButton_Click(object sender, EventArgs e)
         {
@@ -163,21 +190,21 @@ namespace dicionario
                     p.id = int.Parse(resultados[0].ElementAt(0));
                     p.lema = resultados[1].ElementAt(0);
                     p.Id_catGram = int.Parse(resultados[2].ElementAt(0));
-                    p.Genero = resultados[3].ElementAt(0);
-                    p.idioma = resultados[4].ElementAt(0);
-                    p.rubrica = int.Parse(resultados[5].ElementAt(0));
-                    p.heterogenerico = Boolean.Parse(resultados[6].ElementAt(0));
-                    p.heterotonico = Boolean.Parse(resultados[7].ElementAt(0));
-                    p.equivalente = int.Parse(resultados[8].ElementAt(0));
-                    p.referencia_verbete = int.Parse(resultados[9].ElementAt(0));
-                    p.referencia_exemplo = resultados[10].ElementAt(0);
-                    p.notas_gramatica = resultados[11].ElementAt(0);
-                    p.nota_cultura = resultados[12].ElementAt(0);
-                    p.acepcao = int.Parse(resultados[13].ElementAt(0));
-                    p.heterossemantico = Boolean.Parse(resultados[14].ElementAt(0));
-                    p.ref_ex_tr = resultados[15].ElementAt(0);
-                    p.Infinitivo = int.Parse(resultados[16].ElementAt(0));
-
+                    p.Genero = resultados[17].ElementAt(0);
+                    p.idioma = resultados[3].ElementAt(0);
+                    p.rubrica = int.Parse(resultados[4].ElementAt(0));
+                    p.heterogenerico = Boolean.Parse(resultados[5].ElementAt(0));
+                    p.heterotonico = Boolean.Parse(resultados[6].ElementAt(0));
+                    p.equivalente = int.Parse(resultados[7].ElementAt(0));
+                    p.referencia_verbete = int.Parse(resultados[8].ElementAt(0));
+                    p.referencia_exemplo = resultados[9].ElementAt(0);
+                    p.notas_gramatica = resultados[10].ElementAt(0);
+                    p.nota_cultura = resultados[11].ElementAt(0);
+                    p.acepcao = int.Parse(resultados[12].ElementAt(0));
+                    p.heterossemantico = Boolean.Parse(resultados[13].ElementAt(0));
+                    p.ref_ex_tr = resultados[14].ElementAt(0);
+                    p.Infinitivo = int.Parse(resultados[15].ElementAt(0));
+                    //p = (Palavra)resultados;
                     MostraDados();
                 }
                 else { }
@@ -200,6 +227,7 @@ namespace dicionario
         private void btnSalva_Click(object sender, EventArgs e)
 //NOTE: Se houver problemas ao salvar, foi criado um INDEX na tabela com o nome Lema_UNIQUE
         {
+
             if(txtpalavra.Text == String.Empty)
             {
                 MessageBox.Show("Palavra não pode ser vazio!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -233,10 +261,27 @@ namespace dicionario
             p.heterossemantico = chkHeterossemantico.Checked;
             p.referencia_exemplo = txtExemplo.Text;
             p.ref_ex_tr = txtExemploT.Text;
-            if (txtpalavra.Text.Contains(' ')) { MessageBox.Show("Sem espaços no lema por enquanto", "aviso", MessageBoxButtons.OK); }
+            switch (ComboGenero.SelectedIndex)
+            {
+                case 0:
+                    p.Genero = "M";
+                    break;
+                case 1:
+                    p.Genero = "F";
+                    break;
+                default:
+                    p.Genero = "N";
+                    break;
+            }
+            /*if (txtpalavra.Text.Contains(' ')) { MessageBox.Show("Sem espaços no lema por enquanto", "aviso", MessageBoxButtons.OK);
+
+            }
             
-            else
+            else*/
+            if (p.id == 0)
                 conexao.InsereLinha("palavra", Palavra.ToListTabela(), p.ToListValores());
+            else
+                conexao.UpdateLine("palavra", Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
             //Uma excessão pode ser lançda aqui quando os valores das chaves estrangerias forem <1, pois estão refernciando um valor que não existe. Como o int no c# não cabe um NULL, seria melhor não enviar o tal valor que evitamos o problema
             LimpaCampos();
         }
@@ -469,6 +514,12 @@ namespace dicionario
                 diag.Dispose();
             }
             p.EditRelacoesPluri(saidas);
+        }
+
+        private void btnConjuga_Click(object sender, EventArgs e)
+        {
+            frm_conjuga fc = new frm_conjuga();
+            fc.ShowDialog();
         }
     }
 }

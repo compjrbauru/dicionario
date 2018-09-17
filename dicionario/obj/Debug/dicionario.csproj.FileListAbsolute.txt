@@ -139,3 +139,4 @@ C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.csp
 C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.exe
 C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.pdb
 C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.diag_equivalente.resources
+C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.frm_conjuga.resources

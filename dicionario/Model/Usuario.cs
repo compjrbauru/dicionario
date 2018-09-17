@@ -70,4 +70,5 @@ namespace dicionario.Model
             return usu;
         }
     }
+    //class adsadfa : Tabelas, IServiceProvider { }
 }

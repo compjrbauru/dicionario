@@ -72,6 +72,7 @@ namespace dicionario.Model
                 return false;
             }
         }
+        ///TODO: DIVIDIR EM DUAS CLASSES AQUI. A PARTE DE BAIXO É CAPAZ DE GENERICS
         public void InsereLinha(string tabela, List<string> campos, List<string> valores)
         {
             int temp = 0; bool tempb;
@@ -117,11 +118,29 @@ namespace dicionario.Model
             ///TODO: Analisar a strings contando os dados para que os valores boolean sejam corretamente adaptados para 0 ou 1
             string query = "UPDATE " + tabela + " SET ";
             string temp1, temp2;
+            int dummy;
+            bool dummyb;
             while (campos.Count > 0)
             {
                 temp1 = campos.First();
                 temp2 = valores.First();
-                query += temp1 + "=" + "'" + temp2 + "'";
+                query += temp1 + "=";
+                 if (int.TryParse(temp2, out dummy)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
+                    query += temp2;
+                }
+                else {
+                    if (Boolean.TryParse(temp2, out dummyb)){
+                        if (dummyb)
+                            query += "1";
+                        else
+                            query += "0";
+                    }
+                    else {
+                        query += "'";
+                        query += temp2;
+                        query += "'";
+                    }
+                }
                 campos.RemoveAt(0);
                 valores.RemoveAt(0);
                 if (campos.Count > 0)
@@ -165,6 +184,10 @@ namespace dicionario.Model
             {
                 MySqlCommand cmd = new MySqlCommand(query, conexao);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
+                ///TODO: Fazer com que os itens do list de campos da tabela sejam rodados dentro de um FOR
+                /* for i=0; i < campos.Tamanho; i ++
+                 *  list[i].add(datareader[campos.elementAt(i)] + "");
+                 */
                 switch (tabela)
                 {
                     case "categoriagram":
@@ -190,21 +213,22 @@ namespace dicionario.Model
                             list[0].Add(dataReader["id"] + "");
                             list[1].Add(dataReader["Lema"] + "");
                             list[2].Add(dataReader["Id_catGram"] + "");
-                            list[3].Add(dataReader["Id_classeGram"] + "");
-                            list[4].Add(dataReader["Idioma"] + "");
-                            list[5].Add(dataReader["Rubrica"] + "");
-                            list[6].Add(dataReader["heterogenerico"] + "");
-                            list[7].Add(dataReader["heterotonico"] + "");
-                            list[8].Add(dataReader["equivalente"] + "");
-                            list[9].Add(dataReader["referencia_verbete"] + "");
-                            list[10].Add(dataReader["referencia_exemplo"] + "");
-                            list[11].Add(dataReader["notas_gramatica"] + "");
-                            list[12].Add(dataReader["notas_cultura"] + "");
-                            list[13].Add(dataReader["acepcao"] + "");
-                            list[14].Add(dataReader["heterossemantico"] + "");
-                            list[15].Add(dataReader["referencia_exemplo_tr"] + "");
-                            list[16].Add(dataReader["Infinitivo"] + "");
-                            list[17].Add(dataReader["equivalente_pluriv"] + "");
+                            //list[3].Add(dataReader["Id_classeGram"] + "");
+                            list[3].Add(dataReader["Idioma"] + "");
+                            list[4].Add(dataReader["Rubrica"] + "");
+                            list[5].Add(dataReader["heterogenerico"] + "");
+                            list[6].Add(dataReader["heterotonico"] + "");
+                            list[7].Add(dataReader["equivalente"] + "");
+                            list[8].Add(dataReader["referencia_verbete"] + "");
+                            list[9].Add(dataReader["referencia_exemplo"] + "");
+                            list[10].Add(dataReader["notas_gramatica"] + "");
+                            list[11].Add(dataReader["notas_cultura"] + "");
+                            list[12].Add(dataReader["acepcao"] + "");
+                            list[13].Add(dataReader["heterossemantico"] + "");
+                            list[14].Add(dataReader["referencia_exemplo_tr"] + "");
+                            list[15].Add(dataReader["Infinitivo"] + "");
+                            list[16].Add(dataReader["equivalente_pluriv"] + "");
+                            list[17].Add(dataReader["Genero"] + "");
                         }
                         break;
                     case "rubrica":

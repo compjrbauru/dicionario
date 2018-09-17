@@ -7,23 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace dicionario
 {
     public partial class frm_configuracao : Form
     {
+        FileStream acesso;
+        const string nomeArquivo = "nude.dicio";
         public frm_configuracao()
         {
             InitializeComponent();
+            
         }
 
         private void confOkButton_Click(object sender, EventArgs e)
         {
-            string connName = this.ConnNameTextBox.Text;
+            string connName = this.txtBd.Text;
 
         }
 
-
+        private void ResetPadroes()
+        {
+            txtHost.Text = "";
+            txtPort.Text = "3306";
+            txtBd.Text = "dicionario";
+            txtUser.Text = "usuario";
+            txtPass.Text = String.Empty;
+        }
         private void homeButton_Click(object sender, EventArgs e)
         {
             Owner.Show();
@@ -45,13 +56,17 @@ namespace dicionario
         {
             frm_controledeusuario usr = new frm_controledeusuario();
             usr.ShowDialog();
-            usr.Dispose();
+            
         }
 
-        private void btn_usr_Click(object sender, EventArgs e)
+        private void frm_configuracao_Load(object sender, EventArgs e)
         {
-            frm_controledeusuario ctlu = new frm_controledeusuario();
-            ctlu.ShowDialog();
+            try
+            {
+                acesso = File.OpenRead(nomeArquivo);
+            }
+            catch (FileNotFoundException) { File.Create(nomeArquivo);
+            }
         }
     }
 }
