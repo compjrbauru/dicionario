@@ -148,6 +148,7 @@ namespace dicionario
             DataGridViewCell[] cell = new DataGridViewCell[dataGridView1.ColumnCount];
             List<string> ValoresLinha = new List<string>();
             ConectaBanco conBanco = new ConectaBanco("dicionario", "usuario", "senha");
+            CRUD operacoes = new CRUD();
             string temp;
 
             progressBar1.MarqueeAnimationSpeed = 50;
@@ -169,7 +170,7 @@ namespace dicionario
                     switch (NomeTabela)
                     {
                     case "Palavra":
-                        conBanco.InsereLinha(NomeTabela, Palavra.ToListTabela(), ValoresLinha);
+                        operacoes.InsereLinha(NomeTabela, Palavra.ToListTabela(), ValoresLinha);
                         break;
                     }
 

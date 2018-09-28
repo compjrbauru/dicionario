@@ -13,12 +13,10 @@ namespace dicionario
 {
     public partial class frm_busca : Form
     {
-        frm_Edit objEditForm;
-        frm_configuracao configForm;
-        List<Palavra> palavra;
-        List<string>[] resultadosPalavra;
-        ConectaBanco conexao;
-
+        /*frm_Edit objEditForm;
+        frm_configuracao configForm;*/
+        List<Palavra> resultadosPalavra;
+        CRUD cRUD = new CRUD();
         public frm_busca()
         {
             //O Construtor esconde o ResultsBox, que só é mostrado depois de uma
@@ -27,7 +25,7 @@ namespace dicionario
             this.searchResultsListBox.Hide();
             this.extraComboBox1.Hide();
             this.extraComboBox2.Hide();
-            conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
+
         }
 
         private void contactButton_Click(object sender, EventArgs e)
@@ -40,6 +38,7 @@ namespace dicionario
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+            List<object[]> lista = new List<object[]>();
             if (searchBox.Text == "")
             {
                 MessageBox.Show("A caixa de busca não pode estar vazia!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -70,13 +69,32 @@ namespace dicionario
                     filtro += "lema='" + searchBox.Text + "'";
                     break;
             }
-            resultadosPalavra = conexao.Select("palavra", Palavra.ToListTabela(true),filtro , "ORDER BY lema ASC");
+            lista = cRUD.SelecionarTabela("palavra", Palavra.ToListTabela(true),filtro , "ORDER BY lema ASC");
             searchResultsListBox.Items.Clear();
-            if (resultadosPalavra[0].Count > 0)
+            if (lista.Count > 0)
             {
-                foreach (string item in resultadosPalavra[1])
-                    this.searchResultsListBox.Items.Add(item);
-                OrganizaResultados();
+                try
+                {
+                    resultadosPalavra.Clear();
+                }
+                catch (NullReferenceException) {
+                    resultadosPalavra = new List<Palavra>();
+                }
+                /*int lim = lista.Count;
+                Palavra pt = new Palavra();
+                object[] po = new object[Palavra.ToListTabela(true).Count];
+                for (int i = 0; i < lim; i++)
+                {
+                    po = lista.ElementAt(i);
+                    pt = (Palavra)po;
+                    searchResultsListBox.Items.Add(pt.lema);
+                    resultadosPalavra.Add(pt);
+                }*/
+                resultadosPalavra = Palavra.ConverteObject(lista);
+                foreach (Palavra item in resultadosPalavra)
+                {
+                    searchResultsListBox.Items.Add(item.lema);
+                }
                 searchResultsListBox.Enabled = true;
             }
             else
@@ -133,51 +151,9 @@ namespace dicionario
         {
 
         }
-        private void OrganizaResultados()
-            ///TODO:Modelo de tradução vetor-tipo MVC
-        {
-            int t = resultadosPalavra[0].Count;
-            int dummy;
-            try
-            {
-                if (palavra.Count > 0)
-                    palavra.Clear();
-            }
-            catch (NullReferenceException) { }
-            Palavra temp = new Palavra();
-            for (int e = 0; e < t; e++)
-            {
-                temp.id = int.Parse(resultadosPalavra[0].ElementAt(e));
-                temp.lema = resultadosPalavra[1].ElementAt(e);
-                temp.Id_catGram = int.Parse(resultadosPalavra[2].ElementAt(e));
-                
-                temp.idioma = resultadosPalavra[3].ElementAt(e);
-                temp.rubrica = int.Parse(resultadosPalavra[4].ElementAt(e));
-                temp.heterogenerico = Boolean.Parse(resultadosPalavra[5].ElementAt(e));
-                temp.heterotonico = Boolean.Parse(resultadosPalavra[6].ElementAt(e));
-                int.TryParse(resultadosPalavra[7].ElementAt(e), out dummy);
-                temp.equivalente = dummy;
-                int.TryParse(resultadosPalavra[8].ElementAt(e), out dummy);
-                temp.referencia_verbete = dummy;
-                temp.referencia_exemplo = resultadosPalavra[9].ElementAt(e);
-                temp.notas_gramatica = resultadosPalavra[10].ElementAt(e);
-                temp.nota_cultura = resultadosPalavra[11].ElementAt(e);
-                temp.acepcao = int.Parse(resultadosPalavra[12].ElementAt(e));
-                temp.heterossemantico = Boolean.Parse(resultadosPalavra[13].ElementAt(e));
-                temp.ref_ex_tr = resultadosPalavra[14].ElementAt(e);
-                int.TryParse(resultadosPalavra[15].ElementAt(e),out dummy);
-                temp.Infinitivo = dummy;
-                temp.Genero = resultadosPalavra[16].ElementAt(e);
-            }
-            try
-            {
-                palavra.Add(temp);
-            }
-            catch (NullReferenceException) { palavra = new List<Palavra>(); palavra.Add(temp); }
-        }
         private void searchResultsListBox_DoubleClick(object sender, EventArgs e)
         {
-            Palavra resultado  = palavra.ElementAt(searchResultsListBox.SelectedIndex);
+            Palavra resultado  = resultadosPalavra.ElementAt(searchResultsListBox.SelectedIndex);
             frm_visualizaverbete _Visualizaverbete = new frm_visualizaverbete(resultado);
             _Visualizaverbete.ShowDialog();
         }

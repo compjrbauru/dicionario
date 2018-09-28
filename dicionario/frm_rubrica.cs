@@ -15,6 +15,7 @@ namespace dicionario.Model
     {
         ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         Rubrica rubrica = new Rubrica();
+        CRUD c = new CRUD();
         public frm_rubrica()
         {
             InitializeComponent();
@@ -31,10 +32,10 @@ namespace dicionario.Model
                 return true;
             return false;
         }
-        private void MostraModel()
+        private void MostraModel(Rubrica r)
         {
-            txtDesc.Text = rubrica.descricao;
-            txtSigla.Text = rubrica.sigla;
+            txtDesc.Text = r.descricao;
+            txtSigla.Text = r.sigla;
         }
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -57,9 +58,9 @@ namespace dicionario.Model
             rubrica.descricao = txtDesc.Text;
             rubrica.sigla = txtSigla.Text;
             if (rubrica.id > 0)
-                conexao.UpdateLine("rubrica", Rubrica.ToListTabela(false), rubrica.ToListValores(), "id=" + rubrica.id.ToString());
+                c.UpdateLine("rubrica", Rubrica.ToListTabela(false), rubrica.ToListValores(), "id=" + rubrica.id.ToString());
             else
-                conexao.InsereLinha("rubrica", Rubrica.ToListTabela(false), rubrica.ToListValores());
+                c.InsereLinha("rubrica", Rubrica.ToListTabela(false), rubrica.ToListValores());
             LimpaCampos();
             LimpaModel();
         }
@@ -72,7 +73,7 @@ namespace dicionario.Model
                 {
                     if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        conexao.ApagaLinha("rubrica", "Id=" + rubrica.id.ToString());
+                        c.ApagaLinha("rubrica", "Id=" + rubrica.id.ToString());
                         LimpaModel();
                         LimpaCampos();
                     }
@@ -84,14 +85,11 @@ namespace dicionario.Model
         {
             if (txtSigla.Text != "")
             {
-                List<string>[] resultado = conexao.Select("rubrica", Rubrica.ToListTabela(true), "sigla='" + txtSigla.Text + "'");
-                if (resultado[0].Count > 0)
+                List<Rubrica> resultado = Rubrica.ConverteObject(c.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "sigla='" + txtSigla.Text + "'"));
+                if (resultado.Count > 0)
                 {
-                    List<string> temp = new List<string>();
-                    for (int i = 0; i < 3; i++)
-                        temp.Add(resultado[i].ElementAt<string>(0));
-                    rubrica = (Rubrica)temp;
-                    MostraModel();
+                    MostraModel(resultado.First());
+                    //TODO: muultiplos resultados vão para onde mesmo?
                 }
                 else
                 {

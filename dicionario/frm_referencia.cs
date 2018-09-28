@@ -15,6 +15,7 @@ namespace dicionario
     {
         ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         Referencia referencia = new Referencia();
+        CRUD c = new CRUD();
         public frm_referencia()
         {
             InitializeComponent();
@@ -46,13 +47,9 @@ namespace dicionario
         }
         private void btnPesquisa_Click(object sender, EventArgs e)
         {
-            List<string>[] resultado = conexao.Select("referencias", Referencia.ToListTabela(true), "Cod=" + txtCod.Text);
-            if (resultado[0].Count > 0) {
-                //tratar resultado antes de continuar
-                List<string> temp = new List<string>();
-                for (int i = 0; i<4; i++)
-                    temp.Add(resultado[i].ElementAt<string>(0));
-                referencia = (Referencia) temp;
+            List<Referencia> resultado = Referencia.ConverteObject(c.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Cod=" + txtCod.Text));
+            if (resultado.Count > 0) {
+                throw new Exception("incompleto");
                 MostraModel();
                 
             } else {
@@ -106,9 +103,9 @@ namespace dicionario
             referencia.ano = int.Parse(txtAno.Text);
             referencia.autor = txtAutor.Text;
             if (referencia.Cod > 0)
-                conexao.UpdateLine("referencias", Referencia.ToListTabela(false), referencia.ToListValores(), "Cod=" + referencia.Cod.ToString());
+                c.UpdateLine("referencias", Referencia.ToListTabela(false), referencia.ToListValores(), "Cod=" + referencia.Cod.ToString());
             else
-                conexao.InsereLinha("referencias", Referencia.ToListTabela(false), referencia.ToListValores());
+                c.InsereLinha("referencias", Referencia.ToListTabela(false), referencia.ToListValores());
             LimpaCampos();
             LimpaModel();
         }
@@ -121,7 +118,7 @@ namespace dicionario
                 {
                     if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        conexao.ApagaLinha("referencias", "Cod=" + referencia.Cod.ToString());
+                        c.ApagaLinha("referencias", "Cod=" + referencia.Cod.ToString());
                         LimpaModel();
                         LimpaCampos();
                     }

@@ -41,6 +41,20 @@ namespace dicionario
             val.Add("autor");
             return val;
         }
+        public static List<Referencia> ConverteObject (List<object[]> entrada)
+        {
+            List<Referencia> s = new List<Referencia>();
+            int lim = entrada.Count;
+            Referencia pt = new Referencia();
+            object[] po = new object[Referencia.ToListTabela(true).Count];
+            for (int i = 0; i < lim; i++)
+            {
+                po = entrada.ElementAt(i);
+                pt = (Referencia)po;
+                s.Add(pt);
+            }
+            return s;
+        }
         public static explicit operator Referencia(List<string> lista)
         {
             Referencia novo = new Referencia

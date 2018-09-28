@@ -151,6 +151,7 @@
             this.btnDescarta.TabIndex = 16;
             this.btnDescarta.Text = "Descartar";
             this.btnDescarta.UseVisualStyleBackColor = true;
+            this.btnDescarta.Click += new System.EventHandler(this.btnDescarta_Click);
             // 
             // frm_conjuga
             // 

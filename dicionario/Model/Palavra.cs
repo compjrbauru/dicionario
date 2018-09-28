@@ -108,6 +108,20 @@ namespace dicionario.Model
                 equivalente_pluriv = entrada;
             }
         }
+        public static List<Palavra> ConverteObject(List<object[]> entrada)
+        {
+            List<Palavra> s = new List<Palavra>();
+            int lim = entrada.Count;
+            Palavra pt = new Palavra();
+            object[] po = new object[Palavra.ToListTabela(true).Count];
+            for (int i = 0; i < lim; i++)
+            {
+                po = entrada.ElementAt(i);
+                pt = (Palavra)po;
+                s.Add(pt);
+            }
+            return s;
+        }
         public static explicit operator Palavra(List<string> lista) //fazer um implicito?
         {
             Palavra p = new Palavra
@@ -134,21 +148,32 @@ namespace dicionario.Model
             p.ChecaOperador(lista.ElementAt(17));
             return p;
         }
-        /*public static explicit operator Palavra[](List<string>[] lista)
+        public static explicit operator Palavra(object[] lista)
         {
-            int elementos = lista[0].Count;
-            Palavra[] saida = new Palavra[elementos];
-            if (elementos == 1)
-            {
-
-            }
-            else
-            {
-
-            }
+            Palavra saida = new Palavra {
+                id = int.Parse(lista[0].ToString()),
+                lema = lista[1].ToString(),
+                Id_catGram = int.Parse(lista[2].ToString()),
+                Genero = lista[18].ToString(),
+                idioma = lista[4].ToString(),
+                rubrica = int.Parse(lista[5].ToString()),
+                heterogenerico = Boolean.Parse(lista[6].ToString()),
+                heterotonico = Boolean.Parse(lista[7].ToString()),
+                equivalente = int.Parse(lista[8].ToString()),
+                referencia_verbete = int.Parse(lista[9].ToString()),
+                referencia_exemplo = lista[10].ToString(),
+                notas_gramatica = lista[11].ToString(),
+                nota_cultura = lista[12].ToString(),
+                acepcao = int.Parse(lista[13].ToString()),
+                heterossemantico = Boolean.Parse(lista[14].ToString()),
+                ref_ex_tr = lista[15].ToString(),
+                Infinitivo = int.Parse(lista[16].ToString())
+                //id_conjuga = int.Parse(lista.ElementAt(18))
+            };
+            saida.ChecaOperador(lista[17].ToString());
             return saida;
         }
-         */
+        
     }
 
 }
