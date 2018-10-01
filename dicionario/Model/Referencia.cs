@@ -66,19 +66,19 @@ namespace dicionario
             };
             return novo;
         }
-        public static explicit operator Referencia(List<string>[] lista)
+        public static explicit operator Referencia(object[] lista)
         {
             Referencia novo = new Referencia();
             try {
-                novo.Cod = int.Parse(lista[0].ElementAt(0));
-                novo.descricao = lista[1].ElementAt(0);
-                novo.ano = int.Parse(lista[2].ElementAt(0));
-                novo.autor = lista[3].ElementAt(0);
+                novo.Cod = int.Parse(lista[0].ToString());
+                novo.descricao = lista[1].ToString();
+                novo.ano = int.Parse(lista[2].ToString());
+                novo.autor = lista[3].ToString();
             }
             catch (IndexOutOfRangeException) {
-                novo.descricao = lista[0].ElementAt(0);
-                novo.ano = int.Parse(lista[1].ElementAt(0));
-                novo.autor = lista[2].ElementAt(0);
+                novo.descricao = lista[0].ToString();
+                novo.ano = int.Parse(lista[1].ToString());
+                novo.autor = lista[2].ToString();
             }
             return novo;
         }

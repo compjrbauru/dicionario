@@ -37,15 +37,21 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSalva = new System.Windows.Forms.Button();
             this.btnApaga = new System.Windows.Forms.Button();
-            this.btnPesquisa = new System.Windows.Forms.Button();
             this.txtAno = new System.Windows.Forms.MaskedTextBox();
             this.txtCod = new System.Windows.Forms.MaskedTextBox();
+            this.btnProx = new System.Windows.Forms.Button();
+            this.btnAnt = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnPesquisa = new System.Windows.Forms.Button();
+            this.txtCodPSQ = new System.Windows.Forms.MaskedTextBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnNovo
             // 
             this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNovo.Location = new System.Drawing.Point(536, 67);
+            this.btnNovo.Location = new System.Drawing.Point(497, 58);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(75, 26);
             this.btnNovo.TabIndex = 0;
@@ -57,7 +63,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(56, 41);
+            this.label1.Location = new System.Drawing.Point(23, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 20);
             this.label1.TabIndex = 1;
@@ -66,18 +72,17 @@
             // txtAutor
             // 
             this.txtAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAutor.Location = new System.Drawing.Point(59, 132);
+            this.txtAutor.Location = new System.Drawing.Point(26, 123);
             this.txtAutor.MaxLength = 45;
             this.txtAutor.Name = "txtAutor";
             this.txtAutor.Size = new System.Drawing.Size(323, 26);
             this.txtAutor.TabIndex = 4;
-            this.txtAutor.Leave += new System.EventHandler(this.TravaCod);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(56, 106);
+            this.label2.Location = new System.Drawing.Point(23, 97);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 20);
             this.label2.TabIndex = 3;
@@ -87,7 +92,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(402, 106);
+            this.label3.Location = new System.Drawing.Point(369, 97);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 20);
             this.label3.TabIndex = 5;
@@ -96,18 +101,17 @@
             // txtDesc
             // 
             this.txtDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesc.Location = new System.Drawing.Point(59, 193);
+            this.txtDesc.Location = new System.Drawing.Point(26, 184);
             this.txtDesc.MaxLength = 45;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(447, 26);
             this.txtDesc.TabIndex = 8;
-            this.txtDesc.Leave += new System.EventHandler(this.TravaCod);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(56, 170);
+            this.label4.Location = new System.Drawing.Point(23, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 20);
             this.label4.TabIndex = 7;
@@ -116,7 +120,7 @@
             // btnSalva
             // 
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalva.Location = new System.Drawing.Point(536, 98);
+            this.btnSalva.Location = new System.Drawing.Point(497, 89);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(75, 28);
             this.btnSalva.TabIndex = 9;
@@ -127,7 +131,7 @@
             // btnApaga
             // 
             this.btnApaga.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApaga.Location = new System.Drawing.Point(536, 135);
+            this.btnApaga.Location = new System.Drawing.Point(497, 126);
             this.btnApaga.Name = "btnApaga";
             this.btnApaga.Size = new System.Drawing.Size(75, 29);
             this.btnApaga.TabIndex = 10;
@@ -135,47 +139,102 @@
             this.btnApaga.UseVisualStyleBackColor = true;
             this.btnApaga.Click += new System.EventHandler(this.btnApaga_Click);
             // 
-            // btnPesquisa
-            // 
-            this.btnPesquisa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPesquisa.Location = new System.Drawing.Point(200, 67);
-            this.btnPesquisa.Name = "btnPesquisa";
-            this.btnPesquisa.Size = new System.Drawing.Size(96, 26);
-            this.btnPesquisa.TabIndex = 11;
-            this.btnPesquisa.Text = "Pesquisar";
-            this.btnPesquisa.UseVisualStyleBackColor = true;
-            this.btnPesquisa.Click += new System.EventHandler(this.btnPesquisa_Click);
-            // 
             // txtAno
             // 
             this.txtAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAno.Location = new System.Drawing.Point(406, 132);
+            this.txtAno.Location = new System.Drawing.Point(373, 123);
             this.txtAno.Mask = "0000";
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(100, 26);
             this.txtAno.TabIndex = 12;
             this.txtAno.ValidatingType = typeof(int);
-            this.txtAno.Leave += new System.EventHandler(this.TravaCod);
             // 
             // txtCod
             // 
+            this.txtCod.BeepOnError = true;
             this.txtCod.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCod.Location = new System.Drawing.Point(60, 67);
-            this.txtCod.Mask = "9999999999";
+            this.txtCod.Location = new System.Drawing.Point(27, 58);
+            this.txtCod.Mask = "AAA00a";
             this.txtCod.Name = "txtCod";
             this.txtCod.Size = new System.Drawing.Size(100, 26);
             this.txtCod.TabIndex = 13;
             this.txtCod.ValidatingType = typeof(int);
-            this.txtCod.Leave += new System.EventHandler(this.txtCod_Leave);
+            // 
+            // btnProx
+            // 
+            this.btnProx.Location = new System.Drawing.Point(497, 184);
+            this.btnProx.Name = "btnProx";
+            this.btnProx.Size = new System.Drawing.Size(75, 23);
+            this.btnProx.TabIndex = 14;
+            this.btnProx.Text = ">";
+            this.btnProx.UseVisualStyleBackColor = true;
+            this.btnProx.Visible = false;
+            this.btnProx.Click += new System.EventHandler(this.btnProx_Click);
+            // 
+            // btnAnt
+            // 
+            this.btnAnt.Location = new System.Drawing.Point(497, 213);
+            this.btnAnt.Name = "btnAnt";
+            this.btnAnt.Size = new System.Drawing.Size(75, 23);
+            this.btnAnt.TabIndex = 15;
+            this.btnAnt.Text = "<";
+            this.btnAnt.UseVisualStyleBackColor = true;
+            this.btnAnt.Visible = false;
+            this.btnAnt.Click += new System.EventHandler(this.btnAnt_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtCodPSQ);
+            this.groupBox1.Controls.Add(this.btnPesquisa);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(606, 49);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 187);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Caixa de Pesquisa";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Código";
+            // 
+            // btnPesquisa
+            // 
+            this.btnPesquisa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisa.Location = new System.Drawing.Point(98, 155);
+            this.btnPesquisa.Name = "btnPesquisa";
+            this.btnPesquisa.Size = new System.Drawing.Size(96, 26);
+            this.btnPesquisa.TabIndex = 12;
+            this.btnPesquisa.Text = "Pesquisar";
+            this.btnPesquisa.UseVisualStyleBackColor = true;
+            this.btnPesquisa.Click += new System.EventHandler(this.btnPesquisa_Click);
+            // 
+            // txtCodPSQ
+            // 
+            this.txtCodPSQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodPSQ.Location = new System.Drawing.Point(94, 42);
+            this.txtCodPSQ.Mask = "AAA00a";
+            this.txtCodPSQ.Name = "txtCodPSQ";
+            this.txtCodPSQ.Size = new System.Drawing.Size(100, 26);
+            this.txtCodPSQ.TabIndex = 14;
             // 
             // frm_referencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 312);
+            this.ClientSize = new System.Drawing.Size(818, 257);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnAnt);
+            this.Controls.Add(this.btnProx);
             this.Controls.Add(this.txtCod);
             this.Controls.Add(this.txtAno);
-            this.Controls.Add(this.btnPesquisa);
             this.Controls.Add(this.btnApaga);
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.txtDesc);
@@ -187,6 +246,8 @@
             this.Controls.Add(this.btnNovo);
             this.Name = "frm_referencia";
             this.Text = "Banco de referências";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,8 +264,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSalva;
         private System.Windows.Forms.Button btnApaga;
-        private System.Windows.Forms.Button btnPesquisa;
         private System.Windows.Forms.MaskedTextBox txtAno;
         private System.Windows.Forms.MaskedTextBox txtCod;
+        private System.Windows.Forms.Button btnProx;
+        private System.Windows.Forms.Button btnAnt;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnPesquisa;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MaskedTextBox txtCodPSQ;
     }
 }
