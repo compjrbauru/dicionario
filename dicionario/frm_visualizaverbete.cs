@@ -18,44 +18,9 @@ namespace dicionario
             InitializeComponent();
             
         }*/
-        public frm_visualizaverbete(Palavra Resultado) {
+        public frm_visualizaverbete(List<Palavra> Resultado) {
             InitializeComponent();
-            /*List<string>[] coletor = new List<string>[5];
-            Rubrica ru;
-            CategoriaGramatical cg;
-            Referencia refer;
-            int i = 0;
-            coletor = bd.Select("rubrica", Rubrica.ToListTabela(true), "Id=" + Resultado.rubrica.ToString());
-            ru = (Rubrica)coletor;
-            coletor = bd.Select("categoriagram",CategoriaGramatical.ToListTabela(true),"Id=" + Resultado.Id_catGram.ToString());
-            cg = (CategoriaGramatical)coletor;
-            coletor = bd.Select("referencias",Referencia.ToListTabela(true),"Cod=" + Resultado.referencia_verbete.ToString());
-            refer = (Referencia)coletor;
-            p = Resultado;
-            TreeNode[] nodecoll = new TreeNode[] {new TreeNode(cg.Definicao), new TreeNode (p.referencia_exemplo), new TreeNode (p.ref_ex_tr), new TreeNode (refer.descricao), new TreeNode(p.notas_gramatica), new TreeNode(p.nota_cultura) };
-            TreeNode[] teste = new TreeNode[] {new TreeNode(cg.descricao,new TreeNode[] { nodecoll[i++] }), new TreeNode(ru.descricao), new TreeNode("Exemplos de uso",new TreeNode[] {nodecoll[i++], nodecoll[i++], nodecoll[i++] }), new TreeNode("Notas Gramaticais", new TreeNode[] { nodecoll[i++] }), new TreeNode("Notas culturais", new TreeNode[] { nodecoll[i++] })  };
-            TrvPalavra.Nodes.AddRange(teste);
-            lblLema.Text = Resultado.lema;*/
-        }
-        public frm_visualizaverbete(Palavra[] Resultado)
-        {
-            InitializeComponent();
-            /*List<string>[] coletor = new List<string>[5];
-            Rubrica ru;
-            CategoriaGramatical cg;
-            Referencia refer;
-            int i = 0;
-            coletor = bd.Select("rubrica", Rubrica.ToListTabela(true), "Id=" + Resultado.rubrica.ToString());
-            ru = (Rubrica)coletor;
-            coletor = bd.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "Id=" + Resultado.Id_catGram.ToString());
-            cg = (CategoriaGramatical)coletor;
-            coletor = bd.Select("referencias", Referencia.ToListTabela(true), "Cod=" + Resultado.referencia_verbete.ToString());
-            refer = (Referencia)coletor;
-            p = Resultado;
-            TreeNode[] nodecoll = new TreeNode[] { new TreeNode(cg.Definicao), new TreeNode(p.referencia_exemplo), new TreeNode(p.ref_ex_tr), new TreeNode(refer.descricao), new TreeNode(p.notas_gramatica), new TreeNode(p.nota_cultura) };
-            TreeNode[] teste = new TreeNode[] { new TreeNode(cg.descricao, new TreeNode[] { nodecoll[i++] }), new TreeNode(ru.descricao), new TreeNode("Exemplos de uso", new TreeNode[] { nodecoll[i++], nodecoll[i++], nodecoll[i++] }), new TreeNode("Notas Gramaticais", new TreeNode[] { nodecoll[i++] }), new TreeNode("Notas culturais", new TreeNode[] { nodecoll[i++] }) };
-            TrvPalavra.Nodes.AddRange(teste);
-            lblLema.Text = ;*/
+            PreencheTreeList(Resultado);
         }
         private void PreencheTreeList(List<Palavra> entrada)
         {
@@ -64,25 +29,28 @@ namespace dicionario
             List<Rubrica> resRubrica = new List<Rubrica>();
             List<CategoriaGramatical> resCg = new List<CategoriaGramatical>();
             List<Referencia> resRefer = new List<Referencia>();
-            Rubrica ru;
-            CategoriaGramatical cg;
-            Referencia refer;
+            CategoriaGramatical cgselect;
             string filtro;
             List<int> v1 = new List<int>();
             List<int> v2 = new List<int>();
             List<int> v3 = new List<int>();
+            List<string> s = new List<string>();
+            TreeNode[] exemplos, holder;
+            List<TreeNode[]> nf = new List<TreeNode[]>();
+            //List<TreeNode[]> holder = new List<TreeNode[]>();
+            List<TreeNode[]> saida = new List<TreeNode[]>();
 
             foreach (Palavra p in entrada)
             {
-                if (v1.Find(val => val == p.Id_catGram) < 0)
+                if (v1.FindIndex(val => val == p.Id_catGram) < 0)
                 {
                     v1.Add(p.Id_catGram);
                 }
-                if (v2.Find(val => val == p.rubrica) < 0)
+                if (v2.FindIndex(val => val == p.rubrica) < 0)
                 {
                     v2.Add(p.rubrica);
                 }
-                if (v3.Find(val => val == p.referencia_verbete) < 0)
+                if (v3.FindIndex(val => val == p.referencia_verbete) < 0)
                 {
                     v3.Add(p.referencia_verbete);
                 }
@@ -93,7 +61,32 @@ namespace dicionario
             resRubrica = Rubrica.ConverteObject(operaBd.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), filtro));
             filtro = montaFiltro("Cod", v3);
             resRefer = Referencia.ConverteObject(operaBd.SelecionarTabela("referencias", Referencia.ToListTabela(true), filtro));
+            foreach (Palavra p in entrada) {
+                //vamos criar os nodes de exemplo e juntá-los num único conjunto
+                s.Clear();
+                s.Add(p.referencia_exemplo);
+                s.Add(p.ref_ex_tr);
+                exemplos = criaNode(s);
 
+                cgselect = resCg.Find(icg => icg.id == p.Id_catGram);
+                //vamos agora juntar os outros valores pertinentes à acepção ou verbete selecionado
+                s = criaListaValores(p, cgselect, resRefer.Find(iref => iref.Cod == p.referencia_verbete));
+                nf = criaTreeNodes(s);
+
+                //mesclando ambos em nf
+                nf.Add(exemplos);
+
+                //vamos criar os pais destas folhas
+                s = criaListaTitulos(p, cgselect, resRubrica.Find(irub => irub.id == p.rubrica));
+                holder = criaTreeTether(s, nf);
+
+                saida.Add(new TreeNode[] { new TreeNode("Acepção" + p.acepcao, holder) });
+            }
+            foreach (TreeNode[] i in saida)
+            {
+                TrvPalavra.Nodes.AddRange(i);
+            }
+            lblLema.Text = entrada.First().lema;
         }
         private string montaFiltro(string nomeCampo, List<int> valores) {
             String retorno = (nomeCampo + "=" + valores.First().ToString());
@@ -103,11 +96,74 @@ namespace dicionario
             }
             return retorno;
         }
+        private TreeNode[] criaNode(List<string> en)
+        {
+            TreeNode[] nd = new TreeNode[en.Count];
+            int i = 0;
+            foreach (string s in en) {
+                nd[i++] = new TreeNode(s);
+            }
+            return nd;
+        }
+        private List<string> criaListaValores(Palavra p, CategoriaGramatical cg, Referencia r)
+        {
+            List<string> sai = new List<string>
+            {
+                cg.Definicao,
+                //String.Concat(p.referencia_exemplo,"\n", p.ref_ex_tr),
+                r.descricao,
+                p.notas_gramatica,
+                p.nota_cultura
+            };
+            return sai;
+        }
+        private List<string> criaListaTitulos(Palavra p, CategoriaGramatical cg, Rubrica r)
+        {
+            List<string> sai = new List<string>
+            {
+                cg.descricao,
+                r.descricao,
+                "Notas Gramaticais",
+                "Notas Culturais",
+                "Exemplos de uso"
+            };
+            return sai;
+        }
         /*private TreeNode[] criaTreeNodes(List<string> valores) {
-            IEnumerator<string> i;
-            i.
-            TreeNode[] tnm = new TreeNode[valores.Count];
-            tnm
+            //IEnumerator<string> i = valores.GetEnumerator();
+            string[] v = valores.ToArray();
+            int i = 0;
+            TreeNode[] tnm = new TreeNode[] {new TreeNode(v[i]), new TreeNode(v[++i]), new TreeNode(v[++i]), new TreeNode(v[++i]), new TreeNode(v[++i]), new TreeNode(v[++i]) };
+            return tnm;
+        }*/
+        private List<TreeNode[]> criaTreeNodes(List<string> valores)
+        {
+            int i = 0;
+            List<TreeNode[]> tnm = new List<TreeNode[]>();
+            foreach (string s in valores){
+                tnm.Add(new TreeNode[] { new TreeNode(s) });
+            }
+            return tnm;       
+        }
+        private TreeNode[] criaTreeTether(List<string> valores, List<TreeNode[]> descFilhos) {
+            int i = 0;
+            TreeNode[] tn = new TreeNode[valores.Count];
+            foreach (string s in valores)
+            {
+                tn[i] = new TreeNode(s, descFilhos.ElementAt(i));
+                i++;
+            }
+            return tn;
+        }
+        /*private TreeNode[] ConverteList (List<TreeNode[]> l)
+        {
+            TreeNode[] s = new TreeNode[l.Count];
+            int i = 0;
+            foreach(TreeNode[] n in l)
+            {
+                s[i++] = n;
+            }
+            return s;
         }*/
         private void frm_visualizaverbete_Load(object sender, EventArgs e)
         {

@@ -154,7 +154,9 @@ namespace dicionario
         private void searchResultsListBox_DoubleClick(object sender, EventArgs e)
         {
             Palavra resultado  = resultadosPalavra.ElementAt(searchResultsListBox.SelectedIndex);
-            frm_visualizaverbete _Visualizaverbete = new frm_visualizaverbete(resultado);
+            List<Palavra> r = new List<Palavra>();
+            r.Add(resultado);
+            frm_visualizaverbete _Visualizaverbete = new frm_visualizaverbete(r);
             _Visualizaverbete.ShowDialog();
         }
     }

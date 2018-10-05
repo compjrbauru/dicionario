@@ -19,8 +19,7 @@ namespace dicionario
         public frm_conjuga(int reg)
         {
             InitializeComponent();
-            List<object[]> res = crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(true), "idconjugacao=" + reg.ToString());
-            List<Conjugacao> p = Conjugacao.ConverteObject(res);
+            List<Conjugacao> p = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(true), "idconjugacao=" + reg.ToString()));
             conjuga = p.First();
 
         }
