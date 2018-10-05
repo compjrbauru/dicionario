@@ -131,7 +131,8 @@ namespace dicionario
             List<Usuario> resultado = Usuario.ConverteObject(c.SelecionarTabela("usr", Usuario.ToListTabela(),"cpf='"+txtCpf.Text+"'"));
             if (resultado.Count > 0)
             {
-
+                usr = resultado.First();
+                MostraModel();
             }
             else
                 MessageBox.Show("Nenhum usuário encontrado.");
@@ -151,11 +152,14 @@ namespace dicionario
         {
             if (txtusr.Text != usr.usr || txtpass.Text != usr.pass || txtEmail.Text != usr.email || converteAutorizacao() != usr.permissao || txtCpf.Text != usr.cpf)
             {
-                if (MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
-                    return;
+                if (MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    LimpaCampo();
+                    LimpaModel();
+                }
+        
             }
-            LimpaCampo();
-            LimpaModel();
+            
         }
     }
 }
