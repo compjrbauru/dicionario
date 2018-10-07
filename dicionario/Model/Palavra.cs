@@ -28,6 +28,7 @@ namespace dicionario.Model
         public string equivalente_pluriv { get; private set; } = "{-1}";
         public int id_conjuga { get; set; }
         public string Genero { get; set; }
+        public string Definicao { get; set; }
 
         public override string ToString()
         {
@@ -61,6 +62,7 @@ namespace dicionario.Model
             val.Add(equivalente_pluriv);
             val.Add(id_conjuga.ToString());
             val.Add(Genero);
+            //val.Add(Definicao);
             return val;
         }
 
@@ -88,6 +90,7 @@ namespace dicionario.Model
             val.Add("equivalente_pluriv");
             val.Add("Id_conjuga");
             val.Add("Genero");
+            //val.Add("Definicao");
             return val;
         }
         public void EditRelacoesPluri(List<int> relacionamento)
@@ -124,6 +127,7 @@ namespace dicionario.Model
         }
         public static explicit operator Palavra(List<string> lista) //fazer um implicito?
         {
+            ///TODO: para evitar problemas de estouro, usar um contador simples autoincementável para pegar os valores. Exemplo{ int i = 0; id = int.parse(list.elementat(i++),...}
             Palavra p = new Palavra
             {
                 id = int.Parse(lista.ElementAt(0)),
@@ -142,8 +146,9 @@ namespace dicionario.Model
                 acepcao = int.Parse(lista.ElementAt(13)),
                 heterossemantico = Boolean.Parse(lista.ElementAt(14)),
                 ref_ex_tr = lista.ElementAt(15),
-                Infinitivo = int.Parse(lista.ElementAt(16))
+                Infinitivo = int.Parse(lista.ElementAt(16)),
                 //id_conjuga = int.Parse(lista.ElementAt(18))
+                Definicao = lista.ElementAt(19)
             };
             p.ChecaOperador(lista.ElementAt(17));
             return p;
@@ -167,8 +172,9 @@ namespace dicionario.Model
                 acepcao = int.Parse(lista[13].ToString()),
                 heterossemantico = Boolean.Parse(lista[14].ToString()),
                 ref_ex_tr = lista[15].ToString(),
-                Infinitivo = int.Parse(lista[16].ToString())
+                Infinitivo = int.Parse(lista[16].ToString())//,
                 //id_conjuga = int.Parse(lista.ElementAt(18))
+                //Definicao = lista[19].ToString()
             };
             saida.ChecaOperador(lista[17].ToString());
             return saida;

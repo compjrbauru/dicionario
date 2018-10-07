@@ -84,6 +84,10 @@
             this.txtExemploT = new System.Windows.Forms.TextBox();
             this.btnEquiv = new System.Windows.Forms.Button();
             this.btnConjuga = new System.Windows.Forms.Button();
+            this.btnPrimeiro = new System.Windows.Forms.Button();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.btnProx = new System.Windows.Forms.Button();
+            this.btnUltimo = new System.Windows.Forms.Button();
             this.menu_barra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).BeginInit();
             this.SuspendLayout();
@@ -289,7 +293,7 @@
             this.searchBox.Location = new System.Drawing.Point(45, 60);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(179, 26);
-            this.searchBox.TabIndex = 13;
+            this.searchBox.TabIndex = 0;
             this.searchBox.Text = "Buscar...";
             // 
             // searchButton
@@ -518,7 +522,7 @@
             this.txtpalavra.Multiline = true;
             this.txtpalavra.Name = "txtpalavra";
             this.txtpalavra.Size = new System.Drawing.Size(248, 28);
-            this.txtpalavra.TabIndex = 16;
+            this.txtpalavra.TabIndex = 1;
             this.txtpalavra.Leave += new System.EventHandler(this.txtpalavra_Leave);
             // 
             // textCultura
@@ -942,7 +946,7 @@
             this.txtAcepcao.Name = "txtAcepcao";
             this.txtAcepcao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtAcepcao.Size = new System.Drawing.Size(766, 107);
-            this.txtAcepcao.TabIndex = 20;
+            this.txtAcepcao.TabIndex = 6;
             // 
             // ComboGenero
             // 
@@ -956,7 +960,7 @@
             this.ComboGenero.Location = new System.Drawing.Point(652, 152);
             this.ComboGenero.Name = "ComboGenero";
             this.ComboGenero.Size = new System.Drawing.Size(159, 28);
-            this.ComboGenero.TabIndex = 21;
+            this.ComboGenero.TabIndex = 5;
             this.ComboGenero.SelectedIndexChanged += new System.EventHandler(this.ComboClasseGram_SelectedIndexChanged);
             this.ComboGenero.TextUpdate += new System.EventHandler(this.ComboClasseGram_TextUpdate);
             // 
@@ -971,7 +975,7 @@
             this.ComboIdioma.Location = new System.Drawing.Point(344, 152);
             this.ComboIdioma.Name = "ComboIdioma";
             this.ComboIdioma.Size = new System.Drawing.Size(137, 28);
-            this.ComboIdioma.TabIndex = 22;
+            this.ComboIdioma.TabIndex = 3;
             // 
             // ComboCatGram
             // 
@@ -981,7 +985,7 @@
             this.ComboCatGram.Location = new System.Drawing.Point(487, 152);
             this.ComboCatGram.Name = "ComboCatGram";
             this.ComboCatGram.Size = new System.Drawing.Size(159, 28);
-            this.ComboCatGram.TabIndex = 23;
+            this.ComboCatGram.TabIndex = 4;
             this.ComboCatGram.SelectedIndexChanged += new System.EventHandler(this.ComboCatGram_SelectedIndexChanged);
             this.ComboCatGram.TextUpdate += new System.EventHandler(this.ComboCatGram_TextUpdate);
             // 
@@ -1274,7 +1278,7 @@
             this.txtEquiv.Multiline = true;
             this.txtEquiv.Name = "txtEquiv";
             this.txtEquiv.Size = new System.Drawing.Size(179, 28);
-            this.txtEquiv.TabIndex = 37;
+            this.txtEquiv.TabIndex = 7;
             // 
             // lblGenero
             // 
@@ -1314,7 +1318,7 @@
             this.ComboRubrica.Location = new System.Drawing.Point(436, 400);
             this.ComboRubrica.Name = "ComboRubrica";
             this.ComboRubrica.Size = new System.Drawing.Size(179, 28);
-            this.ComboRubrica.TabIndex = 41;
+            this.ComboRubrica.TabIndex = 9;
             this.ComboRubrica.SelectedIndexChanged += new System.EventHandler(this.ComboRubrica_SelectedIndexChanged);
             this.ComboRubrica.TextUpdate += new System.EventHandler(this.ComboRubrica_TextUpdate);
             // 
@@ -1334,7 +1338,7 @@
             this.btnSalva.Location = new System.Drawing.Point(868, 238);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(75, 33);
-            this.btnSalva.TabIndex = 43;
+            this.btnSalva.TabIndex = 12;
             this.btnSalva.Text = "Salvar";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
@@ -1453,7 +1457,7 @@
             0});
             this.numAcepcao.Name = "numAcepcao";
             this.numAcepcao.Size = new System.Drawing.Size(39, 26);
-            this.numAcepcao.TabIndex = 47;
+            this.numAcepcao.TabIndex = 2;
             this.numAcepcao.Value = new decimal(new int[] {
             1,
             0,
@@ -1493,7 +1497,7 @@
             this.comboRef.Location = new System.Drawing.Point(45, 400);
             this.comboRef.Name = "comboRef";
             this.comboRef.Size = new System.Drawing.Size(385, 28);
-            this.comboRef.TabIndex = 49;
+            this.comboRef.TabIndex = 8;
             this.comboRef.SelectedIndexChanged += new System.EventHandler(this.comboRef_SelectedIndexChanged);
             this.comboRef.TextUpdate += new System.EventHandler(this.comboRef_TextUpdate);
             // 
@@ -1574,7 +1578,7 @@
             this.txtExemplo.Location = new System.Drawing.Point(45, 481);
             this.txtExemplo.Name = "txtExemplo";
             this.txtExemplo.Size = new System.Drawing.Size(385, 26);
-            this.txtExemplo.TabIndex = 56;
+            this.txtExemplo.TabIndex = 10;
             // 
             // txtExemploT
             // 
@@ -1582,7 +1586,7 @@
             this.txtExemploT.Location = new System.Drawing.Point(439, 481);
             this.txtExemploT.Name = "txtExemploT";
             this.txtExemploT.Size = new System.Drawing.Size(372, 26);
-            this.txtExemploT.TabIndex = 57;
+            this.txtExemploT.TabIndex = 11;
             // 
             // btnEquiv
             // 
@@ -1607,11 +1611,59 @@
             this.btnConjuga.UseVisualStyleBackColor = true;
             this.btnConjuga.Click += new System.EventHandler(this.btnConjuga_Click);
             // 
+            // btnPrimeiro
+            // 
+            this.btnPrimeiro.Enabled = false;
+            this.btnPrimeiro.Location = new System.Drawing.Point(868, 426);
+            this.btnPrimeiro.Name = "btnPrimeiro";
+            this.btnPrimeiro.Size = new System.Drawing.Size(75, 23);
+            this.btnPrimeiro.TabIndex = 60;
+            this.btnPrimeiro.Text = "|<";
+            this.btnPrimeiro.UseVisualStyleBackColor = true;
+            this.btnPrimeiro.Click += new System.EventHandler(this.btnPrimeiro_Click);
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.Enabled = false;
+            this.btnAnterior.Location = new System.Drawing.Point(868, 453);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(75, 23);
+            this.btnAnterior.TabIndex = 61;
+            this.btnAnterior.Text = "<";
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // btnProx
+            // 
+            this.btnProx.Enabled = false;
+            this.btnProx.Location = new System.Drawing.Point(868, 482);
+            this.btnProx.Name = "btnProx";
+            this.btnProx.Size = new System.Drawing.Size(75, 23);
+            this.btnProx.TabIndex = 62;
+            this.btnProx.Text = ">";
+            this.btnProx.UseVisualStyleBackColor = true;
+            this.btnProx.Click += new System.EventHandler(this.btnProx_Click);
+            // 
+            // btnUltimo
+            // 
+            this.btnUltimo.Enabled = false;
+            this.btnUltimo.Location = new System.Drawing.Point(868, 511);
+            this.btnUltimo.Name = "btnUltimo";
+            this.btnUltimo.Size = new System.Drawing.Size(75, 23);
+            this.btnUltimo.TabIndex = 63;
+            this.btnUltimo.Text = ">|";
+            this.btnUltimo.UseVisualStyleBackColor = true;
+            this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
+            // 
             // frm_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.btnUltimo);
+            this.Controls.Add(this.btnProx);
+            this.Controls.Add(this.btnAnterior);
+            this.Controls.Add(this.btnPrimeiro);
             this.Controls.Add(this.btnConjuga);
             this.Controls.Add(this.btnEquiv);
             this.Controls.Add(this.txtExemploT);
@@ -1721,5 +1773,9 @@
         private System.Windows.Forms.TextBox txtExemploT;
         private System.Windows.Forms.Button btnEquiv;
         private System.Windows.Forms.Button btnConjuga;
+        private System.Windows.Forms.Button btnPrimeiro;
+        private System.Windows.Forms.Button btnAnterior;
+        private System.Windows.Forms.Button btnProx;
+        private System.Windows.Forms.Button btnUltimo;
     }
 }

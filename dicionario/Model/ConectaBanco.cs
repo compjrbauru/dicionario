@@ -76,9 +76,10 @@ namespace dicionario.Model
     class CRUD{
         private ConectaBanco ControllerBanco = new ConectaBanco();
         private string SanitizaQuery(string cmd){
-            if (cmd.Contains("'")){
-                cmd.Replace("'","\\'");
-            }
+            if (cmd != null)
+                if (cmd.Contains("'")){
+                    cmd.Replace("'","\\'");
+                }
             return cmd;
         }
         private void EnviaComando(string query){
@@ -183,22 +184,19 @@ namespace dicionario.Model
                     object[] colunas = new object[campos.Count];
                     while(dataReader.Read()){
                         dataReader.GetValues(colunas);
-                        try
-                        {
-                            resultados.Add(colunas);
-                        }
-                        catch (Exception)
-                        {
-
-                            throw;
-                        }
+                        resultados.Add(RetornaCopia(colunas, campos.Count));
                     }
-
                  }
                  dataReader.Close();
                  ControllerBanco.FechaConexao();
             }
             return resultados;
+        }
+        private object[] RetornaCopia (object[] obj, int t)
+        {
+            object[] o = new object[t];
+            obj.CopyTo(o,0);
+            return o;
         }
     }
 }
