@@ -15,6 +15,7 @@ namespace dicionario
     {
         Usuario usr = new Usuario();
         ConectaBanco conecta = new ConectaBanco("dicionario", "root", "gamesjoker");
+        CRUD c = new CRUD();
         Form saida;
         byte nAcesso;
         enum Nacesso
@@ -53,20 +54,21 @@ namespace dicionario
         private void button1_Click(object sender, EventArgs e)
         {
             
-            List<string>[] list = new List<string>[1];    
+            
             if (txtusuario.Text == "" || txtsenha.Text == "")
                 MessageBox.Show("Usurio e(ou) senha não foram preenchidos. Por favor verifique os campos.");
             else
             {
-                list = conecta.Select("usr", Usuario.ToListTabela(), "usr='" + txtusuario.Text + "'AND pass='" + txtsenha.Text + "'");
-                if (list[0].Count<string>() == 0)
+                List<Usuario> list = Usuario.ConverteObject(c.SelecionarTabela("usr", Usuario.ToListTabela(), "usr='" + txtusuario.Text + "'AND pass='" + txtsenha.Text + "'"));
+                if (list.Count == 0)
                 {
                     MessageBox.Show("Combinação de usuário e senha não existe.");
                     txtsenha.Text = "";
                 }
                 else
                 {
-                    byte a = ConverteAcesso(list[2].ElementAt(0));
+                    Usuario u = list.First();
+                    byte a = ConverteAcesso(u.permissao);
                     if (a <= nAcesso)
                     {
                         this.Hide();

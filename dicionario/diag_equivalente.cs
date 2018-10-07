@@ -14,7 +14,8 @@ namespace dicionario
     public partial class diag_equivalente : Form
     {
         ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
-        List<string>[] resultados;
+        CRUD c = new CRUD();
+        List<CategoriaGramatical> resultados;
         public int selecionado;
         //talvez seja melhor salvar os resultados antes e depois, como entrada, enviar um int indicando qual palavra é obsevada
         public diag_equivalente(string lema)
@@ -35,13 +36,13 @@ namespace dicionario
             }
             if (pesquisa.Length <= 3)
             {
-                resultados = conexao.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"); //TODO: Trocar a tabela para palavra e atualizar  ofiltro de pesquisa
-                string[] siglas = new string[10];
+                resultados = CategoriaGramatical.ConverteObject(c.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10")); //TODO: Trocar a tabela para palavra e atualizar  ofiltro de pesquisa
+                /*string[] siglas = new string[10];
                 resultados[1].CopyTo(siglas, 0);
                 while (siglas[i] != null && i < 10)
                 {
                     comboBusca.Items.Add(siglas[i] + " Ac " + resultados[0].ElementAt(i++) ); //colocar a coluna acepcao
-                }
+                }*/
             }
             BuscaTimer.Enabled = false;
         }
@@ -55,7 +56,7 @@ namespace dicionario
         {
             if (comboBusca.Text != "")
             {
-                selecionado = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(comboBusca.Text.Remove(comboBusca.Text.LastIndexOf(' ') - 3))));
+                //selecionado = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(comboBusca.Text.Remove(comboBusca.Text.LastIndexOf(' ') - 3))));
                 button2.Enabled = true;
             }
             else

@@ -13,38 +13,25 @@ namespace dicionario
 {
     public partial class frm_Edit : Form
     {
-        //byte nAcesso;
         public frm_Edit()
         {
             InitializeComponent();
-            //nAcesso = acesso;
         }
-        private ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
+        private CRUD crud = new CRUD();
         private Palavra p = new Palavra();
         private Rubrica rb = new Rubrica();
         private CategoriaGramatical ctg = new CategoriaGramatical();
-        //private ClasseGramatical clg = new ClasseGramatical();
-        List<string>[] resultados;
-        
-        private void homeButton_Click(object sender, EventArgs e)
-        {
-            Owner.Show();
-            this.Hide();
-        }
+        private Referencia refere = new Referencia();
+        private List<object[]> resultados;
+        private List<Palavra> resPalavra = new List<Palavra>();
+        private int ipal = 0;
+        private List<Rubrica> resRubrica = new List<Rubrica>();
+        private List<CategoriaGramatical> resCtg = new List<CategoriaGramatical>();
+        private List<Referencia> resRef = new List<Referencia>();
 
         private void EditForm_Load(object sender, EventArgs e)
         {
         }
-
-        /*protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-
-            if (e.CloseReason == CloseReason.WindowsShutDown) return;
-
-            // Faz o form pai aparecer
-            Owner.Show();
-        }*/
         private void LimpaCampos()
         {
             txtAcepcao.Text = "";
@@ -97,18 +84,24 @@ namespace dicionario
             }
             if (p.Id_catGram > 0)
             {
-                resultados = conexao.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "Id=" + p.Id_catGram.ToString());
-                ComboCatGram.Text = resultados[1].ElementAt(0);
+                resultados = crud.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "Id=" + p.Id_catGram.ToString());
+                resCtg = CategoriaGramatical.ConverteObject(resultados);
+                ctg = resCtg.First();
+                ComboCatGram.Text = ctg.descricao;
             }
             if (p.referencia_verbete > 0)
             {
-                resultados = conexao.Select("referencias", Referencia.ToListTabela(true), "Cod=" + p.referencia_verbete.ToString());
-                comboRef.Text = resultados[1].ElementAt(0);
+                resultados = crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Cod=" + p.referencia_verbete.ToString());
+                resRef = Referencia.ConverteObject(resultados);
+                refere = resRef.First();
+                comboRef.Text = refere.descricao;
             }
             if (p.rubrica > 0)
             {
-                resultados = conexao.Select("rubrica", Rubrica.ToListTabela(true), "Id=" + p.rubrica.ToString());
-                ComboRubrica.Text = resultados[1].ElementAt(0);
+                resultados = crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "Id=" + p.rubrica.ToString());
+                resRubrica = Rubrica.ConverteObject(resultados);
+                rb = resRubrica.First();
+                ComboRubrica.Text = rb.descricao;
             }
 
             chkHeterogenerico.Checked = p.heterogenerico;
@@ -140,6 +133,19 @@ namespace dicionario
                 default:
                     break;
             }
+        }
+        private void AtivaNavegadores() {
+            btnPrimeiro.Enabled = true;
+            btnAnterior.Enabled = true;
+            btnProx.Enabled = true;
+            btnUltimo.Enabled = true;
+        }
+        private void DesativaNavegadores()
+        {
+            btnPrimeiro.Enabled = false;
+            btnAnterior.Enabled = false;
+            btnProx.Enabled = false;
+            btnUltimo.Enabled = false;
         }
         private void searchButton_Click(object sender, EventArgs e)
         {
@@ -183,49 +189,42 @@ namespace dicionario
                     default:
                         break;
                 }
-                resultados  = conexao.Select("palavra", Palavra.ToListTabela(), "lema='" + searchBox.Text + "'");
-                ///FIXME: Temos isso dentro da classe palavra
-                if (resultados[0].Count == 1)
+                resultados  = crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema='" + searchBox.Text + "'");
+                if (resultados.Count > 0)
                 {
-                    p.id = int.Parse(resultados[0].ElementAt(0));
-                    p.lema = resultados[1].ElementAt(0);
-                    p.Id_catGram = int.Parse(resultados[2].ElementAt(0));
-                    p.Genero = resultados[17].ElementAt(0);
-                    p.idioma = resultados[3].ElementAt(0);
-                    p.rubrica = int.Parse(resultados[4].ElementAt(0));
-                    p.heterogenerico = Boolean.Parse(resultados[5].ElementAt(0));
-                    p.heterotonico = Boolean.Parse(resultados[6].ElementAt(0));
-                    p.equivalente = int.Parse(resultados[7].ElementAt(0));
-                    p.referencia_verbete = int.Parse(resultados[8].ElementAt(0));
-                    p.referencia_exemplo = resultados[9].ElementAt(0);
-                    p.notas_gramatica = resultados[10].ElementAt(0);
-                    p.nota_cultura = resultados[11].ElementAt(0);
-                    p.acepcao = int.Parse(resultados[12].ElementAt(0));
-                    p.heterossemantico = Boolean.Parse(resultados[13].ElementAt(0));
-                    p.ref_ex_tr = resultados[14].ElementAt(0);
-                    p.Infinitivo = int.Parse(resultados[15].ElementAt(0));
-                    //p = (Palavra)resultados;
+                    resPalavra = Palavra.ConverteObject(resultados);
+                    p = resPalavra.First();
                     MostraDados();
+                    if (resPalavra.Count == 1)
+                    {
+                        DesativaNavegadores();
+                    }
+                    else
+                    {
+                        AtivaNavegadores();
+                        ipal = 0;
+                    }
                 }
-                else { }
+                else
+                {
+                    MessageBox.Show("Nenhum resultado adequado encontrado.");
+                }
             }
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            if (p.id == 0 && txtpalavra.Text != "")
+            if (p.id <= 0 && txtpalavra.Text != "")
             {
-                if(MessageBox.Show("Existem dados não salvos. Caso prossiga com a operação, todos os dados" + '\n' + "digitados serão perdidos. Continuar mesmo assim?", "Atenção", MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.No)
-                {
+                if (MessageBox.Show("Existem dados não salvos. Caso prossiga com a operação, todos os dados" + '\n' + "digitados serão perdidos. Continuar mesmo assim?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                     return;
-                }
             }
             LimpaCampos();
             LimpaModel();
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
-//NOTE: Se houver problemas ao salvar, foi criado um INDEX na tabela com o nome Lema_UNIQUE
+        //NOTE: Se houver problemas ao salvar, foi criado um INDEX na tabela com o nome Lema_UNIQUE
         {
 
             if(txtpalavra.Text == String.Empty)
@@ -278,10 +277,13 @@ namespace dicionario
             }
             
             else*/
-            if (p.id == 0)
-                conexao.InsereLinha("palavra", Palavra.ToListTabela(), p.ToListValores());
+            if (p.id <= 0)
+            {
+                crud.InsereLinha("palavra", Palavra.ToListTabela(), p.ToListValores());
+                MessageBox.Show("Fazer lançamento na tabela de conjugações");
+            }
             else
-                conexao.UpdateLine("palavra", Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
+                crud.UpdateLine("palavra", Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
             //Uma excessão pode ser lançda aqui quando os valores das chaves estrangerias forem <1, pois estão refernciando um valor que não existe. Como o int no c# não cabe um NULL, seria melhor não enviar o tal valor que evitamos o problema
             LimpaCampos();
         }
@@ -292,9 +294,19 @@ namespace dicionario
             {
                 if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    conexao.ApagaLinha("palavra", "Id=" + p.id.ToString());
-                    LimpaModel();
-                    LimpaCampos();
+                    crud.ApagaLinha("palavra", "Id=" + p.id.ToString());
+                    if (resPalavra.Count > 1)
+                    {
+                        resPalavra.Remove(p);
+                        if (ipal > 0)
+                            btnAnterior_Click(sender, e);
+                        else
+                            btnProx_Click(sender, e);
+                    }
+                    else {
+                        LimpaModel();
+                        LimpaCampos();
+                    }                   
                 }
             }
             
@@ -348,7 +360,6 @@ namespace dicionario
         private void timerCtg_Tick(object sender, EventArgs e)
         {
             string pesquisa;
-            int i = 0;
             pesquisa = ComboCatGram.Text;
             if (ComboCatGram.Items.Count > 0)
             {
@@ -356,24 +367,33 @@ namespace dicionario
             }
             if (pesquisa.Length <= 3)
             {
-                resultados = conexao.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10");
-                string[] siglas = new string[10];
-                resultados[1].CopyTo(siglas, 0);
-                while (siglas[i] != null && i<10)
+                resCtg = CategoriaGramatical.ConverteObject(crud.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                List<string> d = new List<string>();
+                foreach (CategoriaGramatical c in resCtg)
                 {
-                    ComboCatGram.Items.Add(siglas[i++]);
+                    d.Add(c.descricao);
+                }
+                foreach (string o in d)
+                {
+                    ComboCatGram.Items.Add(o);
                 }
             }
 
             /*else
-                resultados = conexao.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
+                resultados = crud.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
             timerCtg.Enabled = false; //prevenindo de floodar a combo
         }
 
         private void ComboCatGram_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ComboCatGram.Text != "")
-                p.Id_catGram = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(ComboCatGram.Text)));
+            if (ComboCatGram.Text != "") {
+                if(ComboCatGram.Text.Length <= 3)
+                    ctg = resCtg.Find(ctg => ctg.sigla == ComboCatGram.Text);
+                else
+                    ctg = resCtg.ElementAt(resCtg.FindIndex(ctg => ctg.descricao == ComboCatGram.Text));
+                p.Id_catGram = ctg.id;
+            }
+                 //https://docs.microsoft.com/pt-br/dotnet/api/system.predicate-1?redirectedfrom=MSDN&view=netframework-4.7.2
         }
 
         private void ComboClasseGram_SelectedIndexChanged(object sender, EventArgs e)
@@ -398,7 +418,7 @@ namespace dicionario
             }
             if (pesquisa.Length <= 3)
             {
-                resultados = conexao.Select("classegram", ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10");
+                resultados = crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10");
                 string[] siglas = new string[10];
                 resultados[1].CopyTo(siglas, 0);
                 while (siglas[i] != null && i < 10)
@@ -408,14 +428,13 @@ namespace dicionario
             }
 
             /*else
-                resultados = conexao.Select("classegram", ClasseGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
+                resultados = crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
             timerClg.Enabled = false; //prevenindo de floodar a combo
         }
 
         private void timerRub_Tick(object sender, EventArgs e)
         {
             string pesquisa;
-            int i = 0;
             pesquisa = ComboRubrica.Text;
             if (ComboRubrica.Items.Count > 0)
             {
@@ -423,24 +442,30 @@ namespace dicionario
             }
             if (pesquisa.Length <= 3)
             {
-                resultados = conexao.Select("rubrica", Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10");
-                string[] siglas = new string[10];
-                resultados[1].CopyTo(siglas, 0);
-                while (siglas[i] != null && i < 10)
+                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                List<string> d = new List<string>();
+                foreach(Rubrica r in resRubrica)
                 {
-                    ComboRubrica.Items.Add(siglas[i++]);
+                    d.Add(r.descricao);
+                }
+                foreach(string s in d)
+                {
+                    ComboRubrica.Items.Add(s);
                 }
             }
 
             /*else
-                resultados = conexao.Select("rubrica", Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
+                resultados = crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
             timerRub.Enabled = false; //prevenindo de floodar a combo
         }
 
         private void ComboRubrica_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ComboRubrica.Text != "")
-                p.rubrica = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(ComboRubrica.Text)));
+            {
+                rb = resRubrica.Find(rubrica => rubrica.descricao == ComboRubrica.Text);
+                p.rubrica = rb.id;
+            }
         }
 
         private void ComboRubrica_TextUpdate(object sender, EventArgs e)
@@ -451,32 +476,39 @@ namespace dicionario
         private void timerRef_Tick(object sender, EventArgs e)
         {
             string pesquisa;
-            int i = 0;
             pesquisa = comboRef.Text;
             if (comboRef.Items.Count > 0)
             {
                 comboRef.Items.Clear();
             }
-            if (pesquisa.Length > 5)
+            if (pesquisa.Length >= 5)
             {
-                resultados = conexao.Select("referencias", Referencia.ToListTabela(true), "Descricao LIKE '" + pesquisa + "%'", "LIMIT 10");
-                string[] desc = new string[10];
-                resultados[1].CopyTo(desc, 0);
-                while (desc[i] != null && i < 10)
+                resRef = Referencia.ConverteObject(crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Descricao LIKE '%" + pesquisa + "%'", "LIMIT 10"));
+                List<string> d = new List<string>();
+                foreach (Referencia re in resRef)
                 {
-                    comboRef.Items.Add(desc[i++]);
+                    d.Add(re.descricao);
+                }
+                foreach(string s in d)
+                {
+                    comboRef.Items.Add(s);
                 }
             }
 
             /*else
-                resultados = conexao.Select("referencias", Referencia.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
+                resultados = crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
             timerRef.Enabled = false; //prevenindo de floodar a combo
         }
 
         private void comboRef_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboRef.Text != "")
-                p.referencia_verbete = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(comboRef.Text)));
+            {
+                refere = resRef.Find(r => r.descricao == comboRef.Text);
+                p.referencia_verbete = refere.Cod;
+
+            }
+                //p.referencia_verbete = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(comboRef.Text)));
         }
 
         private void comboRef_TextUpdate(object sender, EventArgs e)
@@ -518,8 +550,54 @@ namespace dicionario
 
         private void btnConjuga_Click(object sender, EventArgs e)
         {
-            frm_conjuga fc = new frm_conjuga();
-            fc.ShowDialog();
+            if (p.id_conjuga > 0)
+            {
+                frm_conjuga fc = new frm_conjuga(p.id_conjuga);
+                fc.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Salve as alterações antes de acessar as conjugações", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnPrimeiro_Click(object sender, EventArgs e)
+        {
+            if (ipal > 0)
+            {
+                p = resPalavra.First();
+                MostraDados();
+                ipal = 0;
+            }
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            if (ipal > 0)
+            {
+                p = resPalavra.ElementAt(--ipal);
+                MostraDados();
+            }
+        }
+
+        private void btnProx_Click(object sender, EventArgs e)
+        {
+            if (ipal < (resPalavra.Count - 1))
+            {
+                p = resPalavra.ElementAt(++ipal);
+                MostraDados();
+            }
+        }
+
+        private void btnUltimo_Click(object sender, EventArgs e)
+        {
+            int mx = (resPalavra.Count - 1);
+            if (ipal < mx)
+            {
+                p = resPalavra.Last();
+                ipal = mx;
+                MostraDados();
+            }
         }
     }
 }

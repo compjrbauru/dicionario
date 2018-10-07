@@ -40,6 +40,20 @@ namespace dicionario.Model
             val.Add("sigla");
             return val;
         }
+        public static List<Rubrica> ConverteObject(List<object[]> entrada)
+        {
+            List<Rubrica> s = new List<Rubrica>();
+            int lim = entrada.Count;
+            Rubrica pt = new Rubrica();
+            object[] po = new object[Rubrica.ToListTabela(true).Count];
+            for (int i = 0; i < lim; i++)
+            {
+                po = entrada.ElementAt(i);
+                pt = (Rubrica)po;
+                s.Add(pt);
+            }
+            return s;
+        }
         public static explicit operator Rubrica (List<string> lista)
         {
             Rubrica rubrica = new Rubrica
@@ -50,18 +64,18 @@ namespace dicionario.Model
             };
             return rubrica;
         }
-        public static explicit operator Rubrica (List<string>[] lista)
+        public static explicit operator Rubrica (object[] lista)
         {
             Rubrica rubrica = new Rubrica();
             try
             {
-                rubrica.id = int.Parse(lista[0].ElementAt(0));
-                rubrica.descricao = lista[1].ElementAt(0);
-                rubrica.sigla = lista[2].ElementAt(0);
+                rubrica.id = int.Parse(lista[0].ToString());
+                rubrica.descricao = lista[1].ToString();
+                rubrica.sigla = lista[2].ToString();
             }
             catch (IndexOutOfRangeException) {
-                rubrica.descricao = lista[0].ElementAt(0);
-                rubrica.sigla = lista[1].ElementAt(0);
+                rubrica.descricao = lista[0].ToString();
+                rubrica.sigla = lista[1].ToString();
             }
             return rubrica;
         }

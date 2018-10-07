@@ -40,6 +40,20 @@ namespace dicionario.Model
             val.Add("definicao");
             return val;
         }
+        public static List<CategoriaGramatical> ConverteObject(List<object[]> entrada)
+        {
+            List<CategoriaGramatical> s = new List<CategoriaGramatical>();
+            int lim = entrada.Count;
+            CategoriaGramatical pt = new CategoriaGramatical();
+            object[] po = new object[CategoriaGramatical.ToListTabela(true).Count];
+            for (int i = 0; i < lim; i++)
+            {
+                po = entrada.ElementAt(i);
+                pt = (CategoriaGramatical)po;
+                s.Add(pt);
+            }
+            return s;
+        }
         public static explicit operator CategoriaGramatical(List<string> lista)
         {
             CategoriaGramatical ct = new CategoriaGramatical
@@ -51,21 +65,21 @@ namespace dicionario.Model
             };
             return ct;
         }
-        public static explicit operator CategoriaGramatical(List<string>[] lista)
+        public static explicit operator CategoriaGramatical(object[] lista)
         {
             CategoriaGramatical ct = new CategoriaGramatical();
             try
             {
-                ct.id = int.Parse(lista[0].ElementAt(0));
-                ct.descricao = lista[1].ElementAt(0);
-                ct.sigla = lista[2].ElementAt(0);
-                ct.Definicao = lista[3].ElementAt(0);
+                ct.id = int.Parse(lista[0].ToString());
+                ct.descricao = lista[1].ToString();
+                ct.sigla = lista[2].ToString();
+                ct.Definicao = lista[3].ToString();
             }
             catch (IndexOutOfRangeException)
             {
-                ct.descricao = lista[0].ElementAt(0);
-                ct.sigla = lista[1].ElementAt(0);
-                ct.Definicao = lista[2].ElementAt(0);
+                ct.descricao = lista[0].ToString();
+                ct.sigla = lista[1].ToString();
+                ct.Definicao = lista[2].ToString();
             }
             return ct;
         }

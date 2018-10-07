@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,21 +18,17 @@ namespace dicionario.Model
         private string porta;
         private MySqlConnection conexao;
 
-        public ConectaBanco(string bd, string usr, string pss, string svr = "localhost", string porta = "3306")
+        public ConectaBanco(string bd = "dicionario", string usr = "root", string pss = "gamesjoker", string svr = "localhost", string porta = "3306")
         {
-            PreparaConexao(bd, usr, pss, svr, porta);
+            string connectionString = "Server=" + svr + ";" + "Port=" + porta + ";Database=" + bd + ";" + "User=" + usr + ";" + "pwd=" + pss + ";";
+            conexao = new MySqlConnection(connectionString);
             servidor = svr;
             bancoDados = bd;
             usuario = usr;
             senha = pss;
             this.porta = porta;
         }
-        private void PreparaConexao(string bd, string usr, string pss, string svr = "localhost", string port = "3306")
-        {
-            string connectionString = "Server=" + svr + ";" + "Port=" + port + ";Database=" + bd + ";" + "User=" + usr + ";" + "pwd=" + pss + ";";
-            conexao = new MySqlConnection(connectionString);
-        }
-        private bool AbreConexao()
+        public bool AbreConexao()
         {
             try
             {
@@ -59,7 +55,7 @@ namespace dicionario.Model
                 return false;
             }
         }
-        private bool FechaConexao()
+        public bool FechaConexao()
         {
             try
             {
@@ -72,7 +68,28 @@ namespace dicionario.Model
                 return false;
             }
         }
-        ///TODO: DIVIDIR EM DUAS CLASSES AQUI. A PARTE DE BAIXO É CAPAZ DE GENERICS
+        public MySqlConnection PegaConexao()
+        {
+            return this.conexao;
+        }
+    }
+    class CRUD{
+        private ConectaBanco ControllerBanco = new ConectaBanco();
+        private string SanitizaQuery(string cmd){
+            if (cmd != null)
+                if (cmd.Contains("'")){
+                    cmd.Replace("'","\\'");
+                }
+            return cmd;
+        }
+        private void EnviaComando(string query){
+            if (ControllerBanco.AbreConexao() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, ControllerBanco.PegaConexao());
+                cmd.ExecuteNonQuery();
+                ControllerBanco.FechaConexao();
+            }
+        }
         public void InsereLinha(string tabela, List<string> campos, List<string> valores)
         {
             int temp = 0; bool tempb;
@@ -99,19 +116,14 @@ namespace dicionario.Model
                     }
                     else {
                         query += "'";
-                        query += item;
+                        query += SanitizaQuery(item);
                         query += "',";
                     }
                 }
             }
             query = query.Remove(query.Length - 1);
             query += ")";
-            if (this.AbreConexao() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, conexao);
-                cmd.ExecuteNonQuery();
-                this.FechaConexao();
-            }
+            EnviaComando(query);
         }
         public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro = "")
         {
@@ -148,132 +160,43 @@ namespace dicionario.Model
             }
             if (filtro != "")
                 query += "WHERE " + filtro;
-            if (this.AbreConexao() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandText = query;
-                cmd.Connection = conexao;
-                cmd.ExecuteNonQuery();
-                this.FechaConexao();
-            }
+            EnviaComando(query);
         }
         public void ApagaLinha(string tabela, string filtro)
         {
             string query = "DELETE FROM " + tabela + " WHERE " + filtro;
-            if (this.AbreConexao() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, conexao);
-                cmd.ExecuteNonQuery();
-                this.FechaConexao();
-            }
+            EnviaComando(query);
         }
-        public List<string>[] Select(string tabela, List<string> campos, string filtro = "", string outrosParam = "")
+        public List<object[]> SelecionarTabela(string tabela, List<string> campos, string filtro = "", string outrosParam = "")
         {
             string query = "SELECT * FROM " + tabela;
-            int qtReg = campos.Count;
             if (filtro != "")
                 query += " WHERE " + filtro;
             if (outrosParam != "")
                 query += " " + outrosParam;
-            List<string>[] list = new List<string>[qtReg];
-            for (int i = 0; i < qtReg; i++)
+            List<object[]> resultados = new List<object[]>();
+            if (ControllerBanco.AbreConexao() == true)
             {
-                list[i] = new List<string>();
-            }
-            if (this.AbreConexao() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, conexao);
+                MySqlCommand cmd = new MySqlCommand(query, ControllerBanco.PegaConexao());
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-                ///TODO: Fazer com que os itens do list de campos da tabela sejam rodados dentro de um FOR
-                /* for i=0; i < campos.Tamanho; i ++
-                 *  list[i].add(datareader[campos.elementAt(i)] + "");
-                 */
-                switch (tabela)
-                {
-                    case "categoriagram":
-                        while (dataReader.Read())
-                        {
-                            list[0].Add(dataReader["id"] + "");
-                            list[1].Add(dataReader["Descricao"] + "");
-                            list[2].Add(dataReader["sigla"] + "");
-                            list[3].Add(dataReader["definicao"] + "");
-                        }
-                    break;
-                    case "classegram":
-                        while (dataReader.Read())
-                        {
-                            list[0].Add(dataReader["id"] + "");
-                            list[1].Add(dataReader["Descricao"] + "");
-                            list[2].Add(dataReader["sigla"] + "");
-                        }
-                        break;
-                    case "palavra":
-                        while (dataReader.Read())
-                        {
-                            list[0].Add(dataReader["id"] + "");
-                            list[1].Add(dataReader["Lema"] + "");
-                            list[2].Add(dataReader["Id_catGram"] + "");
-                            //list[3].Add(dataReader["Id_classeGram"] + "");
-                            list[3].Add(dataReader["Idioma"] + "");
-                            list[4].Add(dataReader["Rubrica"] + "");
-                            list[5].Add(dataReader["heterogenerico"] + "");
-                            list[6].Add(dataReader["heterotonico"] + "");
-                            list[7].Add(dataReader["equivalente"] + "");
-                            list[8].Add(dataReader["referencia_verbete"] + "");
-                            list[9].Add(dataReader["referencia_exemplo"] + "");
-                            list[10].Add(dataReader["notas_gramatica"] + "");
-                            list[11].Add(dataReader["notas_cultura"] + "");
-                            list[12].Add(dataReader["acepcao"] + "");
-                            list[13].Add(dataReader["heterossemantico"] + "");
-                            list[14].Add(dataReader["referencia_exemplo_tr"] + "");
-                            list[15].Add(dataReader["Infinitivo"] + "");
-                            list[16].Add(dataReader["equivalente_pluriv"] + "");
-                            list[17].Add(dataReader["Genero"] + "");
-                        }
-                        break;
-                    case "rubrica":
-                        while (dataReader.Read())
-                        {
-                            list[0].Add(dataReader["id"] + "");
-                            list[1].Add(dataReader["Descricao"] + "");
-                            list[2].Add(dataReader["sigla"] + "");
-                        }
-                        break;
-                    case "referencias":
-                        while (dataReader.Read())
-                        {
-                            list[0].Add(dataReader["Cod"] + "");
-                            list[1].Add(dataReader["Descricao"] + "");
-                            list[2].Add(dataReader["Ano"] + "");
-                            list[3].Add(dataReader["Autor"] + "");
-                        }
-                        break;
-                    case "usr":
-                        while (dataReader.Read())
-                        {
-                            list[0].Add(dataReader["usr"] + "");
-                            list[1].Add(dataReader["pass"] + "");
-                            list[2].Add(dataReader["nivel_permissao"] + "");
-                            list[3].Add(dataReader["email"] + "");
-                            list[4].Add(dataReader["nome"] + "");
-                            list[5].Add(dataReader["contato"] + "");
-                            list[6].Add(dataReader["rede_social"] + "");
-                            list[7].Add(dataReader["cpf"] + "");
-                            list[8].Add(dataReader["telefone"] + "");
-                        }
-                        break;
-                    default:
-                        throw new Exception("Tabela não tratada no programa!");
-                    
-                }
-                dataReader.Close();
-                this.FechaConexao();
-                return list;
+                 //REF HERE https://dev.mysql.com/doc/dev/connector-net/6.10/html/T_MySql_Data_MySqlClient_MySqlDataReader.htm
+                 if (dataReader.HasRows){
+                    object[] colunas = new object[campos.Count];
+                    while(dataReader.Read()){
+                        dataReader.GetValues(colunas);
+                        resultados.Add(RetornaCopia(colunas, campos.Count));
+                    }
+                 }
+                 dataReader.Close();
+                 ControllerBanco.FechaConexao();
             }
-            else
-            {
-                return list;
-            }
+            return resultados;
+        }
+        private object[] RetornaCopia (object[] obj, int t)
+        {
+            object[] o = new object[t];
+            obj.CopyTo(o,0);
+            return o;
         }
     }
 }

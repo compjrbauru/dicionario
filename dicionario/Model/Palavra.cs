@@ -28,6 +28,7 @@ namespace dicionario.Model
         public string equivalente_pluriv { get; private set; } = "{-1}";
         public int id_conjuga { get; set; }
         public string Genero { get; set; }
+        public string Definicao { get; set; }
 
         public override string ToString()
         {
@@ -61,6 +62,7 @@ namespace dicionario.Model
             val.Add(equivalente_pluriv);
             val.Add(id_conjuga.ToString());
             val.Add(Genero);
+            //val.Add(Definicao);
             return val;
         }
 
@@ -88,6 +90,7 @@ namespace dicionario.Model
             val.Add("equivalente_pluriv");
             val.Add("Id_conjuga");
             val.Add("Genero");
+            //val.Add("Definicao");
             return val;
         }
         public void EditRelacoesPluri(List<int> relacionamento)
@@ -108,8 +111,23 @@ namespace dicionario.Model
                 equivalente_pluriv = entrada;
             }
         }
+        public static List<Palavra> ConverteObject(List<object[]> entrada)
+        {
+            List<Palavra> s = new List<Palavra>();
+            int lim = entrada.Count;
+            Palavra pt = new Palavra();
+            object[] po = new object[Palavra.ToListTabela(true).Count];
+            for (int i = 0; i < lim; i++)
+            {
+                po = entrada.ElementAt(i);
+                pt = (Palavra)po;
+                s.Add(pt);
+            }
+            return s;
+        }
         public static explicit operator Palavra(List<string> lista) //fazer um implicito?
         {
+            ///TODO: para evitar problemas de estouro, usar um contador simples autoincementável para pegar os valores. Exemplo{ int i = 0; id = int.parse(list.elementat(i++),...}
             Palavra p = new Palavra
             {
                 id = int.Parse(lista.ElementAt(0)),
@@ -128,27 +146,40 @@ namespace dicionario.Model
                 acepcao = int.Parse(lista.ElementAt(13)),
                 heterossemantico = Boolean.Parse(lista.ElementAt(14)),
                 ref_ex_tr = lista.ElementAt(15),
-                Infinitivo = int.Parse(lista.ElementAt(16))
+                Infinitivo = int.Parse(lista.ElementAt(16)),
                 //id_conjuga = int.Parse(lista.ElementAt(18))
+                Definicao = lista.ElementAt(19)
             };
             p.ChecaOperador(lista.ElementAt(17));
             return p;
         }
-        /*public static explicit operator Palavra[](List<string>[] lista)
+        public static explicit operator Palavra(object[] lista)
         {
-            int elementos = lista[0].Count;
-            Palavra[] saida = new Palavra[elementos];
-            if (elementos == 1)
-            {
-
-            }
-            else
-            {
-
-            }
+            Palavra saida = new Palavra {
+                id = int.Parse(lista[0].ToString()),
+                lema = lista[1].ToString(),
+                Id_catGram = int.Parse(lista[2].ToString()),
+                Genero = lista[18].ToString(),
+                idioma = lista[4].ToString(),
+                rubrica = int.Parse(lista[5].ToString()),
+                heterogenerico = Boolean.Parse(lista[6].ToString()),
+                heterotonico = Boolean.Parse(lista[7].ToString()),
+                equivalente = int.Parse(lista[8].ToString()),
+                referencia_verbete = int.Parse(lista[9].ToString()),
+                referencia_exemplo = lista[10].ToString(),
+                notas_gramatica = lista[11].ToString(),
+                nota_cultura = lista[12].ToString(),
+                acepcao = int.Parse(lista[13].ToString()),
+                heterossemantico = Boolean.Parse(lista[14].ToString()),
+                ref_ex_tr = lista[15].ToString(),
+                Infinitivo = int.Parse(lista[16].ToString())//,
+                //id_conjuga = int.Parse(lista.ElementAt(18))
+                //Definicao = lista[19].ToString()
+            };
+            saida.ChecaOperador(lista[17].ToString());
             return saida;
         }
-         */
+        
     }
 
 }

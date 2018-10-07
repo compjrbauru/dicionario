@@ -15,6 +15,8 @@ namespace dicionario
     {
         ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         CategoriaGramatical CtGr = new CategoriaGramatical();
+        List<CategoriaGramatical> resultado = new List<CategoriaGramatical>();
+        CRUD c = new CRUD();
         public frm_categoriaGramatical()
         {
             InitializeComponent();
@@ -63,9 +65,9 @@ namespace dicionario
             CtGr.sigla = txtSigla.Text;
             CtGr.Definicao = txtDefine.Text;
             if (CtGr.id > 0)
-                conexao.UpdateLine("categoriagram", ClasseGramatical.ToListTabela(false), CtGr.ToListValores(), "id=" + CtGr.id.ToString());
+                c.UpdateLine("categoriagram", ClasseGramatical.ToListTabela(false), CtGr.ToListValores(), "id=" + CtGr.id.ToString());
             else
-                conexao.InsereLinha("categoriagram", ClasseGramatical.ToListTabela(false), CtGr.ToListValores());
+                c.InsereLinha("categoriagram", ClasseGramatical.ToListTabela(false), CtGr.ToListValores());
             LimpaCampos();
             LimpaModel();
         }
@@ -78,7 +80,7 @@ namespace dicionario
                 {
                     if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        conexao.ApagaLinha("categoriagram", "Id=" + CtGr.id.ToString());
+                        c.ApagaLinha("categoriagram", "Id=" + CtGr.id.ToString());
                         LimpaModel();
                         LimpaCampos();
                     }
@@ -90,13 +92,10 @@ namespace dicionario
         {
             if (txtSigla.Text != "")
             {
-                List<string>[] resultado = conexao.Select("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'");
-                if(resultado[0].Count > 0)
+                resultado = CategoriaGramatical.ConverteObject(c.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'"));
+                if(resultado.Count > 0)
                 {
-                    /*List<string> temp = new List<string>();
-                    for (int i = 0; i < 3; i++)
-                        temp.Add(resultado[i].ElementAt<string>(0));*/
-                    CtGr = (CategoriaGramatical)resultado;
+                    
                     MostraModel();
                 }
                 else

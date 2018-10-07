@@ -15,6 +15,8 @@ namespace dicionario
     {
         ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         ClasseGramatical classe = new ClasseGramatical();
+        List<ClasseGramatical> resultado = new List<ClasseGramatical>();
+        CRUD c = new CRUD();
         public frm_CssGr()
         {
             InitializeComponent();
@@ -59,9 +61,9 @@ namespace dicionario
             classe.descricao = txtDesc.Text;
             classe.sigla = txtSigla.Text;
             if (classe.id > 0)
-                conexao.UpdateLine("classegram", ClasseGramatical.ToListTabela(false), classe.ToListValores(), "id=" + classe.id.ToString());
+                c.UpdateLine("classegram", ClasseGramatical.ToListTabela(false), classe.ToListValores(), "id=" + classe.id.ToString());
             else
-                conexao.InsereLinha("classegram", ClasseGramatical.ToListTabela(false), classe.ToListValores());
+                c.InsereLinha("classegram", ClasseGramatical.ToListTabela(false), classe.ToListValores());
             LimpaCampos();
             LimpaModel();
         }
@@ -74,7 +76,7 @@ namespace dicionario
                 {
                     if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        conexao.ApagaLinha("classegram", "Id=" + classe.id.ToString());
+                        c.ApagaLinha("classegram", "Id=" + classe.id.ToString());
                         LimpaModel();
                         LimpaCampos();
                     }
@@ -86,13 +88,13 @@ namespace dicionario
         {
             if (txtSigla.Text != "")
             {
-                List<string>[] resultado = conexao.Select("classegram", ClasseGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'");
-                if (resultado[0].Count > 0)
+                resultado = ClasseGramatical.ConverteObject(c.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'"));
+                if (resultado.Count > 0)
                 {
-                    List<string> temp = new List<string>();
+                    /*List<string> temp = new List<string>();
                     for (int i = 0; i < 3; i++)
                         temp.Add(resultado[i].ElementAt<string>(0));
-                    classe = (ClasseGramatical)temp;
+                    classe = (ClasseGramatical)temp;*/
                     MostraModel();
                 }
                 else

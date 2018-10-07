@@ -38,6 +38,19 @@ namespace dicionario.Model
             val.Add("sigla");
             return val;
         }
+        public static List<ClasseGramatical> ConverteObject(List<object[]> entrada) {
+            List<ClasseGramatical> s = new List<ClasseGramatical>();
+            int lim = entrada.Count;
+            ClasseGramatical pt = new ClasseGramatical();
+            object[] po = new object[ClasseGramatical.ToListTabela(true).Count];
+            for (int i = 0; i < lim; i++)
+            {
+                po = entrada.ElementAt(i);
+                pt = (ClasseGramatical)po;
+                s.Add(pt);
+            }
+            return s;
+        }
         public static explicit operator ClasseGramatical(List<string> lista)
         {
             ClasseGramatical cl = new ClasseGramatical
@@ -46,6 +59,24 @@ namespace dicionario.Model
                 descricao = lista.ElementAt(1),
                 sigla = lista.ElementAt(2)
             };
+            return cl;
+        }
+        public static explicit operator ClasseGramatical(object[] lista)
+        {
+            ClasseGramatical cl = new ClasseGramatical();
+            try
+            {
+                cl.id = int.Parse(lista[0].ToString());
+                cl.descricao = lista[1].ToString();
+                cl.sigla = lista[2].ToString();
+                
+            }
+            catch (IndexOutOfRangeException)
+            {
+                cl.descricao = lista[0].ToString();
+                cl.sigla = lista[1].ToString();
+                
+            }
             return cl;
         }
     }

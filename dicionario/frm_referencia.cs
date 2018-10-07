@@ -15,6 +15,9 @@ namespace dicionario
     {
         ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         Referencia referencia = new Referencia();
+        CRUD c = new CRUD();
+        List<Referencia> resultado = new List<Referencia>();
+        int p = 0;
         public frm_referencia()
         {
             InitializeComponent();
@@ -31,6 +34,7 @@ namespace dicionario
             referencia.ano = 0;
             referencia.autor = "";
             referencia.Cod = -1;
+            txtCod.ReadOnly = false;
         }
         private void MostraModel() {
             txtDesc.Text = referencia.descricao;
@@ -46,43 +50,37 @@ namespace dicionario
         }
         private void btnPesquisa_Click(object sender, EventArgs e)
         {
-            List<string>[] resultado = conexao.Select("referencias", Referencia.ToListTabela(true), "Cod=" + txtCod.Text);
-            if (resultado[0].Count > 0) {
-                //tratar resultado antes de continuar
-                List<string> temp = new List<string>();
-                for (int i = 0; i<4; i++)
-                    temp.Add(resultado[i].ElementAt<string>(0));
-                referencia = (Referencia) temp;
+            resultado = Referencia.ConverteObject(c.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Cod='" + txtCodPSQ.Text + "'"));
+            if (resultado.Count < 1) {
+                MessageBox.Show("Nenhum resultado encontrado.", "Busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            referencia = resultado.First();
+            MostraModel();
+            if (resultado.Count > 1)
+            {
+                btnAnt.Visible = true;
+                btnProx.Visible = true;
+            }
+            p = 0;
+            txtCod.ReadOnly = true;
+        }
+        private void btnAnt_Click (object sender, EventArgs e)
+        {
+            if (p > 0)
+            {
+                referencia = resultado.ElementAt(--p);
                 MostraModel();
-                
-            } else {
-                MessageBox.Show("Nenhum resultado encontrado.", "Busca", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            }
         }
 
-        private void txtCod_Leave(object sender, EventArgs e)
+        private void btnProx_Click (object sender, EventArgs e)
         {
-            if (txtCod.Text != "" && txtCod.ReadOnly == false)
+            if(p < resultado.Count)
             {
-                btnApaga.Enabled = false;
-                btnSalva.Enabled = false;
-                txtAno.Enabled = false;
-                txtAutor.Enabled = false;
-                txtDesc.Enabled = false;
+                referencia = resultado.ElementAt(++p);
+                MostraModel();
             }
-            else {
-                btnApaga.Enabled = true;
-                btnSalva.Enabled = true;
-                txtAno.Enabled = true;
-                txtAutor.Enabled = true;
-                txtDesc.Enabled = true;
-            }
-        }
-        private void TravaCod(object sender, EventArgs e)
-        {
-            if (txtAno.Text != "" || txtAutor.Text != "" || txtDesc.Text != "")
-                txtCod.ReadOnly = true;
-            else
-                txtCod.ReadOnly = false;
         }
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -93,6 +91,7 @@ namespace dicionario
             }
             LimpaCampos();
             LimpaModel();
+            
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
@@ -105,12 +104,17 @@ namespace dicionario
             referencia.descricao = txtDesc.Text;
             referencia.ano = int.Parse(txtAno.Text);
             referencia.autor = txtAutor.Text;
-            if (referencia.Cod > 0)
-                conexao.UpdateLine("referencias", Referencia.ToListTabela(false), referencia.ToListValores(), "Cod=" + referencia.Cod.ToString());
-            else
-                conexao.InsereLinha("referencias", Referencia.ToListTabela(false), referencia.ToListValores());
+            if (referencia.Cod > 0) { 
+                c.UpdateLine("referencias", Referencia.ToListTabela(false), referencia.ToListValores(), "Cod=" + referencia.Cod.ToString());
             LimpaCampos();
-            LimpaModel();
+            LimpaModel(); }
+            else
+            {
+                c.InsereLinha("referencias", Referencia.ToListTabela(false), referencia.ToListValores()); 
+                ///FIXME:o valor da referência é manual?
+                MessageBox.Show("Salvo!");
+            }
+            
         }
 
         private void btnApaga_Click(object sender, EventArgs e)
@@ -121,9 +125,25 @@ namespace dicionario
                 {
                     if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        conexao.ApagaLinha("referencias", "Cod=" + referencia.Cod.ToString());
-                        LimpaModel();
-                        LimpaCampos();
+                        c.ApagaLinha("referencias", "Cod=" + referencia.Cod.ToString());
+                        resultado.RemoveAt(p);
+                        if (resultado.Count > 0)
+                        {
+                            try
+                            {
+                                referencia = resultado.ElementAt(--p);
+                            }
+                            catch (IndexOutOfRangeException)
+                            {
+                                referencia = resultado.ElementAt(++p);
+                            }
+                            MostraModel();
+                        }
+                        else {
+                            LimpaModel();
+                            LimpaCampos();
+                        }
+                        
                     }
                 }
             }

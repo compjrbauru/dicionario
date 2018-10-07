@@ -19,6 +19,7 @@ namespace dicionario
         }
         private ConectaBanco conecta = new ConectaBanco("dicionario", "root", "gamesjoker");
         Usuario usr = new Usuario();
+        CRUD c = new CRUD();
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -102,7 +103,7 @@ namespace dicionario
                 usr.rsocial = txtRSoc.Text;
                 usr.cpf = txtCpf.Text;
                 usr.contato = txtContato.Text;
-                conecta.InsereLinha("usr", Usuario.ToListTabela(),usr.ToListValores());
+                c.InsereLinha("usr", Usuario.ToListTabela(),usr.ToListValores());
                 LimpaCampo();
             }
         }
@@ -121,17 +122,20 @@ namespace dicionario
         {
             if (MessageBox.Show("Tem certeza?", "Confirmação", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
-                conecta.ApagaLinha("usr", "usr='" + txtusr.Text+"'");
+                c.ApagaLinha("usr", "usr='" + txtusr.Text+"'");
             }
         }
 
         private void txtBuscaCpf_Click(object sender, EventArgs e)
         {
-            List<string>[] resultado = conecta.Select("usr", Usuario.ToListTabela(),"cpf='"+txtCpf.Text+"'");
-            if(resultado[0].Count > 0)
+            List<Usuario> resultado = Usuario.ConverteObject(c.SelecionarTabela("usr", Usuario.ToListTabela(),"cpf='"+txtCpf.Text+"'"));
+            if (resultado.Count > 0)
             {
-
+                usr = resultado.First();
+                MostraModel();
             }
+            else
+                MessageBox.Show("Nenhum usuário encontrado.");
         }
 
         private void btnMostraSenha_MouseDown(object sender, MouseEventArgs e)
@@ -148,11 +152,14 @@ namespace dicionario
         {
             if (txtusr.Text != usr.usr || txtpass.Text != usr.pass || txtEmail.Text != usr.email || converteAutorizacao() != usr.permissao || txtCpf.Text != usr.cpf)
             {
-                if (MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
-                    return;
+                if (MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    LimpaCampo();
+                    LimpaModel();
+                }
+        
             }
-            LimpaCampo();
-            LimpaModel();
+            
         }
     }
 }
