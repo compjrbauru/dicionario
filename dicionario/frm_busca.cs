@@ -80,20 +80,19 @@ namespace dicionario
                 catch (NullReferenceException) {
                     resultadosPalavra = new List<Palavra>();
                 }
-                /*int lim = lista.Count;
-                Palavra pt = new Palavra();
-                object[] po = new object[Palavra.ToListTabela(true).Count];
-                for (int i = 0; i < lim; i++)
+                List<string> cabecalhos = new List<string>();
+                Palavra temPal = new Palavra();
+                resultadosPalavra = AgrupaResultados(Palavra.ConverteObject(lista), out cabecalhos, out int[] divisores);
+                int c = 0, i;
+                foreach (string conjunto in cabecalhos)
                 {
-                    po = lista.ElementAt(i);
-                    pt = (Palavra)po;
-                    searchResultsListBox.Items.Add(pt.lema);
-                    resultadosPalavra.Add(pt);
-                }*/
-                resultadosPalavra = Palavra.ConverteObject(lista);
-                foreach (Palavra item in resultadosPalavra)
-                {
-                    searchResultsListBox.Items.Add(item.lema);
+                    searchResultsListBox.Items.Add(conjunto);
+                    for (i=0; i<divisores[c]; i++) {
+                        temPal = resultadosPalavra.ElementAt(i);
+                        filtro = temPal.lema + " Entrada " + temPal.acepcao.ToString();
+                        searchResultsListBox.Items.Add(filtro);
+                    }
+                    c++;
                 }
                 searchResultsListBox.Enabled = true;
             }
@@ -108,7 +107,31 @@ namespace dicionario
         private void searchResultsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
-
+        private List<Palavra> AgrupaResultados(List<Palavra> res, out List<string> cnj, out int[] intervalos)
+        {
+            List<Palavra> s = new List<Palavra>();
+            List<Palavra> temp = new List<Palavra>();
+            List<string> grupos = new List<string>();
+            int[] pos = new int[res.Count];
+            int i = 0;
+            string agrupador;
+            Palavra t = new Palavra();
+            while(res.Count > 0)
+            {
+                t = res.First();
+                agrupador = t.lema;
+                temp = res.FindAll(p => p.lema == agrupador);
+                temp.OrderBy(p => p.acepcao);
+                s.AddRange(temp);
+                res.RemoveAll(p => p.lema == agrupador);
+                grupos.Add(agrupador);
+                pos[i++] = temp.Count;
+                temp.Clear();
+            }
+            cnj = grupos;
+            intervalos = pos;
+            return s;
+        }
         private void searchBox_TextChanged(object sender, EventArgs e)
         {
         }
@@ -153,11 +176,40 @@ namespace dicionario
         }
         private void searchResultsListBox_DoubleClick(object sender, EventArgs e)
         {
-            Palavra resultado  = resultadosPalavra.ElementAt(searchResultsListBox.SelectedIndex);
+            IEnumerable<string> slist = searchResultsListBox.Items.Cast<string>();
+            string s = slist.ElementAt(searchResultsListBox.SelectedIndex);
+            Palavra resultado = new Palavra();
             List<Palavra> r = new List<Palavra>();
-            r.Add(resultado);
+            if (s.Contains("Entrada")){
+                string entra = PegaInformacoes(s, out int a);
+                r.Add(resultadosPalavra.Find(p => p.lema == entra && p.acepcao == a));
+            } else {
+                r.AddRange(resultadosPalavra.FindAll(p => p.lema == s));
+            }
+            //r.Add(resultado);
             frm_visualizaverbete _Visualizaverbete = new frm_visualizaverbete(r);
             _Visualizaverbete.ShowDialog();
+        }
+        private string PegaInformacoes (string s, out int nAcepcaoSel)
+        {
+            string retorno = "";
+            int ac = 2, elementos;
+            string[] lemas = s.Split(' ');
+            bool encontrado = false;
+            elementos = lemas.Count();
+            do
+            {
+                encontrado = int.TryParse(lemas[ac], out int temp);
+                if (!encontrado) ac++;
+            } while (!encontrado || ac >= elementos);
+            ac--;
+            for (int i = 0; i < ac; i++)
+            {
+                retorno += (lemas[i] + " ");
+            }
+            retorno = retorno.Remove(retorno.Length - 1);
+            nAcepcaoSel = int.Parse(lemas[++ac]);
+            return retorno;
         }
     }
 }
