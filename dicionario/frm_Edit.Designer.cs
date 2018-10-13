@@ -38,7 +38,7 @@
             this.txtAcepcao = new System.Windows.Forms.TextBox();
             this.ComboGenero = new System.Windows.Forms.ComboBox();
             this.ComboIdioma = new System.Windows.Forms.ComboBox();
-            this.ComboCatGram = new System.Windows.Forms.ComboBox();
+            this.ComboClasseGram = new System.Windows.Forms.ComboBox();
             this.comboFiltroIdiomas = new System.Windows.Forms.ComboBox();
             this.label_palavra = new System.Windows.Forms.Label();
             this.label_ref = new System.Windows.Forms.Label();
@@ -977,17 +977,17 @@
             this.ComboIdioma.Size = new System.Drawing.Size(137, 28);
             this.ComboIdioma.TabIndex = 3;
             // 
-            // ComboCatGram
+            // ComboClasseGram
             // 
-            this.ComboCatGram.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboCatGram.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboCatGram.FormattingEnabled = true;
-            this.ComboCatGram.Location = new System.Drawing.Point(487, 152);
-            this.ComboCatGram.Name = "ComboCatGram";
-            this.ComboCatGram.Size = new System.Drawing.Size(159, 28);
-            this.ComboCatGram.TabIndex = 4;
-            this.ComboCatGram.SelectedIndexChanged += new System.EventHandler(this.ComboCatGram_SelectedIndexChanged);
-            this.ComboCatGram.TextUpdate += new System.EventHandler(this.ComboCatGram_TextUpdate);
+            this.ComboClasseGram.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ComboClasseGram.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboClasseGram.FormattingEnabled = true;
+            this.ComboClasseGram.Location = new System.Drawing.Point(487, 152);
+            this.ComboClasseGram.Name = "ComboClasseGram";
+            this.ComboClasseGram.Size = new System.Drawing.Size(159, 28);
+            this.ComboClasseGram.TabIndex = 4;
+            this.ComboClasseGram.SelectedIndexChanged += new System.EventHandler(this.ComboClasseGram_SelectedIndexChanged);
+            this.ComboClasseGram.TextUpdate += new System.EventHandler(this.ComboClasseGram_TextUpdate);
             // 
             // comboFiltroIdiomas
             // 
@@ -1070,9 +1070,9 @@
             this.label_catgrama.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label_catgrama.Location = new System.Drawing.Point(484, 131);
             this.label_catgrama.Name = "label_catgrama";
-            this.label_catgrama.Size = new System.Drawing.Size(148, 18);
+            this.label_catgrama.Size = new System.Drawing.Size(130, 18);
             this.label_catgrama.TabIndex = 34;
-            this.label_catgrama.Text = "Categoria Gramatical";
+            this.label_catgrama.Text = "Classe Gramatical";
             // 
             // txtEquiv
             // 
@@ -1694,7 +1694,7 @@
             this.Controls.Add(this.label_ref);
             this.Controls.Add(this.label_palavra);
             this.Controls.Add(this.comboFiltroIdiomas);
-            this.Controls.Add(this.ComboCatGram);
+            this.Controls.Add(this.ComboClasseGram);
             this.Controls.Add(this.ComboIdioma);
             this.Controls.Add(this.ComboGenero);
             this.Controls.Add(this.txtAcepcao);
@@ -1727,7 +1727,7 @@
         private System.Windows.Forms.TextBox txtAcepcao;
         private System.Windows.Forms.ComboBox ComboGenero;
         private System.Windows.Forms.ComboBox ComboIdioma;
-        private System.Windows.Forms.ComboBox ComboCatGram;
+        private System.Windows.Forms.ComboBox ComboClasseGram;
         private System.Windows.Forms.ComboBox comboFiltroIdiomas;
         private System.Windows.Forms.Label label_palavra;
         private System.Windows.Forms.Label label_ref;

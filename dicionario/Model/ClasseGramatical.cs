@@ -11,6 +11,7 @@ namespace dicionario.Model
         public int id { get; set; }
         public string descricao { get; set; }
         public string sigla { get; set; }
+        public string Definicao { get; set; }
 
         public override string ToString()
         {
@@ -25,6 +26,7 @@ namespace dicionario.Model
                 val.Add(id.ToString());
             val.Add(descricao);
             val.Add(sigla);
+            val.Add(Definicao);
             return val;
         }
 
@@ -36,6 +38,7 @@ namespace dicionario.Model
                 val.Add("id");
             val.Add("descricao");
             val.Add("sigla");
+            val.Add("Definicao");
             return val;
         }
         public static List<ClasseGramatical> ConverteObject(List<object[]> entrada) {
@@ -57,7 +60,8 @@ namespace dicionario.Model
             {
                 id = int.Parse(lista.ElementAt(0)),
                 descricao = lista.ElementAt(1),
-                sigla = lista.ElementAt(2)
+                sigla = lista.ElementAt(2),
+                Definicao = lista.ElementAt(3)
             };
             return cl;
         }
@@ -69,13 +73,14 @@ namespace dicionario.Model
                 cl.id = int.Parse(lista[0].ToString());
                 cl.descricao = lista[1].ToString();
                 cl.sigla = lista[2].ToString();
-                
+                cl.Definicao = lista[3].ToString();
             }
             catch (IndexOutOfRangeException)
             {
                 cl.descricao = lista[0].ToString();
                 cl.sigla = lista[1].ToString();
-                
+                cl.Definicao = lista[2].ToString();
+
             }
             return cl;
         }

@@ -27,9 +27,9 @@ namespace dicionario
             ConectaBanco bd = new ConectaBanco("dicionario", "root", "gamesjoker");
             CRUD operaBd = new CRUD();
             List<Rubrica> resRubrica = new List<Rubrica>();
-            List<CategoriaGramatical> resCg = new List<CategoriaGramatical>();
+            List<ClasseGramatical> resCg = new List<ClasseGramatical>();
             List<Referencia> resRefer = new List<Referencia>();
-            CategoriaGramatical cgselect;
+            ClasseGramatical cgselect;
             string filtro;
             List<int> v1 = new List<int>();
             List<int> v2 = new List<int>();
@@ -42,9 +42,9 @@ namespace dicionario
 
             foreach (Palavra p in entrada)
             {
-                if (v1.FindIndex(val => val == p.Id_catGram) < 0)
+                if (v1.FindIndex(val => val == p.Id_classeGram) < 0)
                 {
-                    v1.Add(p.Id_catGram);
+                    v1.Add(p.Id_classeGram);
                 }
                 if (v2.FindIndex(val => val == p.rubrica) < 0)
                 {
@@ -56,7 +56,7 @@ namespace dicionario
                 }
             }
             filtro = montaFiltro("id", v1); //filtrando cgram
-            resCg = CategoriaGramatical.ConverteObject(operaBd.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), filtro));
+            resCg = ClasseGramatical.ConverteObject(operaBd.SelecionarTabela("categoriagram", ClasseGramatical.ToListTabela(true), filtro));
             filtro = montaFiltro("id", v2); //filtrando rubrica
             resRubrica = Rubrica.ConverteObject(operaBd.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), filtro));
             filtro = montaFiltro("Cod", v3);
@@ -68,7 +68,7 @@ namespace dicionario
                 s.Add(p.ref_ex_tr);
                 exemplos = criaNode(s);
 
-                cgselect = resCg.Find(icg => icg.id == p.Id_catGram);
+                cgselect = resCg.Find(icg => icg.id == p.Id_classeGram);
                 //vamos agora juntar os outros valores pertinentes à acepção ou verbete selecionado
                 s = criaListaValores(p, cgselect, resRefer.Find(iref => iref.Cod == p.referencia_verbete));
                 nf = criaTreeNodes(s);
@@ -105,7 +105,7 @@ namespace dicionario
             }
             return nd;
         }
-        private List<string> criaListaValores(Palavra p, CategoriaGramatical cg, Referencia r)
+        private List<string> criaListaValores(Palavra p, ClasseGramatical cg, Referencia r)
         {
             List<string> sai = new List<string>
             {
@@ -117,7 +117,7 @@ namespace dicionario
             };
             return sai;
         }
-        private List<string> criaListaTitulos(Palavra p, CategoriaGramatical cg, Rubrica r)
+        private List<string> criaListaTitulos(Palavra p, ClasseGramatical cg, Rubrica r)
         {
             List<string> sai = new List<string>
             {

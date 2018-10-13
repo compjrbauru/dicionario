@@ -20,14 +20,16 @@ namespace dicionario
         private CRUD crud = new CRUD();
         private Palavra p = new Palavra();
         private Rubrica rb = new Rubrica();
-        private CategoriaGramatical ctg = new CategoriaGramatical();
+        private ClasseGramatical clg = new ClasseGramatical();
         private Referencia refere = new Referencia();
         private List<object[]> resultados;
         private List<Palavra> resPalavra = new List<Palavra>();
         private int ipal = 0;
         private List<Rubrica> resRubrica = new List<Rubrica>();
-        private List<CategoriaGramatical> resCtg = new List<CategoriaGramatical>();
+        private List<ClasseGramatical> resClg = new List<ClasseGramatical>();
         private List<Referencia> resRef = new List<Referencia>();
+        private List<CategoriaGramatical> resCtg;
+        private CategoriaGramatical ctg;
 
         private void EditForm_Load(object sender, EventArgs e)
         {
@@ -43,8 +45,8 @@ namespace dicionario
             txtpalavra.Text = "";
             comboRef.SelectedIndex = -1;
             comboRef.Text = "";
-            ComboCatGram.SelectedIndex = -1;
-            ComboCatGram.Text = "";
+            ComboClasseGram.SelectedIndex = -1;
+            ComboClasseGram.Text = "";
             ComboGenero.SelectedIndex = -1;
             ComboGenero.Text = "";
             ComboIdioma.SelectedIndex = -1;
@@ -54,13 +56,13 @@ namespace dicionario
             txtExemploT.Text = "";
             txtExemplo.Text = "";
             textCultura.Text = "";
-            ComboGenero.SelectedIndex = 2;
         }
         private void LimpaModel()
         {
             p.id = -1;
             p.lema = "";
-            p.Id_catGram = 0;
+            //p.Id_catGram = 0;
+            p.Id_classeGram = 0;
             p.Genero = "N";
             p.rubrica = 0;
             p.referencia_verbete = 0;
@@ -82,12 +84,12 @@ namespace dicionario
                     ComboIdioma.SelectedIndex = 1;
                 }
             }
-            if (p.Id_catGram > 0)
+            if (p.Id_classeGram > 0)
             {
-                resultados = crud.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "Id=" + p.Id_catGram.ToString());
-                resCtg = CategoriaGramatical.ConverteObject(resultados);
-                ctg = resCtg.First();
-                ComboCatGram.Text = ctg.descricao;
+                resultados = crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "Id=" + p.Id_classeGram.ToString());
+                resClg = ClasseGramatical.ConverteObject(resultados);
+                clg = resClg.First();
+                ComboClasseGram.Text = clg.descricao;
             }
             if (p.referencia_verbete > 0)
             {
@@ -360,10 +362,10 @@ namespace dicionario
         private void timerCtg_Tick(object sender, EventArgs e)
         {
             string pesquisa;
-            pesquisa = ComboCatGram.Text;
-            if (ComboCatGram.Items.Count > 0)
+            pesquisa = ComboClasseGram.Text;
+            if (ComboClasseGram.Items.Count > 0)
             {
-                ComboCatGram.Items.Clear();
+                ComboClasseGram.Items.Clear();
             }
             if (pesquisa.Length <= 3)
             {
@@ -375,7 +377,7 @@ namespace dicionario
                 }
                 foreach (string o in d)
                 {
-                    ComboCatGram.Items.Add(o);
+                    ComboClasseGram.Items.Add(o);
                 }
             }
 
@@ -384,46 +386,42 @@ namespace dicionario
             timerCtg.Enabled = false; //prevenindo de floodar a combo
         }
 
-        private void ComboCatGram_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ComboCatGram.Text != "") {
-                if(ComboCatGram.Text.Length <= 3)
-                    ctg = resCtg.Find(ctg => ctg.sigla == ComboCatGram.Text);
-                else
-                    ctg = resCtg.ElementAt(resCtg.FindIndex(ctg => ctg.descricao == ComboCatGram.Text));
-                p.Id_catGram = ctg.id;
-            }
-                 //https://docs.microsoft.com/pt-br/dotnet/api/system.predicate-1?redirectedfrom=MSDN&view=netframework-4.7.2
-        }
-
         private void ComboClasseGram_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*if (ComboClasseGram.Text != "")
-                p.Id_classeGram = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(ComboClasseGram.Text)));*/
+            if (ComboClasseGram.Text != "")
+            {
+                if(ComboClasseGram.Text.Length <= 3 )
+                    clg = resClg.Find(clg => clg.sigla == ComboClasseGram.Text);
+                else
+                    clg = resClg.Find(clg => clg.descricao == ComboClasseGram.Text);
+            }
+            p.Id_classeGram = clg.id;
         }
 
         private void ComboClasseGram_TextUpdate(object sender, EventArgs e)
         {
-            /*if (timerClg.Enabled == true) { timerClg.Enabled = false; timerClg.Enabled = true; } else timerClg.Enabled = true;*/
+            if (timerClg.Enabled == true) { timerClg.Enabled = false; timerClg.Enabled = true; } else timerClg.Enabled = true;
         }
 
         private void timerClg_Tick(object sender, EventArgs e)
         {
             string pesquisa;
-            int i = 0;
-            pesquisa = ComboGenero.Text;
-            if (ComboGenero.Items.Count > 0)
+            pesquisa = ComboClasseGram.Text;
+            if (ComboClasseGram.Items.Count > 0)
             {
-                ComboGenero.Items.Clear();
+                ComboClasseGram.Items.Clear();
             }
             if (pesquisa.Length <= 3)
             {
-                resultados = crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10");
-                string[] siglas = new string[10];
-                resultados[1].CopyTo(siglas, 0);
-                while (siglas[i] != null && i < 10)
+                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                List<string> d = new List<string>();
+                foreach (ClasseGramatical c in resClg)
                 {
-                    ComboGenero.Items.Add(siglas[i++]);
+                    d.Add(c.descricao);
+                }
+                foreach (string s in d)
+                {
+                    ComboClasseGram.Items.Add(s);
                 }
             }
 

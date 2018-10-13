@@ -36,6 +36,8 @@
             this.txtDesc = new System.Windows.Forms.TextBox();
             this.btnNovo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtDefinicao = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnPesquisa
@@ -52,7 +54,7 @@
             // btnSalva
             // 
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalva.Location = new System.Drawing.Point(492, 67);
+            this.btnSalva.Location = new System.Drawing.Point(534, 67);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(75, 30);
             this.btnSalva.TabIndex = 16;
@@ -63,7 +65,7 @@
             // btnApaga
             // 
             this.btnApaga.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApaga.Location = new System.Drawing.Point(492, 103);
+            this.btnApaga.Location = new System.Drawing.Point(534, 103);
             this.btnApaga.Name = "btnApaga";
             this.btnApaga.Size = new System.Drawing.Size(75, 38);
             this.btnApaga.TabIndex = 15;
@@ -96,13 +98,13 @@
             this.txtDesc.Location = new System.Drawing.Point(31, 115);
             this.txtDesc.MaxLength = 45;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(365, 26);
+            this.txtDesc.Size = new System.Drawing.Size(449, 26);
             this.txtDesc.TabIndex = 12;
             // 
             // btnNovo
             // 
             this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNovo.Location = new System.Drawing.Point(492, 30);
+            this.btnNovo.Location = new System.Drawing.Point(534, 30);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(75, 31);
             this.btnNovo.TabIndex = 11;
@@ -120,11 +122,32 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Descrição Classe Gramatical";
             // 
+            // txtDefinicao
+            // 
+            this.txtDefinicao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDefinicao.Location = new System.Drawing.Point(31, 172);
+            this.txtDefinicao.Multiline = true;
+            this.txtDefinicao.Name = "txtDefinicao";
+            this.txtDefinicao.Size = new System.Drawing.Size(449, 201);
+            this.txtDefinicao.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(27, 149);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 20);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Definição";
+            // 
             // frm_CssGr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 176);
+            this.ClientSize = new System.Drawing.Size(644, 385);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtDefinicao);
             this.Controls.Add(this.btnPesquisa);
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.btnApaga);
@@ -150,6 +173,8 @@
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtDefinicao;
+        private System.Windows.Forms.Label label3;
     }
 }
 

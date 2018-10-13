@@ -13,7 +13,6 @@ namespace dicionario
 {
     public partial class frm_CssGr : Form
     {
-        ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         ClasseGramatical classe = new ClasseGramatical();
         List<ClasseGramatical> resultado = new List<ClasseGramatical>();
         CRUD c = new CRUD();
@@ -22,12 +21,13 @@ namespace dicionario
             InitializeComponent();
         }
 
-        private void LimpaCampos() { txtDesc.Text = ""; txtSigla.Text = ""; }
+        private void LimpaCampos() { txtDesc.Text = ""; txtSigla.Text = ""; txtDefinicao.Text = ""; }
         private void LimpaModel()
         {
             classe.descricao = "";
             classe.id = -1;
             classe.sigla = "";
+            classe.Definicao = "";
         }
         private bool verificaCampos()
         {
@@ -60,6 +60,7 @@ namespace dicionario
             }
             classe.descricao = txtDesc.Text;
             classe.sigla = txtSigla.Text;
+            classe.Definicao = txtDefinicao.Text;
             if (classe.id > 0)
                 c.UpdateLine("classegram", ClasseGramatical.ToListTabela(false), classe.ToListValores(), "id=" + classe.id.ToString());
             else

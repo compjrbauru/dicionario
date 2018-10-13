@@ -10,8 +10,8 @@ namespace dicionario.Model
     {
         public int id { get; set; }
         public string lema { get; set; }
-	    public int Id_catGram { get; set; }
-	    
+	    //public int Id_catGram { get; set; }
+	    public int Id_classeGram { get; set; }
         public string idioma { get; set; }
         public int rubrica { get; set; }
         public bool heterogenerico { get; set; }
@@ -30,20 +30,14 @@ namespace dicionario.Model
         public string Genero { get; set; }
         public string Definicao { get; set; }
 
-        public override string ToString()
-        {
-            string expressao = "lema=" + lema + "',idioma='" + idioma + "',heterogenerico='" + heterogenerico + "',heterotonico='" + heterotonico + "',equivalente='" + equivalente + "',referencia_verbete='" + referencia_verbete + "',referencia_exemplo='" + referencia_exemplo + "',notas_gramatica='" + notas_gramatica + "',notas_cultura='" + nota_cultura + "',acepcao='" + acepcao + "'";
-            return expressao;
-        }
-
         public List<string> ToListValores(bool incluiId = false)
         {
             List<string> val = new List<string>();
             if (incluiId)
                 val.Add(id.ToString());
             val.Add(lema);
-	        val.Add(Id_catGram.ToString());
-	        
+            //val.Add(Id_catGram.ToString());
+            val.Add(Id_classeGram.ToString());
             val.Add(idioma);
             val.Add(rubrica.ToString());
             val.Add(heterogenerico.ToString());
@@ -132,7 +126,8 @@ namespace dicionario.Model
             {
                 id = int.Parse(lista.ElementAt(0)),
                 lema = lista.ElementAt(1),
-                Id_catGram = int.Parse(lista.ElementAt(2)),
+                //Id_catGram = int.Parse(lista.ElementAt(2)),
+                Id_classeGram = int.Parse(lista.ElementAt(2)),
                 Genero = lista.ElementAt(18),
                 idioma = lista.ElementAt(4),
                 rubrica = int.Parse(lista.ElementAt(5)),
@@ -158,7 +153,8 @@ namespace dicionario.Model
             Palavra saida = new Palavra {
                 id = int.Parse(lista[0].ToString()),
                 lema = lista[1].ToString(),
-                Id_catGram = int.Parse(lista[2].ToString()),
+                //Id_catGram = int.Parse(lista[2].ToString()),
+                Id_classeGram = int.Parse(lista[2].ToString()),
                 Genero = lista[18].ToString(),
                 idioma = lista[4].ToString(),
                 rubrica = int.Parse(lista[5].ToString()),
