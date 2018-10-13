@@ -28,6 +28,7 @@ namespace dicionario
         private List<Rubrica> resRubrica = new List<Rubrica>();
         private List<ClasseGramatical> resClg = new List<ClasseGramatical>();
         private List<Referencia> resRef = new List<Referencia>();
+        private List<Palavra> resEq = new List<Palavra>();
         private List<CategoriaGramatical> resCtg;
         private CategoriaGramatical ctg;
 
@@ -37,7 +38,7 @@ namespace dicionario
         private void LimpaCampos()
         {
             txtAcepcao.Text = "";
-            txtEquiv.Text = "";
+            comboEquiv.Text = "";
             txtGramatica.Text = "";
             chkHeterogenerico.Checked = false;
             chkHeterotonico.Checked = false;
@@ -114,12 +115,12 @@ namespace dicionario
             txtGramatica.Text = p.notas_gramatica;
             if (p.equivalente_pluriv != "{-1}")
             {
-                txtEquiv.Visible = false;
+                comboEquiv.Visible = false;
                 btnEquiv.Visible = true;
             }
             else
             {
-                txtEquiv.Visible = true;
+                comboEquiv.Visible = true;
                 btnEquiv.Visible = false;
             }
             switch (p.Genero) {
@@ -394,8 +395,8 @@ namespace dicionario
                     clg = resClg.Find(clg => clg.sigla == ComboClasseGram.Text);
                 else
                     clg = resClg.Find(clg => clg.descricao == ComboClasseGram.Text);
+                p.Id_classeGram = clg.id;
             }
-            p.Id_classeGram = clg.id;
         }
 
         private void ComboClasseGram_TextUpdate(object sender, EventArgs e)
@@ -414,14 +415,9 @@ namespace dicionario
             if (pesquisa.Length <= 3)
             {
                 resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
-                List<string> d = new List<string>();
                 foreach (ClasseGramatical c in resClg)
                 {
-                    d.Add(c.descricao);
-                }
-                foreach (string s in d)
-                {
-                    ComboClasseGram.Items.Add(s);
+                    ComboClasseGram.Items.Add(c.descricao);
                 }
             }
 
@@ -455,6 +451,34 @@ namespace dicionario
             /*else
                 resultados = crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
             timerRub.Enabled = false; //prevenindo de floodar a combo
+        }
+
+        private void timerEquiv_Tick(object sender, EventArgs e)
+        {
+            string pesquisa = comboEquiv.Text;
+            if (comboEquiv.Items.Count > 0)
+                comboEquiv.Items.Clear();
+            resEq = Palavra.ConverteObject(crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema LIKE '" + pesquisa + "%'", "LIMIT 20"));
+            foreach (Palavra peq in resEq)
+            {
+                pesquisa = peq.lema + " Acepção " + peq.acepcao.ToString();
+                comboEquiv.Items.Add(pesquisa);
+            }
+            timerEquiv.Enabled = false;
+        }
+
+        private void comboEquiv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboEquiv.Text != "")
+            {
+                Palavra Eq = resEq.ElementAt(comboEquiv.SelectedIndex);
+                p.equivalente = Eq.id;
+            }
+        }
+
+        private void comboEquiv_TextUpdate(object sender, EventArgs e)
+        {
+            if (timerEquiv.Enabled == true) { timerEquiv.Enabled = false; timerEquiv.Enabled = true; } else timerEquiv.Enabled = true;
         }
 
         private void ComboRubrica_SelectedIndexChanged(object sender, EventArgs e)
@@ -519,12 +543,12 @@ namespace dicionario
             if (txtpalavra.Text.Contains(' ') && txtpalavra.Text.Last()!= ' ')
             {
                 btnEquiv.Visible = true;
-                txtEquiv.Visible = false;
+                comboEquiv.Visible = false;
             }
             else
             {
                 btnEquiv.Visible = false;
-                txtEquiv.Visible = true;
+                comboEquiv.Visible = true;
             }
         }
 
@@ -597,5 +621,7 @@ namespace dicionario
                 MostraDados();
             }
         }
+
+
     }
 }

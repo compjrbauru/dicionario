@@ -47,7 +47,6 @@
             this.label_acep = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label_catgrama = new System.Windows.Forms.Label();
-            this.txtEquiv = new System.Windows.Forms.TextBox();
             this.lblGenero = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNovo = new System.Windows.Forms.Button();
@@ -88,6 +87,8 @@
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnProx = new System.Windows.Forms.Button();
             this.btnUltimo = new System.Windows.Forms.Button();
+            this.comboEquiv = new System.Windows.Forms.ComboBox();
+            this.timerEquiv = new System.Windows.Forms.Timer(this.components);
             this.menu_barra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).BeginInit();
             this.SuspendLayout();
@@ -1074,212 +1075,6 @@
             this.label_catgrama.TabIndex = 34;
             this.label_catgrama.Text = "Classe Gramatical";
             // 
-            // txtEquiv
-            // 
-            this.txtEquiv.AutoCompleteCustomSource.AddRange(new string[] {
-            "Country",
-            "Afghanistan",
-            "Albania",
-            "Algeria",
-            "Andorra",
-            "Angola",
-            "Antigua and Barbuda",
-            "Argentina",
-            "Armenia",
-            "Australia",
-            "Austria",
-            "Azerbaijan",
-            "Bahamas",
-            "Bahrain",
-            "Bangladesh",
-            "Barbados",
-            "Belarus",
-            "Belgium",
-            "Belize",
-            "Benin",
-            "Bhutan",
-            "Bolivia",
-            "Bosnia and Herzegovina",
-            "Botswana",
-            "Brazil",
-            "Brunei Darussalam",
-            "Bulgaria",
-            "Burkina Faso",
-            "Burundi",
-            "Cabo Verde",
-            "Cambodia",
-            "Cameroon",
-            "Canada",
-            "Central African Republic",
-            "Chad",
-            "Chile",
-            "China",
-            "Colombia",
-            "Comoros",
-            "Congo",
-            "Costa Rica",
-            "Côte d\'Ivoire",
-            "Croatia",
-            "Cuba",
-            "Cyprus",
-            "Czech Republic",
-            "Democratic People\'s Republic of Korea (North Korea)",
-            "Democratic Republic of the Cong",
-            "Denmark",
-            "Djibouti",
-            "Dominica",
-            "Dominican Republic",
-            "Ecuador",
-            "Egypt",
-            "El Salvador",
-            "Equatorial Guinea",
-            "Eritrea",
-            "Estonia",
-            "Ethiopia",
-            "Fiji",
-            "Finland",
-            "France",
-            "Gabon",
-            "Gambia",
-            "Georgia",
-            "Germany",
-            "Ghana",
-            "Greece",
-            "Grenada",
-            "Guatemala",
-            "Guinea",
-            "Guinea-Bissau",
-            "Guyana",
-            "Haiti",
-            "Honduras",
-            "Hungary",
-            "Iceland",
-            "India",
-            "Indonesia",
-            "Iran",
-            "Iraq",
-            "Ireland",
-            "Israel",
-            "Italy",
-            "Jamaica",
-            "Japan",
-            "Jordan",
-            "Kazakhstan",
-            "Kenya",
-            "Kiribati",
-            "Kuwait",
-            "Kyrgyzstan",
-            "Lao People\'s Democratic Republic (Laos)",
-            "Latvia",
-            "Lebanon",
-            "Lesotho",
-            "Liberia",
-            "Libya",
-            "Liechtenstein",
-            "Lithuania",
-            "Luxembourg",
-            "Macedonia",
-            "Madagascar",
-            "Malawi",
-            "Malaysia",
-            "Maldives",
-            "Mali",
-            "Malta",
-            "Marshall Islands",
-            "Mauritania",
-            "Mauritius",
-            "Mexico",
-            "Micronesia (Federated States of)",
-            "Monaco",
-            "Mongolia",
-            "Montenegro",
-            "Morocco",
-            "Mozambique",
-            "Myanmar",
-            "Namibia",
-            "Nauru",
-            "Nepal",
-            "Netherlands",
-            "New Zealand",
-            "Nicaragua",
-            "Niger",
-            "Nigeria",
-            "Norway",
-            "Oman",
-            "Pakistan",
-            "Palau",
-            "Panama",
-            "Papua New Guinea",
-            "Paraguay",
-            "Peru",
-            "Philippines",
-            "Poland",
-            "Portugal",
-            "Qatar",
-            "Republic of Korea (South Korea)",
-            "Republic of Moldova",
-            "Romania",
-            "Russian Federation",
-            "Rwanda",
-            "Saint Kitts and Nevis",
-            "Saint Lucia",
-            "Saint Vincent and the Grenadines",
-            "Samoa",
-            "San Marino",
-            "Sao Tome and Principe",
-            "Saudi Arabia",
-            "Senegal",
-            "Serbia",
-            "Seychelles",
-            "Sierra Leone",
-            "Singapore",
-            "Slovakia",
-            "Slovenia",
-            "Solomon Islands",
-            "Somalia",
-            "South Africa",
-            "South Sudan",
-            "Spain",
-            "Sri Lanka",
-            "Sudan",
-            "Suriname",
-            "Swaziland",
-            "Sweden",
-            "Switzerland",
-            "Syrian Arab Republic",
-            "Tajikistan",
-            "Thailand",
-            "Timor-Leste",
-            "Togo",
-            "Tonga",
-            "Trinidad and Tobago",
-            "Tunisia",
-            "Turkey",
-            "Turkmenistan",
-            "Tuvalu",
-            "Uganda",
-            "Ukraine",
-            "United Arab Emirates",
-            "United Kingdom of Great Britain and Northern Ireland",
-            "United Republic of Tanzania",
-            "United States of America",
-            "Uruguay",
-            "Uzbekistan",
-            "Vanuatu",
-            "Venezuela",
-            "Vietnam",
-            "Yemen",
-            "Zambia",
-            "Zimbabwe"});
-            this.txtEquiv.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtEquiv.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtEquiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEquiv.Location = new System.Drawing.Point(45, 341);
-            this.txtEquiv.Multiline = true;
-            this.txtEquiv.Name = "txtEquiv";
-            this.txtEquiv.Size = new System.Drawing.Size(179, 28);
-            this.txtEquiv.TabIndex = 7;
-            // 
             // lblGenero
             // 
             this.lblGenero.AutoSize = true;
@@ -1317,7 +1112,7 @@
             this.ComboRubrica.FormattingEnabled = true;
             this.ComboRubrica.Location = new System.Drawing.Point(436, 400);
             this.ComboRubrica.Name = "ComboRubrica";
-            this.ComboRubrica.Size = new System.Drawing.Size(179, 28);
+            this.ComboRubrica.Size = new System.Drawing.Size(375, 28);
             this.ComboRubrica.TabIndex = 9;
             this.ComboRubrica.SelectedIndexChanged += new System.EventHandler(this.ComboRubrica_SelectedIndexChanged);
             this.ComboRubrica.TextUpdate += new System.EventHandler(this.ComboRubrica_TextUpdate);
@@ -1655,11 +1450,28 @@
             this.btnUltimo.UseVisualStyleBackColor = true;
             this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
             // 
+            // comboEquiv
+            // 
+            this.comboEquiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboEquiv.FormattingEnabled = true;
+            this.comboEquiv.Location = new System.Drawing.Point(45, 341);
+            this.comboEquiv.Name = "comboEquiv";
+            this.comboEquiv.Size = new System.Drawing.Size(228, 28);
+            this.comboEquiv.TabIndex = 64;
+            this.comboEquiv.SelectedIndexChanged += new System.EventHandler(this.comboEquiv_SelectedIndexChanged);
+            this.comboEquiv.TextUpdate += new System.EventHandler(this.comboEquiv_TextUpdate);
+            // 
+            // timerEquiv
+            // 
+            this.timerEquiv.Interval = 700;
+            this.timerEquiv.Tick += new System.EventHandler(this.timerEquiv_Tick);
+            // 
             // frm_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.comboEquiv);
             this.Controls.Add(this.btnUltimo);
             this.Controls.Add(this.btnProx);
             this.Controls.Add(this.btnAnterior);
@@ -1685,7 +1497,6 @@
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGenero);
-            this.Controls.Add(this.txtEquiv);
             this.Controls.Add(this.label_catgrama);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label_acep);
@@ -1736,7 +1547,6 @@
         private System.Windows.Forms.Label label_acep;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_catgrama;
-        private System.Windows.Forms.TextBox txtEquiv;
         private System.Windows.Forms.Label lblGenero;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNovo;
@@ -1777,5 +1587,7 @@
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnProx;
         private System.Windows.Forms.Button btnUltimo;
+        private System.Windows.Forms.ComboBox comboEquiv;
+        private System.Windows.Forms.Timer timerEquiv;
     }
 }
