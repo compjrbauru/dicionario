@@ -46,7 +46,7 @@
             this.btnPesquisa.Location = new System.Drawing.Point(172, 30);
             this.btnPesquisa.Name = "btnPesquisa";
             this.btnPesquisa.Size = new System.Drawing.Size(102, 49);
-            this.btnPesquisa.TabIndex = 17;
+            this.btnPesquisa.TabIndex = 1;
             this.btnPesquisa.Text = "Pesquisar";
             this.btnPesquisa.UseVisualStyleBackColor = true;
             this.btnPesquisa.Click += new System.EventHandler(this.btnPesquisa_Click);
@@ -80,7 +80,7 @@
             this.txtSigla.MaxLength = 4;
             this.txtSigla.Name = "txtSigla";
             this.txtSigla.Size = new System.Drawing.Size(100, 26);
-            this.txtSigla.TabIndex = 14;
+            this.txtSigla.TabIndex = 0;
             // 
             // label2
             // 
@@ -99,7 +99,7 @@
             this.txtDesc.MaxLength = 45;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(449, 26);
-            this.txtDesc.TabIndex = 12;
+            this.txtDesc.TabIndex = 2;
             // 
             // btnNovo
             // 
@@ -129,7 +129,7 @@
             this.txtDefinicao.Multiline = true;
             this.txtDefinicao.Name = "txtDefinicao";
             this.txtDefinicao.Size = new System.Drawing.Size(449, 201);
-            this.txtDefinicao.TabIndex = 18;
+            this.txtDefinicao.TabIndex = 3;
             // 
             // label3
             // 

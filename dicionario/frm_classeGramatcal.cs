@@ -92,10 +92,7 @@ namespace dicionario
                 resultado = ClasseGramatical.ConverteObject(c.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'"));
                 if (resultado.Count > 0)
                 {
-                    /*List<string> temp = new List<string>();
-                    for (int i = 0; i < 3; i++)
-                        temp.Add(resultado[i].ElementAt<string>(0));
-                    classe = (ClasseGramatical)temp;*/
+                    classe = resultado.First();
                     MostraModel();
                 }
                 else

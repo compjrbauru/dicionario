@@ -42,9 +42,9 @@
             this.btnProx = new System.Windows.Forms.Button();
             this.btnAnt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnPesquisa = new System.Windows.Forms.Button();
             this.txtCodPSQ = new System.Windows.Forms.MaskedTextBox();
+            this.btnPesquisa = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +76,7 @@
             this.txtAutor.MaxLength = 45;
             this.txtAutor.Name = "txtAutor";
             this.txtAutor.Size = new System.Drawing.Size(323, 26);
-            this.txtAutor.TabIndex = 4;
+            this.txtAutor.TabIndex = 1;
             // 
             // label2
             // 
@@ -105,7 +105,7 @@
             this.txtDesc.MaxLength = 45;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(447, 26);
-            this.txtDesc.TabIndex = 8;
+            this.txtDesc.TabIndex = 3;
             // 
             // label4
             // 
@@ -123,7 +123,7 @@
             this.btnSalva.Location = new System.Drawing.Point(497, 89);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(75, 28);
-            this.btnSalva.TabIndex = 9;
+            this.btnSalva.TabIndex = 4;
             this.btnSalva.Text = "Salvar";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
@@ -146,7 +146,7 @@
             this.txtAno.Mask = "0000";
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(100, 26);
-            this.txtAno.TabIndex = 12;
+            this.txtAno.TabIndex = 2;
             this.txtAno.ValidatingType = typeof(int);
             // 
             // txtCod
@@ -157,7 +157,7 @@
             this.txtCod.Mask = "AAA00a";
             this.txtCod.Name = "txtCod";
             this.txtCod.Size = new System.Drawing.Size(100, 26);
-            this.txtCod.TabIndex = 13;
+            this.txtCod.TabIndex = 0;
             this.txtCod.ValidatingType = typeof(int);
             // 
             // btnProx
@@ -195,6 +195,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Caixa de Pesquisa";
             // 
+            // txtCodPSQ
+            // 
+            this.txtCodPSQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodPSQ.Location = new System.Drawing.Point(94, 42);
+            this.txtCodPSQ.Mask = "AAA00a";
+            this.txtCodPSQ.Name = "txtCodPSQ";
+            this.txtCodPSQ.Size = new System.Drawing.Size(100, 26);
+            this.txtCodPSQ.TabIndex = 13;
+            // 
+            // btnPesquisa
+            // 
+            this.btnPesquisa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisa.Location = new System.Drawing.Point(98, 155);
+            this.btnPesquisa.Name = "btnPesquisa";
+            this.btnPesquisa.Size = new System.Drawing.Size(96, 26);
+            this.btnPesquisa.TabIndex = 14;
+            this.btnPesquisa.Text = "Pesquisar";
+            this.btnPesquisa.UseVisualStyleBackColor = true;
+            this.btnPesquisa.Click += new System.EventHandler(this.btnPesquisa_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -204,26 +224,6 @@
             this.label5.Size = new System.Drawing.Size(59, 20);
             this.label5.TabIndex = 1;
             this.label5.Text = "Código";
-            // 
-            // btnPesquisa
-            // 
-            this.btnPesquisa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPesquisa.Location = new System.Drawing.Point(98, 155);
-            this.btnPesquisa.Name = "btnPesquisa";
-            this.btnPesquisa.Size = new System.Drawing.Size(96, 26);
-            this.btnPesquisa.TabIndex = 12;
-            this.btnPesquisa.Text = "Pesquisar";
-            this.btnPesquisa.UseVisualStyleBackColor = true;
-            this.btnPesquisa.Click += new System.EventHandler(this.btnPesquisa_Click);
-            // 
-            // txtCodPSQ
-            // 
-            this.txtCodPSQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodPSQ.Location = new System.Drawing.Point(94, 42);
-            this.txtCodPSQ.Mask = "AAA00a";
-            this.txtCodPSQ.Name = "txtCodPSQ";
-            this.txtCodPSQ.Size = new System.Drawing.Size(100, 26);
-            this.txtCodPSQ.TabIndex = 14;
             // 
             // frm_referencia
             // 

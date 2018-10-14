@@ -76,7 +76,7 @@
             this.txtTelefone.Location = new System.Drawing.Point(24, 238);
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(183, 26);
-            this.txtTelefone.TabIndex = 2;
+            this.txtTelefone.TabIndex = 4;
             // 
             // txtEmail
             // 
@@ -100,7 +100,7 @@
             this.txtRSoc.Location = new System.Drawing.Point(285, 140);
             this.txtRSoc.Name = "txtRSoc";
             this.txtRSoc.Size = new System.Drawing.Size(183, 26);
-            this.txtRSoc.TabIndex = 4;
+            this.txtRSoc.TabIndex = 7;
             // 
             // txtCpf
             // 
@@ -108,7 +108,7 @@
             this.txtCpf.Location = new System.Drawing.Point(285, 90);
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(183, 26);
-            this.txtCpf.TabIndex = 5;
+            this.txtCpf.TabIndex = 6;
             // 
             // comboPermissao
             // 
@@ -121,7 +121,7 @@
             this.comboPermissao.Location = new System.Drawing.Point(285, 38);
             this.comboPermissao.Name = "comboPermissao";
             this.comboPermissao.Size = new System.Drawing.Size(183, 28);
-            this.comboPermissao.TabIndex = 6;
+            this.comboPermissao.TabIndex = 5;
             // 
             // btnincluir
             // 
@@ -129,7 +129,7 @@
             this.btnincluir.Location = new System.Drawing.Point(285, 273);
             this.btnincluir.Name = "btnincluir";
             this.btnincluir.Size = new System.Drawing.Size(85, 33);
-            this.btnincluir.TabIndex = 8;
+            this.btnincluir.TabIndex = 9;
             this.btnincluir.Text = "Salvar";
             this.btnincluir.UseVisualStyleBackColor = true;
             this.btnincluir.Click += new System.EventHandler(this.btnincluir_Click);
@@ -232,7 +232,7 @@
             this.txtContato.Location = new System.Drawing.Point(285, 190);
             this.txtContato.Name = "txtContato";
             this.txtContato.Size = new System.Drawing.Size(183, 26);
-            this.txtContato.TabIndex = 17;
+            this.txtContato.TabIndex = 8;
             // 
             // BtnLimpar
             // 

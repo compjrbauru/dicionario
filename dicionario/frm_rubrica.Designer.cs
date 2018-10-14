@@ -54,7 +54,7 @@
             this.btnNovo.Location = new System.Drawing.Point(505, 20);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(75, 31);
-            this.btnNovo.TabIndex = 1;
+            this.btnNovo.TabIndex = 3;
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
@@ -66,7 +66,7 @@
             this.txtDesc.MaxLength = 45;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(365, 26);
-            this.txtDesc.TabIndex = 2;
+            this.txtDesc.TabIndex = 1;
             // 
             // label2
             // 
@@ -85,7 +85,7 @@
             this.txtSigla.MaxLength = 4;
             this.txtSigla.Name = "txtSigla";
             this.txtSigla.Size = new System.Drawing.Size(100, 26);
-            this.txtSigla.TabIndex = 6;
+            this.txtSigla.TabIndex = 0;
             // 
             // btnApaga
             // 
@@ -104,7 +104,7 @@
             this.btnSalva.Location = new System.Drawing.Point(505, 57);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(75, 30);
-            this.btnSalva.TabIndex = 8;
+            this.btnSalva.TabIndex = 2;
             this.btnSalva.Text = "Salvar";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
