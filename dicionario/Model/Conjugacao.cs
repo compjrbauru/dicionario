@@ -63,13 +63,20 @@ namespace dicionario
         }
         public static explicit operator Conjugacao(object[] lista)
         {
-            Conjugacao c = new Conjugacao
+            Conjugacao c = new Conjugacao();
+            try
             {
-                id = int.Parse(lista[0].ToString()),
-                preterito = lista[1].ToString(),
-                presente = lista[2].ToString(),
-                futuro = lista[3].ToString()
-            };
+                c.id = int.Parse(lista[0].ToString());
+                c.preterito = lista[1].ToString();
+                c.presente = lista[2].ToString();
+                c.futuro = lista[3].ToString();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                c.preterito = lista[0].ToString();
+                c.presente = lista[1].ToString();
+                c.futuro = lista[2].ToString();
+            }
             return c;
         }
     }

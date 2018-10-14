@@ -275,15 +275,24 @@ namespace dicionario
                     p.Genero = "N";
                     break;
             }
-            /*if (txtpalavra.Text.Contains(' ')) { MessageBox.Show("Sem espaços no lema por enquanto", "aviso", MessageBoxButtons.OK);
 
-            }
-            
-            else*/
             if (p.id <= 0)
             {
+                if (p.acepcao == 1)
+                {
+                    List<Conjugacao> lconj = new List<Conjugacao>();
+                    Conjugacao conjugacao = new Conjugacao { preterito = "", presente = "", futuro = "" };
+                    crud.InsereLinha("conjugacao",Conjugacao.ToListTabela(), conjugacao.ToListValores());
+                    lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
+                    p.id_conjuga = lconj.First().id;
+                }
+                else
+                {
+                    List<Palavra> ltemp = new List<Palavra>();
+                    ltemp = Palavra.ConverteObject(crud.SelecionarTabela("Palavra", Palavra.ToListTabela(), "lema = '"+p.lema+"'", "LIMIT 2 "));
+                    p.id_conjuga = ltemp.First().id_conjuga;
+                }
                 crud.InsereLinha("palavra", Palavra.ToListTabela(), p.ToListValores());
-                MessageBox.Show("Fazer lançamento na tabela de conjugações");
             }
             else
                 crud.UpdateLine("palavra", Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
