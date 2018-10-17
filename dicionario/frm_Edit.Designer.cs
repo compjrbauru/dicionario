@@ -292,6 +292,7 @@
             "Zimbabwe"});
             this.searchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchBox.Location = new System.Drawing.Point(45, 60);
+            this.searchBox.MaxLength = 45;
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(179, 26);
             this.searchBox.TabIndex = 0;
@@ -520,6 +521,7 @@
             "Zimbabwe"});
             this.txtpalavra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtpalavra.Location = new System.Drawing.Point(45, 152);
+            this.txtpalavra.MaxLength = 45;
             this.txtpalavra.Name = "txtpalavra";
             this.txtpalavra.Size = new System.Drawing.Size(248, 26);
             this.txtpalavra.TabIndex = 1;
@@ -1370,6 +1372,7 @@
             // 
             this.txtExemplo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExemplo.Location = new System.Drawing.Point(45, 481);
+            this.txtExemplo.MaxLength = 255;
             this.txtExemplo.Name = "txtExemplo";
             this.txtExemplo.Size = new System.Drawing.Size(385, 26);
             this.txtExemplo.TabIndex = 10;
@@ -1378,6 +1381,7 @@
             // 
             this.txtExemploT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExemploT.Location = new System.Drawing.Point(439, 481);
+            this.txtExemploT.MaxLength = 255;
             this.txtExemploT.Name = "txtExemploT";
             this.txtExemploT.Size = new System.Drawing.Size(372, 26);
             this.txtExemploT.TabIndex = 11;

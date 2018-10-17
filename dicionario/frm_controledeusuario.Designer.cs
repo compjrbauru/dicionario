@@ -57,6 +57,7 @@
             // 
             this.txtusr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtusr.Location = new System.Drawing.Point(25, 38);
+            this.txtusr.MaxLength = 15;
             this.txtusr.Name = "txtusr";
             this.txtusr.Size = new System.Drawing.Size(182, 26);
             this.txtusr.TabIndex = 0;
@@ -65,6 +66,7 @@
             // 
             this.txtpass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtpass.Location = new System.Drawing.Point(24, 88);
+            this.txtpass.MaxLength = 45;
             this.txtpass.Name = "txtpass";
             this.txtpass.Size = new System.Drawing.Size(183, 26);
             this.txtpass.TabIndex = 1;
@@ -74,6 +76,7 @@
             // 
             this.txtTelefone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtTelefone.Location = new System.Drawing.Point(24, 238);
+            this.txtTelefone.MaxLength = 13;
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(183, 26);
             this.txtTelefone.TabIndex = 4;
@@ -82,6 +85,7 @@
             // 
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtEmail.Location = new System.Drawing.Point(24, 138);
+            this.txtEmail.MaxLength = 45;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(183, 26);
             this.txtEmail.TabIndex = 2;
@@ -90,6 +94,7 @@
             // 
             this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtNome.Location = new System.Drawing.Point(24, 188);
+            this.txtNome.MaxLength = 45;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(183, 26);
             this.txtNome.TabIndex = 3;
@@ -98,6 +103,7 @@
             // 
             this.txtRSoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtRSoc.Location = new System.Drawing.Point(285, 140);
+            this.txtRSoc.MaxLength = 11;
             this.txtRSoc.Name = "txtRSoc";
             this.txtRSoc.Size = new System.Drawing.Size(183, 26);
             this.txtRSoc.TabIndex = 7;
@@ -106,6 +112,7 @@
             // 
             this.txtCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtCpf.Location = new System.Drawing.Point(285, 90);
+            this.txtCpf.MaxLength = 45;
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(183, 26);
             this.txtCpf.TabIndex = 6;
@@ -230,6 +237,7 @@
             // 
             this.txtContato.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtContato.Location = new System.Drawing.Point(285, 190);
+            this.txtContato.MaxLength = 45;
             this.txtContato.Name = "txtContato";
             this.txtContato.Size = new System.Drawing.Size(183, 26);
             this.txtContato.TabIndex = 8;
