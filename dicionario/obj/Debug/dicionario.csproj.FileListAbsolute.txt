@@ -166,3 +166,9 @@ C:\Users\Igor\Desktop\copy\dicionario\dicionario\bin\Debug\dicionario.pdb
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\bin\Debug\MySql.Data.dll
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\bin\Debug\MySql.Data.xml
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.csproj.CopyComplete
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\bin\Debug\dicionario.exe.manifest
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\bin\Debug\dicionario.application
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\bin\Debug\dicionario.xml
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.TrustInfo.xml
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.exe.manifest
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.application
