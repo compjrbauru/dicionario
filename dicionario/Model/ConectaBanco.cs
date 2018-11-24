@@ -75,6 +75,7 @@ namespace dicionario.Model
     }
     class CRUD{
         private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
+        //private ConectaBanco ControllerBanco = new ConectaBanco();
         private string SanitizaQuery(string cmd){
             if (cmd != null)
                 if (cmd.Contains("'")){

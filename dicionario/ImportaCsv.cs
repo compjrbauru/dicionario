@@ -14,6 +14,7 @@ namespace dicionario
 {
     public partial class frmImportaCsv : Form
     {
+        CRUD operacoes = new CRUD();
         public frmImportaCsv()
         {
             InitializeComponent();
@@ -36,34 +37,67 @@ namespace dicionario
             progressBar1.MarqueeAnimationSpeed = 50;
             if (File.Exists(LblArquivo.Text))
             {
-                ///TODO:TRY-CATCH the next line
-                StreamReader leitor = new StreamReader(LblArquivo.Text);
                 try
                 {
-                    do
+                    StreamReader leitor = new StreamReader(LblArquivo.Text);
+                    linha = leitor.ReadLine();
+                    
+
+                    try
                     {
-                        linha = leitor.ReadLine();
-                        if (linha != "")
+                        do
                         {
-                            divisor = linha.Split(';');
-                            for (int i = 0; i < divisor.GetLength(0); i++)
+                            linha = leitor.ReadLine();
+                            if (linha != "")
                             {
-                                dataGridView1.Columns.Add(divisor[i], divisor[i]);
+                                divisor = linha.Split(';');
+                                //varificar dimensao antes de prosseguir
+                                if (divisor.Count() != Palavra.ToListTabela().Count)
+                                {
+                                    MessageBox.Show("A quantidade de colunas da entrada é diferente do destino.\nOperação Abortada.", "Erro fatal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    progressBar1.MarqueeAnimationSpeed = 0;
+                                    BtnStart.Enabled = false;
+                                    return;
+                                }
+                                List<string> ptlt = Palavra.ToListTabela(true);
+                                for (int i = 0; i < divisor.GetLength(0); i++)
+                                {
+                                    if (divisor[i] == ptlt.ElementAt(i))
+                                        dataGridView1.Columns.Add(divisor[i], divisor[i]);
+                                    else
+                                    {
+                                        MessageBox.Show("A coluna " + divisor[i] + " do arquivo importado deveria ser nomeada " + ptlt.ElementAt(i) + ".\nOperação Abortada!");
+                                        dataGridView1.Columns.Clear();
+                                        return;
+                                    }
+                                }
                             }
-                        }
-                    } while (linha == "");
-                    do //implementar thread
-                    {
-                        linha = leitor.ReadLine();
-                        if (linha != "")
+                        } while (linha == "");
+                        do //implementar thread
                         {
-                            divisor = linha.Split(';');
-                            dataGridView1.Rows.Add(divisor);
-                        }
-                    } while (leitor.Peek() != -1);
+                            linha = leitor.ReadLine();
+                            if (linha != "")
+                            {
+                                divisor = linha.Split(';');
+                                dataGridView1.Rows.Add(divisor);
+                            }
+                        } while (leitor.Peek() != -1);
+                    
+                    }
+                    catch (IndexOutOfRangeException) { }
+                    catch (EndOfStreamException) { }
                 }
-                catch (IndexOutOfRangeException) { }
-                catch (EndOfStreamException) { }
+                catch (FileLoadException) {
+                    return;
+                }
+                catch (FileNotFoundException) {
+                    return;
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("O arquivo está inacessível no momento.\nTente novamente mais tarde.");
+                    return;
+                }
                 BtnStart.Enabled = false;
                 BtnProcura.Enabled = false;
                 BtnCancela.Enabled = true;
@@ -95,32 +129,55 @@ namespace dicionario
 
         }
 
-        private List<string> SanitizaValores(List<string> valores)
+        private List<string> SanitizaValores(string tabela, List<string> valores)
         { //função para trocar possíveis valores em string por suas respectivas FK
-            switch (ComboTable.SelectedIndex)
+            switch (tabela)
             {
-                case 0:
-                    /*City city = new City();
-                    if (valores.Count == 2)
+                case "palavra":
+                    Palavra teste = new Palavra();
+                    try
                     {
-                        city.Cidade = valores.First<string>();
-                        string temp = valores.ElementAt(2);
-                        if (int.TryParse(temp, out int val))
+                        teste = (Palavra)valores;
+                    }
+                    catch (InvalidCastException)
+                    {
+                        MessageBox.Show("Erro na conversão. Tipo de dado divergente.");
+                    }
+                    List<Rubrica> lrub = new List<Rubrica>();
+                    List<ClasseGramatical> lclg = new List<ClasseGramatical>();
+                    List<Referencia> lref = new List<Referencia>();
+                    lrub = Rubrica.ConverteObject(operacoes.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "Id="+ teste.rubrica.ToString()));
+                    lclg = ClasseGramatical.ConverteObject(operacoes.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "id=" + teste.Id_classeGram.ToString()));
+                    lref = Referencia.ConverteObject(operacoes.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Id=" + teste.referencia_verbete.ToString()));
+                    if (lrub.Count() > 0)
+                    {
+                        teste.rubrica = lrub.First().id;
+                    }
+                    if (lclg.Count() > 0)
+                    {
+                        teste.Id_classeGram = lclg.First().id;
+                    }
+                    if (lref.Count > 0)
+                    {
+                        teste.referencia_verbete = lref.First().id;
+                    }
+                    //criação das referências para o caso de pluriverbalidade
+                    /*if (teste.lema.Contains(' '))
+                    {
+                        string[] lemas = teste.lema.Split(' ');
+                        List<int> saidas = new List<int>();
+                        diag_equivalente diag;
+                        for (int i = 0; i < lemas.Count(); i++)
                         {
-                            city.IDEstado = val;
+                            diag = new diag_equivalente(lemas[i]);
+                            diag.ShowDialog();
+                            if (diag.DialogResult == DialogResult.OK)
+                                saidas.Add(diag.selecionado);
+                            else
+                                saidas.Add(-1);
+                            diag.Dispose();
                         }
-                        else
-                        {
-                            ConectaBanco conecta = new ConectaBanco("bd", "usr", "pass");
-                            Country country = new Country();
-                            List<string>[] similares = conecta.Select("country", Country.ToStringTabelaLista(true), "country='" + temp);
-                            try { city.IDEstado = Convert.ToInt32(similares[0].First<string>()); }
-                            catch (IndexOutOfRangeException)
-                            {
-                                MessageBox.Show("Nenhuma chave similar encontrada. Deixando como está.");
-                            }
-
-                        }
+                        teste.EditRelacoesPluri(saidas);
                     }*/
                     break;
             }
@@ -147,8 +204,7 @@ namespace dicionario
             DataGridViewRow[] linhas = new DataGridViewRow[dataGridView1.Rows.Count];
             DataGridViewCell[] cell = new DataGridViewCell[dataGridView1.ColumnCount];
             List<string> ValoresLinha = new List<string>();
-            ConectaBanco conBanco = new ConectaBanco("dicionario", "usuario", "senha");
-            CRUD operacoes = new CRUD();
+            
             string temp;
 
             progressBar1.MarqueeAnimationSpeed = 50;
@@ -165,11 +221,12 @@ namespace dicionario
                 {
                     temp = Convert.ToString(cell[j].Value);
                     ValoresLinha.Add(temp);
-                    ValoresLinha = SanitizaValores(ValoresLinha);
+                   
                 }
                     switch (NomeTabela)
                     {
-                    case "Palavra":
+                    case "palavra":
+                        ValoresLinha = SanitizaValores("palavra", ValoresLinha);
                         operacoes.InsereLinha(NomeTabela, Palavra.ToListTabela(), ValoresLinha);
                         break;
                     }
@@ -196,44 +253,6 @@ namespace dicionario
              * repete até acabar a string analisada
              * coloca a string montada no lugar
              */
-            /*
-           string[] text = (textBox1.Text).Split(' ');
-           label3.Text = "";
-           for (int i = 0; i < text.Count<string>(); i++) {
-               if (text[i].Length >= 3)
-               {
-                   ConectaBanco con = new ConectaBanco("bd", "user", "pass");
-
-                   List<string>[] resultados = con.Select("city", City.ToStringTabelaLista(true), "city='" + Convert.ToString(text.GetValue(i)) + "'");
-                   if (resultados[0].Count > 1) //se há mais de um código
-                   {
-                       List<City> city = new List<City>();
-                       City temp = new City();
-                       for (int j = 0; j < (resultados.Count()-1); j++) {
-                           temp.IDCidade = Convert.ToInt32(resultados[0].ElementAt(j));
-                           temp.Cidade = resultados[1].ElementAt(j);
-                           temp.IDEstado = Convert.ToInt32(resultados[2].ElementAt(j));
-                           temp.ultimaAtualizacao = Convert.ToDateTime(resultados[3].ElementAt(j));
-                           city.Add(temp);
-                           city.
-                       }
-                       popup_EscolheCelula Desco = new popup_EscolheCelula(city);
-                       Desco.Show();
-                       label3.Text += "{" + Desco.retorno.ToString() + "} ";
-                   }
-                   else {
-                       try
-                       {
-                           label3.Text += "{" + resultados[0].ElementAt(0) + "} ";
-                       }
-                       catch (ArgumentOutOfRangeException) {
-                           label3.Text += text[i];
-                       }
-                   }
-               }
-               else {
-                   label3.Text += text[i] + " ";
-               }*/
         }
 
     }

@@ -33,7 +33,8 @@ namespace dicionario
             referencia.descricao = "";
             referencia.ano = 0;
             referencia.autor = "";
-            referencia.Cod = -1;
+            referencia.Cod = "";
+            referencia.id = -1;
             txtCod.ReadOnly = false;
         }
         private void MostraModel() {
@@ -96,16 +97,17 @@ namespace dicionario
 
         private void btnSalva_Click(object sender, EventArgs e)
         {
-            if (txtDesc.Text == "" || txtAno.Text == "" || txtAutor.Text == "")
+            if (txtDesc.Text == "" || txtAno.Text == "" || txtAutor.Text == "" || txtCod.Text == "")
             {
                 MessageBox.Show("Existem campos obrigatórios vazios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            referencia.Cod = txtCod.Text;
             referencia.descricao = txtDesc.Text;
             referencia.ano = int.Parse(txtAno.Text);
             referencia.autor = txtAutor.Text;
-            if (referencia.Cod > 0) { 
-                c.UpdateLine("referencias", Referencia.ToListTabela(false), referencia.ToListValores(), "Cod=" + referencia.Cod.ToString());
+            if (referencia.id > 0) { 
+                c.UpdateLine("referencias", Referencia.ToListTabela(false), referencia.ToListValores(), "Id=" + referencia.id.ToString());
             LimpaCampos();
             LimpaModel(); }
             else
@@ -119,7 +121,7 @@ namespace dicionario
 
         private void btnApaga_Click(object sender, EventArgs e)
         {
-            if (referencia.Cod > 0)
+            if (referencia.id > 0)
             {
                 if (MessageBox.Show("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar" + '\n' + "Prosseguir?", "Confirmação", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
