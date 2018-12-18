@@ -8,22 +8,18 @@ namespace dicionario
 {
     class Referencia
     {
-        public int Cod { get; set; }
+        public int id { get; set; }
+        public string Cod { get; set; }
         public string descricao { get; set; }
         public int ano { get; set; }
         public string autor { get; set; }
-
-        public override string ToString()
-        {
-            string expressao = "Cod=" + Cod + ",descricao='" + descricao + "',ano='" + ano + "',autor='" + autor;
-            return expressao;
-        }
 
         public List<string> ToListValores(bool incluiId = false)
         {
             List<string> val = new List<string>();
             if (incluiId)
-                val.Add(Cod.ToString());
+                val.Add(id.ToString());
+            val.Add(Cod);
             val.Add(descricao);
             val.Add(ano.ToString());
             val.Add(autor);
@@ -35,7 +31,8 @@ namespace dicionario
 
             List<string> val = new List<string>();
             if (incluiId)
-                val.Add("Cod");
+                val.Add("id");
+            val.Add("Cod");
             val.Add("descricao");
             val.Add("ano");
             val.Add("autor");
@@ -59,7 +56,8 @@ namespace dicionario
         {
             Referencia novo = new Referencia
             {
-                Cod = int.Parse(lista.ElementAt(0)),
+                id = int.Parse(lista.ElementAt(0)),
+                Cod = lista.ElementAt(1),
                 descricao = lista.ElementAt(1),
                 ano = int.Parse(lista.ElementAt(2)),
                 autor = lista.ElementAt(3)
@@ -68,17 +66,21 @@ namespace dicionario
         }
         public static explicit operator Referencia(object[] lista)
         {
+            int itera = 0;
             Referencia novo = new Referencia();
             try {
-                novo.Cod = int.Parse(lista[0].ToString());
-                novo.descricao = lista[1].ToString();
-                novo.ano = int.Parse(lista[2].ToString());
-                novo.autor = lista[3].ToString();
+                novo.id = int.Parse(lista[itera++].ToString());
+                novo.Cod = lista[itera++].ToString();
+                novo.descricao = lista[itera++].ToString();
+                novo.ano = int.Parse(lista[itera++].ToString());
+                novo.autor = lista[itera++].ToString();
             }
             catch (IndexOutOfRangeException) {
-                novo.descricao = lista[0].ToString();
-                novo.ano = int.Parse(lista[1].ToString());
-                novo.autor = lista[2].ToString();
+                novo.Cod = lista[itera++].ToString();
+
+                novo.descricao = lista[itera++].ToString();
+                novo.ano = int.Parse(lista[itera++].ToString());
+                novo.autor = lista[itera++].ToString();
             }
             return novo;
         }

@@ -94,7 +94,7 @@ namespace dicionario
             }
             if (p.referencia_verbete > 0)
             {
-                resultados = crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Cod=" + p.referencia_verbete.ToString());
+                resultados = crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Id=" + p.referencia_verbete.ToString());
                 resRef = Referencia.ConverteObject(resultados);
                 refere = resRef.First();
                 comboRef.Text = refere.descricao;
@@ -289,7 +289,7 @@ namespace dicionario
                 else
                 {
                     List<Palavra> ltemp = new List<Palavra>();
-                    ltemp = Palavra.ConverteObject(crud.SelecionarTabela("Palavra", Palavra.ToListTabela(), "lema = '"+p.lema+"'", "LIMIT 2 "));
+                    ltemp = Palavra.ConverteObject(crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema = '"+p.lema+"'", "LIMIT 2 "));
                     p.id_conjuga = ltemp.First().id_conjuga;
                 }
                 crud.InsereLinha("palavra", Palavra.ToListTabela(), p.ToListValores());
@@ -536,7 +536,7 @@ namespace dicionario
             if (comboRef.Text != "")
             {
                 refere = resRef.Find(r => r.descricao == comboRef.Text);
-                p.referencia_verbete = refere.Cod;
+                p.referencia_verbete = refere.id;
 
             }
                 //p.referencia_verbete = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(comboRef.Text)));

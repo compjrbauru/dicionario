@@ -56,10 +56,10 @@ namespace dicionario
                 }
             }
             filtro = montaFiltro("id", v1); //filtrando cgram
-            resCg = ClasseGramatical.ConverteObject(operaBd.SelecionarTabela("categoriagram", ClasseGramatical.ToListTabela(true), filtro));
+            resCg = ClasseGramatical.ConverteObject(operaBd.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), filtro));
             filtro = montaFiltro("id", v2); //filtrando rubrica
             resRubrica = Rubrica.ConverteObject(operaBd.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), filtro));
-            filtro = montaFiltro("Cod", v3);
+            filtro = montaFiltro("Id", v3);
             resRefer = Referencia.ConverteObject(operaBd.SelecionarTabela("referencias", Referencia.ToListTabela(true), filtro));
             foreach (Palavra p in entrada) {
                 //vamos criar os nodes de exemplo e juntá-los num único conjunto
@@ -70,7 +70,7 @@ namespace dicionario
 
                 cgselect = resCg.Find(icg => icg.id == p.Id_classeGram);
                 //vamos agora juntar os outros valores pertinentes à acepção ou verbete selecionado
-                s = criaListaValores(p, cgselect, resRefer.Find(iref => iref.Cod == p.referencia_verbete));
+                s = criaListaValores(p, cgselect, resRefer.Find(iref => iref.id == p.referencia_verbete));
                 nf = criaTreeNodes(s);
 
                 //mesclando ambos em nf

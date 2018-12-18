@@ -39,6 +39,7 @@ namespace dicionario
         {
             txtDesc.Text = classe.descricao;
             txtSigla.Text = classe.sigla;
+            txtDefinicao.Text = classe.Definicao;
         }
         private void btnNovo_Click(object sender, EventArgs e)
         {

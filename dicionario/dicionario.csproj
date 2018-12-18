@@ -22,8 +22,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\HelperBd.cs" />
     <Compile Include="Model\Conjugacao.cs" />
     <Compile Include="diag_equivalente.cs">
       <SubType>Form</SubType>
@@ -173,6 +174,7 @@
     <Compile Include="frm_rubrica.Designer.cs">
       <DependentUpon>frm_rubrica.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Model\Palavra.cs" />
     <Compile Include="Model\Rubrica.cs" />
     <Compile Include="Model\Tabelas.cs" />

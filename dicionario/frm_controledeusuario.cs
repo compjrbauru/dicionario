@@ -17,7 +17,6 @@ namespace dicionario
         {
             InitializeComponent();
         }
-        private ConectaBanco conecta = new ConectaBanco("dicionario", "root", "gamesjoker");
         Usuario usr = new Usuario();
         CRUD c = new CRUD();
         private void label1_Click(object sender, EventArgs e)
