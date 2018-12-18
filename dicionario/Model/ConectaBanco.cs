@@ -9,14 +9,14 @@ using MySql.Data.MySqlClient;
 
 namespace dicionario.Model
 {
-    class ConectaBanco
+    internal class ConectaBanco
     {
-        private string servidor;
-        private string bancoDados;
-        private string usuario;
-        private string senha;
-        private string porta;
-        private MySqlConnection conexao;
+        protected string servidor;
+        protected string bancoDados;
+        protected string usuario;
+        protected string senha;
+        protected string porta;
+        protected MySqlConnection conexao;
 
         public ConectaBanco(string bd = "dicionario", string usr = "root", string pss = "gamesjoker", string svr = "localhost", string porta = "3306")
         {
@@ -74,12 +74,12 @@ namespace dicionario.Model
         }
     }
     class CRUD{
-        private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
-        //private ConectaBanco ControllerBanco = new ConectaBanco();
+        //private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
+        private ConectaBanco ControllerBanco = new ConectaBanco();
         private string SanitizaQuery(string cmd){
             if (cmd != null)
                 if (cmd.Contains("'")){
-                    cmd.Replace("'","\\'");
+                    cmd.Replace("'","*");
                 }
             return cmd;
         }
@@ -93,7 +93,7 @@ namespace dicionario.Model
         }
         public void InsereLinha(string tabela, List<string> campos, List<string> valores)
         {
-            int temp = 0; bool tempb;
+            int temp = 0; 
             string query = "INSERT INTO " + tabela + " (";
             foreach (string item in campos)
             {
@@ -109,7 +109,7 @@ namespace dicionario.Model
                     query += ",";
                 }
                 else {
-                    if (Boolean.TryParse(item, out tempb)){
+                    if (Boolean.TryParse(item, out bool tempb)){
                         if (tempb)
                             query += "1,";
                         else
@@ -198,6 +198,37 @@ namespace dicionario.Model
             object[] o = new object[t];
             obj.CopyTo(o,0);
             return o;
+        }
+        public void InserirEmMassa(string tabela, string valores)
+        {
+            string query = "INSERT INTO " + tabela + " (";
+            List<string> t = new List<string>();
+            switch (tabela)
+            {
+                case "palavra":
+                    t = Palavra.ToListTabela();
+                    break;
+                case "classegram":
+                    t = ClasseGramatical.ToListTabela();
+                    break;
+                case "rubrica":
+                    t = Rubrica.ToListTabela();
+                    break;
+                case "referencias":
+                    t = Referencia.ToListTabela();
+                    break;
+            }
+            foreach (string s in t)
+            {
+                query += (s + ",");
+            }
+            query = query.Remove(query.Count() - 1);
+            query += ") VALUES ";
+            if (valores.First() == '(')
+                query += valores;
+            else
+                query += ("(" + valores + ");");
+            EnviaComando(query);
         }
     }
 }

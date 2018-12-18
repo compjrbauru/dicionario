@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using dicionario.Helpers;
 
 namespace dicionario.Model
 {
@@ -121,31 +122,33 @@ namespace dicionario.Model
         }
         public static explicit operator Palavra(List<string> lista) //fazer um implicito?
         {
-            ///TODO: para evitar problemas de estouro, usar um contador simples autoincementável para pegar os valores. Exemplo{ int i = 0; id = int.parse(list.elementat(i++),...}
-            Palavra p = new Palavra
+            int i = 0;
+            Palavra p = new Palavra();
+            if (int.TryParse(lista[i].ToString(),out int result))
             {
-                id = int.Parse(lista.ElementAt(0)),
-                lema = lista.ElementAt(1),
-                //Id_catGram = int.Parse(lista.ElementAt(2)),
-                Id_classeGram = int.Parse(lista.ElementAt(2)),
-                Genero = lista.ElementAt(18),
-                idioma = lista.ElementAt(4),
-                rubrica = int.Parse(lista.ElementAt(5)),
-                heterogenerico = Boolean.Parse(lista.ElementAt(6)),
-                heterotonico = Boolean.Parse(lista.ElementAt(7)),
-                equivalente = int.Parse(lista.ElementAt(8)),
-                referencia_verbete = int.Parse(lista.ElementAt(9)),
-                referencia_exemplo = lista.ElementAt(10),
-                notas_gramatica = lista.ElementAt(11),
-                nota_cultura = lista.ElementAt(12),
-                acepcao = int.Parse(lista.ElementAt(13)),
-                heterossemantico = Boolean.Parse(lista.ElementAt(14)),
-                ref_ex_tr = lista.ElementAt(15),
-                Infinitivo = int.Parse(lista.ElementAt(16)),
-                //id_conjuga = int.Parse(lista.ElementAt(18))
-                //Definicao = lista.ElementAt(19)
-            };
-            p.ChecaOperador(lista.ElementAt(17));
+                p.id = result;
+                i++;
+            }
+                p.lema = lista.ElementAt(i++);
+            p.Id_classeGram = int.Parse(lista.ElementAt(i++));
+                
+                p.idioma = lista.ElementAt(i++);
+                p.rubrica = int.Parse(lista.ElementAt(i++));
+            p.heterogenerico = Helper.ParseBoolean(lista.ElementAt(i++));
+                p.heterotonico = Helper.ParseBoolean(lista.ElementAt(i++));
+                p.equivalente = int.Parse(lista.ElementAt(i++));
+                p.referencia_verbete = int.Parse(lista.ElementAt(i++));
+                p.referencia_exemplo = lista.ElementAt(i++);
+                p.notas_gramatica = lista.ElementAt(i++);
+                p.nota_cultura = lista.ElementAt(i++);
+                p.acepcao = int.Parse(lista.ElementAt(i++));
+                p.heterossemantico = Helper.ParseBoolean(lista.ElementAt(i++));
+                p.ref_ex_tr = lista.ElementAt(i++);
+                p.Infinitivo = int.Parse(lista.ElementAt(i++));
+            p.ChecaOperador(lista.ElementAt(i++));
+            p.id_conjuga = int.Parse(lista.ElementAt(i++));
+            p.Genero = lista.ElementAt(i++);
+            p.Definicao = lista.ElementAt(i++);
             return p;
         }
         public static explicit operator Palavra(object[] lista)
@@ -158,19 +161,18 @@ namespace dicionario.Model
                 i++;
             }
             saida.lema = lista[i++].ToString();
-           // i++; //representando a classe gramatical
             saida.Id_classeGram = int.Parse(lista[i++].ToString());
             saida.idioma = lista[i++].ToString();
             saida.rubrica = int.Parse(lista[i++].ToString());
-            saida.heterogenerico = Boolean.Parse(lista[i++].ToString());
-            saida.heterotonico = Boolean.Parse(lista[i++].ToString());
+            saida.heterogenerico = Helper.ParseBoolean(lista[i++].ToString());
+            saida.heterotonico = Helper.ParseBoolean(lista[i++].ToString());
             saida.equivalente = int.Parse(lista[i++].ToString());
             saida.referencia_verbete = int.Parse(lista[i++].ToString());
             saida.referencia_exemplo = lista[i++].ToString();
             saida.notas_gramatica = lista[i++].ToString();
             saida.nota_cultura = lista[i++].ToString();
             saida.acepcao = int.Parse(lista[i++].ToString());
-            saida.heterossemantico = Boolean.Parse(lista[i++].ToString());
+            saida.heterossemantico = Helper.ParseBoolean(lista[i++].ToString());
             saida.ref_ex_tr = lista[i++].ToString();
             saida.Infinitivo = int.Parse(lista[i++].ToString());
             saida.ChecaOperador(lista[i++].ToString());

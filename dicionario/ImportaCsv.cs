@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using dicionario.Model;
+using dicionario.Helpers;
 
 namespace dicionario
 {
@@ -29,20 +30,54 @@ namespace dicionario
             }
         }
 
+        private int LiberaArquivo (StreamReader f)
+        {
+            try{
+            f.DiscardBufferedData();
+            f.Dispose();
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Erro ao liberar o arquivo");
+                return 1;
+            }
+            return 0;
+        }
         private void BtnStart_Click(object sender, EventArgs e)
         //NOTE: Usar ponto e vírgula como separador no CSV
         {
             string linha;
             string[] divisor;
+            int v = 0;
+            List<string> ptlt = new List<string>();
             progressBar1.MarqueeAnimationSpeed = 50;
-            if (File.Exists(LblArquivo.Text))
+            if (ComboTable.Text != "")
             {
+                switch (ComboTable.Text)
+                {
+                    case "Palavra":
+                        v = Palavra.ToListTabela().Count;
+                        ptlt = Palavra.ToListTabela();
+                        break;
+                    case "Classe Gramatical":
+                        v = ClasseGramatical.ToListTabela().Count;
+                        ptlt = ClasseGramatical.ToListTabela();
+                        break;
+                    case "Rubrica":
+                        v = Rubrica.ToListTabela().Count;
+                        ptlt = Rubrica.ToListTabela();
+                        break;
+                    case "Referência":
+                        v = Referencia.ToListTabela().Count;
+                        ptlt = Referencia.ToListTabela();
+                        break;
+                    default:
+                        throw new Exception("Não implementado");
+                        
+                }
                 try
                 {
-                    StreamReader leitor = new StreamReader(LblArquivo.Text);
-                    linha = leitor.ReadLine();
-                    
-
+                    StreamReader leitor = new StreamReader(LblArquivo.Text, Encoding.Default);
                     try
                     {
                         do
@@ -52,14 +87,15 @@ namespace dicionario
                             {
                                 divisor = linha.Split(';');
                                 //varificar dimensao antes de prosseguir
-                                if (divisor.Count() != Palavra.ToListTabela().Count)
+                                if (divisor.Count() != v)
                                 {
                                     MessageBox.Show("A quantidade de colunas da entrada é diferente do destino.\nOperação Abortada.", "Erro fatal", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     progressBar1.MarqueeAnimationSpeed = 0;
                                     BtnStart.Enabled = false;
+                                    LiberaArquivo(leitor);
                                     return;
                                 }
-                                List<string> ptlt = Palavra.ToListTabela(true);
+                                
                                 for (int i = 0; i < divisor.GetLength(0); i++)
                                 {
                                     if (divisor[i] == ptlt.ElementAt(i))
@@ -68,6 +104,9 @@ namespace dicionario
                                     {
                                         MessageBox.Show("A coluna " + divisor[i] + " do arquivo importado deveria ser nomeada " + ptlt.ElementAt(i) + ".\nOperação Abortada!");
                                         dataGridView1.Columns.Clear();
+                                        progressBar1.MarqueeAnimationSpeed = 0;
+                                        BtnStart.Enabled = false;
+                                        LiberaArquivo(leitor);
                                         return;
                                     }
                                 }
@@ -82,11 +121,12 @@ namespace dicionario
                                 dataGridView1.Rows.Add(divisor);
                             }
                         } while (leitor.Peek() != -1);
-                    
+                        LiberaArquivo(leitor);
                     }
                     catch (IndexOutOfRangeException) { }
                     catch (EndOfStreamException) { }
                 }
+                
                 catch (FileLoadException) {
                     return;
                 }
@@ -102,9 +142,16 @@ namespace dicionario
                 BtnProcura.Enabled = false;
                 BtnCancela.Enabled = true;
                 BtnGrava.Enabled = true;
-                ComboTable.Enabled = true;
+                ComboTable.Enabled = false;
                 progressBar1.MarqueeAnimationSpeed = 0;
+                
+                
             }
+            else
+            {
+                MessageBox.Show("Escolha uma tabela destino");
+            }
+            
         }
 
         private void BtnCancela_Click(object sender, EventArgs e)
@@ -117,7 +164,7 @@ namespace dicionario
                 BtnCancela.Enabled = false;
                 BtnGrava.Enabled = false;
                 BtnStart.Enabled = false;
-                ComboTable.Enabled = false;
+                ComboTable.Enabled = true;
                 BtnProcura.Enabled = true;
                 LblArquivo.Text = "Nenhum arquivo selecionado";
                 progressBar1.MarqueeAnimationSpeed = 0;
@@ -131,81 +178,174 @@ namespace dicionario
 
         private List<string> SanitizaValores(string tabela, List<string> valores)
         { //função para trocar possíveis valores em string por suas respectivas FK
-            switch (tabela)
+            string saida;
+            
+            for(int i = 0; i < valores.Count; i++)
             {
-                case "palavra":
-                    Palavra teste = new Palavra();
-                    try
-                    {
-                        teste = (Palavra)valores;
-                    }
-                    catch (InvalidCastException)
-                    {
-                        MessageBox.Show("Erro na conversão. Tipo de dado divergente.");
-                    }
-                    List<Rubrica> lrub = new List<Rubrica>();
-                    List<ClasseGramatical> lclg = new List<ClasseGramatical>();
-                    List<Referencia> lref = new List<Referencia>();
-                    lrub = Rubrica.ConverteObject(operacoes.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "Id="+ teste.rubrica.ToString()));
-                    lclg = ClasseGramatical.ConverteObject(operacoes.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "id=" + teste.Id_classeGram.ToString()));
-                    lref = Referencia.ConverteObject(operacoes.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Id=" + teste.referencia_verbete.ToString()));
+                if (SanitizaString(valores.ElementAt(i), out saida)){
+                    valores.RemoveAt(i);
+                    valores.Insert(i,saida);
+                }
+            }
+            if (tabela == "palavra"){
+                List<string> FKs = new List<string>();
+                int idx, c = 0;
+                bool[] fila = { false, false, false};
+                ///TODO: Ah, enumeradores...
+                /////faço issoi para evitar que seja lançada uma exceção e os valores perdidos no cast logo abaixo
+                //classe gramatical
+                idx = Palavra.ToListTabela().FindIndex(bs => bs == "Id_classeGram");
+                if (!int.TryParse(valores.ElementAt(idx), out int conv) && (valores.ElementAt(idx)!="")){
+                FKs.Add(valores.ElementAt(idx));
+                valores.RemoveAt(idx);
+                valores.Insert(idx, "0");
+                    fila[c] = true;
+                }
+                c++;
+                //rubrica
+                idx = Palavra.ToListTabela().FindIndex(bs => bs == "Rubrica");
+                if (!int.TryParse(valores.ElementAt(idx), out conv) && (valores.ElementAt(idx) != ""))
+                {
+                    FKs.Add(valores.ElementAt(idx));
+                valores.RemoveAt(idx);
+                valores.Insert(idx, "0");
+                    fila[c] = true;
+                }
+                c++;
+                //referencia
+                idx = Palavra.ToListTabela().FindIndex(bs => bs == "referencia_verbete");
+                if (!int.TryParse(valores.ElementAt(idx), out conv) && (valores.ElementAt(idx) != ""))
+                {
+                    FKs.Add(valores.ElementAt(idx));
+                valores.RemoveAt(idx);
+                valores.Insert(idx, "0");
+                    fila[c++] = true;
+                }
+                c++;
+
+                idx = Palavra.ToListTabela().FindIndex(bs => bs == "equivalente");
+                if (!int.TryParse(valores.ElementAt(idx), out conv))
+                {
+                    valores.RemoveAt(idx);
+                    valores.Insert(idx, "0");
+                }
+                idx = Palavra.ToListTabela().FindIndex(bs => bs == "Infinitivo");
+                if (!int.TryParse(valores.ElementAt(idx), out conv))
+                {
+                    valores.RemoveAt(idx);
+                    valores.Insert(idx, "0");
+                }
+                idx = Palavra.ToListTabela().FindIndex(bs => bs == "Id_conjuga");
+                if (!int.TryParse(valores.ElementAt(idx), out conv))
+                {
+                    valores.RemoveAt(idx);
+                    valores.Insert(idx, "0");
+                }
+
+                Palavra teste = new Palavra();
+                try
+                {
+                    teste = (Palavra)valores;
+                }
+                catch (InvalidCastException)
+                {
+                    ErroCast();
+                    return null;
+                }
+                catch (FormatException)
+                {
+                    ErroCast();
+                    return null;
+                }
+
+                List<Rubrica> lrub = new List<Rubrica>();
+                List<ClasseGramatical> lclg = new List<ClasseGramatical>();
+                List<Referencia> lref = new List<Referencia>();
+                IEnumerator<string> ff = FKs.GetEnumerator();
+                c = 0;
+                if (fila[c++]){
+                    saida = ff.Current;
+                    lrub = Rubrica.ConverteObject(operacoes.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "sigla='"+ saida + "'"));
                     if (lrub.Count() > 0)
                     {
                         teste.rubrica = lrub.First().id;
                     }
+                    else
+                    {
+                        return null;
+                    }
+                    ff.MoveNext();
+                }
+                if (fila[c++]){
+                    saida = ff.Current;
+                    lclg = ClasseGramatical.ConverteObject(operacoes.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla='" + saida + "'"));
                     if (lclg.Count() > 0)
                     {
                         teste.Id_classeGram = lclg.First().id;
                     }
+                    else
+                    {
+                        return null;
+                    }
+                    ff.MoveNext();
+                }
+                if (fila[c]){
+                    saida = ff.Current;
+                    lref = Referencia.ConverteObject(operacoes.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Cod='" + saida + "'"));
                     if (lref.Count > 0)
                     {
                         teste.referencia_verbete = lref.First().id;
                     }
-                    //criação das referências para o caso de pluriverbalidade
-                    /*if (teste.lema.Contains(' '))
+                    else
                     {
-                        string[] lemas = teste.lema.Split(' ');
-                        List<int> saidas = new List<int>();
-                        diag_equivalente diag;
-                        for (int i = 0; i < lemas.Count(); i++)
-                        {
-                            diag = new diag_equivalente(lemas[i]);
-                            diag.ShowDialog();
-                            if (diag.DialogResult == DialogResult.OK)
-                                saidas.Add(diag.selecionado);
-                            else
-                                saidas.Add(-1);
-                            diag.Dispose();
-                        }
-                        teste.EditRelacoesPluri(saidas);
-                    }*/
-                    break;
+                        return null;
+                    }
+                }
+                    valores.Clear();
+                    valores.AddRange(teste.ToListValores());             
             }
             return valores;
         }
-
+        private void ErroCast()
+        {
+            MessageBox.Show("Erro na conversão. Tipo de dado divergente ou inválido.\nO registro será ignorado na importação");
+        }
         private void BtnGrava_Click(object sender, EventArgs e)
         {
-            if (ComboTable.Text != "")
-            {
-                if (MessageBox.Show("Você tem certeza que deseja continuar?\n" + "Todos os dados da tabela serão salvos no Banco de Dados!", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    importador(ComboTable.Text);
 
+                if (MessageBox.Show("Você tem certeza que deseja continuar?\n" + "Todos os dados válidos da tabela serão salvos no Banco de Dados!", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    if (importador(ComboTable.Text) == 1)
+                        MessageBox.Show("Houveram erros na importação e alguns registros foram ignorados.");
+                    BtnProcura.Enabled = true;
+                    LblArquivo.Text = "Nenhum arquivo selecionado";
+                    progressBar1.MarqueeAnimationSpeed = 0;
+                    dataGridView1.Rows.Clear();
+                    dataGridView1.Columns.Clear();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Escolha uma tabela destino");
-            }
         }
-        private void importador(string NomeTabela)
+        private int importador(string NomeTabela)
+            ///TODO: FAZER UM PROCESSO DE IMPORTAÇÃO MASSIVO PARA ECONOMIZAR TRANSAÇÕES DO BANCO E POR CONSEQUÊNCIA, DIMINUIR CONSUMO DE RECURSOS
         {
             DataGridViewRow[] linhas = new DataGridViewRow[dataGridView1.Rows.Count];
             DataGridViewCell[] cell = new DataGridViewCell[dataGridView1.ColumnCount];
             List<string> ValoresLinha = new List<string>();
-            
-            string temp;
+            switch (NomeTabela)
+            {
+                case "Palavra":
+                    NomeTabela = "palavra";
+                    break;
+                case "Classe Gramatical":
+                    NomeTabela = "classegram";
+                    break;
+                case "Rubrica":
+                    NomeTabela = "rubrica";
+                    break;
+                case "Referência":
+                    NomeTabela = "referencias";
+                    break;
+            }
+            string temp="", query = "";
 
             progressBar1.MarqueeAnimationSpeed = 50;
             BtnCancela.Enabled = false;
@@ -214,7 +354,7 @@ namespace dicionario
             BtnProcura.Enabled = false;
 
             dataGridView1.Rows.CopyTo(linhas, 0);
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
             {
                 linhas[i].Cells.CopyTo(cell, 0);
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
@@ -223,107 +363,50 @@ namespace dicionario
                     ValoresLinha.Add(temp);
                    
                 }
-                    switch (NomeTabela)
-                    {
-                    case "palavra":
-                        ValoresLinha = SanitizaValores("palavra", ValoresLinha);
-                        operacoes.InsereLinha(NomeTabela, Palavra.ToListTabela(), ValoresLinha);
-                        break;
+                query += "(";
+                ValoresLinha = SanitizaValores(NomeTabela, ValoresLinha);
+                if (ValoresLinha == null) {
+                    ValoresLinha = new List<string>();
+                    query = query.Remove(query.Count() - 1);
+                    continue;
+                }
+                foreach (string s in ValoresLinha)
+                {
+                    if (HelperBd.VerificaInt(s)){
+                        query += (s + ",");
                     }
-
+                    else
+                    {
+                        if (HelperBd.VerificaBool(s, out string valor))
+                            query += (valor + ",");
+                        else
+                            query += "'" + s + "',";
+                    }
+                }
+                query = query.Remove(query.Count()-1);
+                query += "),";
+                ValoresLinha.Clear();
             }
-
-            BtnProcura.Enabled = true;
-            LblArquivo.Text = "Nenhum arquivo selecionado";
-            progressBar1.MarqueeAnimationSpeed = 0;
+            if (query.Count() > 0){
+                query = query.Remove(query.Count() - 1);
+                query += ";";
+                operacoes.InserirEmMassa(NomeTabela, query);
+                return 0;
+            }
+            return 1;
+        }
+        private bool SanitizaString (string valor, out string saida)
+        {
+            if (valor.Contains("'")){
+                saida = valor.Replace(Char.Parse("'"), Char.Parse("*"));
+                return true;
+            }
+            saida = valor;
+            return false;
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            /* FLUXO DA IDEIA
-             * Digitar sublema na caixa
-             * clicar no botão
-             * Verificar todas as palavras com mais de X caracteres
-             * verificar se existe o lema analisado na base de dados
-             * caso existir, então:
-             * Verificar quantos lemas iguais existem.
-             *  Caso = 1, atribuir este automaticamente
-             *  caso > 1, perguntar qual o usuário deseja relacionar
-             *  pegar o código do registro escolhido
-             *  repor na string entre { }
-             * repete até acabar a string analisada
-             * coloca a string montada no lugar
-             */
         }
 
     }
 }
-
-/*public class popup_EscolheCelula : Form
-{
-    private DataGridView DgvOpcoes;
-    private Form popup;
-    private Label lblDescreve;
-    private Button BtnConfirma;
-    public popup_EscolheCelula()
-    {
-        List<string> list = City.ToStringTabelaLista(true);
-        popup = new Form
-        {
-            Size = new Size(640, 480),
-            ShowInTaskbar = false,
-
-            ControlBox = false,
-            MaximizeBox = false,
-            MinimizeBox = false
-        };
-        lblDescreve = new Label
-        {
-            Text = "Escolha um dos valores da lista a seguir para vincular ao sublema do verbete",
-            AutoSize = true,
-            Location = new Point(20, 20)
-        };
-        popup.Controls.Add(lblDescreve);
-        BtnConfirma = new Button
-        {
-            Text = "Confirmar",
-            Location = new Point(500, 400),
-            AutoSize = true
-        };
-        BtnConfirma.Click += new EventHandler(EvClick);
-        popup.Controls.Add(BtnConfirma);
-        DgvOpcoes = new DataGridView();
-        DgvOpcoes.MultiSelect = false;
-        for (int t = 0; t < list.Count; t++)
-        {
-            DgvOpcoes.Columns.Add(list.ElementAt(t), list.ElementAt(t));
-        }
-
-        DgvOpcoes.Rows.Add();
-
-        DgvOpcoes.Size = new Size(500, 380);
-        DgvOpcoes.Location = new Point(20, 50);
-        popup.Controls.Add(DgvOpcoes);
-
-        popup.PerformLayout();
-        popup.Update();
-    }
-    public int retorno { 
-        get { return selecio; } 
-    }
-    private int selecio;
-
-    private void EvClick(object sender, EventArgs e)
-    {
-        if (MessageBox.Show("Confirma seleção da linha?","Confirmação",MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-        {
-            DataGridViewSelectedCellCollection sel = DgvOpcoes.SelectedCells;
-            DataGridViewCell c = sel[0];
-            selecio = (int)c.Value;
-            popup.Close();
-        }
-
-    }
-
-}
-}
-*/

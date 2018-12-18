@@ -132,13 +132,12 @@
             // 
             this.ComboTable.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.ComboTable.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboTable.Enabled = false;
             this.ComboTable.FormattingEnabled = true;
             this.ComboTable.Items.AddRange(new object[] {
-            "city",
-            "address",
-            "staff",
-            "conutry"});
+            "Palavra",
+            "Classe Gramatical",
+            "Rubrica",
+            "Referência"});
             this.ComboTable.Location = new System.Drawing.Point(82, 91);
             this.ComboTable.Name = "ComboTable";
             this.ComboTable.Size = new System.Drawing.Size(121, 21);
