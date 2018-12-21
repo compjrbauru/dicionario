@@ -37,5 +37,14 @@ namespace dicionario.Helpers
             retorno = s;
             return false;
         }
+        public static string SanitizaString (string s)
+        {
+            if (s != null)
+                if (s.Contains("'"))
+                {
+                    return s.Replace("'", "*");
+                }
+            return s;
+        }
     }
 }

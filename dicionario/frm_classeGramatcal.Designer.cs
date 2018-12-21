@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnPesquisa = new System.Windows.Forms.Button();
             this.btnSalva = new System.Windows.Forms.Button();
             this.btnApaga = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtDefinicao = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnPesquisa
@@ -81,6 +83,8 @@
             this.txtSigla.Name = "txtSigla";
             this.txtSigla.Size = new System.Drawing.Size(100, 26);
             this.txtSigla.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.txtSigla, "Digite a sigla que vai identificar esta classe gramatical.\r\nUtilize este campo pa" +
+        "ra pesquisar entradas já existentes no no banco de dados");
             // 
             // label2
             // 
@@ -100,6 +104,8 @@
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(449, 26);
             this.txtDesc.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.txtDesc, "Digite neste campo a forma por extenso da classe gramatical representada pela sig" +
+        "la");
             // 
             // btnNovo
             // 
@@ -130,6 +136,7 @@
             this.txtDefinicao.Name = "txtDefinicao";
             this.txtDefinicao.Size = new System.Drawing.Size(449, 201);
             this.txtDefinicao.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.txtDefinicao, "Digite um texto de definição e/ou explicação desta classe gramatical");
             // 
             // label3
             // 
@@ -175,6 +182,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDefinicao;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

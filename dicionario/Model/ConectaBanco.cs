@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using dicionario.Helpers;
 
 namespace dicionario.Model
 {
@@ -44,7 +45,7 @@ namespace dicionario.Model
                             MessageBox.Show("Falha ao conectar no servidor de dados.");
                             break;
                         case 1045:
-                            MessageBox.Show("A combinacao de usuario e senha nao existe. Tente novamente.");
+                            MessageBox.Show("A combinação de usuário e senha não existe. Tente novamente.");
                             break;
                         default:
                             MessageBox.Show("Erro" + ex.Code.ToString() + ex.Message);
@@ -76,13 +77,6 @@ namespace dicionario.Model
     class CRUD{
         //private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
         private ConectaBanco ControllerBanco = new ConectaBanco();
-        private string SanitizaQuery(string cmd){
-            if (cmd != null)
-                if (cmd.Contains("'")){
-                    cmd.Replace("'","*");
-                }
-            return cmd;
-        }
         private void EnviaComando(string query){
             if (ControllerBanco.AbreConexao() == true)
             {
@@ -93,7 +87,7 @@ namespace dicionario.Model
         }
         public void InsereLinha(string tabela, List<string> campos, List<string> valores)
         {
-            int temp = 0; 
+            string s; 
             string query = "INSERT INTO " + tabela + " (";
             foreach (string item in campos)
             {
@@ -104,23 +98,20 @@ namespace dicionario.Model
             query += ") VALUES(";
             foreach (string item in valores)
             {
-                if (int.TryParse(item, out temp)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
+                if (HelperBd.VerificaInt(item)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
                     query += item;
-                    query += ",";
                 }
                 else {
-                    if (Boolean.TryParse(item, out bool tempb)){
-                        if (tempb)
-                            query += "1,";
-                        else
-                            query += "0,";
+                    if (HelperBd.VerificaBool(item, out s)){
+                            query += s;
                     }
                     else {
                         query += "'";
-                        query += SanitizaQuery(item);
-                        query += "',";
+                        query += HelperBd.SanitizaString(item);
+                        query += "'";
                     }
                 }
+                query += ",";
             }
             query = query.Remove(query.Length - 1);
             query += ")";
@@ -128,29 +119,23 @@ namespace dicionario.Model
         }
         public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro = "")
         {
-            ///TODO: Analisar a strings contando os dados para que os valores boolean sejam corretamente adaptados para 0 ou 1
             string query = "UPDATE " + tabela + " SET ";
-            string temp1, temp2;
-            int dummy;
-            bool dummyb;
+            string temp1, temp2, s;
             while (campos.Count > 0)
             {
                 temp1 = campos.First();
                 temp2 = valores.First();
                 query += temp1 + "=";
-                 if (int.TryParse(temp2, out dummy)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
+                 if (HelperBd.VerificaInt(temp2)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
                     query += temp2;
                 }
                 else {
-                    if (Boolean.TryParse(temp2, out dummyb)){
-                        if (dummyb)
-                            query += "1";
-                        else
-                            query += "0";
+                    if (HelperBd.VerificaBool(temp2, out s)){
+                            query += s;
                     }
                     else {
                         query += "'";
-                        query += temp2;
+                        query += HelperBd.SanitizaString(temp2);
                         query += "'";
                     }
                 }
