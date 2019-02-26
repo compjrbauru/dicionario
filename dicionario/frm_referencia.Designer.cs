@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnNovo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtAutor = new System.Windows.Forms.TextBox();
@@ -45,6 +46,7 @@
             this.txtCodPSQ = new System.Windows.Forms.MaskedTextBox();
             this.btnPesquisa = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,6 +79,7 @@
             this.txtAutor.Name = "txtAutor";
             this.txtAutor.Size = new System.Drawing.Size(323, 26);
             this.txtAutor.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.txtAutor, "Digite o autor ou autores da referência");
             // 
             // label2
             // 
@@ -106,6 +109,7 @@
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(447, 26);
             this.txtDesc.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.txtDesc, "Digite uma descrição completa da obra referenciada por este código");
             // 
             // label4
             // 
@@ -147,6 +151,7 @@
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(100, 26);
             this.txtAno.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.txtAno, "Digite o ano de produção da referência");
             this.txtAno.ValidatingType = typeof(int);
             // 
             // txtCod
@@ -158,6 +163,7 @@
             this.txtCod.Name = "txtCod";
             this.txtCod.Size = new System.Drawing.Size(100, 26);
             this.txtCod.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.txtCod, "Insira o código da referência usando a máscara AAA999A");
             this.txtCod.ValidatingType = typeof(int);
             // 
             // btnProx
@@ -272,5 +278,6 @@
         private System.Windows.Forms.Button btnPesquisa;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox txtCodPSQ;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -525,6 +525,7 @@
             this.txtpalavra.Name = "txtpalavra";
             this.txtpalavra.Size = new System.Drawing.Size(248, 26);
             this.txtpalavra.TabIndex = 1;
+            this.tip_Dicas.SetToolTip(this.txtpalavra, "Digite a palavra ou conjunto de palavras que identificará está entrada");
             this.txtpalavra.Leave += new System.EventHandler(this.txtpalavra_Leave);
             // 
             // textCultura
@@ -939,6 +940,7 @@
             this.txtGramatica.Name = "txtGramatica";
             this.txtGramatica.Size = new System.Drawing.Size(375, 120);
             this.txtGramatica.TabIndex = 19;
+            this.tip_Dicas.SetToolTip(this.txtGramatica, "Informe neste campo se o lema possui alguma característica gramatical especial");
             // 
             // txtAcepcao
             // 
@@ -949,6 +951,7 @@
             this.txtAcepcao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtAcepcao.Size = new System.Drawing.Size(766, 107);
             this.txtAcepcao.TabIndex = 6;
+            this.tip_Dicas.SetToolTip(this.txtAcepcao, "Insira aqui alguma explicação que defina o lema");
             // 
             // ComboGenero
             // 
@@ -963,6 +966,7 @@
             this.ComboGenero.Name = "ComboGenero";
             this.ComboGenero.Size = new System.Drawing.Size(159, 28);
             this.ComboGenero.TabIndex = 5;
+            this.tip_Dicas.SetToolTip(this.ComboGenero, "Indique o gênero do lema");
             this.ComboGenero.SelectedIndexChanged += new System.EventHandler(this.ComboClasseGram_SelectedIndexChanged);
             this.ComboGenero.TextUpdate += new System.EventHandler(this.ComboClasseGram_TextUpdate);
             // 
@@ -978,6 +982,7 @@
             this.ComboIdioma.Name = "ComboIdioma";
             this.ComboIdioma.Size = new System.Drawing.Size(137, 28);
             this.ComboIdioma.TabIndex = 3;
+            this.tip_Dicas.SetToolTip(this.ComboIdioma, "Defina o idioma do lema");
             // 
             // ComboClasseGram
             // 
@@ -988,6 +993,7 @@
             this.ComboClasseGram.Name = "ComboClasseGram";
             this.ComboClasseGram.Size = new System.Drawing.Size(159, 28);
             this.ComboClasseGram.TabIndex = 4;
+            this.tip_Dicas.SetToolTip(this.ComboClasseGram, "Determine a classe gramatical.\r\nDigite um texto para buscar registros existentes");
             this.ComboClasseGram.SelectedIndexChanged += new System.EventHandler(this.ComboClasseGram_SelectedIndexChanged);
             this.ComboClasseGram.TextUpdate += new System.EventHandler(this.ComboClasseGram_TextUpdate);
             // 
@@ -1115,6 +1121,8 @@
             this.ComboRubrica.Name = "ComboRubrica";
             this.ComboRubrica.Size = new System.Drawing.Size(375, 28);
             this.ComboRubrica.TabIndex = 9;
+            this.tip_Dicas.SetToolTip(this.ComboRubrica, "Indique qual a rubrica da entrada atual.\r\nDigite um texto para buscar registros e" +
+        "xistentes");
             this.ComboRubrica.SelectedIndexChanged += new System.EventHandler(this.ComboRubrica_SelectedIndexChanged);
             this.ComboRubrica.TextUpdate += new System.EventHandler(this.ComboRubrica_TextUpdate);
             // 
@@ -1254,6 +1262,7 @@
             this.numAcepcao.Name = "numAcepcao";
             this.numAcepcao.Size = new System.Drawing.Size(39, 26);
             this.numAcepcao.TabIndex = 2;
+            this.tip_Dicas.SetToolTip(this.numAcepcao, "Defina o número de acepção do lema");
             this.numAcepcao.Value = new decimal(new int[] {
             1,
             0,
@@ -1294,6 +1303,8 @@
             this.comboRef.Name = "comboRef";
             this.comboRef.Size = new System.Drawing.Size(385, 28);
             this.comboRef.TabIndex = 8;
+            this.tip_Dicas.SetToolTip(this.comboRef, "Determine qual é a origem bibliográfica do exemplo de uso.\r\nDigite um texto para " +
+        "buscar registros existentes");
             this.comboRef.SelectedIndexChanged += new System.EventHandler(this.comboRef_SelectedIndexChanged);
             this.comboRef.TextUpdate += new System.EventHandler(this.comboRef_TextUpdate);
             // 
@@ -1376,6 +1387,7 @@
             this.txtExemplo.Name = "txtExemplo";
             this.txtExemplo.Size = new System.Drawing.Size(385, 26);
             this.txtExemplo.TabIndex = 10;
+            this.tip_Dicas.SetToolTip(this.txtExemplo, "Digite um exemplo de uso do lema na língua do mesmo");
             // 
             // txtExemploT
             // 

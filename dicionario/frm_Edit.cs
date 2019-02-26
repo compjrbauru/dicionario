@@ -30,7 +30,7 @@ namespace dicionario
         private List<Referencia> resRef = new List<Referencia>();
         private List<Palavra> resEq = new List<Palavra>();
         private List<CategoriaGramatical> resCtg;
-        private CategoriaGramatical ctg;
+        //private CategoriaGramatical ctg;
 
         private void EditForm_Load(object sender, EventArgs e)
         {
@@ -192,7 +192,10 @@ namespace dicionario
                     default:
                         break;
                 }
-                resultados  = crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema='" + searchBox.Text + "'");
+                if (ComboFiltroPrecisao.Text == "Precisamente")
+                    resultados  = crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema='" + searchBox.Text + "'");
+                else
+                    resultados = crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema LIKE '%" + searchBox.Text + "%'");
                 if (resultados.Count > 0)
                 {
                     resPalavra = Palavra.ConverteObject(resultados);
@@ -424,14 +427,14 @@ namespace dicionario
             if (pesquisa.Length <= 3)
             {
                 resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
-                foreach (ClasseGramatical c in resClg)
-                {
-                    ComboClasseGram.Items.Add(c.descricao);
-                }
             }
-
-            /*else
-                resultados = crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
+            else{
+                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
+            }
+            foreach (ClasseGramatical c in resClg)
+            {
+                ComboClasseGram.Items.Add(c.descricao);
+            }
             timerClg.Enabled = false; //prevenindo de floodar a combo
         }
 
@@ -446,19 +449,13 @@ namespace dicionario
             if (pesquisa.Length <= 3)
             {
                 resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
-                List<string> d = new List<string>();
-                foreach(Rubrica r in resRubrica)
-                {
-                    d.Add(r.descricao);
-                }
-                foreach(string s in d)
-                {
-                    ComboRubrica.Items.Add(s);
-                }
             }
-
-            /*else
-                resultados = crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
+            else
+                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
+            foreach (Rubrica r in resRubrica)
+            {
+                ComboRubrica.Items.Add(r.descricao);
+            }
             timerRub.Enabled = false; //prevenindo de floodar a combo
         }
 
@@ -515,14 +512,9 @@ namespace dicionario
             if (pesquisa.Length >= 5)
             {
                 resRef = Referencia.ConverteObject(crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Descricao LIKE '%" + pesquisa + "%'", "LIMIT 10"));
-                List<string> d = new List<string>();
                 foreach (Referencia re in resRef)
                 {
-                    d.Add(re.descricao);
-                }
-                foreach(string s in d)
-                {
-                    comboRef.Items.Add(s);
+                    comboRef.Items.Add(re.descricao);
                 }
             }
 

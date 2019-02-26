@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNovo = new System.Windows.Forms.Button();
             this.txtDesc = new System.Windows.Forms.TextBox();
@@ -36,6 +37,7 @@
             this.btnApaga = new System.Windows.Forms.Button();
             this.btnSalva = new System.Windows.Forms.Button();
             this.btnPesquisa = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -67,6 +69,7 @@
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(365, 26);
             this.txtDesc.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.txtDesc, "Digite neste campo a forma por extenso da rubrica representada pela sigla");
             // 
             // label2
             // 
@@ -86,6 +89,8 @@
             this.txtSigla.Name = "txtSigla";
             this.txtSigla.Size = new System.Drawing.Size(100, 26);
             this.txtSigla.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.txtSigla, "Digite a sigla que vai identificar esta rubrica.\r\nUtilize este campo para pesquis" +
+        "ar entradas já existentes no no banco de dados");
             // 
             // btnApaga
             // 
@@ -150,5 +155,6 @@
         private System.Windows.Forms.Button btnApaga;
         private System.Windows.Forms.Button btnSalva;
         private System.Windows.Forms.Button btnPesquisa;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

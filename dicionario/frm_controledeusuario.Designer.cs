@@ -102,7 +102,7 @@
             // txtRSoc
             // 
             this.txtRSoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtRSoc.Location = new System.Drawing.Point(285, 140);
+            this.txtRSoc.Location = new System.Drawing.Point(285, 88);
             this.txtRSoc.MaxLength = 11;
             this.txtRSoc.Name = "txtRSoc";
             this.txtRSoc.Size = new System.Drawing.Size(183, 26);
@@ -111,7 +111,7 @@
             // txtCpf
             // 
             this.txtCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtCpf.Location = new System.Drawing.Point(285, 90);
+            this.txtCpf.Location = new System.Drawing.Point(285, 138);
             this.txtCpf.MaxLength = 45;
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(183, 26);
