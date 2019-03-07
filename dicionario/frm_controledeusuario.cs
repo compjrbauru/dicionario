@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dicionario.Model;
+using dicionario.Helpers;
 
 namespace dicionario
 {
@@ -89,9 +90,18 @@ namespace dicionario
         { 
             //campos não nulos: usuario, senha, nivel de permissão, email e cpf
             if (txtusr.Text == "" || txtpass.Text == "" || txtEmail.Text==""||txtCpf.Text=="")
-                MessageBox.Show("Campos obrigatórios não foram preenchidos.");
+                InformaDiag.Erro("Campos obrigatórios não foram preenchidos.");
             else
             {
+                bool edicao;
+                if (usr.cpf != "")
+                {
+                    edicao = true;
+                }
+                else
+                {
+                    edicao = false;
+                }
                 usr.usr = txtusr.Text;
                 usr.pass = txtpass.Text;
 
@@ -102,7 +112,16 @@ namespace dicionario
                 usr.rsocial = txtRSoc.Text;
                 usr.cpf = txtCpf.Text;
                 usr.contato = txtContato.Text;
-                c.InsereLinha("usr", Usuario.ToListTabela(),usr.ToListValores());
+                if (edicao)
+                {
+                    c.UpdateLine(tabelasBd.USUARIOS, Usuario.ToListTabela(), usr.ToListValores());
+                }
+                else
+                {
+                    c.InsereLinha(tabelasBd.USUARIOS, Usuario.ToListTabela(), usr.ToListValores());
+                }
+                
+                InformaDiag.InformaSalvo();
                 LimpaCampo();
             }
         }
@@ -119,22 +138,22 @@ namespace dicionario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Tem certeza?", "Confirmação", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (InformaDiag.ConfirmaSN("Tem certeza?") == DialogResult.Yes)
             {
-                c.ApagaLinha("usr", "usr='" + txtusr.Text+"'");
+                c.ApagaLinha(tabelasBd.USUARIOS, "usr='" + txtusr.Text+"'");
             }
         }
 
         private void txtBuscaCpf_Click(object sender, EventArgs e)
         {
-            List<Usuario> resultado = Usuario.ConverteObject(c.SelecionarTabela("usr", Usuario.ToListTabela(),"cpf='"+txtCpf.Text+"'"));
+            List<Usuario> resultado = Usuario.ConverteObject(c.SelecionarTabela(tabelasBd.USUARIOS, Usuario.ToListTabela(),"cpf='"+txtCpf.Text+"'"));
             if (resultado.Count > 0)
             {
                 usr = resultado.First();
                 MostraModel();
             }
             else
-                MessageBox.Show("Nenhum usuário encontrado.");
+                InformaDiag.Informa("Nenhum usuário encontrado.");
         }
 
         private void btnMostraSenha_MouseDown(object sender, MouseEventArgs e)
@@ -151,7 +170,7 @@ namespace dicionario
         {
             if (txtusr.Text != usr.usr || txtpass.Text != usr.pass || txtEmail.Text != usr.email || converteAutorizacao() != usr.permissao || txtCpf.Text != usr.cpf)
             {
-                if (MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                if (InformaDiag.ConfirmaSN("Existem dados não salvos que serão perdidos. \n Deseja continuar?") == DialogResult.Yes)
                 {
                     LimpaCampo();
                     LimpaModel();

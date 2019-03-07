@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dicionario.Model;
+using dicionario.Helpers;
 
 namespace dicionario
 {
@@ -193,9 +194,9 @@ namespace dicionario
                         break;
                 }
                 if (ComboFiltroPrecisao.Text == "Precisamente")
-                    resultados  = crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema='" + searchBox.Text + "'");
+                    resultados  = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema='" + searchBox.Text + "'");
                 else
-                    resultados = crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema LIKE '%" + searchBox.Text + "%'");
+                    resultados = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema LIKE '%" + searchBox.Text + "%'");
                 if (resultados.Count > 0)
                 {
                     resPalavra = Palavra.ConverteObject(resultados);
@@ -213,7 +214,7 @@ namespace dicionario
                 }
                 else
                 {
-                    MessageBox.Show("Nenhum resultado adequado encontrado.");
+                    InformaDiag.Erro("Nenhum resultado adequado encontrado.");
                 }
             }
         }
@@ -222,7 +223,7 @@ namespace dicionario
         {
             if (p.id <= 0 && txtpalavra.Text != "")
             {
-                if (MessageBox.Show("Existem dados não salvos. Caso prossiga com a operação, todos os dados" + '\n' + "digitados serão perdidos. Continuar mesmo assim?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                if (InformaDiag.ConfirmaSN("Existem dados não salvos. Caso prossiga com a operação, todos os dados" + '\n' + "digitados serão perdidos. Continuar mesmo assim?") == DialogResult.No)
                     return;
             }
             LimpaCampos();
@@ -230,12 +231,10 @@ namespace dicionario
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
-        //NOTE: Se houver problemas ao salvar, foi criado um INDEX na tabela com o nome Lema_UNIQUE
         {
-
             if(txtpalavra.Text == String.Empty)
             {
-                MessageBox.Show("Palavra não pode ser vazio!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                InformaDiag.Erro("Palavra não pode ser vazio!");
                 return;
             }
             //if (txtpalavra.Text.Contains('{') || txtpalavra.Text.Contains('}')) { }
@@ -285,31 +284,32 @@ namespace dicionario
                 {
                     List<Conjugacao> lconj = new List<Conjugacao>();
                     Conjugacao conjugacao = new Conjugacao { preterito = "", presente = "", futuro = "" };
-                    crud.InsereLinha("conjugacao",Conjugacao.ToListTabela(), conjugacao.ToListValores());
+                    crud.InsereLinha(tabelasBd.CONJUGACAO,Conjugacao.ToListTabela(), conjugacao.ToListValores());
                     lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
                     p.id_conjuga = lconj.First().id;
                 }
                 else
                 {
                     List<Palavra> ltemp = new List<Palavra>();
-                    ltemp = Palavra.ConverteObject(crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema = '"+p.lema+"'", "LIMIT 2 "));
+                    ltemp = Palavra.ConverteObject(crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema = '"+p.lema+"'", "LIMIT 2 "));
                     p.id_conjuga = ltemp.First().id_conjuga;
                 }
-                crud.InsereLinha("palavra", Palavra.ToListTabela(), p.ToListValores());
+                crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
             }
             else
-                crud.UpdateLine("palavra", Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
+                crud.UpdateLine(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
             //Uma excessão pode ser lançda aqui quando os valores das chaves estrangerias forem <1, pois estão refernciando um valor que não existe. Como o int no c# não cabe um NULL, seria melhor não enviar o tal valor que evitamos o problema
+            InformaDiag.Informa("Salvo!");
             LimpaCampos();
         }
 
         private void btnApaga_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar"+ '\n' + "Prosseguir?", "Confirmação",MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (InformaDiag.ConfirmaSN("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar"+ '\n' + "Prosseguir?") == DialogResult.Yes)
             {
-                if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                if (InformaDiag.ConfirmaOkCancel("Esta ação é irreversível! Confirme a exculsão.") == DialogResult.OK)
                 {
-                    crud.ApagaLinha("palavra", "Id=" + p.id.ToString());
+                    crud.ApagaLinha(tabelasBd.PALAVRA, "Id=" + p.id.ToString());
                     if (resPalavra.Count > 1)
                     {
                         resPalavra.Remove(p);
@@ -426,10 +426,10 @@ namespace dicionario
             }
             if (pesquisa.Length <= 3)
             {
-                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
             }
             else{
-                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
             }
             foreach (ClasseGramatical c in resClg)
             {
@@ -448,10 +448,10 @@ namespace dicionario
             }
             if (pesquisa.Length <= 3)
             {
-                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
             }
             else
-                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
             foreach (Rubrica r in resRubrica)
             {
                 ComboRubrica.Items.Add(r.descricao);
@@ -464,7 +464,7 @@ namespace dicionario
             string pesquisa = comboEquiv.Text;
             if (comboEquiv.Items.Count > 0)
                 comboEquiv.Items.Clear();
-            resEq = Palavra.ConverteObject(crud.SelecionarTabela("palavra", Palavra.ToListTabela(true), "lema LIKE '" + pesquisa + "%'", "LIMIT 20"));
+            resEq = Palavra.ConverteObject(crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema LIKE '" + pesquisa + "%'", "LIMIT 20"));
             foreach (Palavra peq in resEq)
             {
                 pesquisa = peq.lema + " Acepção " + peq.acepcao.ToString();
@@ -511,7 +511,7 @@ namespace dicionario
             }
             if (pesquisa.Length >= 5)
             {
-                resRef = Referencia.ConverteObject(crud.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Descricao LIKE '%" + pesquisa + "%'", "LIMIT 10"));
+                resRef = Referencia.ConverteObject(crud.SelecionarTabela(tabelasBd.REFERENCIAS, Referencia.ToListTabela(true), "Descricao LIKE '%" + pesquisa + "%'", "LIMIT 10"));
                 foreach (Referencia re in resRef)
                 {
                     comboRef.Items.Add(re.descricao);
@@ -580,7 +580,7 @@ namespace dicionario
             }
             else
             {
-                MessageBox.Show("Salve as alterações antes de acessar as conjugações", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                InformaDiag.Informa("Salve as alterações antes de acessar as conjugações");
             }
         }
 

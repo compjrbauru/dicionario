@@ -10,6 +10,16 @@ using dicionario.Helpers;
 
 namespace dicionario.Model
 {
+    class tabelasBd
+    {
+        public const string PALAVRA = "palavra";
+        public const string CLASSE_GRAMATICAL = "classegram";
+        public const string RUBRICA = "rubrica";
+        public const string REFERENCIAS = "referencias";
+        public const string USUARIOS = "usr";
+        public const string CONJUGACAO = "conjugacao";
+        public const string EQUIVALENTE = "equivalente";
+    }
     internal class ConectaBanco
     {
         protected string servidor;
@@ -42,13 +52,13 @@ namespace dicionario.Model
                     switch (ex.ErrorCode)
                     {
                         case 0:
-                            MessageBox.Show("Falha ao conectar no servidor de dados.");
+                            InformaDiag.Erro("Falha ao conectar no servidor de dados.");
                             break;
                         case 1045:
-                            MessageBox.Show("A combinação de usuário e senha não existe. Tente novamente.");
+                            InformaDiag.Erro("A combinação de usuário e senha não existe. Tente novamente.");
                             break;
                         default:
-                            MessageBox.Show("Erro" + ex.Code.ToString() + ex.Message);
+                            InformaDiag.Erro("Erro" + ex.Code.ToString() + ex.Message);
                             break;
                     }
                    
@@ -65,7 +75,7 @@ namespace dicionario.Model
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                InformaDiag.Erro(ex.Message);
                 return false;
             }
         }
@@ -75,8 +85,8 @@ namespace dicionario.Model
         }
     }
     class CRUD{
-        //private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
-        private ConectaBanco ControllerBanco = new ConectaBanco();
+        private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
+        //private ConectaBanco ControllerBanco = new ConectaBanco();
         private void EnviaComando(string query){
             if (ControllerBanco.AbreConexao() == true)
             {

@@ -38,7 +38,7 @@ namespace dicionario
             }
             catch (IOException)
             {
-                MessageBox.Show("Erro ao liberar o arquivo");
+                InformaDiag.Erro("Erro ao liberar o arquivo");
                 return 1;
             }
             return 0;
@@ -89,7 +89,7 @@ namespace dicionario
                                 //varificar dimensao antes de prosseguir
                                 if (divisor.Count() != v)
                                 {
-                                    MessageBox.Show("A quantidade de colunas da entrada é diferente do destino.\nOperação Abortada.", "Erro fatal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    InformaDiag.Erro("A quantidade de colunas da entrada é diferente do destino.\nOperação Abortada.");
                                     progressBar1.MarqueeAnimationSpeed = 0;
                                     BtnStart.Enabled = false;
                                     LiberaArquivo(leitor);
@@ -102,7 +102,7 @@ namespace dicionario
                                         dataGridView1.Columns.Add(divisor[i], divisor[i]);
                                     else
                                     {
-                                        MessageBox.Show("A coluna " + divisor[i] + " do arquivo importado deveria ser nomeada " + ptlt.ElementAt(i) + ".\nOperação Abortada!");
+                                        InformaDiag.Erro("A coluna " + divisor[i] + " do arquivo importado deveria ser nomeada " + ptlt.ElementAt(i) + ".\nOperação Abortada!");
                                         dataGridView1.Columns.Clear();
                                         progressBar1.MarqueeAnimationSpeed = 0;
                                         BtnStart.Enabled = false;
@@ -135,7 +135,7 @@ namespace dicionario
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("O arquivo está inacessível no momento.\nTente novamente mais tarde.");
+                    InformaDiag.Erro("O arquivo está inacessível no momento.\nTente novamente mais tarde.");
                     return;
                 }
                 BtnStart.Enabled = false;
@@ -144,19 +144,18 @@ namespace dicionario
                 BtnGrava.Enabled = true;
                 ComboTable.Enabled = false;
                 progressBar1.MarqueeAnimationSpeed = 0;
-                
-                
+ 
             }
             else
             {
-                MessageBox.Show("Escolha uma tabela destino");
+                InformaDiag.Informa("Escolha uma tabela destino");
             }
             
         }
 
         private void BtnCancela_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Você tem certeza que deseja apagar todos os dados não salvos?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            if (InformaDiag.ConfirmaSN("Você tem certeza que deseja apagar todos os dados não salvos?") == DialogResult.Yes)
             {
                 progressBar1.MarqueeAnimationSpeed = 50;
                 dataGridView1.Rows.Clear();
@@ -308,15 +307,15 @@ namespace dicionario
         }
         private void ErroCast()
         {
-            MessageBox.Show("Erro na conversão. Tipo de dado divergente ou inválido.\nO registro será ignorado na importação");
+            InformaDiag.Erro("Erro na conversão. Tipo de dado divergente ou inválido.\nO registro será ignorado na importação");
         }
         private void BtnGrava_Click(object sender, EventArgs e)
         {
 
-                if (MessageBox.Show("Você tem certeza que deseja continuar?\n" + "Todos os dados válidos da tabela serão salvos no Banco de Dados!", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (InformaDiag.ConfirmaSN("Você tem certeza que deseja continuar?\n" + "Todos os dados válidos da tabela serão salvos no Banco de Dados!") == DialogResult.Yes)
                 {
                     if (importador(ComboTable.Text) == 1)
-                        MessageBox.Show("Houveram erros na importação e alguns registros foram ignorados.");
+                       InformaDiag.Informa("Houveram erros na importação e alguns registros foram ignorados.");
                     BtnProcura.Enabled = true;
                     LblArquivo.Text = "Nenhum arquivo selecionado";
                     progressBar1.MarqueeAnimationSpeed = 0;

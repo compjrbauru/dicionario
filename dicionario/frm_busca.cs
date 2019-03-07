@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dicionario.Model;
+using dicionario.Helpers;
 
 namespace dicionario
 {
     public partial class frm_busca : Form
     {
-        /*frm_Edit objEditForm;
-        frm_configuracao configForm;*/
-        List<Palavra> resultadosPalavra;
+        List<Palavra> resultadosPalavra, similares;
         CRUD cRUD = new CRUD();
         public frm_busca()
         {
@@ -41,7 +40,7 @@ namespace dicionario
             List<object[]> lista = new List<object[]>();
             if (searchBox.Text == "")
             {
-                MessageBox.Show("A caixa de busca não pode estar vazia!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                InformaDiag.Erro("A caixa de busca não pode estar vazia!");
                 return;
             }
             string filtro = "";
@@ -89,17 +88,34 @@ namespace dicionario
                     searchResultsListBox.Items.Add(conjunto);
                     for (i=0; i<divisores[c]; i++) {
                         temPal = resultadosPalavra.ElementAt(i);
-                        filtro = temPal.lema + " Entrada " + temPal.acepcao.ToString();
+                        filtro = temPal.lema + " Acep." + temPal.acepcao.ToString() + " " + temPal.Id_classeGram + "\"" + temPal.referencia_exemplo + "\"" + "\"" + temPal.ref_ex_tr + "\"" + temPal.referencia_verbete;
                         searchResultsListBox.Items.Add(filtro);
                     }
                     c++;
                 }
                 searchResultsListBox.Enabled = true;
+
+                similares = Palavra.ConverteObject(cRUD.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "referencia_exemplo LIKE '" + searchBox.Text + "'"));
+                if (similares.Count > 0)
+                {
+                    foreach (Palavra p in similares)
+                    {
+                        similarListBox.Items.Add(p.lema);
+                    }
+                } else
+                {
+                    similarListBox.Items.Clear();
+                    similarListBox.Items.Add("Não há entradas similares além das pesquisadas.");
+                    similarListBox.Enabled = false;
+                }
+                similarListBox.Enabled = true;
             }
             else
             {
+                similarListBox.Items.Clear();
                 searchResultsListBox.Items.Add("Nenhum resultado encontrado. Verifique seus critérios de pesquisa!");
                 searchResultsListBox.Enabled = false;
+                similarListBox.Enabled = false;
             }
             this.searchResultsListBox.Show();
         }
@@ -141,11 +157,6 @@ namespace dicionario
             Login l = new Login(new frm_Edit());
             l.ShowDialog();
             l.Dispose();
-
-            /*this.objEditForm = new frm_Edit();
-            this.objEditForm.Show(this);
-            this.objEditForm.BringToFront();
-            this.Hide();*/
         }
 
         private void extraFilterCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -190,6 +201,14 @@ namespace dicionario
             frm_visualizaverbete _Visualizaverbete = new frm_visualizaverbete(r);
             _Visualizaverbete.ShowDialog();
         }
+
+        private void similarListBox_DoubleClick(object sender, EventArgs e)
+        {
+            List<Palavra> r = new List<Palavra>();
+            r.Add(similares.ElementAt(similarListBox.SelectedIndex));
+            frm_visualizaverbete _Visualizaverbete = new frm_visualizaverbete(r);
+            _Visualizaverbete.ShowDialog();
+        }
         private string PegaInformacoes (string s, out int nAcepcaoSel)
         {
             string retorno = "";
@@ -210,6 +229,12 @@ namespace dicionario
             retorno = retorno.Remove(retorno.Length - 1);
             nAcepcaoSel = int.Parse(lemas[++ac]);
             return retorno;
+        }
+
+        private void frm_busca_Resize(object sender, EventArgs e)
+        {
+            searchResultsListBox.Size = new Size(this.Size.Width - 212, this.Size.Height - 242);
+            similarListBox.Size = new Size(146, this.Size.Height - 242);//tamanho padrão 388*208
         }
     }
 }
