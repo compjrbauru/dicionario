@@ -22,13 +22,43 @@ namespace dicionario.Model
 
         public List<string> ToListValores()
         {
-            List<string> r = new List<string>();
-            r.Add(origem.ToString());
-            r.Add(destino.ToString());
-            r.Add(heterotonico.ToString());
-            r.Add(heterossemantico.ToString());
-            r.Add(heterogenerico.ToString());
+            List<string> r = null;
+            if (destino > 0 && origem > 0 && origem != destino){
+                r = new List<string>{
+                    origem.ToString(),
+                    destino.ToString(),
+                    heterotonico.ToString(),
+                    heterossemantico.ToString(),
+                    heterogenerico.ToString()
+                };
+            }
             return r;
+        }
+
+        public void SetDestino(int d)
+        {
+            if (origem != d)
+                destino = d;
+            else
+                InvalidarDestino();
+        }
+
+        public void SetOrigem(int o)
+        {
+            if (destino != o)
+                origem = o;
+            else
+                InvalidarOrigem();
+        }
+
+        public void InvalidarDestino()
+        {
+            destino = -1;
+        }
+
+        public void InvalidarOrigem()
+        {
+            origem = -1;
         }
 
         public static List<Equivalente> ConverteObject(List<object[]> entrada){

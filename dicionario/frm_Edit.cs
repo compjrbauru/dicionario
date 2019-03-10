@@ -29,9 +29,7 @@ namespace dicionario
         private List<Rubrica> resRubrica = new List<Rubrica>();
         private List<ClasseGramatical> resClg = new List<ClasseGramatical>();
         private List<Referencia> resRef = new List<Referencia>();
-        private List<Palavra> resEq = new List<Palavra>();
         private List<CategoriaGramatical> resCtg;
-        //private CategoriaGramatical ctg;
 
         private void EditForm_Load(object sender, EventArgs e)
         {
@@ -39,11 +37,7 @@ namespace dicionario
         private void LimpaCampos()
         {
             txtAcepcao.Text = "";
-            comboEquiv.Text = "";
             txtGramatica.Text = "";
-            chkHeterogenerico.Checked = false;
-            chkHeterotonico.Checked = false;
-            chkHeterossemantico.Checked = false;
             txtpalavra.Text = "";
             comboRef.SelectedIndex = -1;
             comboRef.Text = "";
@@ -58,6 +52,9 @@ namespace dicionario
             txtExemploT.Text = "";
             txtExemplo.Text = "";
             textCultura.Text = "";
+
+            btnEquiv.Enabled = false;
+            btnConjuga.Enabled = false;
         }
         private void LimpaModel()
         {
@@ -108,22 +105,9 @@ namespace dicionario
                 ComboRubrica.Text = rb.descricao;
             }
 
-            chkHeterogenerico.Checked = p.heterogenerico;
-            chkHeterotonico.Checked = p.heterotonico;
-            chkHeterossemantico.Checked = p.heterossemantico;
             numAcepcao.Value = p.acepcao; ///FIXME:bloquear a troca?
             textCultura.Text = p.nota_cultura;
-            txtGramatica.Text = p.notas_gramatica;
-            if (p.equivalente_pluriv != "{-1}")
-            {
-                comboEquiv.Visible = false;
-                btnEquiv.Visible = true;
-            }
-            else
-            {
-                comboEquiv.Visible = true;
-                btnEquiv.Visible = false;
-            }
+            txtGramatica.Text = p.notas_gramatica;            
             switch (p.Genero) {
                 case "M":
                     ComboGenero.SelectedIndex = 0;
@@ -137,6 +121,8 @@ namespace dicionario
                 default:
                     break;
             }
+            btnEquiv.Enabled = true;
+            btnConjuga.Enabled = true;
         }
         private void AtivaNavegadores() {
             btnPrimeiro.Enabled = true;
@@ -258,11 +244,8 @@ namespace dicionario
             }
             p.idioma = lng;
             p.acepcao = (int)numAcepcao.Value;
-            p.heterogenerico = chkHeterogenerico.Checked;
-            p.heterotonico = chkHeterotonico.Checked;
             p.notas_gramatica = txtGramatica.Text;
             p.nota_cultura = textCultura.Text;
-            p.heterossemantico = chkHeterossemantico.Checked;
             p.referencia_exemplo = txtExemplo.Text;
             p.ref_ex_tr = txtExemploT.Text;
             switch (ComboGenero.SelectedIndex)
@@ -363,42 +346,6 @@ namespace dicionario
             rf.ShowDialog();
         }
 
-        private void ComboCatGram_TextUpdate(object sender, EventArgs e)
-        {
-            if (timerCtg.Enabled == true) { timerCtg.Enabled = false; timerCtg.Enabled = true; } else timerCtg.Enabled = true;
-            // pesquisar itens, se o tmanho = 3, bscar sigla. Caso maior, pesquisar descrição
-            //preencher o combobox.itens.add com cada item
-            //ver como funciona o autocomplete
-            //colocar o selected index com o valor do ID do item selecionado          
-        }
-
-        private void timerCtg_Tick(object sender, EventArgs e)
-        {
-            string pesquisa;
-            pesquisa = ComboClasseGram.Text;
-            if (ComboClasseGram.Items.Count > 0)
-            {
-                ComboClasseGram.Items.Clear();
-            }
-            if (pesquisa.Length <= 3)
-            {
-                resCtg = CategoriaGramatical.ConverteObject(crud.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
-                List<string> d = new List<string>();
-                foreach (CategoriaGramatical c in resCtg)
-                {
-                    d.Add(c.descricao);
-                }
-                foreach (string o in d)
-                {
-                    ComboClasseGram.Items.Add(o);
-                }
-            }
-
-            /*else
-                resultados = crud.SelecionarTabela("categoriagram", CategoriaGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10");*/
-            timerCtg.Enabled = false; //prevenindo de floodar a combo
-        }
-
         private void ComboClasseGram_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ComboClasseGram.Text != "")
@@ -459,34 +406,6 @@ namespace dicionario
             timerRub.Enabled = false; //prevenindo de floodar a combo
         }
 
-        private void timerEquiv_Tick(object sender, EventArgs e)
-        {
-            string pesquisa = comboEquiv.Text;
-            if (comboEquiv.Items.Count > 0)
-                comboEquiv.Items.Clear();
-            resEq = Palavra.ConverteObject(crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema LIKE '" + pesquisa + "%'", "LIMIT 20"));
-            foreach (Palavra peq in resEq)
-            {
-                pesquisa = peq.lema + " Acepção " + peq.acepcao.ToString();
-                comboEquiv.Items.Add(pesquisa);
-            }
-            timerEquiv.Enabled = false;
-        }
-
-        private void comboEquiv_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboEquiv.Text != "")
-            {
-                Palavra Eq = resEq.ElementAt(comboEquiv.SelectedIndex);
-                p.equivalente = Eq.id;
-            }
-        }
-
-        private void comboEquiv_TextUpdate(object sender, EventArgs e)
-        {
-            if (timerEquiv.Enabled == true) { timerEquiv.Enabled = false; timerEquiv.Enabled = true; } else timerEquiv.Enabled = true;
-        }
-
         private void ComboRubrica_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ComboRubrica.Text != "")
@@ -531,7 +450,6 @@ namespace dicionario
                 p.referencia_verbete = refere.id;
 
             }
-                //p.referencia_verbete = int.Parse(resultados[0].ElementAt(resultados[1].IndexOf(comboRef.Text)));
         }
 
         private void comboRef_TextUpdate(object sender, EventArgs e)
@@ -539,36 +457,10 @@ namespace dicionario
             if (timerRef.Enabled == true) { timerRef.Enabled = false; timerRef.Enabled = true; } else timerRef.Enabled = true;
         }
 
-        private void txtpalavra_Leave(object sender, EventArgs e)
-        {
-            if (txtpalavra.Text.Contains(' ') && txtpalavra.Text.Last()!= ' ')
-            {
-                btnEquiv.Visible = true;
-                comboEquiv.Visible = false;
-            }
-            else
-            {
-                btnEquiv.Visible = false;
-                comboEquiv.Visible = true;
-            }
-        }
-
         private void btnEquiv_Click(object sender, EventArgs e)
         {
-            string[] lemas = txtpalavra.Text.Split(' ');
-            List<int> saidas = new List<int>();
-            diag_equivalente diag;
-            for (int i = 0; i < lemas.Count(); i++)
-            {
-                diag = new diag_equivalente(lemas[i]);
-                diag.ShowDialog();
-                if (diag.DialogResult == DialogResult.OK)
-                    saidas.Add(diag.selecionado);
-                else
-                    saidas.Add(-1);
-                diag.Dispose();
-            }
-            p.EditRelacoesPluri(saidas);
+            frm_Equivalente feq = new frm_Equivalente(p);
+            feq.ShowDialog();
         }
 
         private void btnConjuga_Click(object sender, EventArgs e)

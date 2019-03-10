@@ -72,7 +72,8 @@ namespace dicionario
                         ptlt = Referencia.ToListTabela();
                         break;
                     default:
-                        throw new Exception("Não implementado");
+                        InformaDiag.Erro("Não implementado");
+                        break;
                         
                 }
                 try
@@ -186,7 +187,7 @@ namespace dicionario
                     valores.Insert(i,saida);
                 }
             }
-            if (tabela == "palavra"){
+            if (tabela == tabelasBd.PALAVRA){
                 List<string> FKs = new List<string>();
                 int idx, c = 0;
                 bool[] fila = { false, false, false};
@@ -307,7 +308,7 @@ namespace dicionario
         }
         private void ErroCast()
         {
-            InformaDiag.Erro("Erro na conversão. Tipo de dado divergente ou inválido.\nO registro será ignorado na importação");
+            listErros.Items.Add("Tipo de dado divergente ou inválido");
         }
         private void BtnGrava_Click(object sender, EventArgs e)
         {
@@ -332,16 +333,16 @@ namespace dicionario
             switch (NomeTabela)
             {
                 case "Palavra":
-                    NomeTabela = "palavra";
+                    NomeTabela = tabelasBd.PALAVRA;
                     break;
                 case "Classe Gramatical":
-                    NomeTabela = "classegram";
+                    NomeTabela = tabelasBd.CLASSE_GRAMATICAL;
                     break;
                 case "Rubrica":
-                    NomeTabela = "rubrica";
+                    NomeTabela = tabelasBd.RUBRICA;
                     break;
                 case "Referência":
-                    NomeTabela = "referencias";
+                    NomeTabela = tabelasBd.REFERENCIAS;
                     break;
             }
             string temp="", query = "";
@@ -352,7 +353,15 @@ namespace dicionario
             BtnStart.Enabled = false;
             BtnProcura.Enabled = false;
 
-            dataGridView1.Rows.CopyTo(linhas, 0);
+            try
+            {
+                dataGridView1.Rows.CopyTo(linhas, 0);
+            }
+            catch(OutOfMemoryException)
+            {
+                InformaDiag.Erro("Memória esgotada!\nTente novamente importando menos registros.");
+            }
+
             for (int i = 0; i < dataGridView1.RowCount - 1; i++)
             {
                 linhas[i].Cells.CopyTo(cell, 0);

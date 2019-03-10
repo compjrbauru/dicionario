@@ -45,7 +45,6 @@
             this.label_cult = new System.Windows.Forms.Label();
             this.label_grammar = new System.Windows.Forms.Label();
             this.label_acep = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label_catgrama = new System.Windows.Forms.Label();
             this.lblGenero = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -67,19 +66,15 @@
             this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tip_Dicas = new System.Windows.Forms.ToolTip(this.components);
             this.numAcepcao = new System.Windows.Forms.NumericUpDown();
+            this.comboRef = new System.Windows.Forms.ComboBox();
+            this.txtExemplo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.timerCtg = new System.Windows.Forms.Timer(this.components);
             this.timerClg = new System.Windows.Forms.Timer(this.components);
             this.timerRub = new System.Windows.Forms.Timer(this.components);
-            this.comboRef = new System.Windows.Forms.ComboBox();
             this.timerRef = new System.Windows.Forms.Timer(this.components);
             this.ComboFiltroPrecisao = new System.Windows.Forms.ComboBox();
-            this.chkHeterossemantico = new System.Windows.Forms.CheckBox();
-            this.chkHeterotonico = new System.Windows.Forms.CheckBox();
-            this.chkHeterogenerico = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtExemplo = new System.Windows.Forms.TextBox();
             this.txtExemploT = new System.Windows.Forms.TextBox();
             this.btnEquiv = new System.Windows.Forms.Button();
             this.btnConjuga = new System.Windows.Forms.Button();
@@ -87,8 +82,6 @@
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnProx = new System.Windows.Forms.Button();
             this.btnUltimo = new System.Windows.Forms.Button();
-            this.comboEquiv = new System.Windows.Forms.ComboBox();
-            this.timerEquiv = new System.Windows.Forms.Timer(this.components);
             this.menu_barra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).BeginInit();
             this.SuspendLayout();
@@ -526,7 +519,6 @@
             this.txtpalavra.Size = new System.Drawing.Size(248, 26);
             this.txtpalavra.TabIndex = 1;
             this.tip_Dicas.SetToolTip(this.txtpalavra, "Digite a palavra ou conjunto de palavras que identificará está entrada");
-            this.txtpalavra.Leave += new System.EventHandler(this.txtpalavra_Leave);
             // 
             // textCultura
             // 
@@ -728,7 +720,7 @@
             this.textCultura.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.textCultura.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textCultura.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textCultura.Location = new System.Drawing.Point(45, 549);
+            this.textCultura.Location = new System.Drawing.Point(45, 493);
             this.textCultura.Multiline = true;
             this.textCultura.Name = "textCultura";
             this.textCultura.Size = new System.Drawing.Size(385, 120);
@@ -935,7 +927,7 @@
             this.txtGramatica.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtGramatica.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtGramatica.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGramatica.Location = new System.Drawing.Point(436, 549);
+            this.txtGramatica.Location = new System.Drawing.Point(436, 493);
             this.txtGramatica.Multiline = true;
             this.txtGramatica.Name = "txtGramatica";
             this.txtGramatica.Size = new System.Drawing.Size(375, 120);
@@ -1026,7 +1018,7 @@
             // 
             this.label_ref.AutoSize = true;
             this.label_ref.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_ref.Location = new System.Drawing.Point(42, 378);
+            this.label_ref.Location = new System.Drawing.Point(42, 322);
             this.label_ref.Name = "label_ref";
             this.label_ref.Size = new System.Drawing.Size(79, 18);
             this.label_ref.TabIndex = 27;
@@ -1036,7 +1028,7 @@
             // 
             this.label_cult.AutoSize = true;
             this.label_cult.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_cult.Location = new System.Drawing.Point(42, 528);
+            this.label_cult.Location = new System.Drawing.Point(42, 472);
             this.label_cult.Name = "label_cult";
             this.label_cult.Size = new System.Drawing.Size(110, 18);
             this.label_cult.TabIndex = 28;
@@ -1046,7 +1038,7 @@
             // 
             this.label_grammar.AutoSize = true;
             this.label_grammar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_grammar.Location = new System.Drawing.Point(433, 528);
+            this.label_grammar.Location = new System.Drawing.Point(433, 472);
             this.label_grammar.Name = "label_grammar";
             this.label_grammar.Size = new System.Drawing.Size(132, 18);
             this.label_grammar.TabIndex = 29;
@@ -1061,16 +1053,6 @@
             this.label_acep.Size = new System.Drawing.Size(70, 18);
             this.label_acep.TabIndex = 30;
             this.label_acep.Text = "Definição";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label4.Location = new System.Drawing.Point(42, 320);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 18);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Equivalente";
             // 
             // label_catgrama
             // 
@@ -1117,7 +1099,7 @@
             // 
             this.ComboRubrica.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ComboRubrica.FormattingEnabled = true;
-            this.ComboRubrica.Location = new System.Drawing.Point(436, 400);
+            this.ComboRubrica.Location = new System.Drawing.Point(436, 344);
             this.ComboRubrica.Name = "ComboRubrica";
             this.ComboRubrica.Size = new System.Drawing.Size(375, 28);
             this.ComboRubrica.TabIndex = 9;
@@ -1130,7 +1112,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(433, 379);
+            this.label5.Location = new System.Drawing.Point(433, 323);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 18);
             this.label5.TabIndex = 42;
@@ -1269,6 +1251,30 @@
             0,
             0});
             // 
+            // comboRef
+            // 
+            this.comboRef.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboRef.FormattingEnabled = true;
+            this.comboRef.Location = new System.Drawing.Point(45, 344);
+            this.comboRef.Name = "comboRef";
+            this.comboRef.Size = new System.Drawing.Size(385, 28);
+            this.comboRef.TabIndex = 8;
+            this.tip_Dicas.SetToolTip(this.comboRef, "Determine qual é a origem bibliográfica do exemplo de uso.\r\nDigite um texto para " +
+        "buscar registros existentes");
+            this.comboRef.SelectedIndexChanged += new System.EventHandler(this.comboRef_SelectedIndexChanged);
+            this.comboRef.TextUpdate += new System.EventHandler(this.comboRef_TextUpdate);
+            // 
+            // txtExemplo
+            // 
+            this.txtExemplo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExemplo.Location = new System.Drawing.Point(45, 425);
+            this.txtExemplo.MaxLength = 255;
+            this.txtExemplo.Name = "txtExemplo";
+            this.txtExemplo.Size = new System.Drawing.Size(385, 26);
+            this.txtExemplo.TabIndex = 10;
+            this.tip_Dicas.SetToolTip(this.txtExemplo, "Digite um exemplo de uso do lema na língua do mesmo");
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1279,11 +1285,6 @@
             this.label6.TabIndex = 48;
             this.label6.Text = "Nº Ac.";
             // 
-            // timerCtg
-            // 
-            this.timerCtg.Interval = 700;
-            this.timerCtg.Tick += new System.EventHandler(this.timerCtg_Tick);
-            // 
             // timerClg
             // 
             this.timerClg.Interval = 700;
@@ -1293,20 +1294,6 @@
             // 
             this.timerRub.Interval = 700;
             this.timerRub.Tick += new System.EventHandler(this.timerRub_Tick);
-            // 
-            // comboRef
-            // 
-            this.comboRef.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboRef.FormattingEnabled = true;
-            this.comboRef.Location = new System.Drawing.Point(45, 400);
-            this.comboRef.Name = "comboRef";
-            this.comboRef.Size = new System.Drawing.Size(385, 28);
-            this.comboRef.TabIndex = 8;
-            this.tip_Dicas.SetToolTip(this.comboRef, "Determine qual é a origem bibliográfica do exemplo de uso.\r\nDigite um texto para " +
-        "buscar registros existentes");
-            this.comboRef.SelectedIndexChanged += new System.EventHandler(this.comboRef_SelectedIndexChanged);
-            this.comboRef.TextUpdate += new System.EventHandler(this.comboRef_TextUpdate);
             // 
             // timerRef
             // 
@@ -1326,44 +1313,11 @@
             this.ComboFiltroPrecisao.TabIndex = 50;
             this.ComboFiltroPrecisao.Text = "Precisão";
             // 
-            // chkHeterossemantico
-            // 
-            this.chkHeterossemantico.AutoSize = true;
-            this.chkHeterossemantico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHeterossemantico.Location = new System.Drawing.Point(588, 343);
-            this.chkHeterossemantico.Name = "chkHeterossemantico";
-            this.chkHeterossemantico.Size = new System.Drawing.Size(158, 24);
-            this.chkHeterossemantico.TabIndex = 51;
-            this.chkHeterossemantico.Text = "Heterossemântico";
-            this.chkHeterossemantico.UseVisualStyleBackColor = true;
-            // 
-            // chkHeterotonico
-            // 
-            this.chkHeterotonico.AutoSize = true;
-            this.chkHeterotonico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHeterotonico.Location = new System.Drawing.Point(462, 343);
-            this.chkHeterotonico.Name = "chkHeterotonico";
-            this.chkHeterotonico.Size = new System.Drawing.Size(120, 24);
-            this.chkHeterotonico.TabIndex = 52;
-            this.chkHeterotonico.Text = "Heterotônico";
-            this.chkHeterotonico.UseVisualStyleBackColor = true;
-            // 
-            // chkHeterogenerico
-            // 
-            this.chkHeterogenerico.AutoSize = true;
-            this.chkHeterogenerico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHeterogenerico.Location = new System.Drawing.Point(318, 343);
-            this.chkHeterogenerico.Name = "chkHeterogenerico";
-            this.chkHeterogenerico.Size = new System.Drawing.Size(138, 24);
-            this.chkHeterogenerico.TabIndex = 53;
-            this.chkHeterogenerico.Text = "Heterogenérico";
-            this.chkHeterogenerico.UseVisualStyleBackColor = true;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(42, 456);
+            this.label2.Location = new System.Drawing.Point(42, 400);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 20);
             this.label2.TabIndex = 54;
@@ -1373,26 +1327,16 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(435, 458);
+            this.label3.Location = new System.Drawing.Point(435, 402);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(140, 20);
             this.label3.TabIndex = 55;
             this.label3.Text = "Exemplo traduzido";
             // 
-            // txtExemplo
-            // 
-            this.txtExemplo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExemplo.Location = new System.Drawing.Point(45, 481);
-            this.txtExemplo.MaxLength = 255;
-            this.txtExemplo.Name = "txtExemplo";
-            this.txtExemplo.Size = new System.Drawing.Size(385, 26);
-            this.txtExemplo.TabIndex = 10;
-            this.tip_Dicas.SetToolTip(this.txtExemplo, "Digite um exemplo de uso do lema na língua do mesmo");
-            // 
             // txtExemploT
             // 
             this.txtExemploT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExemploT.Location = new System.Drawing.Point(439, 481);
+            this.txtExemploT.Location = new System.Drawing.Point(439, 425);
             this.txtExemploT.MaxLength = 255;
             this.txtExemploT.Name = "txtExemploT";
             this.txtExemploT.Size = new System.Drawing.Size(372, 26);
@@ -1400,31 +1344,32 @@
             // 
             // btnEquiv
             // 
+            this.btnEquiv.Enabled = false;
             this.btnEquiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEquiv.Location = new System.Drawing.Point(168, 341);
+            this.btnEquiv.Location = new System.Drawing.Point(848, 576);
             this.btnEquiv.Name = "btnEquiv";
-            this.btnEquiv.Size = new System.Drawing.Size(144, 28);
+            this.btnEquiv.Size = new System.Drawing.Size(123, 38);
             this.btnEquiv.TabIndex = 58;
-            this.btnEquiv.Text = "Editar";
+            this.btnEquiv.Text = "Equivalentes";
             this.btnEquiv.UseVisualStyleBackColor = true;
-            this.btnEquiv.Visible = false;
             this.btnEquiv.Click += new System.EventHandler(this.btnEquiv_Click);
             // 
             // btnConjuga
             // 
+            this.btnConjuga.Enabled = false;
             this.btnConjuga.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConjuga.Location = new System.Drawing.Point(820, 343);
+            this.btnConjuga.Location = new System.Drawing.Point(848, 534);
             this.btnConjuga.Name = "btnConjuga";
-            this.btnConjuga.Size = new System.Drawing.Size(123, 53);
+            this.btnConjuga.Size = new System.Drawing.Size(123, 36);
             this.btnConjuga.TabIndex = 59;
-            this.btnConjuga.Text = "Editar Conjugações";
+            this.btnConjuga.Text = "Conjugações";
             this.btnConjuga.UseVisualStyleBackColor = true;
             this.btnConjuga.Click += new System.EventHandler(this.btnConjuga_Click);
             // 
             // btnPrimeiro
             // 
             this.btnPrimeiro.Enabled = false;
-            this.btnPrimeiro.Location = new System.Drawing.Point(868, 426);
+            this.btnPrimeiro.Location = new System.Drawing.Point(868, 349);
             this.btnPrimeiro.Name = "btnPrimeiro";
             this.btnPrimeiro.Size = new System.Drawing.Size(75, 23);
             this.btnPrimeiro.TabIndex = 60;
@@ -1435,7 +1380,7 @@
             // btnAnterior
             // 
             this.btnAnterior.Enabled = false;
-            this.btnAnterior.Location = new System.Drawing.Point(868, 453);
+            this.btnAnterior.Location = new System.Drawing.Point(868, 376);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(75, 23);
             this.btnAnterior.TabIndex = 61;
@@ -1446,7 +1391,7 @@
             // btnProx
             // 
             this.btnProx.Enabled = false;
-            this.btnProx.Location = new System.Drawing.Point(868, 482);
+            this.btnProx.Location = new System.Drawing.Point(868, 405);
             this.btnProx.Name = "btnProx";
             this.btnProx.Size = new System.Drawing.Size(75, 23);
             this.btnProx.TabIndex = 62;
@@ -1457,7 +1402,7 @@
             // btnUltimo
             // 
             this.btnUltimo.Enabled = false;
-            this.btnUltimo.Location = new System.Drawing.Point(868, 511);
+            this.btnUltimo.Location = new System.Drawing.Point(868, 434);
             this.btnUltimo.Name = "btnUltimo";
             this.btnUltimo.Size = new System.Drawing.Size(75, 23);
             this.btnUltimo.TabIndex = 63;
@@ -1465,28 +1410,11 @@
             this.btnUltimo.UseVisualStyleBackColor = true;
             this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
             // 
-            // comboEquiv
-            // 
-            this.comboEquiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboEquiv.FormattingEnabled = true;
-            this.comboEquiv.Location = new System.Drawing.Point(45, 341);
-            this.comboEquiv.Name = "comboEquiv";
-            this.comboEquiv.Size = new System.Drawing.Size(228, 28);
-            this.comboEquiv.TabIndex = 64;
-            this.comboEquiv.SelectedIndexChanged += new System.EventHandler(this.comboEquiv_SelectedIndexChanged);
-            this.comboEquiv.TextUpdate += new System.EventHandler(this.comboEquiv_TextUpdate);
-            // 
-            // timerEquiv
-            // 
-            this.timerEquiv.Interval = 700;
-            this.timerEquiv.Tick += new System.EventHandler(this.timerEquiv_Tick);
-            // 
             // frm_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 730);
-            this.Controls.Add(this.comboEquiv);
+            this.ClientSize = new System.Drawing.Size(1008, 632);
             this.Controls.Add(this.btnUltimo);
             this.Controls.Add(this.btnProx);
             this.Controls.Add(this.btnAnterior);
@@ -1497,9 +1425,6 @@
             this.Controls.Add(this.txtExemplo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.chkHeterogenerico);
-            this.Controls.Add(this.chkHeterotonico);
-            this.Controls.Add(this.chkHeterossemantico);
             this.Controls.Add(this.ComboFiltroPrecisao);
             this.Controls.Add(this.comboRef);
             this.Controls.Add(this.label6);
@@ -1513,7 +1438,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGenero);
             this.Controls.Add(this.label_catgrama);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label_acep);
             this.Controls.Add(this.label_grammar);
             this.Controls.Add(this.label_cult);
@@ -1531,7 +1455,8 @@
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchBox);
             this.MainMenuStrip = this.menu_barra;
-            this.MinimumSize = new System.Drawing.Size(1024, 726);
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1024, 670);
             this.Name = "frm_Edit";
             this.Text = "Edição de entradas";
             this.Load += new System.EventHandler(this.EditForm_Load);
@@ -1560,7 +1485,6 @@
         private System.Windows.Forms.Label label_cult;
         private System.Windows.Forms.Label label_grammar;
         private System.Windows.Forms.Label label_acep;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_catgrama;
         private System.Windows.Forms.Label lblGenero;
         private System.Windows.Forms.Label label1;
@@ -1583,15 +1507,11 @@
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown numAcepcao;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Timer timerCtg;
         private System.Windows.Forms.Timer timerClg;
         private System.Windows.Forms.Timer timerRub;
         private System.Windows.Forms.ComboBox comboRef;
         private System.Windows.Forms.Timer timerRef;
         private System.Windows.Forms.ComboBox ComboFiltroPrecisao;
-        private System.Windows.Forms.CheckBox chkHeterossemantico;
-        private System.Windows.Forms.CheckBox chkHeterotonico;
-        private System.Windows.Forms.CheckBox chkHeterogenerico;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtExemplo;
@@ -1602,7 +1522,5 @@
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnProx;
         private System.Windows.Forms.Button btnUltimo;
-        private System.Windows.Forms.ComboBox comboEquiv;
-        private System.Windows.Forms.Timer timerEquiv;
     }
 }

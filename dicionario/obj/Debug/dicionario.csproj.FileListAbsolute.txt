@@ -172,3 +172,4 @@ C:\Users\Igor\Desktop\copy\dicionario\dicionario\bin\Debug\dicionario.xml
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.TrustInfo.xml
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.exe.manifest
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.application
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_Equivalente.resources
