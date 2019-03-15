@@ -18,13 +18,9 @@ namespace dicionario
         CRUD cRUD = new CRUD();
         public frm_busca()
         {
-            //O Construtor esconde o ResultsBox, que só é mostrado depois de uma
-            //busca.
             InitializeComponent();
-            this.searchResultsListBox.Hide();
             this.extraComboBox1.Hide();
             this.extraComboBox2.Hide();
-
         }
 
         private void contactButton_Click(object sender, EventArgs e)

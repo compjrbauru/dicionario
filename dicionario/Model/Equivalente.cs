@@ -10,50 +10,54 @@ namespace dicionario.Model
     class Equivalente : Itabelas
     {
         public int origem { get; private set; }
-        public int destino { get; private set; }
+        public int equivalente { get; private set; }
         public bool heterotonico { get; set; }
         public bool heterossemantico { get; set; }
         public bool heterogenerico { get; set; }
+        public string exemplo { get; set; }
+        public string exemplo_traduzido { get; set; }
 
         public static List<string> ToListTabela()
         {
-            return new List<string> { "origem", "destino" , "heterotonico", "heterossemantico", "heterogenerico" };
+            return new List<string> { "origem", "equivalente" , "heterogenerico", "heterotonico", "heterossemantico", "Exemplo", "Exemplo_Traduzido"};
         }
 
         public List<string> ToListValores()
         {
             List<string> r = null;
-            if (destino > 0 && origem > 0 && origem != destino){
+            if (equivalente > 0 && origem > 0 && origem != equivalente){
                 r = new List<string>{
                     origem.ToString(),
-                    destino.ToString(),
+                    equivalente.ToString(),
+                    heterogenerico.ToString(),
                     heterotonico.ToString(),
                     heterossemantico.ToString(),
-                    heterogenerico.ToString()
+                    exemplo,
+                    exemplo_traduzido
                 };
             }
             return r;
         }
 
-        public void SetDestino(int d)
+        public void Setequivalente(int d)
         {
             if (origem != d)
-                destino = d;
+                equivalente = d;
             else
-                InvalidarDestino();
+                Invalidarequivalente();
         }
 
         public void SetOrigem(int o)
         {
-            if (destino != o)
+            if (equivalente != o)
                 origem = o;
             else
                 InvalidarOrigem();
         }
 
-        public void InvalidarDestino()
+        public void Invalidarequivalente()
         {
-            destino = -1;
+            equivalente = -1;
         }
 
         public void InvalidarOrigem()
@@ -75,10 +79,12 @@ namespace dicionario.Model
             Equivalente eqv = new Equivalente();
             int i = 0;
             eqv.origem = int.Parse(entrada[i++].ToString());
-            eqv.destino = int.Parse(entrada[i++].ToString());
+            eqv.equivalente = int.Parse(entrada[i++].ToString());
+            eqv.heterogenerico = Helper.ParseBoolean(entrada[i++].ToString());
             eqv.heterotonico = Helper.ParseBoolean(entrada[i++].ToString());
             eqv.heterossemantico = Helper.ParseBoolean(entrada[i++].ToString());
-            eqv.heterogenerico = Helper.ParseBoolean(entrada[i++].ToString());
+            eqv.exemplo = entrada[i++].ToString();
+            eqv.exemplo_traduzido = entrada[i++].ToString();
             return eqv;
         }
     }

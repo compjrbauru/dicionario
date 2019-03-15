@@ -29,7 +29,7 @@ namespace dicionario
         private List<Rubrica> resRubrica = new List<Rubrica>();
         private List<ClasseGramatical> resClg = new List<ClasseGramatical>();
         private List<Referencia> resRef = new List<Referencia>();
-        private List<CategoriaGramatical> resCtg;
+        //private List<CategoriaGramatical> resCtg;
 
         private void EditForm_Load(object sender, EventArgs e)
         {
@@ -49,8 +49,6 @@ namespace dicionario
             ComboIdioma.Text = "";
             ComboRubrica.SelectedIndex = -1;
             ComboRubrica.Text = "";
-            txtExemploT.Text = "";
-            txtExemplo.Text = "";
             textCultura.Text = "";
 
             btnEquiv.Enabled = false;
@@ -65,9 +63,6 @@ namespace dicionario
             p.Genero = "N";
             p.rubrica = 0;
             p.referencia_verbete = 0;
-            p.heterogenerico = false;
-            p.heterossemantico = false;
-            p.heterotonico = false;
         }
         private void MostraDados()
         {
@@ -246,8 +241,6 @@ namespace dicionario
             p.acepcao = (int)numAcepcao.Value;
             p.notas_gramatica = txtGramatica.Text;
             p.nota_cultura = textCultura.Text;
-            p.referencia_exemplo = txtExemplo.Text;
-            p.ref_ex_tr = txtExemploT.Text;
             switch (ComboGenero.SelectedIndex)
             {
                 case 0:

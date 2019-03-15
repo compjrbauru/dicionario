@@ -18,7 +18,7 @@ namespace dicionario.Model
         public const string REFERENCIAS = "referencias";
         public const string USUARIOS = "usr";
         public const string CONJUGACAO = "conjugacao";
-        public const string EQUIVALENTE = "equivalente";
+        public const string EQUIVALENTE = "equivalencias";
     }
     internal class ConectaBanco
     {
@@ -44,6 +44,8 @@ namespace dicionario.Model
             try
             {
                 conexao.Open();
+                if (conexao.ConnectionString.Contains("localhost"))
+                    InformaDiag.Erro("Banco de testes ativo.");
                 return true;
             }
             catch (MySqlException ex)

@@ -24,7 +24,6 @@ namespace dicionario
         }
         private void PreencheTreeList(List<Palavra> entrada)
         {
-            ConectaBanco bd = new ConectaBanco("dicionario", "root", "gamesjoker");
             CRUD operaBd = new CRUD();
             List<Rubrica> resRubrica = new List<Rubrica>();
             List<ClasseGramatical> resCg = new List<ClasseGramatical>();
@@ -138,7 +137,6 @@ namespace dicionario
         }*/
         private List<TreeNode[]> criaTreeNodes(List<string> valores)
         {
-            int i = 0;
             List<TreeNode[]> tnm = new List<TreeNode[]>();
             foreach (string s in valores){
                 tnm.Add(new TreeNode[] { new TreeNode(s) });

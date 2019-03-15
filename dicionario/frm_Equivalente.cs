@@ -49,15 +49,15 @@ namespace dicionario
             comboDestino.Text = "";
             comboDestino.SelectedIndex = 0;
 
-            ativo.InvalidarDestino();
+            ativo.Invalidarequivalente();
 
         }
 
         private void frm_Equivalente_Load(object sender, EventArgs e)
         {
             configuraLabelOrgiem(registroPai);
-            equivO = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "origem="+ registroPai.id.ToString()));
-            equivD = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "destino=" + registroPai.id.ToString()));
+            equivO = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "Origem="+ registroPai.id.ToString()));
+            equivD = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "equivalente=" + registroPai.id.ToString()));
             throw new NotImplementedException();
         }
         
@@ -131,7 +131,7 @@ namespace dicionario
         private void btnApaga_Click(object sender, EventArgs e){
             if (InformaDiag.ConfirmaSN("Deseja realmente apagar o relacionamento?\nA ação é irreversível!") == DialogResult.Yes)
             {
-                crud.ApagaLinha(tabelasBd.EQUIVALENTE, "origem=" + ativo.origem.ToString() + " AND destino=" + ativo.destino.ToString());
+                crud.ApagaLinha(tabelasBd.EQUIVALENTE, "origem=" + ativo.origem.ToString() + " AND equivalente=" + ativo.equivalente.ToString());
                 LimpaCampos();
             }
         }
@@ -189,7 +189,7 @@ namespace dicionario
         {
             if (comboDestino.Text != "")
             {
-                ativo.SetDestino(resP.ElementAt(comboDestino.SelectedIndex).id);
+                ativo.Setequivalente(resP.ElementAt(comboDestino.SelectedIndex).id);
             }
         }
     }

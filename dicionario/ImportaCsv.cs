@@ -10,11 +10,19 @@ using System.Windows.Forms;
 using System.IO;
 using dicionario.Model;
 using dicionario.Helpers;
+using System.Collections;
 
 namespace dicionario
 {
     public partial class frmImportaCsv : Form
     {
+        private enum EnumErros
+        {
+            Erro_dados,
+            Erro_coluna_destino,
+            Informa_Abortado
+
+        }
         CRUD operacoes = new CRUD();
         public frmImportaCsv()
         {
@@ -27,6 +35,7 @@ namespace dicionario
             {
                 LblArquivo.Text = AbreArquivoDialog.FileName;
                 BtnStart.Enabled = true;
+                listErros.Items.Clear();
             }
         }
 
@@ -72,7 +81,7 @@ namespace dicionario
                         ptlt = Referencia.ToListTabela();
                         break;
                     default:
-                        InformaDiag.Erro("Não implementado");
+                        throw new Exception("Não implementado");
                         break;
                         
                 }
@@ -103,8 +112,8 @@ namespace dicionario
                                         dataGridView1.Columns.Add(divisor[i], divisor[i]);
                                     else
                                     {
-                                        InformaDiag.Erro("A coluna " + divisor[i] + " do arquivo importado deveria ser nomeada " + ptlt.ElementAt(i) + ".\nOperação Abortada!");
                                         dataGridView1.Columns.Clear();
+                                        EnumeraColunasFaltantes(divisor, ptlt);
                                         progressBar1.MarqueeAnimationSpeed = 0;
                                         BtnStart.Enabled = false;
                                         LiberaArquivo(leitor);
@@ -152,6 +161,27 @@ namespace dicionario
                 InformaDiag.Informa("Escolha uma tabela destino");
             }
             
+        }
+        private void EnumeraColunasFaltantes(string[] linhasEncontradas, List<string> camposEsperados)
+        {
+            int i = camposEsperados.Count;
+            IEnumerator<string> lTe = camposEsperados.GetEnumerator();
+            IEnumerator lEe = linhasEncontradas.GetEnumerator();
+            VerificadorIgualdadeNomes(lEe, lTe, i);
+        }
+
+        private void VerificadorIgualdadeNomes(IEnumerator opl, IEnumerator<string> opr, int max)
+        {
+            for (int i = 0; i < max; i++)
+            {
+                opl.MoveNext();
+                opr.MoveNext();
+                if ((string) opl.Current != opr.Current)
+                {
+                    LoggerErros(EnumErros.Erro_coluna_destino, new List<string> { opr.Current, (string)opl.Current }); 
+                }
+            }
+            LoggerErros(EnumErros.Informa_Abortado);
         }
 
         private void BtnCancela_Click(object sender, EventArgs e)
@@ -223,12 +253,6 @@ namespace dicionario
                 }
                 c++;
 
-                idx = Palavra.ToListTabela().FindIndex(bs => bs == "equivalente");
-                if (!int.TryParse(valores.ElementAt(idx), out conv))
-                {
-                    valores.RemoveAt(idx);
-                    valores.Insert(idx, "0");
-                }
                 idx = Palavra.ToListTabela().FindIndex(bs => bs == "Infinitivo");
                 if (!int.TryParse(valores.ElementAt(idx), out conv))
                 {
@@ -249,12 +273,12 @@ namespace dicionario
                 }
                 catch (InvalidCastException)
                 {
-                    ErroCast();
+                    LoggerErros(EnumErros.Erro_dados);
                     return null;
                 }
                 catch (FormatException)
                 {
-                    ErroCast();
+                    LoggerErros(EnumErros.Erro_dados);
                     return null;
                 }
 
@@ -265,7 +289,7 @@ namespace dicionario
                 c = 0;
                 if (fila[c++]){
                     saida = ff.Current;
-                    lrub = Rubrica.ConverteObject(operacoes.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), "sigla='"+ saida + "'"));
+                    lrub = Rubrica.ConverteObject(operacoes.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "sigla='"+ saida + "'"));
                     if (lrub.Count() > 0)
                     {
                         teste.rubrica = lrub.First().id;
@@ -278,7 +302,7 @@ namespace dicionario
                 }
                 if (fila[c++]){
                     saida = ff.Current;
-                    lclg = ClasseGramatical.ConverteObject(operacoes.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla='" + saida + "'"));
+                    lclg = ClasseGramatical.ConverteObject(operacoes.SelecionarTabela(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(true), "sigla='" + saida + "'"));
                     if (lclg.Count() > 0)
                     {
                         teste.Id_classeGram = lclg.First().id;
@@ -291,7 +315,7 @@ namespace dicionario
                 }
                 if (fila[c]){
                     saida = ff.Current;
-                    lref = Referencia.ConverteObject(operacoes.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Cod='" + saida + "'"));
+                    lref = Referencia.ConverteObject(operacoes.SelecionarTabela(tabelasBd.REFERENCIAS, Referencia.ToListTabela(true), "Cod='" + saida + "'"));
                     if (lref.Count > 0)
                     {
                         teste.referencia_verbete = lref.First().id;
@@ -306,9 +330,32 @@ namespace dicionario
             }
             return valores;
         }
-        private void ErroCast()
+        private void LoggerErros(EnumErros erro, List<string> outrosParam = null)
         {
-            listErros.Items.Add("Tipo de dado divergente ou inválido");
+            switch (erro)
+            {
+                case EnumErros.Erro_dados:
+                    listErros.Items.Add("Tipo de dado divergente ou inválido");
+                    break;
+                case EnumErros.Erro_coluna_destino:
+                    if (outrosParam.Count < 2) throw new Exception("Argumentos insuficientes");
+
+                    IEnumerator<string> args = outrosParam.GetEnumerator();
+                    args.MoveNext();
+                    string msg = "O programa espera encontrar a coluna " + args.Current + " mas encontrou ";
+
+                    args.MoveNext();
+                    msg += args.Current;
+
+                    listErros.Items.Add(msg);
+                    break;
+                case EnumErros.Informa_Abortado:
+                    listErros.Items.Add("Operação abortada");
+                    break;
+                default:
+                    throw new Exception("Não implementado");
+                    break;
+            }
         }
         private void BtnGrava_Click(object sender, EventArgs e)
         {
@@ -325,11 +372,12 @@ namespace dicionario
                 }
         }
         private int importador(string NomeTabela)
-            ///TODO: FAZER UM PROCESSO DE IMPORTAÇÃO MASSIVO PARA ECONOMIZAR TRANSAÇÕES DO BANCO E POR CONSEQUÊNCIA, DIMINUIR CONSUMO DE RECURSOS
         {
             DataGridViewRow[] linhas = new DataGridViewRow[dataGridView1.Rows.Count];
             DataGridViewCell[] cell = new DataGridViewCell[dataGridView1.ColumnCount];
             List<string> ValoresLinha = new List<string>();
+            string query = "";
+
             switch (NomeTabela)
             {
                 case "Palavra":
@@ -345,7 +393,6 @@ namespace dicionario
                     NomeTabela = tabelasBd.REFERENCIAS;
                     break;
             }
-            string temp="", query = "";
 
             progressBar1.MarqueeAnimationSpeed = 50;
             BtnCancela.Enabled = false;
@@ -364,13 +411,13 @@ namespace dicionario
 
             for (int i = 0; i < dataGridView1.RowCount - 1; i++)
             {
+                //pegar uma linha da grade e coloca no ValoresLinha
                 linhas[i].Cells.CopyTo(cell, 0);
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
                 {
-                    temp = Convert.ToString(cell[j].Value);
-                    ValoresLinha.Add(temp);
-                   
+                    ValoresLinha.Add(Convert.ToString(cell[j].Value));  
                 }
+
                 query += "(";
                 ValoresLinha = SanitizaValores(NomeTabela, ValoresLinha);
                 if (ValoresLinha == null) {
@@ -406,7 +453,7 @@ namespace dicionario
         private bool SanitizaString (string valor, out string saida)
         {
             if (valor.Contains("'")){
-                saida = valor.Replace(Char.Parse("'"), Char.Parse("*"));
+                saida = valor.Replace(char.Parse("'"), char.Parse("*"));
                 return true;
             }
             saida = valor;
