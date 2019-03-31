@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dicionario.Model;
+using dicionario.Helpers;
 
 namespace dicionario
 {
@@ -45,7 +46,7 @@ namespace dicionario
         {
             if (txtDesc.Text != classe.descricao || txtSigla.Text != classe.sigla)
             {
-                if (MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                if (InformaDiag.ConfirmaSN("Existem dados não salvos que serão perdidos. \n Deseja continuar?") == DialogResult.No)
                     return;
             }
             LimpaCampos();
@@ -56,16 +57,16 @@ namespace dicionario
         {
             if (txtDesc.Text == "" || txtSigla.Text == "")
             {
-                MessageBox.Show("Existem campos obrigatórios vazios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                InformaDiag.Erro("Existem campos obrigatórios vazios!");
                 return;
             }
             classe.descricao = txtDesc.Text;
             classe.sigla = txtSigla.Text;
             classe.Definicao = txtDefinicao.Text;
             if (classe.id > 0)
-                c.UpdateLine("classegram", ClasseGramatical.ToListTabela(false), classe.ToListValores(), "id=" + classe.id.ToString());
+                c.UpdateLine(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(false), classe.ToListValores(), "id=" + classe.id.ToString());
             else
-                c.InsereLinha("classegram", ClasseGramatical.ToListTabela(false), classe.ToListValores());
+                c.InsereLinha(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(false), classe.ToListValores());
             LimpaCampos();
             LimpaModel();
         }
@@ -74,11 +75,11 @@ namespace dicionario
         {
             if (classe.id > 0)
             {
-                if (MessageBox.Show("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar" + '\n' + "Prosseguir?", "Confirmação", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (InformaDiag.ConfirmaSN("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar" + '\n' + "Prosseguir?") == DialogResult.Yes)
                 {
-                    if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (InformaDiag.ConfirmaOkCancel("Esta ação é irreversível! Confirme a exculsão.") == DialogResult.OK)
                     {
-                        c.ApagaLinha("classegram", "Id=" + classe.id.ToString());
+                        c.ApagaLinha(tabelasBd.CLASSE_GRAMATICAL, "Id=" + classe.id.ToString());
                         LimpaModel();
                         LimpaCampos();
                     }
@@ -90,7 +91,7 @@ namespace dicionario
         {
             if (txtSigla.Text != "")
             {
-                resultado = ClasseGramatical.ConverteObject(c.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'"));
+                resultado = ClasseGramatical.ConverteObject(c.SelecionarTabela(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(true), "sigla='" + txtSigla.Text + "'"));
                 if (resultado.Count > 0)
                 {
                     classe = resultado.First();
@@ -98,7 +99,7 @@ namespace dicionario
                 }
                 else
                 {
-                    MessageBox.Show("Nenhum resultado encontrado.", "Busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    InformaDiag.Informa("Nenhum resultado encontrado.");
                 }
             }
         }

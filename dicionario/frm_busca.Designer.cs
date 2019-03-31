@@ -44,6 +44,7 @@
             this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.similarListBox = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -280,9 +281,9 @@
             this.searchResultsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.searchResultsListBox.FormattingEnabled = true;
             this.searchResultsListBox.ItemHeight = 17;
-            this.searchResultsListBox.Location = new System.Drawing.Point(21, 192);
+            this.searchResultsListBox.Location = new System.Drawing.Point(174, 192);
             this.searchResultsListBox.Name = "searchResultsListBox";
-            this.searchResultsListBox.Size = new System.Drawing.Size(541, 208);
+            this.searchResultsListBox.Size = new System.Drawing.Size(388, 208);
             this.searchResultsListBox.TabIndex = 3;
             this.searchResultsListBox.SelectedIndexChanged += new System.EventHandler(this.searchResultsListBox_SelectedIndexChanged);
             this.searchResultsListBox.DoubleClick += new System.EventHandler(this.searchResultsListBox_DoubleClick);
@@ -343,7 +344,7 @@
             this.sobreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(634, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(584, 29);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -398,11 +399,25 @@
             this.contatoToolStripMenuItem.Text = "Contato";
             this.contatoToolStripMenuItem.Click += new System.EventHandler(this.contactButton_Click);
             // 
+            // similarListBox
+            // 
+            this.similarListBox.Enabled = false;
+            this.similarListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.similarListBox.FormattingEnabled = true;
+            this.similarListBox.ItemHeight = 17;
+            this.similarListBox.Location = new System.Drawing.Point(22, 192);
+            this.similarListBox.Name = "similarListBox";
+            this.similarListBox.Size = new System.Drawing.Size(146, 208);
+            this.similarListBox.TabIndex = 22;
+            this.similarListBox.DoubleClick += new System.EventHandler(this.similarListBox_DoubleClick);
+            // 
             // frm_busca
             // 
+            this.AcceptButton = this.searchButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 412);
+            this.ClientSize = new System.Drawing.Size(584, 412);
+            this.Controls.Add(this.similarListBox);
             this.Controls.Add(this.extraComboBox2);
             this.Controls.Add(this.extraComboBox1);
             this.Controls.Add(this.extraFilterCheckBox);
@@ -413,8 +428,10 @@
             this.Controls.Add(this.searchBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(600, 450);
             this.Name = "frm_busca";
             this.Text = "Dicionário";
+            this.Resize += new System.EventHandler(this.frm_busca_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -440,6 +457,7 @@
         private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ajudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contatoToolStripMenuItem;
+        private System.Windows.Forms.ListBox similarListBox;
     }
 }
 

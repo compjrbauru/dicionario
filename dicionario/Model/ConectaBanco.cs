@@ -10,6 +10,16 @@ using dicionario.Helpers;
 
 namespace dicionario.Model
 {
+    class tabelasBd
+    {
+        public const string PALAVRA = "palavra";
+        public const string CLASSE_GRAMATICAL = "classegram";
+        public const string RUBRICA = "rubrica";
+        public const string REFERENCIAS = "referencias";
+        public const string USUARIOS = "usr";
+        public const string CONJUGACAO = "conjugacao";
+        public const string EQUIVALENTE = "equivalencias";
+    }
     internal class ConectaBanco
     {
         protected string servidor;
@@ -34,6 +44,8 @@ namespace dicionario.Model
             try
             {
                 conexao.Open();
+                if (conexao.ConnectionString.Contains("localhost"))
+                    InformaDiag.Erro("Banco de testes ativo.");
                 return true;
             }
             catch (MySqlException ex)
@@ -42,17 +54,21 @@ namespace dicionario.Model
                     switch (ex.ErrorCode)
                     {
                         case 0:
-                            MessageBox.Show("Falha ao conectar no servidor de dados.");
+                            InformaDiag.Erro("Falha ao conectar no servidor de dados.");
                             break;
                         case 1045:
-                            MessageBox.Show("A combinação de usuário e senha não existe. Tente novamente.");
+                            InformaDiag.Erro("A combinação de usuário e senha não existe. Tente novamente.");
                             break;
                         default:
-                            MessageBox.Show("Erro" + ex.Code.ToString() + ex.Message);
+                            InformaDiag.Erro("Erro" + ex.Code.ToString() + ex.Message);
                             break;
                     }
                    
                 }
+                return false;
+            }
+            catch (InvalidOperationException ex)
+            {
                 return false;
             }
         }
@@ -65,7 +81,7 @@ namespace dicionario.Model
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                InformaDiag.Erro(ex.Message);
                 return false;
             }
         }
@@ -117,14 +133,14 @@ namespace dicionario.Model
             query += ")";
             EnviaComando(query);
         }
-        public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro = "")
+        public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro)
         {
             string query = "UPDATE " + tabela + " SET ";
             string temp1, temp2, s;
             while (campos.Count > 0)
             {
                 temp1 = campos.First();
-                temp2 = valores.First();
+                  temp2 = valores.First();
                 query += temp1 + "=";
                  if (HelperBd.VerificaInt(temp2)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
                     query += temp2;
@@ -145,7 +161,7 @@ namespace dicionario.Model
                     query += ", ";
             }
             if (filtro != "")
-                query += "WHERE " + filtro;
+                query += " WHERE " + filtro;
             EnviaComando(query);
         }
         public void ApagaLinha(string tabela, string filtro)

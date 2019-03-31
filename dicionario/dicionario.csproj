@@ -22,9 +22,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <TargetCulture>pt-BR</TargetCulture>
+    <ProductName>Dicionario</ProductName>
+    <PublisherName>Estudos da língua Interlex</PublisherName>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>2.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -66,6 +70,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>dicionario.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.10.6\lib\net452\MySql.Data.dll</HintPath>
@@ -91,14 +98,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\HelperBd.cs" />
-    <Compile Include="Model\Conjugacao.cs" />
-    <Compile Include="diag_equivalente.cs">
+    <Compile Include="frm_Equivalente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="diag_equivalente.Designer.cs">
-      <DependentUpon>diag_equivalente.cs</DependentUpon>
+    <Compile Include="frm_Equivalente.Designer.cs">
+      <DependentUpon>frm_Equivalente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HelperBd.cs" />
+    <Compile Include="Helpers\InformaDiag.cs" />
+    <Compile Include="Model\Conjugacao.cs" />
     <Compile Include="frm_conjuga.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,9 +183,10 @@
       <DependentUpon>frm_rubrica.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Model\Equivalente.cs" />
+    <Compile Include="Model\Itabelas.cs" />
     <Compile Include="Model\Palavra.cs" />
     <Compile Include="Model\Rubrica.cs" />
-    <Compile Include="Model\Tabelas.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,9 +197,6 @@
       <DependentUpon>frm_visualizaverbete.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Referencia.cs" />
-    <EmbeddedResource Include="diag_equivalente.resx">
-      <DependentUpon>diag_equivalente.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm_conjuga.resx">
       <DependentUpon>frm_conjuga.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Edit.resx">
       <DependentUpon>frm_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equivalente.resx">
+      <DependentUpon>frm_Equivalente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>

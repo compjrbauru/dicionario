@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dicionario.Model;
+using dicionario.Helpers;
 
 namespace dicionario.Model
 {
     public partial class frm_rubrica : Form
     {
-        ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         Rubrica rubrica = new Rubrica();
         CRUD c = new CRUD();
         public frm_rubrica()
@@ -41,7 +41,7 @@ namespace dicionario.Model
         {
             if (txtDesc.Text != rubrica.descricao || txtSigla.Text != rubrica.sigla)
             {
-                if(MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                if(InformaDiag.ConfirmaSN("Existem dados não salvos que serão perdidos. \n Deseja continuar?") == DialogResult.No)
                     return;
             }
             LimpaCampos();
@@ -52,15 +52,16 @@ namespace dicionario.Model
         {
             if(txtDesc.Text == "" || txtSigla.Text == "")
             {
-                MessageBox.Show("Existem campos obrigatórios vazios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                InformaDiag.Erro("Existem campos obrigatórios vazios!");
                 return;
             }
             rubrica.descricao = txtDesc.Text;
             rubrica.sigla = txtSigla.Text;
             if (rubrica.id > 0)
-                c.UpdateLine("rubrica", Rubrica.ToListTabela(false), rubrica.ToListValores(), "id=" + rubrica.id.ToString());
+                c.UpdateLine(tabelasBd.RUBRICA, Rubrica.ToListTabela(false), rubrica.ToListValores(), "id=" + rubrica.id.ToString());
             else
-                c.InsereLinha("rubrica", Rubrica.ToListTabela(false), rubrica.ToListValores());
+                c.InsereLinha(tabelasBd.RUBRICA, Rubrica.ToListTabela(false), rubrica.ToListValores());
+            InformaDiag.InformaSalvo();
             LimpaCampos();
             LimpaModel();
         }
@@ -69,11 +70,11 @@ namespace dicionario.Model
         {
             if (rubrica.id>0)
             {
-                if (MessageBox.Show("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar" + '\n' + "Prosseguir?", "Confirmação", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (InformaDiag.ConfirmaSN("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar" + '\n' + "Prosseguir?") == DialogResult.Yes)
                 {
-                    if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (InformaDiag.ConfirmaOkCancel("Esta ação é irreversível! Confirme a exculsão.") == DialogResult.OK)
                     {
-                        c.ApagaLinha("rubrica", "Id=" + rubrica.id.ToString());
+                        c.ApagaLinha(tabelasBd.RUBRICA, "Id=" + rubrica.id.ToString());
                         LimpaModel();
                         LimpaCampos();
                     }

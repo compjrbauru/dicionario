@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dicionario.Model;
+using dicionario.Helpers;
 
 namespace dicionario
 {
     public partial class frm_referencia : Form
     {
-        ConectaBanco conexao = new ConectaBanco("dicionario", "root", "gamesjoker");
         Referencia referencia = new Referencia();
         CRUD c = new CRUD();
         List<Referencia> resultado = new List<Referencia>();
@@ -51,9 +51,9 @@ namespace dicionario
         }
         private void btnPesquisa_Click(object sender, EventArgs e)
         {
-            resultado = Referencia.ConverteObject(c.SelecionarTabela("referencias", Referencia.ToListTabela(true), "Cod='" + txtCodPSQ.Text + "'"));
+            resultado = Referencia.ConverteObject(c.SelecionarTabela(tabelasBd.REFERENCIAS, Referencia.ToListTabela(true), "Cod='" + txtCodPSQ.Text + "'"));
             if (resultado.Count < 1) {
-                MessageBox.Show("Nenhum resultado encontrado.", "Busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                InformaDiag.Informa("Nenhum resultado encontrado.");
                 return;
             }
             referencia = resultado.First();
@@ -87,7 +87,7 @@ namespace dicionario
         {
             if (txtDesc.Text != referencia.descricao || txtAno.Text != referencia.ano.ToString() || txtAutor.Text != referencia.autor)
             {
-                if (MessageBox.Show("Existem dados não salvos que serão perdidos. \n Deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                if (InformaDiag.ConfirmaSN("Existem dados não salvos que serão perdidos. \n Deseja continuar?") == DialogResult.No)
                     return;
             }
             LimpaCampos();
@@ -99,7 +99,7 @@ namespace dicionario
         {
             if (txtDesc.Text == "" || txtAno.Text == "" || txtAutor.Text == "" || txtCod.Text == "")
             {
-                MessageBox.Show("Existem campos obrigatórios vazios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                InformaDiag.Erro("Existem campos obrigatórios vazios!");
                 return;
             }
             referencia.Cod = txtCod.Text;
@@ -107,27 +107,27 @@ namespace dicionario
             referencia.ano = int.Parse(txtAno.Text);
             referencia.autor = txtAutor.Text;
             if (referencia.id > 0) { 
-                c.UpdateLine("referencias", Referencia.ToListTabela(false), referencia.ToListValores(), "Id=" + referencia.id.ToString());
-            LimpaCampos();
-            LimpaModel(); }
+                c.UpdateLine(tabelasBd.REFERENCIAS, Referencia.ToListTabela(false), referencia.ToListValores(), "Id=" + referencia.id.ToString());
+            }
             else
             {
-                c.InsereLinha("referencias", Referencia.ToListTabela(false), referencia.ToListValores()); 
-                ///FIXME:o valor da referência é manual?
-                MessageBox.Show("Salvo!");
+                c.InsereLinha(tabelasBd.REFERENCIAS, Referencia.ToListTabela(false), referencia.ToListValores());
             }
-            
+            InformaDiag.InformaSalvo();
+            LimpaCampos();
+            LimpaModel();
+
         }
 
         private void btnApaga_Click(object sender, EventArgs e)
         {
             if (referencia.id > 0)
             {
-                if (MessageBox.Show("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar" + '\n' + "Prosseguir?", "Confirmação", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (InformaDiag.ConfirmaSN("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar" + '\n' + "Prosseguir?") == DialogResult.Yes)
                 {
-                    if (MessageBox.Show("Esta ação é irreversível! Confirme a exculsão.", "Confirmação", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (InformaDiag.ConfirmaOkCancel("Esta ação é irreversível! Confirme a exculsão.") == DialogResult.OK)
                     {
-                        c.ApagaLinha("referencias", "Cod=" + referencia.Cod.ToString());
+                        c.ApagaLinha(tabelasBd.REFERENCIAS, "Cod=" + referencia.Cod.ToString());
                         resultado.RemoveAt(p);
                         if (resultado.Count > 0)
                         {
