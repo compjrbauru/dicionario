@@ -68,6 +68,10 @@ namespace dicionario
             chkHgenerico.Checked = false;
             comboDestino.Text = "";
             comboDestino.Items.Clear();
+            comboRef.Items.Clear();
+            comboRef.Text = "";
+            ComboRubrica.Items.Clear();
+            ComboRubrica.Text = "";
             txtApresentacao.Value = 1;
             txtExemploTraduzido.Text = "";
             txtExemplo.Text = "";
@@ -78,7 +82,7 @@ namespace dicionario
         {
             configuraLabelOrgiem(registroPai);
             equivO = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "Origem="+ registroPai.id.ToString()));
-            equivD = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "equivalente=" + registroPai.id.ToString()));
+            //equivD = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "equivalente=" + registroPai.id.ToString()));
             if (equivO.Count > 0)
             {
                 posLista++;
@@ -90,7 +94,6 @@ namespace dicionario
             {
                 btnNovo_Click(sender, e);
             }
-            ///TODO: Consertar navegção após inserir registro
         }
 
         private void AtivaNavegadores(){
@@ -180,6 +183,7 @@ namespace dicionario
                 crud.ApagaLinha(tabelasBd.EQUIVALENTE, "origem=" + ativo.origem.ToString() + " AND equivalente=" + ativo.equivalente.ToString());
                 LimpaCampos();
             }
+            btnPrimeiro_Click(sender, e);
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
@@ -287,7 +291,7 @@ namespace dicionario
 
         private void ComboRubrica_TextUpdate(object sender, EventArgs e)
         {
-
+            if (timerRub.Enabled == true) { timerRub.Enabled = false; timerRub.Enabled = true; } else timerRub.Enabled = true;
         }
 
         private void timerRef_Tick(object sender, EventArgs e)

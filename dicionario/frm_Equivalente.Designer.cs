@@ -310,6 +310,14 @@
             this.label6.TabIndex = 24;
             this.label6.Text = "Referência";
             // 
+            // timerRub
+            // 
+            this.timerRub.Tick += new System.EventHandler(this.timerRub_Tick);
+            // 
+            // timerRef
+            // 
+            this.timerRef.Tick += new System.EventHandler(this.timerRef_Tick);
+            // 
             // txtApresentacao
             // 
             this.txtApresentacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
