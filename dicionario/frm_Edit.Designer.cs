@@ -62,8 +62,6 @@
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tip_Dicas = new System.Windows.Forms.ToolTip(this.components);
-            this.numAcepcao = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
             this.timerClg = new System.Windows.Forms.Timer(this.components);
             this.ComboFiltroPrecisao = new System.Windows.Forms.ComboBox();
             this.btnEquiv = new System.Windows.Forms.Button();
@@ -73,7 +71,6 @@
             this.btnProx = new System.Windows.Forms.Button();
             this.btnUltimo = new System.Windows.Forms.Button();
             this.menu_barra.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).BeginInit();
             this.SuspendLayout();
             // 
             // searchBox
@@ -506,7 +503,7 @@
             this.txtpalavra.Location = new System.Drawing.Point(45, 152);
             this.txtpalavra.MaxLength = 45;
             this.txtpalavra.Name = "txtpalavra";
-            this.txtpalavra.Size = new System.Drawing.Size(248, 26);
+            this.txtpalavra.Size = new System.Drawing.Size(293, 26);
             this.txtpalavra.TabIndex = 1;
             this.tip_Dicas.SetToolTip(this.txtpalavra, "Digite a palavra ou conjunto de palavras que identificará está entrada");
             // 
@@ -1184,40 +1181,6 @@
             this.contatoToolStripMenuItem.Text = "Contato";
             this.contatoToolStripMenuItem.Click += new System.EventHandler(this.contatoToolStripMenuItem_Click);
             // 
-            // numAcepcao
-            // 
-            this.numAcepcao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAcepcao.Location = new System.Drawing.Point(299, 154);
-            this.numAcepcao.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numAcepcao.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numAcepcao.Name = "numAcepcao";
-            this.numAcepcao.Size = new System.Drawing.Size(39, 26);
-            this.numAcepcao.TabIndex = 2;
-            this.tip_Dicas.SetToolTip(this.numAcepcao, "Defina o número de acepção do lema");
-            this.numAcepcao.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(289, 133);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 18);
-            this.label6.TabIndex = 48;
-            this.label6.Text = "Nº Ac.";
-            // 
             // timerClg
             // 
             this.timerClg.Interval = 700;
@@ -1316,8 +1279,6 @@
             this.Controls.Add(this.btnConjuga);
             this.Controls.Add(this.btnEquiv);
             this.Controls.Add(this.ComboFiltroPrecisao);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.numAcepcao);
             this.Controls.Add(this.menu_barra);
             this.Controls.Add(this.btnApaga);
             this.Controls.Add(this.btnSalva);
@@ -1348,7 +1309,6 @@
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.menu_barra.ResumeLayout(false);
             this.menu_barra.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAcepcao)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1388,8 +1348,6 @@
         private System.Windows.Forms.ToolTip tip_Dicas;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
-        private System.Windows.Forms.NumericUpDown numAcepcao;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer timerClg;
         private System.Windows.Forms.ComboBox ComboFiltroPrecisao;
         private System.Windows.Forms.Button btnEquiv;

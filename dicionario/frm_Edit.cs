@@ -76,7 +76,6 @@ namespace dicionario
                 clg = resClg.First();
                 ComboClasseGram.Text = clg.descricao;
             }
-            numAcepcao.Value = p.acepcao; ///FIXME:bloquear a troca?
             textCultura.Text = p.nota_cultura;
             txtGramatica.Text = p.notas_gramatica;            
             switch (p.Genero) {
@@ -214,7 +213,6 @@ namespace dicionario
                     break;
             }
             p.idioma = lng;
-            p.acepcao = (int)numAcepcao.Value;
             p.notas_gramatica = txtGramatica.Text;
             p.nota_cultura = textCultura.Text;
             p.Definicao = txtDefinicao.Text;
@@ -232,20 +230,11 @@ namespace dicionario
             }
             if (p.id <= 0)
             {
-                if (p.acepcao == 1)
-                {
-                    List<Conjugacao> lconj = new List<Conjugacao>();
-                    Conjugacao conjugacao = new Conjugacao { preterito = "", presente = "", futuro = "" };
-                    crud.InsereLinha(tabelasBd.CONJUGACAO,Conjugacao.ToListTabela(), conjugacao.ToListValores());
-                    lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
-                    p.id_conjuga = lconj.First().id;
-                }
-                else
-                {
-                    List<Palavra> ltemp = new List<Palavra>();
-                    ltemp = Palavra.ConverteObject(crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema = '"+p.lema+"'", "LIMIT 2 "));
-                    p.id_conjuga = ltemp.First().id_conjuga;
-                }
+                List<Conjugacao> lconj = new List<Conjugacao>();
+                Conjugacao conjugacao = new Conjugacao { preterito = "", presente = "", futuro = "" };
+                crud.InsereLinha(tabelasBd.CONJUGACAO,Conjugacao.ToListTabela(), conjugacao.ToListValores());
+                lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
+                p.id_conjuga = lconj.First().id;
                 crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
             }
             else

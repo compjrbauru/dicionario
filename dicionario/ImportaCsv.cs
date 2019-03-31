@@ -292,7 +292,7 @@ namespace dicionario
                     lrub = Rubrica.ConverteObject(operacoes.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "sigla='"+ saida + "'"));
                     if (lrub.Count() > 0)
                     {
-                        teste.rubrica = lrub.First().id;
+                       // teste.rubrica = lrub.First().id;
                     }
                     else
                     {
@@ -318,7 +318,7 @@ namespace dicionario
                     lref = Referencia.ConverteObject(operacoes.SelecionarTabela(tabelasBd.REFERENCIAS, Referencia.ToListTabela(true), "Cod='" + saida + "'"));
                     if (lref.Count > 0)
                     {
-                        teste.referencia_verbete = lref.First().id;
+                       // teste.referencia_verbete = lref.First().id;
                     }
                     else
                     {

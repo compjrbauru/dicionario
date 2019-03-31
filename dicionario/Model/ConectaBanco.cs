@@ -67,6 +67,10 @@ namespace dicionario.Model
                 }
                 return false;
             }
+            catch (InvalidOperationException ex)
+            {
+                return false;
+            }
         }
         public bool FechaConexao()
         {
@@ -129,14 +133,14 @@ namespace dicionario.Model
             query += ")";
             EnviaComando(query);
         }
-        public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro = "")
+        public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro)
         {
             string query = "UPDATE " + tabela + " SET ";
             string temp1, temp2, s;
             while (campos.Count > 0)
             {
                 temp1 = campos.First();
-                temp2 = valores.First();
+                  temp2 = valores.First();
                 query += temp1 + "=";
                  if (HelperBd.VerificaInt(temp2)) { //na verdade eu tenho que verificar o Controller e o tipo do campo atual
                     query += temp2;
@@ -157,7 +161,7 @@ namespace dicionario.Model
                     query += ", ";
             }
             if (filtro != "")
-                query += "WHERE " + filtro;
+                query += " WHERE " + filtro;
             EnviaComando(query);
         }
         public void ApagaLinha(string tabela, string filtro)

@@ -47,18 +47,22 @@
             this.timerDestino = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtExemplo = new System.Windows.Forms.TextBox();
+            this.txtExemploTraduzido = new System.Windows.Forms.TextBox();
             this.ComboRubrica = new System.Windows.Forms.ComboBox();
             this.comboRef = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.timerRub = new System.Windows.Forms.Timer(this.components);
             this.timerRef = new System.Windows.Forms.Timer(this.components);
+            this.txtApresentacao = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApresentacao)).BeginInit();
             this.SuspendLayout();
             // 
             // btnVisao
             // 
+            this.btnVisao.Enabled = false;
             this.btnVisao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVisao.Location = new System.Drawing.Point(616, 5);
             this.btnVisao.Name = "btnVisao";
@@ -177,6 +181,7 @@
             // 
             // btnPrimeiro
             // 
+            this.btnPrimeiro.Enabled = false;
             this.btnPrimeiro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrimeiro.Location = new System.Drawing.Point(790, 142);
             this.btnPrimeiro.Name = "btnPrimeiro";
@@ -188,6 +193,7 @@
             // 
             // btnUltimo
             // 
+            this.btnUltimo.Enabled = false;
             this.btnUltimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUltimo.Location = new System.Drawing.Point(790, 229);
             this.btnUltimo.Name = "btnUltimo";
@@ -199,6 +205,7 @@
             // 
             // btnProximo
             // 
+            this.btnProximo.Enabled = false;
             this.btnProximo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProximo.Location = new System.Drawing.Point(790, 200);
             this.btnProximo.Name = "btnProximo";
@@ -210,6 +217,7 @@
             // 
             // btnAnterior
             // 
+            this.btnAnterior.Enabled = false;
             this.btnAnterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnterior.Location = new System.Drawing.Point(790, 171);
             this.btnAnterior.Name = "btnAnterior";
@@ -244,21 +252,21 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "Exemplo traduzido";
             // 
-            // textBox1
+            // txtExemplo
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(15, 147);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(698, 23);
-            this.textBox1.TabIndex = 19;
+            this.txtExemplo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExemplo.Location = new System.Drawing.Point(15, 147);
+            this.txtExemplo.Name = "txtExemplo";
+            this.txtExemplo.Size = new System.Drawing.Size(698, 23);
+            this.txtExemplo.TabIndex = 19;
             // 
-            // textBox2
+            // txtExemploTraduzido
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(12, 197);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(701, 23);
-            this.textBox2.TabIndex = 20;
+            this.txtExemploTraduzido.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExemploTraduzido.Location = new System.Drawing.Point(12, 197);
+            this.txtExemploTraduzido.Name = "txtExemploTraduzido";
+            this.txtExemploTraduzido.Size = new System.Drawing.Size(701, 23);
+            this.txtExemploTraduzido.TabIndex = 20;
             // 
             // ComboRubrica
             // 
@@ -268,6 +276,8 @@
             this.ComboRubrica.Name = "ComboRubrica";
             this.ComboRubrica.Size = new System.Drawing.Size(301, 24);
             this.ComboRubrica.TabIndex = 21;
+            this.ComboRubrica.SelectedIndexChanged += new System.EventHandler(this.ComboRubrica_SelectedIndexChanged);
+            this.ComboRubrica.TextUpdate += new System.EventHandler(this.ComboRubrica_TextUpdate);
             // 
             // comboRef
             // 
@@ -277,6 +287,8 @@
             this.comboRef.Name = "comboRef";
             this.comboRef.Size = new System.Drawing.Size(314, 24);
             this.comboRef.TabIndex = 22;
+            this.comboRef.SelectedIndexChanged += new System.EventHandler(this.comboRef_SelectedIndexChanged);
+            this.comboRef.TextUpdate += new System.EventHandler(this.comboRef_TextUpdate);
             // 
             // label5
             // 
@@ -298,17 +310,47 @@
             this.label6.TabIndex = 24;
             this.label6.Text = "Referência";
             // 
+            // txtApresentacao
+            // 
+            this.txtApresentacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtApresentacao.Location = new System.Drawing.Point(408, 29);
+            this.txtApresentacao.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtApresentacao.Name = "txtApresentacao";
+            this.txtApresentacao.Size = new System.Drawing.Size(120, 23);
+            this.txtApresentacao.TabIndex = 25;
+            this.txtApresentacao.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(405, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 17);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Pos. Apresentação";
+            // 
             // frm_Equivalente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 292);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtApresentacao);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboRef);
             this.Controls.Add(this.ComboRubrica);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtExemploTraduzido);
+            this.Controls.Add(this.txtExemplo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnUltimo);
@@ -333,6 +375,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Entradas equivalentes";
             this.Load += new System.EventHandler(this.frm_Equivalente_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.txtApresentacao)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,13 +401,15 @@
         private System.Windows.Forms.Timer timerDestino;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtExemplo;
+        private System.Windows.Forms.TextBox txtExemploTraduzido;
         private System.Windows.Forms.ComboBox ComboRubrica;
         private System.Windows.Forms.ComboBox comboRef;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer timerRub;
         private System.Windows.Forms.Timer timerRef;
+        private System.Windows.Forms.NumericUpDown txtApresentacao;
+        private System.Windows.Forms.Label label7;
     }
 }

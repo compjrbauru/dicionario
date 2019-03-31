@@ -79,7 +79,7 @@ namespace dicionario
                 //s = criaListaTitulos(p, cgselect, resRubrica.Find(irub => irub.id == p.rubrica));
                 holder = criaTreeTether(s, nf);
 
-                saida.Add(new TreeNode[] { new TreeNode("Acepção" + p.acepcao, holder) });
+                saida.Add(new TreeNode[] { new TreeNode("Acepção" , holder) });
             }
             foreach (TreeNode[] i in saida)
             {

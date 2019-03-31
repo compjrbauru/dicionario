@@ -141,7 +141,6 @@ C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.pdb
 C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.diag_equivalente.resources
 C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.frm_conjuga.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.csprojAssemblyReference.cache
-C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.diag_equivalente.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_conjuga.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_categoriaGramatical.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_controledeusuario.resources

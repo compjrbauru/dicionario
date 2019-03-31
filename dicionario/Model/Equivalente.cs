@@ -18,10 +18,11 @@ namespace dicionario.Model
         public string exemplo_traduzido { get; set; }
         public int Referencia { get; set; }
         public int Rubrica { get; set; }
+        public int nOrdem { get; private set; }
 
         public static List<string> ToListTabela()
         {
-            return new List<string> { "origem", "equivalente" , "heterogenerico", "heterotonico", "heterossemantico", "Exemplo", "Exemplo_Traduzido", "Referencia", "Rubrica"};
+            return new List<string> { "origem", "equivalente" , "heterogenerico", "heterotonico", "heterossemantico", "Exemplo", "Exemplo_Traduzido", "Referencia", "Rubrica", "nApresentacao"};
         }
 
         public List<string> ToListValores()
@@ -37,7 +38,8 @@ namespace dicionario.Model
                     exemplo,
                     exemplo_traduzido,
                     Referencia.ToString(),
-                    Rubrica.ToString()
+                    Rubrica.ToString(),
+                    nOrdem.ToString()
                 };
             }
             return r;
@@ -69,9 +71,13 @@ namespace dicionario.Model
             origem = -1;
         }
 
-        public static List<Equivalente> ConverteObject(List<object[]> entrada){
+        public void DefinirOrdemApresentação(int pos){
+            nOrdem = pos;
+        }
+
+        public static List<Equivalente> ConverteObject(List<object[]> listaObjs){
             List<Equivalente> s = new List<Equivalente>();
-            foreach (object data in entrada)
+            foreach (object[] data in listaObjs)
             {
                 s.Add((Equivalente)data);
             }
@@ -91,6 +97,7 @@ namespace dicionario.Model
             eqv.exemplo_traduzido = entrada[i++].ToString();
             eqv.Referencia = int.Parse(entrada[i++].ToString());
             eqv.Rubrica = int.Parse(entrada[i++].ToString());
+            eqv.nOrdem = int.Parse(entrada[i++].ToString());
             return eqv;
         }
     }

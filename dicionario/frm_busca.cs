@@ -84,7 +84,7 @@ namespace dicionario
                     searchResultsListBox.Items.Add(conjunto);
                     for (i=0; i<divisores[c]; i++) {
                         temPal = resultadosPalavra.ElementAt(i);
-                        filtro = temPal.lema + " Acep." + temPal.acepcao.ToString() + " " + temPal.Id_classeGram + " \""; //+ temPal.referencia_exemplo + "\"" + "\"" + temPal.ref_ex_tr + "\"" + temPal.referencia_verbete;
+                        filtro = temPal.lema + " Acep."  + " " + temPal.Id_classeGram + " \""; //+ temPal.referencia_exemplo + "\"" + "\"" + temPal.ref_ex_tr + "\"" + temPal.referencia_verbete;
                         searchResultsListBox.Items.Add(filtro);
                     }
                     c++;
@@ -133,7 +133,7 @@ namespace dicionario
                 t = res.First();
                 agrupador = t.lema;
                 temp = res.FindAll(p => p.lema == agrupador);
-                temp.OrderBy(p => p.acepcao);
+                //temp.OrderBy(p => p.acepcao);
                 s.AddRange(temp);
                 res.RemoveAll(p => p.lema == agrupador);
                 grupos.Add(agrupador);
@@ -189,7 +189,7 @@ namespace dicionario
             List<Palavra> r = new List<Palavra>();
             if (s.Contains("Entrada")){
                 string entra = PegaInformacoes(s, out int a);
-                r.Add(resultadosPalavra.Find(p => p.lema == entra && p.acepcao == a));
+                //r.Add(resultadosPalavra.Find(p => p.lema == entra && p.acepcao == a));
             } else {
                 r.AddRange(resultadosPalavra.FindAll(p => p.lema == s));
             }

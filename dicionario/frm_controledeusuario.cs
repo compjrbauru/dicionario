@@ -114,7 +114,7 @@ namespace dicionario
                 usr.contato = txtContato.Text;
                 if (edicao)
                 {
-                    c.UpdateLine(tabelasBd.USUARIOS, Usuario.ToListTabela(), usr.ToListValores());
+                    c.UpdateLine(tabelasBd.USUARIOS, Usuario.ToListTabela(), usr.ToListValores(), "cpf='" + usr.cpf + "'");
                 }
                 else
                 {
