@@ -26,11 +26,8 @@ namespace dicionario
         {
             CRUD operaBd = new CRUD();
             List<Rubrica> resRubrica = new List<Rubrica>();
-            List<ClasseGramatical> resCg = new List<ClasseGramatical>();
             List<Referencia> resRefer = new List<Referencia>();
-            ClasseGramatical cgselect;
             string filtro;
-            List<int> v1 = new List<int>();
             List<int> v2 = new List<int>();
             List<int> v3 = new List<int>();
             List<string> s = new List<string>();
@@ -41,10 +38,7 @@ namespace dicionario
 
             foreach (Palavra p in entrada)
             {
-                if (v1.FindIndex(val => val == p.Id_classeGram) < 0)
-                {
-                    v1.Add(p.Id_classeGram);
-                }
+
                 /*if (v2.FindIndex(val => val == p.rubrica) < 0)
                 {
                     v2.Add(p.rubrica);
@@ -54,8 +48,6 @@ namespace dicionario
                     v3.Add(p.referencia_verbete);
                 }*/
             }
-            filtro = montaFiltro("id", v1); //filtrando cgram
-            resCg = ClasseGramatical.ConverteObject(operaBd.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), filtro));
             /*filtro = montaFiltro("id", v2); //filtrando rubrica
             resRubrica = Rubrica.ConverteObject(operaBd.SelecionarTabela("rubrica", Rubrica.ToListTabela(true), filtro));
             filtro = montaFiltro("Id", v3);
@@ -67,7 +59,7 @@ namespace dicionario
                 //s.Add(p.ref_ex_tr);
                 exemplos = criaNode(s);
 
-                cgselect = resCg.Find(icg => icg.id == p.Id_classeGram);
+
                 //vamos agora juntar os outros valores pertinentes à acepção ou verbete selecionado
                 //s = criaListaValores(p, cgselect, resRefer.Find(iref => iref.id == p.referencia_verbete));
                 nf = criaTreeNodes(s);
@@ -104,11 +96,11 @@ namespace dicionario
             }
             return nd;
         }
-        private List<string> criaListaValores(Palavra p, ClasseGramatical cg, Referencia r)
+        private List<string> criaListaValores(Palavra p, Referencia r)
         {
             List<string> sai = new List<string>
             {
-                cg.Definicao,
+                //cg.Definicao,
                 //String.Concat(p.referencia_exemplo,"\n", p.ref_ex_tr),
                 r.descricao,
                 p.notas_gramatica,
@@ -116,11 +108,11 @@ namespace dicionario
             };
             return sai;
         }
-        private List<string> criaListaTitulos(Palavra p, ClasseGramatical cg, Rubrica r)
+        private List<string> criaListaTitulos(Palavra p, Rubrica r)
         {
             List<string> sai = new List<string>
             {
-                cg.descricao,
+                //cg.descricao,
                 r.descricao,
                 "Notas Gramaticais",
                 "Notas Culturais",

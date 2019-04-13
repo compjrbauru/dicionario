@@ -142,14 +142,12 @@ C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.dia
 C:\Users\Igor\Desktop\copy\Pasta sem título\dicionario\obj\Debug\dicionario.frm_conjuga.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.csprojAssemblyReference.cache
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_conjuga.resources
-C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_categoriaGramatical.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_controledeusuario.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_busca.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_configuracao.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_contato.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_Edit.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.Login.resources
-C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_CssGr.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_referencia.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.Model.frm_rubrica.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_visualizaverbete.resources

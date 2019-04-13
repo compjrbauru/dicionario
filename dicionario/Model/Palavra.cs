@@ -10,7 +10,7 @@ namespace dicionario.Model
     {
         public int id { get; set; }
         public string lema { get; set; }
-	    public int Id_classeGram { get; set; }
+	    public string ClasseGram { get; set; }
         public string idioma { get; set; }
         public string notas_gramatica { get; set; }
         public string nota_cultura { get; set; }
@@ -24,7 +24,7 @@ namespace dicionario.Model
             if (incluiId)
                 val.Add(id.ToString());
             val.Add(lema);
-            val.Add(Id_classeGram.ToString());
+            val.Add(ClasseGram.ToString());
             val.Add(idioma);
             val.Add(notas_gramatica);
             val.Add(nota_cultura);
@@ -40,7 +40,7 @@ namespace dicionario.Model
             if (incluiId)
                 val.Add("id");
             val.Add("Lema");
-	        val.Add("Id_classeGram");
+	        val.Add("ClasseGram");
             val.Add("Idioma");
             val.Add("notas_gramatica");
             val.Add("notas_cultura");
@@ -74,7 +74,7 @@ namespace dicionario.Model
                 i++;
             }
             p.lema = lista.ElementAt(i++);
-            p.Id_classeGram = int.Parse(lista.ElementAt(i++));        
+            p.ClasseGram = lista.ElementAt(i++);        
             p.idioma = lista.ElementAt(i++);
             p.notas_gramatica = lista.ElementAt(i++);
             p.nota_cultura = lista.ElementAt(i++);
@@ -93,7 +93,7 @@ namespace dicionario.Model
                 i++;
             }
             saida.lema = lista[i++].ToString();
-            saida.Id_classeGram = int.Parse(lista[i++].ToString());
+            saida.ClasseGram = lista[i++].ToString();
             saida.idioma = lista[i++].ToString();
             saida.notas_gramatica = lista[i++].ToString();
             saida.nota_cultura = lista[i++].ToString();

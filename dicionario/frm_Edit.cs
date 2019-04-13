@@ -21,17 +21,16 @@ namespace dicionario
         private CRUD crud = new CRUD();
         private Palavra p = new Palavra();
         private Rubrica rb = new Rubrica();
-        private ClasseGramatical clg = new ClasseGramatical();
         private Referencia refere = new Referencia();
         private List<object[]> resultados;
         private List<Palavra> resPalavra = new List<Palavra>();
         private int ipal = 0;
         private List<Rubrica> resRubrica = new List<Rubrica>();
-        private List<ClasseGramatical> resClg = new List<ClasseGramatical>();
         private List<Referencia> resRef = new List<Referencia>();
 
         private void EditForm_Load(object sender, EventArgs e)
         {
+
         }
         private void LimpaCampos()
         {
@@ -52,7 +51,6 @@ namespace dicionario
         {
             p.id = -1;
             p.lema = "";
-            p.Id_classeGram = 0;
             p.Genero = "N";
         }
         private void MostraDados()
@@ -69,13 +67,6 @@ namespace dicionario
                     ComboIdioma.SelectedIndex = 1;
                 }
             }
-            if (p.Id_classeGram > 0)
-            {
-                resultados = crud.SelecionarTabela("classegram", ClasseGramatical.ToListTabela(true), "Id=" + p.Id_classeGram.ToString());
-                resClg = ClasseGramatical.ConverteObject(resultados);
-                clg = resClg.First();
-                ComboClasseGram.Text = clg.descricao;
-            }
             textCultura.Text = p.nota_cultura;
             txtGramatica.Text = p.notas_gramatica;            
             switch (p.Genero) {
@@ -91,6 +82,7 @@ namespace dicionario
                 default:
                     break;
             }
+            ComboClasseGram.Text = p.ClasseGram;
             btnEquiv.Enabled = true;
             btnConjuga.Enabled = true;
         }
@@ -177,7 +169,7 @@ namespace dicionario
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            if (p.id <= 0 && txtpalavra.Text != "")
+            if (txtpalavra.Text != "")
             {
                 if (InformaDiag.ConfirmaSN("Existem dados não salvos. Caso prossiga com a operação, todos os dados" + '\n' + "digitados serão perdidos. Continuar mesmo assim?") == DialogResult.No)
                     return;
@@ -193,7 +185,21 @@ namespace dicionario
                 InformaDiag.Erro("Palavra não pode ser vazio!");
                 return;
             }
-            //if (txtpalavra.Text.Contains('{') || txtpalavra.Text.Contains('}')) { }
+            if (ComboClasseGram.SelectedItem == null)
+            {
+                InformaDiag.Erro("Selecione um valor válido de Classe gramatical!");
+                return;
+            }
+            if (ComboGenero.SelectedItem == null)
+            {
+                InformaDiag.Erro("Selecione um gênero válido!");
+                return;
+            }
+            if (ComboIdioma.SelectedItem == null)
+            {
+                InformaDiag.Erro("É obrigatório selecionar um idioma!");
+                return;
+            }
             string lng;
             p.lema = txtpalavra.Text;
 
@@ -228,10 +234,11 @@ namespace dicionario
                     p.Genero = "N";
                     break;
             }
+            p.ClasseGram = ComboClasseGram.Text;
             if (p.id <= 0)
             {
                 List<Conjugacao> lconj = new List<Conjugacao>();
-                Conjugacao conjugacao = new Conjugacao { preterito = "", presente = "", futuro = "" };
+                Conjugacao conjugacao = new Conjugacao { ExPreterito = "", ExPresente = "", ExFuturo = "", ConstrPreterito = "", ConstrPresente = "", ConstrFuturo = "" };
                 crud.InsereLinha(tabelasBd.CONJUGACAO,Conjugacao.ToListTabela(), conjugacao.ToListValores());
                 lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
                 p.id_conjuga = lconj.First().id;
@@ -280,18 +287,6 @@ namespace dicionario
             _Rubrica.ShowDialog();
         }
 
-        private void classeGramaticalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frm_CssGr clGram = new frm_CssGr();
-            clGram.ShowDialog();
-        }
-
-        private void categoriaGramaticalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frm_categoriaGramatical ctGram = new frm_categoriaGramatical();
-            ctGram.ShowDialog();
-        }
-
         private void contatoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm_contato cont = new frm_contato();
@@ -302,45 +297,6 @@ namespace dicionario
         {
             frm_referencia rf = new frm_referencia();
             rf.ShowDialog();
-        }
-
-        private void ComboClasseGram_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ComboClasseGram.Text != "")
-            {
-                if(ComboClasseGram.Text.Length <= 3 )
-                    clg = resClg.Find(clg => clg.sigla == ComboClasseGram.Text);
-                else
-                    clg = resClg.Find(clg => clg.descricao == ComboClasseGram.Text);
-                p.Id_classeGram = clg.id;
-            }
-        }
-
-        private void ComboClasseGram_TextUpdate(object sender, EventArgs e)
-        {
-            if (timerClg.Enabled == true) { timerClg.Enabled = false; timerClg.Enabled = true; } else timerClg.Enabled = true;
-        }
-
-        private void timerClg_Tick(object sender, EventArgs e)
-        {
-            string pesquisa;
-            pesquisa = ComboClasseGram.Text;
-            if (ComboClasseGram.Items.Count > 0)
-            {
-                ComboClasseGram.Items.Clear();
-            }
-            if (pesquisa.Length <= 3)
-            {
-                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
-            }
-            else{
-                resClg = ClasseGramatical.ConverteObject(crud.SelecionarTabela(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
-            }
-            foreach (ClasseGramatical c in resClg)
-            {
-                ComboClasseGram.Items.Add(c.descricao);
-            }
-            timerClg.Enabled = false; //prevenindo de floodar a combo
         }
 
         private void btnEquiv_Click(object sender, EventArgs e)
@@ -400,7 +356,5 @@ namespace dicionario
                 MostraDados();
             }
         }
-
-
     }
 }
