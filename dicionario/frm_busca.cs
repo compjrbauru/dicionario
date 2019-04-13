@@ -84,7 +84,7 @@ namespace dicionario
                     searchResultsListBox.Items.Add(conjunto);
                     for (i=0; i<divisores[c]; i++) {
                         temPal = resultadosPalavra.ElementAt(i);
-                        filtro = temPal.lema + " Acep."  + " " + temPal.Id_classeGram + " \""; //+ temPal.referencia_exemplo + "\"" + "\"" + temPal.ref_ex_tr + "\"" + temPal.referencia_verbete;
+                        filtro = temPal.lema + " Acep."  + " " + " \""; //+ temPal.referencia_exemplo + "\"" + "\"" + temPal.ref_ex_tr + "\"" + temPal.referencia_verbete;
                         searchResultsListBox.Items.Add(filtro);
                     }
                     c++;

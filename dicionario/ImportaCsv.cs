@@ -68,10 +68,6 @@ namespace dicionario
                         v = Palavra.ToListTabela().Count;
                         ptlt = Palavra.ToListTabela();
                         break;
-                    case "Classe Gramatical":
-                        v = ClasseGramatical.ToListTabela().Count;
-                        ptlt = ClasseGramatical.ToListTabela();
-                        break;
                     case "Rubrica":
                         v = Rubrica.ToListTabela().Count;
                         ptlt = Rubrica.ToListTabela();
@@ -220,21 +216,12 @@ namespace dicionario
             if (tabela == tabelasBd.PALAVRA){
                 List<string> FKs = new List<string>();
                 int idx, c = 0;
-                bool[] fila = { false, false, false};
+                bool[] fila = { false, false};
                 ///TODO: Ah, enumeradores...
                 /////faço issoi para evitar que seja lançada uma exceção e os valores perdidos no cast logo abaixo
-                //classe gramatical
-                idx = Palavra.ToListTabela().FindIndex(bs => bs == "Id_classeGram");
-                if (!int.TryParse(valores.ElementAt(idx), out int conv) && (valores.ElementAt(idx)!="")){
-                FKs.Add(valores.ElementAt(idx));
-                valores.RemoveAt(idx);
-                valores.Insert(idx, "0");
-                    fila[c] = true;
-                }
-                c++;
                 //rubrica
                 idx = Palavra.ToListTabela().FindIndex(bs => bs == "Rubrica");
-                if (!int.TryParse(valores.ElementAt(idx), out conv) && (valores.ElementAt(idx) != ""))
+                if (!int.TryParse(valores.ElementAt(idx), out int conv) && (valores.ElementAt(idx) != ""))
                 {
                     FKs.Add(valores.ElementAt(idx));
                 valores.RemoveAt(idx);
@@ -283,7 +270,6 @@ namespace dicionario
                 }
 
                 List<Rubrica> lrub = new List<Rubrica>();
-                List<ClasseGramatical> lclg = new List<ClasseGramatical>();
                 List<Referencia> lref = new List<Referencia>();
                 IEnumerator<string> ff = FKs.GetEnumerator();
                 c = 0;
@@ -293,19 +279,6 @@ namespace dicionario
                     if (lrub.Count() > 0)
                     {
                        // teste.rubrica = lrub.First().id;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                    ff.MoveNext();
-                }
-                if (fila[c++]){
-                    saida = ff.Current;
-                    lclg = ClasseGramatical.ConverteObject(operacoes.SelecionarTabela(tabelasBd.CLASSE_GRAMATICAL, ClasseGramatical.ToListTabela(true), "sigla='" + saida + "'"));
-                    if (lclg.Count() > 0)
-                    {
-                        teste.Id_classeGram = lclg.First().id;
                     }
                     else
                     {
@@ -382,9 +355,6 @@ namespace dicionario
             {
                 case "Palavra":
                     NomeTabela = tabelasBd.PALAVRA;
-                    break;
-                case "Classe Gramatical":
-                    NomeTabela = tabelasBd.CLASSE_GRAMATICAL;
                     break;
                 case "Rubrica":
                     NomeTabela = tabelasBd.RUBRICA;

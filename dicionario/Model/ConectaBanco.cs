@@ -13,7 +13,6 @@ namespace dicionario.Model
     class tabelasBd
     {
         public const string PALAVRA = "palavra";
-        public const string CLASSE_GRAMATICAL = "classegram";
         public const string RUBRICA = "rubrica";
         public const string REFERENCIAS = "referencias";
         public const string USUARIOS = "usr";
@@ -67,7 +66,7 @@ namespace dicionario.Model
                 }
                 return false;
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
                 return false;
             }
@@ -208,9 +207,6 @@ namespace dicionario.Model
             {
                 case "palavra":
                     t = Palavra.ToListTabela();
-                    break;
-                case "classegram":
-                    t = ClasseGramatical.ToListTabela();
                     break;
                 case "rubrica":
                     t = Rubrica.ToListTabela();
