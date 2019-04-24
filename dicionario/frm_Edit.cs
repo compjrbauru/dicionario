@@ -20,12 +20,12 @@ namespace dicionario
         }
         private CRUD crud = new CRUD();
         private Palavra p = new Palavra();
-        private Rubrica rb = new Rubrica();
+        private MarcaUso rb = new MarcaUso();
         private Referencia refere = new Referencia();
         private List<object[]> resultados;
         private List<Palavra> resPalavra = new List<Palavra>();
         private int ipal = 0;
-        private List<Rubrica> resRubrica = new List<Rubrica>();
+        private List<MarcaUso> resRubrica = new List<MarcaUso>();
         private List<Referencia> resRef = new List<Referencia>();
 
         private void EditForm_Load(object sender, EventArgs e)
@@ -283,7 +283,7 @@ namespace dicionario
 
         private void rubricaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_rubrica _Rubrica = new frm_rubrica();
+            frm_mUso _Rubrica = new frm_mUso();
             _Rubrica.ShowDialog();
         }
 

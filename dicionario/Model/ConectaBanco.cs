@@ -13,7 +13,7 @@ namespace dicionario.Model
     class tabelasBd
     {
         public const string PALAVRA = "palavra";
-        public const string RUBRICA = "rubrica";
+        public const string MARCAS_USO = "marca_uso";
         public const string REFERENCIAS = "referencias";
         public const string USUARIOS = "usr";
         public const string CONJUGACAO = "conjugacao";
@@ -209,7 +209,7 @@ namespace dicionario.Model
                     t = Palavra.ToListTabela();
                     break;
                 case "rubrica":
-                    t = Rubrica.ToListTabela();
+                    t = MarcaUso.ToListTabela();
                     break;
                 case "referencias":
                     t = Referencia.ToListTabela();

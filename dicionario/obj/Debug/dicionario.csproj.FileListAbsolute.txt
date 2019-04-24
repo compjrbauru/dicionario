@@ -170,3 +170,4 @@ C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.TrustInfo.
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.exe.manifest
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.application
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_Equivalente.resources
+C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.Model.frm_mUso.resources

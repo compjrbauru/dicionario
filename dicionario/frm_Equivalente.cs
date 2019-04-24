@@ -18,7 +18,7 @@ namespace dicionario
         private List<Equivalente> equivO = new List<Equivalente>();
         private List<Equivalente> equivD = new List<Equivalente>();
         private List<Palavra> resP = new List<Palavra>();
-        private List<Rubrica> resRubrica = new List<Rubrica>();
+        private List<MarcaUso> resRubrica = new List<MarcaUso>();
         private List<Referencia> resRef = new List<Referencia>();
         private readonly Palavra registroPai;
         private Equivalente oldEqAt;
@@ -55,7 +55,7 @@ namespace dicionario
             if (resRef.Count > 0)
                 comboRef.Text = resRef.First().descricao;
 
-            resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "Id="+ativo.Rubrica.ToString()));
+            resRubrica = MarcaUso.ConverteObject(crud.SelecionarTabela(tabelasBd.MARCAS_USO, MarcaUso.ToListTabela(true), "Id="+ativo.MarcaUso.ToString()));
             if (resRubrica.Count > 0)
                 ComboRubrica.Text = resRubrica.First().descricao;
             oldEqAt = ativo;
@@ -270,11 +270,11 @@ namespace dicionario
             }
             if (pesquisa.Length <= 3)
             {
-                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
+                resRubrica = MarcaUso.ConverteObject(crud.SelecionarTabela(tabelasBd.MARCAS_USO, MarcaUso.ToListTabela(true), "sigla LIKE '" + pesquisa + "%'", "LIMIT 10"));
             }
             else
-                resRubrica = Rubrica.ConverteObject(crud.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
-            foreach (Rubrica r in resRubrica)
+                resRubrica = MarcaUso.ConverteObject(crud.SelecionarTabela(tabelasBd.MARCAS_USO, MarcaUso.ToListTabela(true), "descricao LIKE '" + pesquisa + "%'", "LIMIT 10"));
+            foreach (MarcaUso r in resRubrica)
             {
                 ComboRubrica.Items.Add(r.descricao);
             }
@@ -285,7 +285,7 @@ namespace dicionario
         {
             if (ComboRubrica.Text != "")
             {
-                ativo.Rubrica = resRubrica.Find(rubrica => rubrica.descricao == ComboRubrica.Text).id;
+                ativo.MarcaUso = resRubrica.Find(rubrica => rubrica.descricao == ComboRubrica.Text).id;
             }
         }
 

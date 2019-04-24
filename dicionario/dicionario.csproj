@@ -162,17 +162,17 @@
       <DependentUpon>ImportaCsv.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ConectaBanco.cs" />
-    <Compile Include="frm_rubrica.cs">
+    <Compile Include="frm_marcaUso.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_rubrica.Designer.cs">
-      <DependentUpon>frm_rubrica.cs</DependentUpon>
+    <Compile Include="frm_marcaUso.Designer.cs">
+      <DependentUpon>frm_marcaUso.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Model\Equivalente.cs" />
     <Compile Include="Model\Itabelas.cs" />
     <Compile Include="Model\Palavra.cs" />
-    <Compile Include="Model\Rubrica.cs" />
+    <Compile Include="Model\MarcaUso.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -210,8 +210,8 @@
     <EmbeddedResource Include="frm_referencia.resx">
       <DependentUpon>frm_referencia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_rubrica.resx">
-      <DependentUpon>frm_rubrica.cs</DependentUpon>
+    <EmbeddedResource Include="frm_marcaUso.resx">
+      <DependentUpon>frm_marcaUso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_visualizaverbete.resx">
       <DependentUpon>frm_visualizaverbete.cs</DependentUpon>

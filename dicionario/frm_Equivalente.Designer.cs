@@ -274,7 +274,7 @@
             this.ComboRubrica.FormattingEnabled = true;
             this.ComboRubrica.Location = new System.Drawing.Point(15, 243);
             this.ComboRubrica.Name = "ComboRubrica";
-            this.ComboRubrica.Size = new System.Drawing.Size(301, 24);
+            this.ComboRubrica.Size = new System.Drawing.Size(317, 24);
             this.ComboRubrica.TabIndex = 21;
             this.ComboRubrica.SelectedIndexChanged += new System.EventHandler(this.ComboRubrica_SelectedIndexChanged);
             this.ComboRubrica.TextUpdate += new System.EventHandler(this.ComboRubrica_TextUpdate);
@@ -283,9 +283,9 @@
             // 
             this.comboRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboRef.FormattingEnabled = true;
-            this.comboRef.Location = new System.Drawing.Point(399, 243);
+            this.comboRef.Location = new System.Drawing.Point(338, 243);
             this.comboRef.Name = "comboRef";
-            this.comboRef.Size = new System.Drawing.Size(314, 24);
+            this.comboRef.Size = new System.Drawing.Size(375, 24);
             this.comboRef.TabIndex = 22;
             this.comboRef.SelectedIndexChanged += new System.EventHandler(this.comboRef_SelectedIndexChanged);
             this.comboRef.TextUpdate += new System.EventHandler(this.comboRef_TextUpdate);
@@ -296,15 +296,15 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(12, 223);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 17);
+            this.label5.Size = new System.Drawing.Size(96, 17);
             this.label5.TabIndex = 23;
-            this.label5.Text = "Rubrica";
+            this.label5.Text = "Marca de Uso";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(396, 223);
+            this.label6.Location = new System.Drawing.Point(338, 223);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 17);
             this.label6.TabIndex = 24;

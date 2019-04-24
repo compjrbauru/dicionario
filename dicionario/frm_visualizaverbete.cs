@@ -25,7 +25,7 @@ namespace dicionario
         private void PreencheTreeList(List<Palavra> entrada)
         {
             CRUD operaBd = new CRUD();
-            List<Rubrica> resRubrica = new List<Rubrica>();
+            List<MarcaUso> resRubrica = new List<MarcaUso>();
             List<Referencia> resRefer = new List<Referencia>();
             string filtro;
             List<int> v2 = new List<int>();
@@ -108,7 +108,7 @@ namespace dicionario
             };
             return sai;
         }
-        private List<string> criaListaTitulos(Palavra p, Rubrica r)
+        private List<string> criaListaTitulos(Palavra p, MarcaUso r)
         {
             List<string> sai = new List<string>
             {

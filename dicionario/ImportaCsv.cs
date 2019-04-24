@@ -69,8 +69,8 @@ namespace dicionario
                         ptlt = Palavra.ToListTabela();
                         break;
                     case "Rubrica":
-                        v = Rubrica.ToListTabela().Count;
-                        ptlt = Rubrica.ToListTabela();
+                        v = MarcaUso.ToListTabela().Count;
+                        ptlt = MarcaUso.ToListTabela();
                         break;
                     case "Referência":
                         v = Referencia.ToListTabela().Count;
@@ -269,13 +269,13 @@ namespace dicionario
                     return null;
                 }
 
-                List<Rubrica> lrub = new List<Rubrica>();
+                List<MarcaUso> lrub = new List<MarcaUso>();
                 List<Referencia> lref = new List<Referencia>();
                 IEnumerator<string> ff = FKs.GetEnumerator();
                 c = 0;
                 if (fila[c++]){
                     saida = ff.Current;
-                    lrub = Rubrica.ConverteObject(operacoes.SelecionarTabela(tabelasBd.RUBRICA, Rubrica.ToListTabela(true), "sigla='"+ saida + "'"));
+                    lrub = MarcaUso.ConverteObject(operacoes.SelecionarTabela(tabelasBd.MARCAS_USO, MarcaUso.ToListTabela(true), "sigla='"+ saida + "'"));
                     if (lrub.Count() > 0)
                     {
                        // teste.rubrica = lrub.First().id;
@@ -357,7 +357,7 @@ namespace dicionario
                     NomeTabela = tabelasBd.PALAVRA;
                     break;
                 case "Rubrica":
-                    NomeTabela = tabelasBd.RUBRICA;
+                    NomeTabela = tabelasBd.MARCAS_USO;
                     break;
                 case "Referência":
                     NomeTabela = tabelasBd.REFERENCIAS;
