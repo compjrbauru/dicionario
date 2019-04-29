@@ -149,7 +149,6 @@ C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_contat
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_Edit.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.Login.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_referencia.resources
-C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.Model.frm_rubrica.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_visualizaverbete.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frmImportaCsv.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.Properties.Resources.resources

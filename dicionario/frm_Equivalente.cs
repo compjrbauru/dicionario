@@ -59,6 +59,8 @@ namespace dicionario
             if (resRubrica.Count > 0)
                 ComboRubrica.Text = resRubrica.First().descricao;
             oldEqAt = ativo;
+            txtCultura.Text = ativo.notasCulturais;
+            txtGramatica.Text = ativo.notasGramaticais;
         }
 
         private void LimpaCampos()
@@ -76,6 +78,8 @@ namespace dicionario
             txtExemploTraduzido.Text = "";
             txtExemplo.Text = "";
             ativo.Invalidarequivalente();
+            txtCultura.Text = "";
+            txtGramatica.Text = "";
         }
 
         private void frm_Equivalente_Load(object sender, EventArgs e)
@@ -194,7 +198,8 @@ namespace dicionario
             ativo.heterogenerico = chkHgenerico.Checked;
             ativo.heterotonico = chkHtonico.Checked;
             ativo.heterossemantico = chkHsemantico.Checked;
-
+            ativo.notasCulturais = txtCultura.Text;
+            ativo.notasGramaticais = txtGramatica.Text;
             if (!novo)
             {
                 crud.UpdateLine(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), ativo.ToListValores(), "Origem=" + oldEqAt.origem.ToString() +" AND equivalente=" + oldEqAt.equivalente.ToString() +" AND nApresentacao=" + oldEqAt.nOrdem.ToString());

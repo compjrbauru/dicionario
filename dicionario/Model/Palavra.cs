@@ -17,6 +17,8 @@ namespace dicionario.Model
         public int id_conjuga { get; set; }
         public string Genero { get; set; }
         public string Definicao { get; set; }
+        public int Sinonimo1 { get; set; }
+        public int Sinonimo2 { get; set; }
 
         public List<string> ToListValores(bool incluiId = false)
         {
@@ -31,6 +33,8 @@ namespace dicionario.Model
             val.Add(id_conjuga.ToString());
             val.Add(Genero);
             val.Add(Definicao);
+            val.Add(Sinonimo1.ToString());
+            val.Add(Sinonimo2.ToString());
             return val;
         }
 
@@ -47,6 +51,8 @@ namespace dicionario.Model
             val.Add("Id_conjuga");
             val.Add("Genero");
             val.Add("Definicao");
+            val.Add("Sinonimo1");
+            val.Add("Sinonimo2");
             return val;
         }
 
@@ -81,6 +87,7 @@ namespace dicionario.Model
             p.id_conjuga = int.Parse(lista.ElementAt(i++));
             p.Genero = lista.ElementAt(i++);
             p.Definicao = lista.ElementAt(i++);
+            p.Sinonimo1 = int.Parse(lista.ElementAt(i++));
             return p;
         }
         public static explicit operator Palavra(object[] lista)
@@ -99,7 +106,9 @@ namespace dicionario.Model
             saida.nota_cultura = lista[i++].ToString();
             saida.id_conjuga = int.Parse(lista.ElementAt(i++).ToString());
             saida.Genero = lista[i++].ToString();
-            saida.Definicao = lista[i++].ToString();          
+            saida.Definicao = lista[i++].ToString();  
+            saida.Sinonimo1 = int.Parse(lista.ElementAt(i++).ToString());
+            saida.Sinonimo2 = int.Parse(lista.ElementAt(i++).ToString());
             return saida;
         }
         

@@ -19,10 +19,12 @@ namespace dicionario.Model
         public int Referencia { get; set; }
         public int MarcaUso { get; set; }
         public int nOrdem { get; private set; }
+        public string notasCulturais { get; set; }
+        public string notasGramaticais { get; set; }
 
         public static List<string> ToListTabela()
         {
-            return new List<string> { "origem", "equivalente" , "heterogenerico", "heterotonico", "heterossemantico", "Exemplo", "Exemplo_Traduzido", "Referencia", "MarcaUso", "nApresentacao"};
+            return new List<string> { "origem", "equivalente" , "heterogenerico", "heterotonico", "heterossemantico", "Exemplo", "Exemplo_Traduzido", "Referencia", "MarcaUso", "nApresentacao", "NCultural", "NGramatical"};
         }
 
         public List<string> ToListValores()
@@ -39,7 +41,9 @@ namespace dicionario.Model
                     exemplo_traduzido,
                     Referencia.ToString(),
                     MarcaUso.ToString(),
-                    nOrdem.ToString()
+                    nOrdem.ToString(),
+                    notasCulturais,
+                    notasGramaticais
                 };
             }
             return r;
@@ -98,6 +102,8 @@ namespace dicionario.Model
             eqv.Referencia = int.Parse(entrada[i++].ToString());
             eqv.MarcaUso = int.Parse(entrada[i++].ToString());
             eqv.nOrdem = int.Parse(entrada[i++].ToString());
+            eqv.notasCulturais = entrada[i++].ToString();
+            eqv.notasGramaticais = entrada[i++].ToString();
             return eqv;
         }
     }

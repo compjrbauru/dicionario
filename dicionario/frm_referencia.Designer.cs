@@ -106,8 +106,9 @@
             this.txtDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesc.Location = new System.Drawing.Point(26, 184);
             this.txtDesc.MaxLength = 45;
+            this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(447, 26);
+            this.txtDesc.Size = new System.Drawing.Size(447, 52);
             this.txtDesc.TabIndex = 3;
             this.toolTip1.SetToolTip(this.txtDesc, "Digite uma descrição completa da obra referenciada por este código");
             // 

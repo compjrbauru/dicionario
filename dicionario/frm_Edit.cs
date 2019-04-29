@@ -27,6 +27,8 @@ namespace dicionario
         private int ipal = 0;
         private List<MarcaUso> resRubrica = new List<MarcaUso>();
         private List<Referencia> resRef = new List<Referencia>();
+        private bool Sin1Ativo = true;
+        private List<Palavra> resSin = new List<Palavra>();
 
         private void EditForm_Load(object sender, EventArgs e)
         {
@@ -35,7 +37,7 @@ namespace dicionario
         private void LimpaCampos()
         {
             txtDefinicao.Text = "";
-            txtGramatica.Text = "";
+            //txtGramatica.Text = "";
             txtpalavra.Text = "";
             ComboClasseGram.SelectedIndex = -1;
             ComboClasseGram.Text = "";
@@ -43,15 +45,21 @@ namespace dicionario
             ComboGenero.Text = "";
             ComboIdioma.SelectedIndex = -1;
             ComboIdioma.Text = "";
-            textCultura.Text = "";
+            //textCultura.Text = "";
             btnEquiv.Enabled = false;
             btnConjuga.Enabled = false;
+            comboSinonimo1.Text = "";
+            comboSinonimo1.Items.Clear();
+            comboSinonimo2.Text = "";
+            comboSinonimo2.Items.Clear();
         }
         private void LimpaModel()
         {
             p.id = -1;
             p.lema = "";
             p.Genero = "N";
+            p.Sinonimo1 = -1;
+            p.Sinonimo2 = -1;
         }
         private void MostraDados()
         {
@@ -67,8 +75,8 @@ namespace dicionario
                     ComboIdioma.SelectedIndex = 1;
                 }
             }
-            textCultura.Text = p.nota_cultura;
-            txtGramatica.Text = p.notas_gramatica;            
+           // textCultura.Text = p.nota_cultura;
+           // txtGramatica.Text = p.notas_gramatica;            
             switch (p.Genero) {
                 case "M":
                     ComboGenero.SelectedIndex = 0;
@@ -79,12 +87,22 @@ namespace dicionario
                 case "F":
                     ComboGenero.SelectedIndex = 1;
                     break;
-                default:
+                case "S":
+                    ComboGenero.SelectedIndex = 3;
                     break;
             }
             ComboClasseGram.Text = p.ClasseGram;
             btnEquiv.Enabled = true;
             btnConjuga.Enabled = true;
+            if (p.Sinonimo1 > 0)
+            {
+                string filtro = "id=" + p.Sinonimo1.ToString();
+                if (p.Sinonimo2 > 0) filtro += (" OR id=" + p.Sinonimo2.ToString());
+                resSin = Palavra.ConverteObject(crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), filtro));
+                comboSinonimo1.Text = resSin.First().lema;
+                if (resSin.Count > 1)
+                comboSinonimo2.Text = resSin.ElementAt(1).lema; 
+            }
         }
         private void AtivaNavegadores() {
             btnPrimeiro.Enabled = true;
@@ -178,6 +196,23 @@ namespace dicionario
             LimpaModel();
         }
 
+        private string PegaSiglaIdioma(){
+            switch (ComboIdioma.SelectedIndex)
+            {
+                case 0:
+                    return "PT";
+                case 2:
+                    return "EN";
+                    
+                case 1:
+                    return "ES";
+                    
+                default:
+                    return "";
+                    
+            }
+        }
+
         private void btnSalva_Click(object sender, EventArgs e)
         {
             if(txtpalavra.Text == String.Empty)
@@ -200,27 +235,10 @@ namespace dicionario
                 InformaDiag.Erro("É obrigatório selecionar um idioma!");
                 return;
             }
-            string lng;
             p.lema = txtpalavra.Text;
-
-            switch (ComboIdioma.SelectedIndex)
-            {
-                case 0:
-                    lng = "PT";
-                    break;
-                case 2:
-                    lng = "EN";
-                    break;
-                case 1:
-                    lng = "ES";
-                    break;
-                default:
-                    lng = "";
-                    break;
-            }
-            p.idioma = lng;
-            p.notas_gramatica = txtGramatica.Text;
-            p.nota_cultura = textCultura.Text;
+            p.idioma = PegaSiglaIdioma();
+           // p.notas_gramatica = txtGramatica.Text;
+            //p.nota_cultura = textCultura.Text;
             p.Definicao = txtDefinicao.Text;
             switch (ComboGenero.SelectedIndex)
             {
@@ -230,11 +248,22 @@ namespace dicionario
                 case 1:
                     p.Genero = "F";
                     break;
-                default:
+                case 2:
                     p.Genero = "N";
                     break;
+                case 3:
+                    p.Genero = "S";
+                    break;
+            }
+            if (p.Genero == "N" && p.idioma == "PT")
+            {
+                InformaDiag.Erro("Gênero inadequado ao idioma.");
+                return;
             }
             p.ClasseGram = ComboClasseGram.Text;
+            if (comboSinonimo1.Text == "") p.Sinonimo1 = 0;
+            if (comboSinonimo2.Text == "") p.Sinonimo2 = 0;
+            AjustaSinonimos();
             if (p.id <= 0)
             {
                 List<Conjugacao> lconj = new List<Conjugacao>();
@@ -242,6 +271,7 @@ namespace dicionario
                 crud.InsereLinha(tabelasBd.CONJUGACAO,Conjugacao.ToListTabela(), conjugacao.ToListValores());
                 lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
                 p.id_conjuga = lconj.First().id;
+
                 crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
             }
             else
@@ -249,8 +279,17 @@ namespace dicionario
             //Uma excessão pode ser lançda aqui quando os valores das chaves estrangerias forem <1, pois estão refernciando um valor que não existe. Como o int no c# não cabe um NULL, seria melhor não enviar o tal valor que evitamos o problema
             InformaDiag.Informa("Salvo!");
             LimpaCampos();
+            LimpaModel();
         }
 
+        private void AjustaSinonimos()
+        {
+            if (p.Sinonimo2 > 0 && p.Sinonimo1 < 1)
+            {
+                p.Sinonimo1 = p.Sinonimo2;
+                p.Sinonimo2 = 0;
+            }
+        }
         private void btnApaga_Click(object sender, EventArgs e)
         {
             if (InformaDiag.ConfirmaSN("Remover um registro pode afetar vários outros. Recomenda-se observar as dependências antes de continuar"+ '\n' + "Prosseguir?") == DialogResult.Yes)
@@ -355,6 +394,80 @@ namespace dicionario
                 ipal = mx;
                 MostraDados();
             }
+        }
+
+        private void timerSinonimo_Tick(object sender, EventArgs e)
+        {
+            string pesquisa;
+            if (Sin1Ativo)
+            {
+                pesquisa = comboSinonimo1.Text;
+                comboSinonimo1.Items.Clear();
+            }
+            else
+            {
+                pesquisa = comboSinonimo2.Text;
+                comboSinonimo2.Items.Clear();
+            }
+            if (pesquisa.Length > 0)
+            {
+                string idioma = p.idioma;
+               if (idioma == "" || idioma == null) idioma = PegaSiglaIdioma();
+                if (idioma != "")
+                    resSin = Palavra.ConverteObject(crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema LIKE '%" + pesquisa + "%' AND Idioma='" + idioma + "'", "LIMIT 10"));
+                if (Sin1Ativo)
+                {
+                    foreach (Palavra p in resSin)
+                    {
+                        comboSinonimo1.Items.Add(p.lema);
+                    }
+                }
+                else
+                {
+                    foreach (Palavra p in resSin)
+                    {
+                        comboSinonimo2.Items.Add(p.lema);
+                    }
+                }
+            }
+            timerSinonimo.Enabled = false;
+        }
+
+        private void TimerSwitcher()
+        {
+            if (timerSinonimo.Enabled)
+            {
+                timerSinonimo.Enabled = false;
+                timerSinonimo.Enabled = true;
+            }
+            else
+            {
+                timerSinonimo.Enabled = true;
+            }
+        }
+
+        private void comboSinonimo1_TextUpdate(object sender, EventArgs e)
+        {
+            TimerSwitcher();
+            Sin1Ativo = true;
+        }
+
+        private void comboSinonimo2_TextUpdate(object sender, EventArgs e)
+        {
+            TimerSwitcher();
+            Sin1Ativo = false;
+        }
+
+        private void comboSinonimo1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboSinonimo1.Text != "")
+                p.Sinonimo1 = resSin.Find(pal => pal.lema == comboSinonimo1.Text).id;
+        }
+
+        private void comboSinonimo2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboSinonimo2.Text != "")
+                p.Sinonimo2 = resSin.Find(pal => pal.lema == comboSinonimo2.Text).id;
         }
     }
 }
