@@ -266,12 +266,6 @@ namespace dicionario
             AjustaSinonimos();
             if (p.id <= 0)
             {
-                List<Conjugacao> lconj = new List<Conjugacao>();
-                Conjugacao conjugacao = new Conjugacao { ExPreterito = "", ExPresente = "", ExFuturo = "", ConstrPreterito = "", ConstrPresente = "", ConstrFuturo = "" };
-                crud.InsereLinha(tabelasBd.CONJUGACAO,Conjugacao.ToListTabela(), conjugacao.ToListValores());
-                lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
-                p.id_conjuga = lconj.First().id;
-
                 crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
             }
             else
@@ -346,15 +340,8 @@ namespace dicionario
 
         private void btnConjuga_Click(object sender, EventArgs e)
         {
-            if (p.id_conjuga > 0)
-            {
-                frm_conjuga fc = new frm_conjuga(p.id_conjuga);
-                fc.ShowDialog();
-            }
-            else
-            {
-                InformaDiag.Informa("Salve as alterações antes de acessar as conjugações");
-            }
+                frm_conjuga fc = new frm_conjuga(p.id);
+            fc.ShowDialog();
         }
 
         private void btnPrimeiro_Click(object sender, EventArgs e)

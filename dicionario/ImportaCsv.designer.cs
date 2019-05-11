@@ -143,9 +143,8 @@
             this.ComboTable.FormattingEnabled = true;
             this.ComboTable.Items.AddRange(new object[] {
             "Palavra",
-            "Classe Gramatical",
             "Rubrica",
-            "Referência"});
+            "Referencia"});
             this.ComboTable.Location = new System.Drawing.Point(88, 30);
             this.ComboTable.Name = "ComboTable";
             this.ComboTable.Size = new System.Drawing.Size(189, 21);

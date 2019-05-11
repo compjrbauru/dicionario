@@ -199,21 +199,28 @@ namespace dicionario.Model
             obj.CopyTo(o,0);
             return o;
         }
-        public void InserirEmMassa(string tabela, string valores)
+        public void InserirEmMassa(string tabela, string valores, List<string> camposAceitos = null)
         {
             string query = "INSERT INTO " + tabela + " (";
             List<string> t = new List<string>();
-            switch (tabela)
+            if (camposAceitos == null)
             {
-                case "palavra":
-                    t = Palavra.ToListTabela();
-                    break;
-                case "rubrica":
-                    t = MarcaUso.ToListTabela();
-                    break;
-                case "referencias":
-                    t = Referencia.ToListTabela();
-                    break;
+                switch (tabela)
+                {
+                    case "palavra":
+                        t = Palavra.ToListTabela();
+                        break;
+                    case "rubrica":
+                        t = MarcaUso.ToListTabela();
+                        break;
+                    case "referencias":
+                        t = Referencia.ToListTabela();
+                        break;
+                }
+            }
+            else
+            {
+                t = camposAceitos;
             }
             foreach (string s in t)
             {

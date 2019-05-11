@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
+﻿-- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
 --
 -- Host: localhost    Database: dicionario
 -- ------------------------------------------------------
@@ -72,7 +72,7 @@ CREATE TABLE `marca_uso` (
   `Descricao` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `sigla` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `palavra` (
   PRIMARY KEY (`Lema`,`Idioma`,`ClasseGram`,`Genero`),
   UNIQUE KEY `IDX_EntradaUnica` (`Lema`,`Idioma`,`ClasseGram`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +115,7 @@ CREATE TABLE `referencias` (
   `Autor` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`Cod`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
