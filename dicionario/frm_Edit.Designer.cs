@@ -52,6 +52,7 @@
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tip_Dicas = new System.Windows.Forms.ToolTip(this.components);
+            this.txtSubLema = new System.Windows.Forms.TextBox();
             this.btnEquiv = new System.Windows.Forms.Button();
             this.btnConjuga = new System.Windows.Forms.Button();
             this.btnPrimeiro = new System.Windows.Forms.Button();
@@ -68,6 +69,7 @@
             this.comboSinonimo2 = new System.Windows.Forms.ComboBox();
             this.comboSinonimo1 = new System.Windows.Forms.ComboBox();
             this.timerSinonimo = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.menu_barra.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -271,22 +273,22 @@
             "Zambia",
             "Zimbabwe"});
             this.txtpalavra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtpalavra.Location = new System.Drawing.Point(45, 152);
+            this.txtpalavra.Location = new System.Drawing.Point(45, 135);
             this.txtpalavra.MaxLength = 45;
             this.txtpalavra.Name = "txtpalavra";
             this.txtpalavra.Size = new System.Drawing.Size(293, 26);
-            this.txtpalavra.TabIndex = 1;
+            this.txtpalavra.TabIndex = 0;
             this.tip_Dicas.SetToolTip(this.txtpalavra, "Digite a palavra ou conjunto de palavras que identificará está entrada");
             // 
             // txtDefinicao
             // 
             this.txtDefinicao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDefinicao.Location = new System.Drawing.Point(45, 204);
+            this.txtDefinicao.Location = new System.Drawing.Point(45, 249);
             this.txtDefinicao.Multiline = true;
             this.txtDefinicao.Name = "txtDefinicao";
             this.txtDefinicao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDefinicao.Size = new System.Drawing.Size(766, 107);
-            this.txtDefinicao.TabIndex = 6;
+            this.txtDefinicao.TabIndex = 5;
             this.tip_Dicas.SetToolTip(this.txtDefinicao, "Insira aqui alguma explicação que defina o lema");
             // 
             // ComboGenero
@@ -305,10 +307,10 @@
             "Feminino",
             "Neutro",
             "Masculino/Feminino"});
-            this.ComboGenero.Location = new System.Drawing.Point(652, 152);
+            this.ComboGenero.Location = new System.Drawing.Point(353, 194);
             this.ComboGenero.Name = "ComboGenero";
             this.ComboGenero.Size = new System.Drawing.Size(159, 28);
-            this.ComboGenero.TabIndex = 5;
+            this.ComboGenero.TabIndex = 4;
             this.tip_Dicas.SetToolTip(this.ComboGenero, "Indique o gênero do lema");
             // 
             // ComboIdioma
@@ -325,10 +327,10 @@
             "Português",
             "Espanhol",
             "Inglês"});
-            this.ComboIdioma.Location = new System.Drawing.Point(344, 152);
+            this.ComboIdioma.Location = new System.Drawing.Point(45, 194);
             this.ComboIdioma.Name = "ComboIdioma";
             this.ComboIdioma.Size = new System.Drawing.Size(137, 28);
-            this.ComboIdioma.TabIndex = 3;
+            this.ComboIdioma.TabIndex = 2;
             this.tip_Dicas.SetToolTip(this.ComboIdioma, "Defina o idioma do lema");
             // 
             // ComboClasseGram
@@ -361,27 +363,27 @@
             "Verbo",
             "Numeral",
             "Substantivo-Adjetivo"});
-            this.ComboClasseGram.Location = new System.Drawing.Point(487, 152);
+            this.ComboClasseGram.Location = new System.Drawing.Point(188, 194);
             this.ComboClasseGram.Name = "ComboClasseGram";
             this.ComboClasseGram.Size = new System.Drawing.Size(159, 28);
-            this.ComboClasseGram.TabIndex = 4;
+            this.ComboClasseGram.TabIndex = 3;
             this.tip_Dicas.SetToolTip(this.ComboClasseGram, "Determine a classe gramatical.\r\nDigite um texto para buscar registros existentes");
             // 
             // label_palavra
             // 
             this.label_palavra.AutoSize = true;
             this.label_palavra.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_palavra.Location = new System.Drawing.Point(42, 131);
+            this.label_palavra.Location = new System.Drawing.Point(42, 114);
             this.label_palavra.Name = "label_palavra";
-            this.label_palavra.Size = new System.Drawing.Size(57, 18);
+            this.label_palavra.Size = new System.Drawing.Size(45, 18);
             this.label_palavra.TabIndex = 26;
-            this.label_palavra.Text = "Palavra";
+            this.label_palavra.Text = "Lema";
             // 
             // label_acep
             // 
             this.label_acep.AutoSize = true;
             this.label_acep.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_acep.Location = new System.Drawing.Point(42, 183);
+            this.label_acep.Location = new System.Drawing.Point(42, 228);
             this.label_acep.Name = "label_acep";
             this.label_acep.Size = new System.Drawing.Size(70, 18);
             this.label_acep.TabIndex = 30;
@@ -391,7 +393,7 @@
             // 
             this.label_catgrama.AutoSize = true;
             this.label_catgrama.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_catgrama.Location = new System.Drawing.Point(484, 131);
+            this.label_catgrama.Location = new System.Drawing.Point(185, 173);
             this.label_catgrama.Name = "label_catgrama";
             this.label_catgrama.Size = new System.Drawing.Size(130, 18);
             this.label_catgrama.TabIndex = 34;
@@ -401,7 +403,7 @@
             // 
             this.lblGenero.AutoSize = true;
             this.lblGenero.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblGenero.Location = new System.Drawing.Point(649, 131);
+            this.lblGenero.Location = new System.Drawing.Point(350, 173);
             this.lblGenero.Name = "lblGenero";
             this.lblGenero.Size = new System.Drawing.Size(58, 18);
             this.lblGenero.TabIndex = 38;
@@ -411,7 +413,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.Location = new System.Drawing.Point(341, 131);
+            this.label1.Location = new System.Drawing.Point(42, 173);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 18);
             this.label1.TabIndex = 39;
@@ -434,7 +436,7 @@
             this.btnSalva.Location = new System.Drawing.Point(868, 172);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(75, 33);
-            this.btnSalva.TabIndex = 12;
+            this.btnSalva.TabIndex = 8;
             this.btnSalva.Text = "Salvar";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
@@ -520,6 +522,211 @@
             this.contatoToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.contatoToolStripMenuItem.Text = "Contato";
             this.contatoToolStripMenuItem.Click += new System.EventHandler(this.contatoToolStripMenuItem_Click);
+            // 
+            // txtSubLema
+            // 
+            this.txtSubLema.AutoCompleteCustomSource.AddRange(new string[] {
+            "Country",
+            "Afghanistan",
+            "Albania",
+            "Algeria",
+            "Andorra",
+            "Angola",
+            "Antigua and Barbuda",
+            "Argentina",
+            "Armenia",
+            "Australia",
+            "Austria",
+            "Azerbaijan",
+            "Bahamas",
+            "Bahrain",
+            "Bangladesh",
+            "Barbados",
+            "Belarus",
+            "Belgium",
+            "Belize",
+            "Benin",
+            "Bhutan",
+            "Bolivia",
+            "Bosnia and Herzegovina",
+            "Botswana",
+            "Brazil",
+            "Brunei Darussalam",
+            "Bulgaria",
+            "Burkina Faso",
+            "Burundi",
+            "Cabo Verde",
+            "Cambodia",
+            "Cameroon",
+            "Canada",
+            "Central African Republic",
+            "Chad",
+            "Chile",
+            "China",
+            "Colombia",
+            "Comoros",
+            "Congo",
+            "Costa Rica",
+            "Côte d\'Ivoire",
+            "Croatia",
+            "Cuba",
+            "Cyprus",
+            "Czech Republic",
+            "Democratic People\'s Republic of Korea (North Korea)",
+            "Democratic Republic of the Cong",
+            "Denmark",
+            "Djibouti",
+            "Dominica",
+            "Dominican Republic",
+            "Ecuador",
+            "Egypt",
+            "El Salvador",
+            "Equatorial Guinea",
+            "Eritrea",
+            "Estonia",
+            "Ethiopia",
+            "Fiji",
+            "Finland",
+            "France",
+            "Gabon",
+            "Gambia",
+            "Georgia",
+            "Germany",
+            "Ghana",
+            "Greece",
+            "Grenada",
+            "Guatemala",
+            "Guinea",
+            "Guinea-Bissau",
+            "Guyana",
+            "Haiti",
+            "Honduras",
+            "Hungary",
+            "Iceland",
+            "India",
+            "Indonesia",
+            "Iran",
+            "Iraq",
+            "Ireland",
+            "Israel",
+            "Italy",
+            "Jamaica",
+            "Japan",
+            "Jordan",
+            "Kazakhstan",
+            "Kenya",
+            "Kiribati",
+            "Kuwait",
+            "Kyrgyzstan",
+            "Lao People\'s Democratic Republic (Laos)",
+            "Latvia",
+            "Lebanon",
+            "Lesotho",
+            "Liberia",
+            "Libya",
+            "Liechtenstein",
+            "Lithuania",
+            "Luxembourg",
+            "Macedonia",
+            "Madagascar",
+            "Malawi",
+            "Malaysia",
+            "Maldives",
+            "Mali",
+            "Malta",
+            "Marshall Islands",
+            "Mauritania",
+            "Mauritius",
+            "Mexico",
+            "Micronesia (Federated States of)",
+            "Monaco",
+            "Mongolia",
+            "Montenegro",
+            "Morocco",
+            "Mozambique",
+            "Myanmar",
+            "Namibia",
+            "Nauru",
+            "Nepal",
+            "Netherlands",
+            "New Zealand",
+            "Nicaragua",
+            "Niger",
+            "Nigeria",
+            "Norway",
+            "Oman",
+            "Pakistan",
+            "Palau",
+            "Panama",
+            "Papua New Guinea",
+            "Paraguay",
+            "Peru",
+            "Philippines",
+            "Poland",
+            "Portugal",
+            "Qatar",
+            "Republic of Korea (South Korea)",
+            "Republic of Moldova",
+            "Romania",
+            "Russian Federation",
+            "Rwanda",
+            "Saint Kitts and Nevis",
+            "Saint Lucia",
+            "Saint Vincent and the Grenadines",
+            "Samoa",
+            "San Marino",
+            "Sao Tome and Principe",
+            "Saudi Arabia",
+            "Senegal",
+            "Serbia",
+            "Seychelles",
+            "Sierra Leone",
+            "Singapore",
+            "Slovakia",
+            "Slovenia",
+            "Solomon Islands",
+            "Somalia",
+            "South Africa",
+            "South Sudan",
+            "Spain",
+            "Sri Lanka",
+            "Sudan",
+            "Suriname",
+            "Swaziland",
+            "Sweden",
+            "Switzerland",
+            "Syrian Arab Republic",
+            "Tajikistan",
+            "Thailand",
+            "Timor-Leste",
+            "Togo",
+            "Tonga",
+            "Trinidad and Tobago",
+            "Tunisia",
+            "Turkey",
+            "Turkmenistan",
+            "Tuvalu",
+            "Uganda",
+            "Ukraine",
+            "United Arab Emirates",
+            "United Kingdom of Great Britain and Northern Ireland",
+            "United Republic of Tanzania",
+            "United States of America",
+            "Uruguay",
+            "Uzbekistan",
+            "Vanuatu",
+            "Venezuela",
+            "Vietnam",
+            "Yemen",
+            "Zambia",
+            "Zimbabwe"});
+            this.txtSubLema.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubLema.Location = new System.Drawing.Point(344, 135);
+            this.txtSubLema.MaxLength = 45;
+            this.txtSubLema.Name = "txtSubLema";
+            this.txtSubLema.Size = new System.Drawing.Size(467, 26);
+            this.txtSubLema.TabIndex = 1;
+            this.tip_Dicas.SetToolTip(this.txtSubLema, "Digite a palavra ou conjunto de palavras que identificará está entrada");
             // 
             // btnEquiv
             // 
@@ -865,7 +1072,7 @@
             this.groupBox2.Controls.Add(this.comboSinonimo2);
             this.groupBox2.Controls.Add(this.comboSinonimo1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(45, 317);
+            this.groupBox2.Location = new System.Drawing.Point(45, 362);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(766, 59);
             this.groupBox2.TabIndex = 67;
@@ -878,7 +1085,7 @@
             this.comboSinonimo2.Location = new System.Drawing.Point(391, 23);
             this.comboSinonimo2.Name = "comboSinonimo2";
             this.comboSinonimo2.Size = new System.Drawing.Size(360, 26);
-            this.comboSinonimo2.TabIndex = 68;
+            this.comboSinonimo2.TabIndex = 7;
             this.comboSinonimo2.SelectedIndexChanged += new System.EventHandler(this.comboSinonimo2_SelectedIndexChanged);
             this.comboSinonimo2.TextUpdate += new System.EventHandler(this.comboSinonimo2_TextUpdate);
             // 
@@ -888,7 +1095,7 @@
             this.comboSinonimo1.Location = new System.Drawing.Point(15, 23);
             this.comboSinonimo1.Name = "comboSinonimo1";
             this.comboSinonimo1.Size = new System.Drawing.Size(370, 26);
-            this.comboSinonimo1.TabIndex = 67;
+            this.comboSinonimo1.TabIndex = 6;
             this.comboSinonimo1.SelectedIndexChanged += new System.EventHandler(this.comboSinonimo1_SelectedIndexChanged);
             this.comboSinonimo1.TextUpdate += new System.EventHandler(this.comboSinonimo1_TextUpdate);
             // 
@@ -897,11 +1104,23 @@
             this.timerSinonimo.Interval = 700;
             this.timerSinonimo.Tick += new System.EventHandler(this.timerSinonimo_Tick);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label2.Location = new System.Drawing.Point(341, 114);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 18);
+            this.label2.TabIndex = 69;
+            this.label2.Text = "Sublema";
+            // 
             // frm_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 542);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtSubLema);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnUltimo);
@@ -980,5 +1199,7 @@
         private System.Windows.Forms.ComboBox comboSinonimo2;
         private System.Windows.Forms.ComboBox comboSinonimo1;
         private System.Windows.Forms.Timer timerSinonimo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtSubLema;
     }
 }

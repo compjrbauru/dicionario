@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `conjugacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `conjugacao` (
-  `idconjugacao` int(11) NOT NULL AUTO_INCREMENT,
+  `idconjugacao` int(11) NOT NULL,
   `ExPreterito` text COLLATE utf8_unicode_ci,
   `ExPresente` text COLLATE utf8_unicode_ci,
   `ExFuturo` text COLLATE utf8_unicode_ci,
@@ -32,7 +32,7 @@ CREATE TABLE `conjugacao` (
   `ConstrFuturo` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`idconjugacao`),
   UNIQUE KEY `idconjugacao_UNIQUE` (`idconjugacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,6 +58,27 @@ CREATE TABLE `equivalencias` (
   PRIMARY KEY (`Origem`,`equivalente`,`nApresentacao`),
   KEY `fk_Equivalencias_2_idx` (`equivalente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Equivalente também vale como *Tradução*';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `fraseologia`
+--
+
+DROP TABLE IF EXISTS `fraseologia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fraseologia` (
+  `IdPalavra` int(11) NOT NULL,
+  `FraseOrig` varchar(100) NOT NULL,
+  `FraseEquiv` varchar(100) NOT NULL,
+  `ExemploOrig` varchar(100) DEFAULT NULL,
+  `ExemploEquiv` varchar(100) DEFAULT NULL,
+  `NotasCultuta` text,
+  `NotasGramatica` text,
+  `Categoria` enum('I','C') NOT NULL,
+  PRIMARY KEY (`FraseOrig`,`FraseEquiv`,`Categoria`),
+  UNIQUE KEY `FraseOrig_UNIQUE` (`FraseOrig`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,16 +110,53 @@ CREATE TABLE `palavra` (
   `Idioma` char(2) COLLATE utf8_unicode_ci NOT NULL,
   `notas_gramatica` tinytext COLLATE utf8_unicode_ci,
   `notas_cultura` text COLLATE utf8_unicode_ci,
-  `Id_conjuga` int(11) DEFAULT NULL,
   `Genero` enum('M','F','N','S') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'M',
   `Definicao` text COLLATE utf8_unicode_ci,
   `Sinonimo1` int(11) DEFAULT '0',
   `Sinonimo2` int(11) DEFAULT '0',
+  `Sublema` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`Lema`,`Idioma`,`ClasseGram`,`Genero`),
   UNIQUE KEY `IDX_EntradaUnica` (`Lema`,`Idioma`,`ClasseGram`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `dicionario`.`palavra_AFTER_INSERT` AFTER INSERT ON `palavra` FOR EACH ROW
+BEGIN
+ INSERT INTO conjugacao (idconjugacao) 
+ VALUES (new.Id);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `dicionario`.`palavra_BEFORE_DELETE` BEFORE DELETE ON `palavra` FOR EACH ROW
+BEGIN
+	DELETE FROM conjugacao WHERE idconjugacao = old.Id;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `referencias`
@@ -150,4 +208,4 @@ CREATE TABLE `usr` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-29 15:37:35
+-- Dump completed on 2019-08-22  2:26:21

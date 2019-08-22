@@ -52,6 +52,7 @@ namespace dicionario
             comboSinonimo1.Items.Clear();
             comboSinonimo2.Text = "";
             comboSinonimo2.Items.Clear();
+            txtSubLema.Text = "";
         }
         private void LimpaModel()
         {
@@ -60,6 +61,7 @@ namespace dicionario
             p.Genero = "N";
             p.Sinonimo1 = -1;
             p.Sinonimo2 = -1;
+            p.Sublema = "";
         }
         private void MostraDados()
         {
@@ -263,6 +265,7 @@ namespace dicionario
             p.ClasseGram = ComboClasseGram.Text;
             if (comboSinonimo1.Text == "") p.Sinonimo1 = 0;
             if (comboSinonimo2.Text == "") p.Sinonimo2 = 0;
+            p.Sublema = txtSubLema.Text;
             AjustaSinonimos();
             if (p.id <= 0)
             {
