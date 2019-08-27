@@ -71,14 +71,12 @@ namespace dicionario
             else
             {
                 if (p.idioma == "ES")
-                    ComboIdioma.SelectedIndex = 2;
+                    ComboIdioma.SelectedIndex = 1;
                 else
                 {
-                    ComboIdioma.SelectedIndex = 1;
+                    ComboIdioma.SelectedIndex = 2;
                 }
-            }
-           // textCultura.Text = p.nota_cultura;
-           // txtGramatica.Text = p.notas_gramatica;            
+            }          
             switch (p.Genero) {
                 case "M":
                     ComboGenero.SelectedIndex = 0;
@@ -91,6 +89,9 @@ namespace dicionario
                     break;
                 case "S":
                     ComboGenero.SelectedIndex = 3;
+                    break;
+                case "SM":
+                    ComboGenero.SelectedIndex = 4;
                     break;
             }
             ComboClasseGram.Text = p.ClasseGram;
@@ -217,6 +218,7 @@ namespace dicionario
 
         private void btnSalva_Click(object sender, EventArgs e)
         {
+            bool r;
             if(txtpalavra.Text == String.Empty)
             {
                 InformaDiag.Erro("Palavra não pode ser vazio!");
@@ -239,8 +241,6 @@ namespace dicionario
             }
             p.lema = txtpalavra.Text;
             p.idioma = PegaSiglaIdioma();
-           // p.notas_gramatica = txtGramatica.Text;
-            //p.nota_cultura = textCultura.Text;
             p.Definicao = txtDefinicao.Text;
             switch (ComboGenero.SelectedIndex)
             {
@@ -256,6 +256,11 @@ namespace dicionario
                 case 3:
                     p.Genero = "S";
                     break;
+                case 4:
+                    p.Genero = "SM";
+                    break;
+                default:
+                    throw new Exception("Opção não disponível na lista de opções de gênero.");
             }
             if (p.Genero == "N" && p.idioma == "PT")
             {
@@ -269,12 +274,13 @@ namespace dicionario
             AjustaSinonimos();
             if (p.id <= 0)
             {
-                crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
+                r = crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
             }
             else
-                crud.UpdateLine(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
+                 r = crud.UpdateLine(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
             //Uma excessão pode ser lançda aqui quando os valores das chaves estrangerias forem <1, pois estão refernciando um valor que não existe. Como o int no c# não cabe um NULL, seria melhor não enviar o tal valor que evitamos o problema
-            InformaDiag.Informa("Salvo!");
+            if (r)
+                InformaDiag.Informa("Salvo!");
             LimpaCampos();
             LimpaModel();
         }
