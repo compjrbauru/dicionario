@@ -280,9 +280,11 @@ namespace dicionario
                  r = crud.UpdateLine(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
             //Uma excessão pode ser lançda aqui quando os valores das chaves estrangerias forem <1, pois estão refernciando um valor que não existe. Como o int no c# não cabe um NULL, seria melhor não enviar o tal valor que evitamos o problema
             if (r)
+            {
                 InformaDiag.Informa("Salvo!");
-            LimpaCampos();
-            LimpaModel();
+                LimpaCampos();
+                LimpaModel();
+            }
         }
 
         private void AjustaSinonimos()

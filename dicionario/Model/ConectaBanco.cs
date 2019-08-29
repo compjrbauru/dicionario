@@ -50,7 +50,7 @@ namespace dicionario.Model
             catch (MySqlException ex)
             {
                 {
-                    switch (ex.ErrorCode)
+                    switch (ex.Number)
                     {
                         
                         case 0 :
@@ -91,8 +91,8 @@ namespace dicionario.Model
         }
     }
     class CRUD{
-        //private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
-        private ConectaBanco ControllerBanco = new ConectaBanco();
+        private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
+        //private ConectaBanco ControllerBanco = new ConectaBanco();
         private bool EnviaComando(string query){
             if (ControllerBanco.AbreConexao() == true)
             {
@@ -102,12 +102,9 @@ namespace dicionario.Model
                     cmd.ExecuteNonQuery();
                 }
                 catch (MySqlException err) {
-                    switch (err.ErrorCode)
+                    switch (err.Number)
                     {
                         case (int)MySqlErrorCode.DuplicateKeyEntry:
-                        case (int)MySqlErrorCode.DuplicateKey:
-                        case (int)MySqlErrorCode.DuplicateUnique:
-
                             InformaDiag.Erro("O registro já existe. Tente outros valores");
                             break;
 
