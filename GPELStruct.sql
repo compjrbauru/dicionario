@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gpel
+-- Host: 127.0.0.1    Database: dicionario
 -- ------------------------------------------------------
 -- Server version	8.0.17
 
@@ -107,11 +107,11 @@ CREATE TABLE `palavra` (
   `Definicao` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `Sinonimo1` int(11) DEFAULT '0',
   `Sinonimo2` int(11) DEFAULT '0',
-  `Sublema` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`Lema`,`Idioma`,`ClasseGram`,`Genero`),
-  UNIQUE KEY `IDX_EntradaUnica` (`Lema`,`Idioma`,`ClasseGram`,`Genero`),
-  UNIQUE KEY `Id_UNIQUE` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Sublema` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '-',
+  PRIMARY KEY (`Lema`,`Idioma`,`ClasseGram`,`Genero`,`Sublema`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`),
+  UNIQUE KEY `IDX_EntradaUnica` (`Lema`,`Idioma`,`ClasseGram`,`Genero`,`Sublema`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,6 +154,10 @@ CREATE TABLE `usr` (
   UNIQUE KEY `cpf_UNIQUE` (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping routines for database 'dicionario'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -164,4 +168,4 @@ CREATE TABLE `usr` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-27 13:23:00
+-- Dump completed on 2019-09-02 19:32:08

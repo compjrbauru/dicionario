@@ -97,6 +97,7 @@ namespace dicionario
             ComboClasseGram.Text = p.ClasseGram;
             btnEquiv.Enabled = true;
             btnConjuga.Enabled = true;
+            txtSubLema.Text = p.Sublema;
             if (p.Sinonimo1 > 0)
             {
                 string filtro = "id=" + p.Sinonimo1.ToString();
