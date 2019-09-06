@@ -26,6 +26,7 @@ namespace dicionario
         private bool regsAtivo = true;
         private int posLista = 0;
         private bool novo = false;
+        private bool equivDestModificado = false;
 
         public frm_Equivalente(Palavra registroPai)
         {
@@ -85,7 +86,7 @@ namespace dicionario
         private void frm_Equivalente_Load(object sender, EventArgs e)
         {
             configuraLabelOrgiem(registroPai);
-            equivO = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "Origem="+ registroPai.id.ToString()));
+            equivO = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "Origem="+ registroPai.id.ToString(),"ORDER BY nApresentacao ASC"));
             //equivD = Equivalente.ConverteObject(crud.SelecionarTabela(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), "equivalente=" + registroPai.id.ToString()));
             if (equivO.Count > 0)
             {
@@ -149,28 +150,41 @@ namespace dicionario
 
         private void btnProximo_Click(object sender, EventArgs e)
         {
-            if (regsAtivo && posLista < equivO.Count)
+            if (regsAtivo)
             {
-                ativo = equivO.ElementAt(++posLista);
+                if (posLista < (equivO.Count -1))
+                {
+                    ativo = equivO.ElementAt(++posLista);
+                }
+
             }
-            if (!regsAtivo && posLista < equivD.Count)
+            else
             {
-                ativo = equivD.ElementAt(++posLista);
+                if (posLista < (equivD.Count-1))
+                {
+                    ativo = equivD.ElementAt(++posLista);
+                }
             }
             MostraRegistroAtivo();
         }
 
         private void btnUltimo_Click(object sender, EventArgs e)
         {
-            if (regsAtivo && posLista < equivO.Count)
+            if (regsAtivo)
             {
-                ativo = equivO.Last();
-                posLista = equivO.Count - 1;
+                if (posLista < equivO.Count)
+                {
+                    ativo = equivO.Last();
+                    posLista = equivO.Count - 1;
+                }
             }
-            if (!regsAtivo && posLista < equivD.Count)
+            else
             {
-                ativo = equivD.Last();
-                posLista = equivD.Count - 1;
+                if (posLista < equivD.Count)
+                {
+                    ativo = equivD.Last();
+                    posLista = equivD.Count - 1;
+                }
             }
             MostraRegistroAtivo();
         }
@@ -185,13 +199,34 @@ namespace dicionario
             if (InformaDiag.ConfirmaSN("Deseja realmente apagar o relacionamento?\nA ação é irreversível!") == DialogResult.Yes)
             {
                 crud.ApagaLinha(tabelasBd.EQUIVALENTE, "origem=" + ativo.origem.ToString() + " AND equivalente=" + ativo.equivalente.ToString());
-                LimpaCampos();
+                equivO.Remove(ativo);
+                if (equivO.Count >= 1)
+                {
+                    btnPrimeiro_Click(sender, e);
+                }
+                else
+                {
+                    LimpaCampos();
+                }
             }
-            btnPrimeiro_Click(sender, e);
+            
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
         {
+            if (equivDestModificado || ativo.equivalente < 1)
+            {
+                if (novo)
+                {
+                    InformaDiag.Erro("Selecione uma palavra equivalente dentro dos\nresultados da caixa de pesquisa Verbete Destino!");
+                    return;
+                }
+                else
+                {
+                    if (InformaDiag.ConfirmaSN("O valor selecionado no verbete destino foi modificado para um valor inconsistente.\nDeseja continuar com o valor antigo?") == DialogResult.No)
+                        return;
+                }
+            }
             ativo.exemplo = txtExemplo.Text;
             ativo.exemplo_traduzido = txtExemploTraduzido.Text;
             ativo.DefinirOrdemApresentação((int)txtApresentacao.Value);
@@ -203,12 +238,16 @@ namespace dicionario
             if (!novo)
             {
                 crud.UpdateLine(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), ativo.ToListValores(), "Origem=" + oldEqAt.origem.ToString() +" AND equivalente=" + oldEqAt.equivalente.ToString() +" AND nApresentacao=" + oldEqAt.nOrdem.ToString());
+                int tpos = equivO.IndexOf(ativo);
+                equivO.RemoveAt(tpos);
+                equivO.Insert(tpos, ativo);
             }
             else
             {
                 crud.InsereLinha(tabelasBd.EQUIVALENTE, Equivalente.ToListTabela(), ativo.ToListValores());
                 equivO.Add(ativo);
-                AtivaNavegadores();
+                if (equivO.Count > 1)
+                    AtivaNavegadores();
             }
             InformaDiag.InformaSalvo();
             novo = false;
@@ -239,7 +278,7 @@ namespace dicionario
                 resP = Palavra.ConverteObject(crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema='" + pesquisa + "'", "LIMIT 25"));
                 foreach (Palavra p in resP)
                 {
-                    comboDestino.Items.Add(p.lema + " Idioma " + p.idioma);
+                    comboDestino.Items.Add(p.lema + " Idioma " + p.idioma + ", " + p.ClasseGram + " " + p.Genero);
                 }
             }
             timerDestino.Enabled = false;
@@ -255,6 +294,7 @@ namespace dicionario
             {
                 timerDestino.Enabled = true;
             }
+            equivDestModificado = true;
         }
 
         private void comboDestino_SelectedIndexChanged(object sender, EventArgs e)
@@ -262,6 +302,7 @@ namespace dicionario
             if (comboDestino.Text != "")
             {
                 ativo.Setequivalente(resP.ElementAt(comboDestino.SelectedIndex).id);
+                equivDestModificado = false;
             }
         }
 
