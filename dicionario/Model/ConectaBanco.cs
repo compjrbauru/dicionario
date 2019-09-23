@@ -91,8 +91,8 @@ namespace dicionario.Model
         }
     }
     class CRUD{
-        private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
-        //private ConectaBanco ControllerBanco = new ConectaBanco();
+        //private readonly ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
+        private readonly ConectaBanco ControllerBanco = new ConectaBanco();
         private bool EnviaComando(string query){
             if (ControllerBanco.AbreConexao() == true)
             {
@@ -112,9 +112,11 @@ namespace dicionario.Model
                             InformaDiag.Erro("Ocorreu um erro e a operação será abortada.");
                             break;
                     }
+                    cmd.Dispose();
                     return false;
                 };
                 ControllerBanco.FechaConexao();
+                cmd.Dispose();
                 return true;
             }
             return false;
@@ -216,6 +218,7 @@ namespace dicionario.Model
                  }
                  dataReader.Close();
                  ControllerBanco.FechaConexao();
+                cmd.Dispose();
             }
             return resultados;
         }

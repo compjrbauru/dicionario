@@ -127,15 +127,15 @@ namespace dicionario
             {
                 string filtroquery;
                 int temp;
-                switch (filterComboBox.SelectedIndex)
+                /*switch (filterComboBox.SelectedIndex)
                 {
                     case 1:
                         filtroquery = "Cod";
                         break;
-                    default:
-                        filtroquery = "lema";
-                        break;
-                }
+                    default:*/
+                        filtroquery = "Lema";
+                /*        break;
+                }*/
                 switch (ComboFiltroPrecisao.SelectedIndex)
                 {
                     case 1:
@@ -152,21 +152,18 @@ namespace dicionario
                 switch (comboFiltroIdiomas.SelectedIndex)
                 {
                     case 1:
-                        filtroquery += "AND Idioma='PT'";
+                        filtroquery += " AND Idioma='PT'";
                         break;
                     case 2:
-                        filtroquery += "AND Idioma='EN'";
+                        filtroquery += " AND Idioma='EN'";
                         break;
                     case 3:
-                        filtroquery += "AND Idioma='ES'";
+                        filtroquery += " AND Idioma='ES'";
                         break;
                     default:
                         break;
                 }
-                if (ComboFiltroPrecisao.Text == "Precisamente")
-                    resultados  = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema='" + searchBox.Text + "'");
-                else
-                    resultados = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema LIKE '%" + searchBox.Text + "%'");
+                resultados = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), filtroquery);
                 if (resultados.Count > 0)
                 {
                     resPalavra = Palavra.ConverteObject(resultados);
@@ -191,7 +188,7 @@ namespace dicionario
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            if (txtpalavra.Text != "")
+            if (txtpalavra.Text != "" && p.lema != "")
             {
                 if (InformaDiag.ConfirmaSN("Existem dados não salvos. Caso prossiga com a operação, todos os dados" + '\n' + "digitados serão perdidos. Continuar mesmo assim?") == DialogResult.No)
                     return;
@@ -285,6 +282,7 @@ namespace dicionario
                 InformaDiag.Informa("Salvo!");
                 LimpaCampos();
                 LimpaModel();
+                btnNovo_Click(sender,e);
             }
         }
 
