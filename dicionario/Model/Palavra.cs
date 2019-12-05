@@ -14,11 +14,11 @@ namespace dicionario.Model
         public string idioma { get; set; }
         public string notas_gramatica { get; set; }
         public string nota_cultura { get; set; }
-        public int id_conjuga { get; set; }
         public string Genero { get; set; }
         public string Definicao { get; set; }
         public int Sinonimo1 { get; set; }
         public int Sinonimo2 { get; set; }
+        public string Sublema { get; set; }
 
         public List<string> ToListValores(bool incluiId = false)
         {
@@ -30,11 +30,11 @@ namespace dicionario.Model
             val.Add(idioma);
             val.Add(notas_gramatica);
             val.Add(nota_cultura);
-            val.Add(id_conjuga.ToString());
             val.Add(Genero);
             val.Add(Definicao);
             val.Add(Sinonimo1.ToString());
             val.Add(Sinonimo2.ToString());
+            val.Add(Sublema);
             return val;
         }
 
@@ -48,11 +48,11 @@ namespace dicionario.Model
             val.Add("Idioma");
             val.Add("notas_gramatica");
             val.Add("notas_cultura");
-            val.Add("Id_conjuga");
             val.Add("Genero");
             val.Add("Definicao");
             val.Add("Sinonimo1");
             val.Add("Sinonimo2");
+            val.Add("Sublema");
             return val;
         }
 
@@ -84,10 +84,10 @@ namespace dicionario.Model
             p.idioma = lista.ElementAt(i++);
             p.notas_gramatica = lista.ElementAt(i++);
             p.nota_cultura = lista.ElementAt(i++);
-            p.id_conjuga = int.Parse(lista.ElementAt(i++));
             p.Genero = lista.ElementAt(i++);
             p.Definicao = lista.ElementAt(i++);
             p.Sinonimo1 = int.Parse(lista.ElementAt(i++));
+            p.Sublema = lista.ElementAt(i++);
             return p;
         }
         public static explicit operator Palavra(object[] lista)
@@ -104,11 +104,11 @@ namespace dicionario.Model
             saida.idioma = lista[i++].ToString();
             saida.notas_gramatica = lista[i++].ToString();
             saida.nota_cultura = lista[i++].ToString();
-            saida.id_conjuga = int.Parse(lista.ElementAt(i++).ToString());
             saida.Genero = lista[i++].ToString();
             saida.Definicao = lista[i++].ToString();  
             saida.Sinonimo1 = int.Parse(lista.ElementAt(i++).ToString());
             saida.Sinonimo2 = int.Parse(lista.ElementAt(i++).ToString());
+            saida.Sublema = lista[i++].ToString();
             return saida;
         }
         

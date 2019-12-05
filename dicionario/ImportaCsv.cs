@@ -23,12 +23,13 @@ namespace dicionario
             Informa_Abortado
 
         }
+        private List<string> ptlt = new List<string>();
         CRUD operacoes = new CRUD();
+
         public frmImportaCsv()
         {
             InitializeComponent();
         }
-
         private void BtnProcura_Click(object sender, EventArgs e)
         {
             if (AbreArquivoDialog.ShowDialog() == DialogResult.OK)
@@ -58,17 +59,18 @@ namespace dicionario
             string linha;
             string[] divisor;
             int v = 0;
-            List<string> ptlt = new List<string>();
+            
             progressBar1.MarqueeAnimationSpeed = 50;
             if (ComboTable.Text != "")
             {
                 switch (ComboTable.Text)
                 {
                     case "Palavra":
-                        v = Palavra.ToListTabela().Count;
                         ptlt = Palavra.ToListTabela();
+                        ptlt.RemoveRange(Palavra.ToListTabela().Count - 2, 2);
+                        v = ptlt.Count;
                         break;
-                    case "Rubrica":
+                    case "Marca de Uso":
                         v = MarcaUso.ToListTabela().Count;
                         ptlt = MarcaUso.ToListTabela();
                         break;
@@ -78,8 +80,7 @@ namespace dicionario
                         break;
                     default:
                         throw new Exception("Não implementado");
-                        break;
-                        
+                        break;         
                 }
                 try
                 {
@@ -213,7 +214,7 @@ namespace dicionario
                     valores.Insert(i,saida);
                 }
             }
-            if (tabela == tabelasBd.PALAVRA){
+            if (tabela == tabelasBd.CONJUGACAO){
                 List<string> FKs = new List<string>();
                 int idx, c = 0;
                 bool[] fila = { false, false};
@@ -239,19 +240,6 @@ namespace dicionario
                     fila[c++] = true;
                 }
                 c++;
-
-                idx = Palavra.ToListTabela().FindIndex(bs => bs == "Infinitivo");
-                if (!int.TryParse(valores.ElementAt(idx), out conv))
-                {
-                    valores.RemoveAt(idx);
-                    valores.Insert(idx, "0");
-                }
-                idx = Palavra.ToListTabela().FindIndex(bs => bs == "Id_conjuga");
-                if (!int.TryParse(valores.ElementAt(idx), out conv))
-                {
-                    valores.RemoveAt(idx);
-                    valores.Insert(idx, "0");
-                }
 
                 Palavra teste = new Palavra();
                 try
@@ -356,7 +344,7 @@ namespace dicionario
                 case "Palavra":
                     NomeTabela = tabelasBd.PALAVRA;
                     break;
-                case "Rubrica":
+                case "Marca de Uso":
                     NomeTabela = tabelasBd.MARCAS_USO;
                     break;
                 case "Referência":
@@ -415,7 +403,10 @@ namespace dicionario
             if (query.Count() > 0){
                 query = query.Remove(query.Count() - 1);
                 query += ";";
-                operacoes.InserirEmMassa(NomeTabela, query);
+                if (NomeTabela == tabelasBd.PALAVRA)
+                    operacoes.InserirEmMassa(NomeTabela, query, ptlt);
+                else
+                    operacoes.InserirEmMassa(NomeTabela, query);
                 return 0;
             }
             return 1;
@@ -428,9 +419,6 @@ namespace dicionario
             }
             saida = valor;
             return false;
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
         }
 
     }

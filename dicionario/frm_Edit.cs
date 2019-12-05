@@ -52,6 +52,7 @@ namespace dicionario
             comboSinonimo1.Items.Clear();
             comboSinonimo2.Text = "";
             comboSinonimo2.Items.Clear();
+            txtSubLema.Text = "";
         }
         private void LimpaModel()
         {
@@ -60,6 +61,7 @@ namespace dicionario
             p.Genero = "N";
             p.Sinonimo1 = -1;
             p.Sinonimo2 = -1;
+            p.Sublema = "";
         }
         private void MostraDados()
         {
@@ -69,14 +71,12 @@ namespace dicionario
             else
             {
                 if (p.idioma == "ES")
-                    ComboIdioma.SelectedIndex = 2;
+                    ComboIdioma.SelectedIndex = 1;
                 else
                 {
-                    ComboIdioma.SelectedIndex = 1;
+                    ComboIdioma.SelectedIndex = 2;
                 }
-            }
-           // textCultura.Text = p.nota_cultura;
-           // txtGramatica.Text = p.notas_gramatica;            
+            }          
             switch (p.Genero) {
                 case "M":
                     ComboGenero.SelectedIndex = 0;
@@ -90,10 +90,14 @@ namespace dicionario
                 case "S":
                     ComboGenero.SelectedIndex = 3;
                     break;
+                case "SM":
+                    ComboGenero.SelectedIndex = 4;
+                    break;
             }
             ComboClasseGram.Text = p.ClasseGram;
             btnEquiv.Enabled = true;
             btnConjuga.Enabled = true;
+            txtSubLema.Text = p.Sublema;
             if (p.Sinonimo1 > 0)
             {
                 string filtro = "id=" + p.Sinonimo1.ToString();
@@ -123,15 +127,15 @@ namespace dicionario
             {
                 string filtroquery;
                 int temp;
-                switch (filterComboBox.SelectedIndex)
+                /*switch (filterComboBox.SelectedIndex)
                 {
                     case 1:
                         filtroquery = "Cod";
                         break;
-                    default:
-                        filtroquery = "lema";
-                        break;
-                }
+                    default:*/
+                        filtroquery = "Lema";
+                /*        break;
+                }*/
                 switch (ComboFiltroPrecisao.SelectedIndex)
                 {
                     case 1:
@@ -148,21 +152,18 @@ namespace dicionario
                 switch (comboFiltroIdiomas.SelectedIndex)
                 {
                     case 1:
-                        filtroquery += "AND Idioma='PT'";
+                        filtroquery += " AND Idioma='PT'";
                         break;
                     case 2:
-                        filtroquery += "AND Idioma='EN'";
+                        filtroquery += " AND Idioma='EN'";
                         break;
                     case 3:
-                        filtroquery += "AND Idioma='ES'";
+                        filtroquery += " AND Idioma='ES'";
                         break;
                     default:
                         break;
                 }
-                if (ComboFiltroPrecisao.Text == "Precisamente")
-                    resultados  = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema='" + searchBox.Text + "'");
-                else
-                    resultados = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), "lema LIKE '%" + searchBox.Text + "%'");
+                resultados = crud.SelecionarTabela(tabelasBd.PALAVRA, Palavra.ToListTabela(true), filtroquery);
                 if (resultados.Count > 0)
                 {
                     resPalavra = Palavra.ConverteObject(resultados);
@@ -187,7 +188,7 @@ namespace dicionario
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            if (txtpalavra.Text != "")
+            if (txtpalavra.Text != "" && p.lema != "")
             {
                 if (InformaDiag.ConfirmaSN("Existem dados não salvos. Caso prossiga com a operação, todos os dados" + '\n' + "digitados serão perdidos. Continuar mesmo assim?") == DialogResult.No)
                     return;
@@ -215,6 +216,7 @@ namespace dicionario
 
         private void btnSalva_Click(object sender, EventArgs e)
         {
+            bool r;
             if(txtpalavra.Text == String.Empty)
             {
                 InformaDiag.Erro("Palavra não pode ser vazio!");
@@ -237,8 +239,6 @@ namespace dicionario
             }
             p.lema = txtpalavra.Text;
             p.idioma = PegaSiglaIdioma();
-           // p.notas_gramatica = txtGramatica.Text;
-            //p.nota_cultura = textCultura.Text;
             p.Definicao = txtDefinicao.Text;
             switch (ComboGenero.SelectedIndex)
             {
@@ -254,6 +254,11 @@ namespace dicionario
                 case 3:
                     p.Genero = "S";
                     break;
+                case 4:
+                    p.Genero = "SM";
+                    break;
+                default:
+                    throw new Exception("Opção não disponível na lista de opções de gênero.");
             }
             if (p.Genero == "N" && p.idioma == "PT")
             {
@@ -263,23 +268,22 @@ namespace dicionario
             p.ClasseGram = ComboClasseGram.Text;
             if (comboSinonimo1.Text == "") p.Sinonimo1 = 0;
             if (comboSinonimo2.Text == "") p.Sinonimo2 = 0;
+            p.Sublema = txtSubLema.Text;
             AjustaSinonimos();
             if (p.id <= 0)
             {
-                List<Conjugacao> lconj = new List<Conjugacao>();
-                Conjugacao conjugacao = new Conjugacao { ExPreterito = "", ExPresente = "", ExFuturo = "", ConstrPreterito = "", ConstrPresente = "", ConstrFuturo = "" };
-                crud.InsereLinha(tabelasBd.CONJUGACAO,Conjugacao.ToListTabela(), conjugacao.ToListValores());
-                lconj = Conjugacao.ConverteObject(crud.SelecionarTabela("conjugacao", Conjugacao.ToListTabela(), "", "ORDER BY idconjugacao DESC LIMIT 2"));
-                p.id_conjuga = lconj.First().id;
-
-                crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
+                r = crud.InsereLinha(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores());
             }
             else
-                crud.UpdateLine(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
+                 r = crud.UpdateLine(tabelasBd.PALAVRA, Palavra.ToListTabela(), p.ToListValores(), "id=" + p.id.ToString());
             //Uma excessão pode ser lançda aqui quando os valores das chaves estrangerias forem <1, pois estão refernciando um valor que não existe. Como o int no c# não cabe um NULL, seria melhor não enviar o tal valor que evitamos o problema
-            InformaDiag.Informa("Salvo!");
-            LimpaCampos();
-            LimpaModel();
+            if (r)
+            {
+                InformaDiag.Informa("Salvo!");
+                LimpaCampos();
+                LimpaModel();
+                btnNovo_Click(sender,e);
+            }
         }
 
         private void AjustaSinonimos()
@@ -346,15 +350,8 @@ namespace dicionario
 
         private void btnConjuga_Click(object sender, EventArgs e)
         {
-            if (p.id_conjuga > 0)
-            {
-                frm_conjuga fc = new frm_conjuga(p.id_conjuga);
-                fc.ShowDialog();
-            }
-            else
-            {
-                InformaDiag.Informa("Salve as alterações antes de acessar as conjugações");
-            }
+                frm_conjuga fc = new frm_conjuga(p.id);
+            fc.ShowDialog();
         }
 
         private void btnPrimeiro_Click(object sender, EventArgs e)

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dicionario.Model;
 using dicionario.Helpers;
+using System.Reflection;
 
 namespace dicionario
 {
@@ -225,6 +226,21 @@ namespace dicionario
             retorno = retorno.Remove(retorno.Length - 1);
             nAcepcaoSel = int.Parse(lemas[++ac]);
             return retorno;
+        }
+
+        private void Frm_busca_Load(object sender, EventArgs e)
+        {
+            string versaoAt = cRUD.SelecionarTabela("config",new List<string> { "versaoPc" }).First()[0].ToString();
+            string versaoEx = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            if (versaoAt != versaoEx)
+            {
+                if (InformaDiag.ConfirmaSN("A versão do software está desatualizada.\nPara continuar utilizando, é necessário obter e instalar uma" +
+                    " nova versão pela Internet. Deseja prosseguir?\nVocê será redirecinado para a página de download ao continuar.") == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start("https://github.com/russkibrazil/dicionario-gpel/releases/latest");
+                }
+                this.Close();
+            }
         }
 
         private void frm_busca_Resize(object sender, EventArgs e)

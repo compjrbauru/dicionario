@@ -50,16 +50,17 @@ namespace dicionario.Model
             catch (MySqlException ex)
             {
                 {
-                    switch (ex.ErrorCode)
+                    switch (ex.Number)
                     {
-                        case 0:
+                        
+                        case 0 :
                             InformaDiag.Erro("Falha ao conectar no servidor de dados.");
                             break;
-                        case 1045:
+                        case (int)MySqlErrorCode.NoSuchUser:
                             InformaDiag.Erro("A combinação de usuário e senha não existe. Tente novamente.");
                             break;
                         default:
-                            InformaDiag.Erro("Erro" + ex.Code.ToString() + ex.Message);
+                            InformaDiag.Erro("Erro " + ex.Code.ToString() + ex.Message);
                             break;
                     }
                    
@@ -90,17 +91,37 @@ namespace dicionario.Model
         }
     }
     class CRUD{
-        //private ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
-        private ConectaBanco ControllerBanco = new ConectaBanco();
-        private void EnviaComando(string query){
+        //private readonly ConectaBanco ControllerBanco = new ConectaBanco("lexdbase","lexdbase","Int3rl3x1c0gr@", "lexdbase.mysql.dbaas.com.br");
+        private readonly ConectaBanco ControllerBanco = new ConectaBanco();
+        private bool EnviaComando(string query){
             if (ControllerBanco.AbreConexao() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, ControllerBanco.PegaConexao());
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (MySqlException err) {
+                    switch (err.Number)
+                    {
+                        case (int)MySqlErrorCode.DuplicateKeyEntry:
+                            InformaDiag.Erro("O registro já existe. Tente outros valores");
+                            break;
+
+                        default:
+                            InformaDiag.Erro("Ocorreu um erro e a operação será abortada.");
+                            break;
+                    }
+                    cmd.Dispose();
+                    return false;
+                };
                 ControllerBanco.FechaConexao();
+                cmd.Dispose();
+                return true;
             }
+            return false;
         }
-        public void InsereLinha(string tabela, List<string> campos, List<string> valores)
+        public bool InsereLinha(string tabela, List<string> campos, List<string> valores)
         {
             string s; 
             string query = "INSERT INTO " + tabela + " (";
@@ -130,9 +151,13 @@ namespace dicionario.Model
             }
             query = query.Remove(query.Length - 1);
             query += ")";
-            EnviaComando(query);
+            if (EnviaComando(query))
+                return true;
+            else
+                return false;
+
         }
-        public void UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro)
+        public bool UpdateLine(string tabela, List<string> campos, List<string> valores, string filtro)
         {
             string query = "UPDATE " + tabela + " SET ";
             string temp1, temp2, s;
@@ -161,7 +186,10 @@ namespace dicionario.Model
             }
             if (filtro != "")
                 query += " WHERE " + filtro;
-            EnviaComando(query);
+            if (EnviaComando(query))
+                return true;
+            else
+                return false;
         }
         public void ApagaLinha(string tabela, string filtro)
         {
@@ -190,6 +218,7 @@ namespace dicionario.Model
                  }
                  dataReader.Close();
                  ControllerBanco.FechaConexao();
+                cmd.Dispose();
             }
             return resultados;
         }
@@ -199,21 +228,28 @@ namespace dicionario.Model
             obj.CopyTo(o,0);
             return o;
         }
-        public void InserirEmMassa(string tabela, string valores)
+        public void InserirEmMassa(string tabela, string valores, List<string> camposAceitos = null)
         {
             string query = "INSERT INTO " + tabela + " (";
             List<string> t = new List<string>();
-            switch (tabela)
+            if (camposAceitos == null)
             {
-                case "palavra":
-                    t = Palavra.ToListTabela();
-                    break;
-                case "rubrica":
-                    t = MarcaUso.ToListTabela();
-                    break;
-                case "referencias":
-                    t = Referencia.ToListTabela();
-                    break;
+                switch (tabela)
+                {
+                    case "palavra":
+                        t = Palavra.ToListTabela();
+                        break;
+                    case "rubrica":
+                        t = MarcaUso.ToListTabela();
+                        break;
+                    case "referencias":
+                        t = Referencia.ToListTabela();
+                        break;
+                }
+            }
+            else
+            {
+                t = camposAceitos;
             }
             foreach (string s in t)
             {

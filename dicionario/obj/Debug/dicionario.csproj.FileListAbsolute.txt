@@ -170,3 +170,33 @@ C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.exe.manife
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.application
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.frm_Equivalente.resources
 C:\Users\Igor\Desktop\copy\dicionario\dicionario\obj\Debug\dicionario.Model.frm_mUso.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.csprojAssemblyReference.cache
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_conjuga.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_controledeusuario.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_busca.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_configuracao.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_contato.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_Edit.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_Equivalente.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.Login.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_referencia.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.Model.frm_mUso.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frm_visualizaverbete.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.frmImportaCsv.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.Properties.Resources.resources
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.csproj.GenerateResource.cache
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.exe
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.pdb
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\dicionario.exe.config
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\dicionario.exe.manifest
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\dicionario.application
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\dicionario.xml
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\dicionario.exe
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\dicionario.pdb
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\MySql.Data.dll
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\bin\Debug\MySql.Data.xml
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.csproj.CoreCompileInputs.cache
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.TrustInfo.xml
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.exe.manifest
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.application
+C:\Users\Igor Pereira\Source\Repos\dicionario-gpel\dicionario\obj\Debug\dicionario.csproj.CopyComplete

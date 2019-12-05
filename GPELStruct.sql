@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: dicionario
+-- Host: 127.0.0.1    Database: dicionario
 -- ------------------------------------------------------
--- Server version	5.7.22-log
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,18 +21,32 @@
 
 DROP TABLE IF EXISTS `conjugacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `conjugacao` (
   `idconjugacao` int(11) NOT NULL AUTO_INCREMENT,
-  `ExPreterito` text COLLATE utf8_unicode_ci,
-  `ExPresente` text COLLATE utf8_unicode_ci,
-  `ExFuturo` text COLLATE utf8_unicode_ci,
-  `ConstrPreterito` text COLLATE utf8_unicode_ci,
-  `ConstrPresente` text COLLATE utf8_unicode_ci,
-  `ConstrFuturo` text COLLATE utf8_unicode_ci,
+  `ExPreterito` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `ExPresente` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `ExFuturo` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `ConstrPreterito` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `ConstrPresente` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `ConstrFuturo` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`idconjugacao`),
   UNIQUE KEY `idconjugacao_UNIQUE` (`idconjugacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `conjugacao_es`
+--
+
+DROP TABLE IF EXISTS `conjugacao_es`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conjugacao_es` (
+  `idPalavra` int(11) NOT NULL,
+  PRIMARY KEY (`idPalavra`),
+  UNIQUE KEY `idPalavra_UNIQUE` (`idPalavra`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +55,7 @@ CREATE TABLE `conjugacao` (
 
 DROP TABLE IF EXISTS `equivalencias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equivalencias` (
   `Origem` int(11) NOT NULL,
   `equivalente` int(11) NOT NULL COMMENT '	',
@@ -66,13 +80,13 @@ CREATE TABLE `equivalencias` (
 
 DROP TABLE IF EXISTS `marca_uso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `marca_uso` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Descricao` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `sigla` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
+  `Descricao` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `sigla` varchar(4) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,23 +95,23 @@ CREATE TABLE `marca_uso` (
 
 DROP TABLE IF EXISTS `palavra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `palavra` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Lema` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `ClasseGram` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `Idioma` char(2) COLLATE utf8_unicode_ci NOT NULL,
-  `notas_gramatica` tinytext COLLATE utf8_unicode_ci,
-  `notas_cultura` text COLLATE utf8_unicode_ci,
-  `Id_conjuga` int(11) DEFAULT NULL,
-  `Genero` enum('M','F','N','S') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'M',
-  `Definicao` text COLLATE utf8_unicode_ci,
+  `Lema` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `ClasseGram` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Idioma` char(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `notas_gramatica` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `notas_cultura` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `Genero` enum('M','F','N','S','MF') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'M',
+  `Definicao` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `Sinonimo1` int(11) DEFAULT '0',
   `Sinonimo2` int(11) DEFAULT '0',
-  PRIMARY KEY (`Lema`,`Idioma`,`ClasseGram`,`Genero`),
-  UNIQUE KEY `IDX_EntradaUnica` (`Lema`,`Idioma`,`ClasseGram`),
-  UNIQUE KEY `Id_UNIQUE` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Sublema` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '-',
+  PRIMARY KEY (`Lema`,`Idioma`,`ClasseGram`,`Genero`,`Sublema`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`),
+  UNIQUE KEY `IDX_EntradaUnica` (`Lema`,`Idioma`,`ClasseGram`,`Genero`,`Sublema`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,16 +120,16 @@ CREATE TABLE `palavra` (
 
 DROP TABLE IF EXISTS `referencias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `referencias` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Cod` char(6) COLLATE utf8_unicode_ci NOT NULL,
-  `Descricao` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `Cod` char(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Descricao` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Ano` int(4) DEFAULT NULL,
-  `Autor` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `Autor` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`Cod`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,22 +138,26 @@ CREATE TABLE `referencias` (
 
 DROP TABLE IF EXISTS `usr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usr` (
-  `usr` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `pass` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `nivel_permissao` enum('ADM','EDT','USR') COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `nome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contato` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rede_social` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cpf` char(11) COLLATE utf8_unicode_ci NOT NULL,
-  `telefone` char(13) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `usr` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `pass` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `nivel_permissao` enum('ADM','EDT','USR') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `nome` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `contato` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rede_social` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cpf` char(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `telefone` char(13) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`usr`),
   UNIQUE KEY `usr_UNIQUE` (`usr`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping routines for database 'dicionario'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -150,4 +168,4 @@ CREATE TABLE `usr` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-29 15:37:35
+-- Dump completed on 2019-09-02 19:32:08
